@@ -2,8 +2,6 @@
 
 #Project plan
 
-## Requirements
-
 ## Userstory
 
 ## Requirements
