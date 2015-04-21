@@ -16,7 +16,6 @@
 - Show variables that are in scope
 - Play pause stop 
 - next/previous statement
-- next/previous visualisation 
 - Example code
 - Customisable initialisation of code
 - Example input
@@ -26,6 +25,7 @@
 - Animation
 - Playback speed
 - Default visualisations
+- next/previous visualisation 
 - Relative object placement
 - Convex hull algorithm
 - Multifile javascript projects
