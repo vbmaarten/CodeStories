@@ -14,7 +14,7 @@ Research:
 * Graphics library
 * MetaCode style. viewOfVariable ||/&& visual with variable argument
 * Javascript Interpreters
-* Bestaande debuggers (https://code.google.com/p/debug-js/ ?)
+* Bestaande debuggers (https://code.google.com/p/debug-js/ ? https://neil.fraser.name/software/JS-Interpreter/)
 
 ##Week 3
 * Maandag: Begin schrijven code
