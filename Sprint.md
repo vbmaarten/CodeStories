@@ -12,5 +12,5 @@
 |-|3| Usecase 1 | salim | 2u |
 |-|3| Usecase 2 |  | 2u |
 |-|3| Usecase 3 |  | 2u |
-|-|3| Userstory | salim | 2u |
+|-|3| Userstory |  | 2u |
 |-|4| Requirements specification | salim | 1u |
