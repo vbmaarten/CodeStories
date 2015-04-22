@@ -13,6 +13,7 @@ A simple javascript interpreter which allows stepping through the code. It uses 
 ###Pro's
 * Written in javascript
 * Support stepping
+* Small (about 2000 lines of code)
 
 ###Con's
 * Supports a limited form of javascript (no try/catch for example)
