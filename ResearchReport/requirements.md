@@ -12,11 +12,11 @@
 * Ability to make a selection in editor 1 
 * Ability to view variables that are in scope
 * Control buttons 
-..* play
-..* pause
-..* stop
-..* next/previous statement
-..* next/previous visualisation 
+	* play
+	* pause
+	* stop
+	* next/previous statement
+	* next/previous visualisation 
 * Example code
 * Customisable initialisation of code
 * Example input
