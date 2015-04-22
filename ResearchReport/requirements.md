@@ -9,9 +9,9 @@
 * Be able to debug the javascript file
 * Canvas element to display visualizations
 * Code editor to input, write and edit code for manipulation of the canvas element (editor 2)
-* Ability to make a selection in editor 1 
-* Ability to view variables that are in scope
-* Control buttons 
+* Ability to mark a statement in editor 1 and write code in editor 2 that executes when the marked statement is reached during debugging
+* Ability to view variables in editor 2 that are in scope in the selected statement in editor 1
+* Control buttons for debugging
 	* play
 	* pause
 	* stop
