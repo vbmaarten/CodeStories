@@ -15,13 +15,9 @@ Canvas Based
 Vector Graphic Based
 * Basic SVG
 * raphael: http://raphaeljs.com/
-
-Combination
 * D3 : http://d3js.org/t
 
 An intresting question is if it is usefull to allow the user to choose.
-
-In the examples it is assumed the setup has already been done and X is some integer of interest and that GetVis(X) will get some previous defined object associated with it. 
 
 #HTML5 canvas
 The standardt HTML5 canvas is very low level. It will only allow the user to draw on top of what is already there and it does not have standardt utilities for manipulating some object relative to another object. 
@@ -35,22 +31,19 @@ Pro:
 Cons:
 * not trivial to bind an object to a visualization object
 * not trivial to place objects relative to one another
-* Unable to finish animation instantly
-
-Example: ( Assuming some refresh function is called )
-> ctx.rect(20,20,150,X);
-> ctx.stroke();
+* Any new functions must also be documentend
 
 #SVG DOM elements
+The default SVG elements are another possibility. 
+It is XML based and lives inside the DOM. 
 
 Pros:
 * CSS interface
-* 
 
 Cons:
-*
-The default SVG elements are another possibility. 
-It is XML based and lives inside the DOM. 
+* no prefab elements
+
+
 
 
 
