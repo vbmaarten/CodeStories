@@ -26,14 +26,14 @@ Research:
 * Vrijdag: Deadline parser + in/uitlezen source en meta code, 
 
 ##Week 4
-* Vrijdag: Bubblesort stepthrough werkend (met visualizatie) 
+* Vrijdag: a Bubblesort stepthrough werkend (met visualizatie) 
 
 ##Week 5
-* Werken aan high level visualisatie objecten
+* Werken aan prefab/high level visualisatie objecten
 
 ##Week 6
 * Dinsdag: Deadline 1 SIG
-* 
+* Add additional Examples 
 
 ##Week 7
 * Vrijdag: Must have code klaar
