@@ -6,12 +6,7 @@ Iedere donderdag: aan rapport werken
 * Woensdag: Scrum plan maken
 * Donderdag: Deadline project plan
 * Vrijdag: Meeting elmar 
-
-##Week 2
-* Class diagram maken
-* Use cases
-
-* Vrijdag: Deadline research report
+* Requirements
 
 Research:
 * Code editor
@@ -19,6 +14,11 @@ Research:
 * MetaCode style. viewOfVariable ||/&& visual with variable argument
 * Javascript Interpreters
 * Bestaande debuggers (https://code.google.com/p/debug-js/ ? https://neil.fraser.name/software/JS-Interpreter/)
+
+##Week 2
+* Class diagram maken
+* Use cases
+* Vrijdag: Deadline research report
 
 ##Week 3
 * Maandag: Begin schrijven code
