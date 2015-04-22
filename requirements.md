@@ -29,5 +29,7 @@
 - Documentation of basic javascript functions
 - Async visualisation
 - More languages other than javascript supported
+- nth time at metablock
+- plot over time / plot delta over time
 
 ## Won’t have:
