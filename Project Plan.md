@@ -1,6 +1,7 @@
 #Project plan
 
-Iedere donderdag: aan rapport werken
+Iedere donderdag ochtend: aan rapport werken
+Iedere Woensdag ochtend: tests bijwerken 
 
 ##Week 1
 * Woensdag: Scrum plan maken
