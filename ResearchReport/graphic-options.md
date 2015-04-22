@@ -12,8 +12,9 @@ List of Options:
 * [Pixijs](http://www.pixijs.com/)
 * [fabricjs](http://fabricjs.com/)
 * [infovis](http://philogb.github.io/jit/)
+* 
 ##### 3D
-* [Threejs](http://threejs.org/)
+* [Threejs](http://threejs.org)/
 * [Ivank](http://lib.ivank.net/)
 
 ###Vector Graphic Based
@@ -24,10 +25,9 @@ List of Options:
 ### Canvas & Vector based
 * [two.js](https://jonobr1.github.io/two.js/)
 
-
 An open question at this moment is: is itusefull to allow the user to choose from multiple options?
 
-####HTML5 canvas
+###HTML5 canvas
 The standardt HTML5 canvas is very low level. It will only allow the user to draw on top of what is already there and it does not have standardt utilities for manipulating some object relative to another object. 
 
 
@@ -64,12 +64,19 @@ Cons:
 ####D3
 
 Pros:
-* Update data approach
+* Visualization based on updating data.
 * Build in support for tree/graph layout
 * Large community 
 
 Cons:
 * Bloated with data import functions.
+* 
+
+####infovis
+
+Pros: 
+* Visualization based on updating data.
+* Build in support for tree/graph layout
 
 
 
