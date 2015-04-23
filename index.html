@@ -63,7 +63,7 @@ alert(result.join(', '));
       
       //Width and height
       var w = 500;
-      var h = 100;
+      var h = 500;
       
       //Create SVG element
       var svg = d3.select("body")
@@ -85,10 +85,10 @@ alert(result.join(', '));
       var code = document.getElementById('code').value
       myInterpreter = new Interpreter(code, initAlert);
       disable('');
-      myInterpreter.ast.body[1].body.body[0].VCode = ' '
+      myInterpreter.ast.body[1].body.body[0].VCode = 'svg.selectAll("circle").data([scope.a,scope.b]).enter().append("circle").attr("cx", function(d, i) { return (i * 50) + 25; }).attr("cy", h/2).attr("r", function(d) {return d; });';
       
-      myInterpreter.ast.body[1].body.body[1].test.VCode =
-    'svg.selectAll("circle").data(scope.output).enter().append("circle").attr("cx", function(d, i) { return (i * 10) + 25; }).attr("cy", h/2).attr("r", function(d) {return d; });';
+      myInterpreter.ast.body[1].body.body[1].test.VCode = 'svg.selectAll("circle").data([scope.a,scope.b]).transition().attr("r", function(d) {return d; });';
+    
     }
 
     function stepButton() {
