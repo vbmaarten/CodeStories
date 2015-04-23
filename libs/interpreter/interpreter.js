@@ -48,9 +48,41 @@ Interpreter.prototype.step = function() {
     return false;
   }
   var state = this.stateStack[0];
+  var stackSize = this.stateStack.length;
   this['step' + state.node.type]();
+
+  //if stateStack is now smaller then before -> node has been poped
+  if(stackSize > this.stateStack.length && state.node.VCode){
+    var iscope = this.getScope();
+    var scope = toPrimitives(iscope);
+    var vars = Object.keys(scope);
+    var  evalStr = '(function(scope){ '+state.node.VCode+' })(' +
+       JSON.stringify(scope) + ')';
+    eval(evalStr);
+  } 
   return true;
 };
+
+
+function toPrimitives(ScopeObj){
+  if(ScopeObj.type === 'object'){
+    var result;
+    if(ScopeObj.length){
+       result = [];
+    } else {
+      result = {};
+    }
+
+    var indexKeys = Object.keys(ScopeObj.properties);
+    indexKeys.forEach(function(i){
+        result[i] = toPrimitives(ScopeObj.properties[i]);
+    });
+    return result;
+   
+  } else {
+  return ScopeObj.valueOf();
+}
+}
 
 /**
  * Execute the interpreter to program completion.

@@ -27,74 +27,8 @@
 <script src="libs/interpreter/interpreter.js"></script>
 <script src="libs/converter.js"></script>
     
+<script src="libs/graphics/D3/d3.js"></script>
 
-
-  <script>
-    var myInterpreter;
-    function initAlert(interpreter, scope) {
-      var wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(alert(text));
-      };
-      interpreter.setProperty(scope, 'alert',
-          interpreter.createNativeFunction(wrapper));
-    };
-
-    function parseButton() {
-      var code = document.getElementById('code').value
-      myInterpreter = new Interpreter(code, initAlert);
-      disable('');
-    }
-
-    function stepButton() {
-      if (myInterpreter.stateStack[0]) {
-        var node = myInterpreter.stateStack[0].node;
-        var start = node.start;
-        var end = node.end;
-      } else {
-        var start = 0;
-        var end = 0;
-      }
-      createSelection(start, end);
-      try {
-        var ok = myInterpreter.step();
-      } finally {
-        if (!ok) {
-          disable('disabled');
-        }
-      }
-    }
-
-    function runButton() {
-      try {
-        myInterpreter.run();
-      } finally {
-        disable('disabled');
-      }
-    }
-
-    function disable(disabled) {
-      document.getElementById('stepButton').disabled = disabled;
-      document.getElementById('runButton').disabled = disabled;
-    }
-
-    function createSelection(start, end) {
-      var field = document.getElementById('code')
-      if (field.createTextRange) {
-        var selRange = field.createTextRange();
-        selRange.collapse(true);
-        selRange.moveStart('character', start);
-        selRange.moveEnd('character', end);
-        selRange.select();
-      } else if (field.setSelectionRange) {
-        field.setSelectionRange(start, end);
-      } else if (field.selectionStart) {
-        field.selectionStart = start;
-        field.selectionEnd = end;
-      }
-      field.focus();
-    }
-  </script>
 </head>
 <body>
   <h1>JS-Interpreter Demo</h1>
@@ -121,18 +55,86 @@ alert(result.join(', '));
   <button onclick="runButton()" id="runButton" disabled="disabled">Run</button>
   </p>
 
-  <p><small>
-  <script type="text/javascript">
-    if (compressed) {
-      document.write('[ Running compressed bundle.  Switch to <A HREF="?uncompressed">raw sources</A>. ]');
-    } else {
-      document.write('[ Running raw sources.  Switch to <A HREF="?compressed">compressed bundle</A>. ]');
+  <div id='D3-canvas'></div>
+
+
+
+  <script>
+
+      
+      //Width and height
+      var w = 500;
+      var h = 100;
+      
+      //Create SVG element
+      var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+    var myInterpreter;
+    function initAlert(interpreter, scope) {
+      var wrapper = function(text) {
+        text = text ? text.toString() : '';
+        return interpreter.createPrimitive(alert(text));
+      };
+      interpreter.setProperty(scope, 'alert',
+          interpreter.createNativeFunction(wrapper));
+    };
+
+    function parseButton() {
+      var code = document.getElementById('code').value
+      myInterpreter = new Interpreter(code, initAlert);
+      disable('');
+      myInterpreter.ast.body[1].body.body[0].VCode = ' '
+      
+      myInterpreter.ast.body[1].body.body[1].test.VCode =
+    'svg.selectAll("circle").data(scope.output).enter().append("circle").attr("cx", function(d, i) { return (i * 10) + 25; }).attr("cy", h/2).attr("r", function(d) {return d; });';
+    }
+
+    function stepButton() {
+      if (myInterpreter.stateStack[0]) {
+        var node = myInterpreter.stateStack[0].node;
+        var start = node.start;
+        var end = node.end;
+      } else {
+        var start = 0;
+        var end = 0;
+      }
+      createSelection(start, end);
+        var ok = myInterpreter.step();
+     
+      
+    }
+
+    function runButton() {
+
+        myInterpreter.run();
+
+    }
+
+    function disable(disabled) {
+      document.getElementById('stepButton').disabled = disabled;
+      document.getElementById('runButton').disabled = disabled;
+    }
+
+    function createSelection(start, end) {
+      var field = document.getElementById('code')
+      if (field.createTextRange) {
+        var selRange = field.createTextRange();
+        selRange.collapse(true);
+        selRange.moveStart('character', start);
+        selRange.moveEnd('character', end);
+        selRange.select();
+      } else if (field.setSelectionRange) {
+        field.setSelectionRange(start, end);
+      } else if (field.selectionStart) {
+        field.selectionStart = start;
+        field.selectionEnd = end;
+      }
+      field.focus();
     }
   </script>
-  </small></p>
-
-  <p>Read the <a href="docs.html">JS-Interpreter documentation</a>.</p>
-  <p>Get the <a href="https://github.com/NeilFraser/JS-Interpreter">source code</a>.</p>
 
 </body>
 </html>
