@@ -1,29 +1,32 @@
-function convertArray(object){
+function _convertArray(object){
 	result = []
 	for(property in object.properties){
-		result[property] = convertProperty(object.properties[property]);
+		result[property] = _convertProperty(object.properties[property]);
 	}
 	return result;
 }
 
-function convertObject(object){
+function _convertObject(object){
 	if(object.length){
-		return convertArray(object);
+		return _convertArray(object);
 	} else{
 		result = {};
 		for(property in object.properties){
-			obj[property] = convertProperty(object.properties[property]);
+			result[property] = _convertProperty(object.properties[property]);
 		}
 		return result;
 	}
 }
 
-function convertProperty(property){
+function _convertProperty(property){
 	if(property.isPrimitive){
 		return property.data;
 	} else {
 		if(property.type === 'object'){
-			return convertObject(property);
+			return _convertObject(property);
+		}
+		else{
+			return null;
 		}
 	}
 }
@@ -37,7 +40,7 @@ function convertScope(interpreter_scope){
 		return {};
 	}
 	for(property in interpreter_scope.properties){
-		scope[property] = convertProperty(interpreter_scope.properties[property]);
+		scope[property] = _convertProperty(interpreter_scope.properties[property]);
 	}
 	
 	return scope;
