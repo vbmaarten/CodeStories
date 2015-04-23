@@ -5,18 +5,27 @@
   <title>Editor</title>
   <style type="text/css" media="screen">
     html, body {
-        overflow: hidden;
-        padding:0;
-        margin:0;
+      overflow: hidden;
+      padding:0;
+      margin:0;
     }
 
     #editor {
-        margin: 0;
-        position: absolute;
-        top: 50px;
-        bottom: 0;
-        left: 0;
-        right: 0;
+      margin: 0;
+      position: absolute;
+      top: 50px;
+      bottom: 0;
+      left: 0;
+      width: 50%;
+    }
+
+    #D3-canvas {
+      position:absolute;
+      top:50px;
+      bottom:0;
+      right:0;
+      left:50%;
+      width: 50%;
     }
 
     nav {
@@ -70,13 +79,16 @@
         <button onclick="stepButton()" id="stepButton" disabled="disabled">Step</button>
       </li>
       <li>
+        <button onclick="playButton()" id="playButton" disabled="disabled">Play</button>
+      </li>
+      <li>
         <button onclick="runButton()" id="runButton" disabled="disabled">Run</button>
       </li>
     </ul>
   </nav>
   <textarea id="code" style="display:none;"></textarea>
   <pre id="editor">
-var a = [34, 203, 3, 746, 200, 984, 198, 764, 9];
+var a = [9, 8, 7, 6, 5, 4, 3, 2, 1];
  
 function bubbleSort(a)
 {
@@ -114,7 +126,7 @@ bubbleSort(a);
     var h = 100;
     
     //Create SVG element
-    var svg = d3.select("body")
+    var svg = d3.select("#D3-canvas")
           .append("svg")
           .attr("width", w)
           .attr("height", h);
@@ -184,6 +196,10 @@ bubbleSort(a);
       }
     }
 
+    function playButton() {
+      myInterpreter.runToVCode();
+    }
+
     function runButton() {
 
         myInterpreter.run();
@@ -193,6 +209,7 @@ bubbleSort(a);
     function disable(disabled) {
       document.getElementById('stepButton').disabled = disabled;
       document.getElementById('runButton').disabled = disabled;
+      document.getElementById('playButton').disabled = disabled;
     }
 
     function createSelection(start, end) {
