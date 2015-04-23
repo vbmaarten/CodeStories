@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Editor</title>
+  <link rel="stylesheet" href="libs/editor-codemirror/lib/codemirror.css">
+  <style type="text/css" media="screen">
+    html, body {
+        overflow: hidden;
+        padding:0;
+        margin:0;
+        height: 100%;
+    }
+
+    #editor {
+        margin: 0;
+        position: absolute;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    nav {
+      background-color: #2196F3;
+      height: 50px;
+    }
+
+    nav ul.controls{
+      list-style: none;
+      margin:0;
+      padding:0;
+      height: 100%;
+    }
+
+    nav ul.controls li{
+      float:left;
+      height: 100%;
+    }
+
+    nav ul.controls li button{
+      background-color: #90CAF9;
+      width: 100px;
+      height: 100%;
+      border: none;
+      margin:0;
+      color:#FFFFFF;
+      font-size: 15px;
+      outline:none;
+    }
+
+    nav ul.controls li button:active{
+      background-color: #1565C0;
+    }
+
+    nav ul.controls li button:disabled{
+      background-color: #B0BEC5;
+    }
+
+    .CodeMirror {
+      height: 100%;
+    }
+
+    .CodeMirror .selected{
+      background-color: #B0BEC5;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul class="controls">
+    <li>
+      <button  onclick="parseButton()">Parse</button>
+    </li>
+    <li>
+      <button onclick="stepButton()" id="stepButton" disabled="disabled">Step</button>
+    </li>
+    <li>
+      <button onclick="runButton()" id="runButton" disabled="disabled">Run</button>
+    </li>
+  </ul>
+</nav>
+<textarea id="code">
+var result = [];
+function fibonacci(n, output) {
+  var a = 1, b = 1, sum;
+  for (var i = 0; i &lt; n; i++) {
+    output.push(a);
+    sum = a + b;
+    a = b;
+    b = sum;
+  }
+}
+fibonacci(16, result);
+alert(result.join(', '));
+</textarea>
+
+
+
+<script src="libs/editor-codemirror/lib/codemirror.js"></script>
+<script src="libs/editor-codemirror/mode/javascript/javascript.js"></script>
+
+<script src="libs/interpreter/acorn.js"></script>
+<script src="libs/interpreter/interpreter.js"></script>
+<script>
+
+  var editor = CodeMirror.fromTextArea(code, {
+    lineNumbers: true,
+    mode: "javascript"
+  });
+
+
+  var myInterpreter;
+  function initAlert(interpreter, scope) {
+    var wrapper = function(text) {
+      text = text ? text.toString() : '';
+      return interpreter.createPrimitive(alert(text));
+    };
+    interpreter.setProperty(scope, 'alert',
+        interpreter.createNativeFunction(wrapper));
+  };
+
+  function parseButton() {
+    //document.getElementById('code').value = editor.getValue();
+    //var code = document.getElementById('code').value;
+    var code = editor.getValue();
+    console.log(code);
+    myInterpreter = new Interpreter(code, initAlert);
+    disable('');
+  }
+
+  function stepButton() {
+    var range = {
+      start: {
+        line: 0,
+        ch: 0
+      },
+      end: {
+        line: 0,
+        ch: 0
+      }
+    }
+
+    if (myInterpreter.stateStack[0]) {
+      var node = myInterpreter.stateStack[0].node;
+      range.start.line = node.loc.start.line - 1 ;
+      range.start.ch = node.loc.start.column;
+      range.end.line = node.loc.end.line - 1;
+      range.end.ch = node.loc.end.column;
+    }
+    
+    editor.markText(range.start, range.end,{className:"selected"});
+
+    try {
+      var ok = myInterpreter.step();
+    } finally {
+      if (!ok) {
+        disable('disabled');
+      }
+    }
+  }
+
+  function runButton() {
+    try {
+      myInterpreter.run();
+    } finally {
+      disable('disabled');
+    }
+  }
+
+  function disable(disabled) {
+    document.getElementById('stepButton').disabled = disabled;
+    document.getElementById('runButton').disabled = disabled;
+  }
+
+  function createSelection(start, end) {
+    console.log(start + " " + end);
+    var field = document.getElementById('code')
+    if (field.createTextRange) {
+      var selRange = field.createTextRange();
+      selRange.collapse(true);
+      selRange.moveStart('character', start);
+      selRange.moveEnd('character', end);
+      selRange.select();
+    } else if (field.setSelectionRange) {
+      field.setSelectionRange(start, end);
+    } else if (field.selectionStart) {
+      field.selectionStart = start;
+      field.selectionEnd = end;
+    }
+    field.focus();
+  }
+</script>
+
+</body>
+</html>

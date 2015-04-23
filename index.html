@@ -2,41 +2,80 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>JS-Interpreter Demo</title>
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
+  <title>Editor</title>
+  <style type="text/css" media="screen">
+    html, body {
+        overflow: hidden;
+        padding:0;
+        margin:0;
     }
-    a:hover {
-      color: red
+
+    #editor {
+        margin: 0;
+        position: absolute;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
-    h1, h2, h3 {
-      font-weight: normal;
+
+    nav {
+      background-color: #2196F3;
+      height: 50px;
     }
-    #code {
-      font-family: monospace;
-      font-size: larger;
-      height: 15em;
-      width: 100%;
-      max-width: 111ex;
+
+    nav ul.controls{
+      list-style: none;
+      margin:0;
+      padding:0;
+      height: 100%;
     }
+
+    nav ul.controls li{
+      float:left;
+      height: 100%;
+    }
+
+    nav ul.controls li button{
+      background-color: #90CAF9;
+      width: 100px;
+      height: 100%;
+      border: none;
+      margin:0;
+      color:#FFFFFF;
+      font-size: 15px;
+      outline:none;
+    }
+
+    nav ul.controls li button:active{
+      background-color: #1565C0;
+    }
+
+    nav ul.controls li button:disabled{
+      background-color: #B0BEC5;
+    }
+
   </style>
 
-<script src="libs/interpreter/acorn.js"></script>
-<script src="libs/interpreter/interpreter.js"></script>
-<script src="libs/converter.js"></script>
-    
-<script src="libs/graphics/D3/d3.js"></script>
-
 </head>
-<body>
-  <h1>JS-Interpreter Demo</h1>
 
-  <p>Enter JavaScript code below, then click <em>Parse</em>.  To execute, either
-  click <em>Step</em> repeatedly, or click <em>Run</em> once.
-  Open your browser's console for errors.</p>
-  <p><textarea id="code">
+<body>
+
+  <nav>
+    <ul class="controls">
+      <li>
+        <button  onclick="parseButton()">Parse</button>
+      </li>
+      <li>
+        <button onclick="stepButton()" id="stepButton" disabled="disabled">Step</button>
+      </li>
+      <li>
+        <button onclick="runButton()" id="runButton" disabled="disabled">Run</button>
+      </li>
+    </ul>
+  </nav>
+  <textarea id="code" style="display:none;"></textarea>
+  <pre id="editor">
 var a = [34, 203, 3, 746, 200, 984, 198, 764, 9];
  
 function bubbleSort(a)
@@ -56,28 +95,34 @@ function bubbleSort(a)
 }
  
 bubbleSort(a);
-</textarea><br>
-  <button onclick="parseButton()">Parse</button>
-  <button onclick="stepButton()" id="stepButton" disabled="disabled">Step</button>
-  <button onclick="runButton()" id="runButton" disabled="disabled">Run</button>
-  </p>
+  </pre>
+
 
   <div id='D3-canvas'></div>
 
-
+  <script src="libs/interpreter/acorn.js"></script>
+  <script src="libs/interpreter/interpreter.js"></script>
+  <script src="libs/converter.js"></script>
+  <script src="libs/editor-ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>    
+  <script src="libs/graphics/D3/d3.js"></script>
 
   <script>
 
       
-      //Width and height
-      var w = 500;
-      var h = 100;
-      
-      //Create SVG element
-      var svg = d3.select("body")
-            .append("svg")
-            .attr("width", w)
-            .attr("height", h);
+    //Width and height
+    var w = 500;
+    var h = 100;
+    
+    //Create SVG element
+    var svg = d3.select("body")
+          .append("svg")
+          .attr("width", w)
+          .attr("height", h);
+
+    //Create editor    
+    var editor = ace.edit("editor");
+    editor.getSession().setMode("ace/mode/javascript");
+    console.log(editor.getValue());
 
     var myInterpreter;
     function initAlert(interpreter, scope) {
@@ -90,7 +135,8 @@ bubbleSort(a);
     };
 
     function parseButton() {
-      var code = document.getElementById('code').value
+      document.getElementById('code').value = editor.getValue();
+      var code = document.getElementById('code').value;
       myInterpreter = new Interpreter(code, initAlert);
       disable('');
       myInterpreter.ast.body[1].body.body[0].VCode = ' '
@@ -100,18 +146,33 @@ bubbleSort(a);
     }
 
     function stepButton() {
+      var range = {
+        start: {
+          row: 0,
+          column: 0
+        },
+        end: {
+          row: 0,
+          column: 0
+        }
+      }
+
       if (myInterpreter.stateStack[0]) {
         var node = myInterpreter.stateStack[0].node;
-        var start = node.start;
-        var end = node.end;
-      } else {
-        var start = 0;
-        var end = 0;
-      }
-      createSelection(start, end);
+        range.start.row = node.loc.start.line - 1 ;
+        range.start.column = node.loc.start.column;
+        range.end.row = node.loc.end.line - 1;
+        range.end.column = node.loc.end.column;
+      } 
+
+      editor.getSession().selection.setSelectionRange(range);
+      try {
         var ok = myInterpreter.step();
-     
-      
+      } finally {
+        if (!ok) {
+          disable('disabled');
+        }
+      }
     }
 
     function runButton() {
