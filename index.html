@@ -63,32 +63,13 @@ alert(result.join(', '));
       
       //Width and height
       var w = 500;
-      var h = 50;
+      var h = 100;
       
       //Create SVG element
-      var svg = d3.select("#D3-canvas")
+      var svg = d3.select("body")
             .append("svg")
             .attr("width", w)
             .attr("height", h);
-
-      var el = svg.selectAll("circle")
-          .data([1])
-      var circle = el.enter()
-          .append("circle");
-
-      circle.attr("cx", function(d, i) {
-            return (i * 50) + 25;
-          })
-           .attr("cy", h/2)
-            
-           .attr("fill", "yellow")
-           .attr("stroke", "orange")
-           .attr("stroke-width", function(d) {
-            return d/2;
-           });
-
-    
-
 
     var myInterpreter;
     function initAlert(interpreter, scope) {
@@ -104,8 +85,10 @@ alert(result.join(', '));
       var code = document.getElementById('code').value
       myInterpreter = new Interpreter(code, initAlert);
       disable('');
-      myInterpreter.ast.body[1].body.body[1].test.VCode = 'alert(JSON.stringify(scope))'/*
-        = " el.data(a).enter().append('div').attr('class','bar').style('height',function(d){var barHeight=d*5; return barHeight+'px';});"*/
+      myInterpreter.ast.body[1].body.body[0].VCode = ' '
+      
+      myInterpreter.ast.body[1].body.body[1].test.VCode =
+    'svg.selectAll("circle").data(scope.output).enter().append("circle").attr("cx", function(d, i) { return (i * 10) + 25; }).attr("cy", h/2).attr("r", function(d) {return d; });';
     }
 
     function stepButton() {
@@ -124,11 +107,9 @@ alert(result.join(', '));
     }
 
     function runButton() {
-      try {
+
         myInterpreter.run();
-      } finally {
-        disable('disabled');
-      }
+
     }
 
     function disable(disabled) {
