@@ -3,6 +3,7 @@ function convertArray(object){
 	for(property in object.properties){
 		result[property] = convertProperty(object.properties[property]);
 	}
+	return result;
 }
 
 function convertObject(object){
@@ -31,12 +32,12 @@ function convertScope(interpreter_scope){
 	var  scope;
 
 	if(interpreter_scope.parentScope){
-		scope = convertScope(scope.parentScope);
+		scope = convertScope(interpreter_scope.parentScope);
 	} else{
 		return {};
 	}
 	for(property in interpreter_scope.properties){
-		scope[property] = convertProperty(scope.properties[property]);
+		scope[property] = convertProperty(interpreter_scope.properties[property]);
 	}
 	
 	return scope;
