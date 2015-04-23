@@ -22,13 +22,15 @@ Research:
 * Vrijdag: Deadline research report
 
 ##Week 3
-* Maandag: Begin schrijven code
-* Vrijdag: Deadline parser + in/uitlezen source en meta code, 
+* Maandag: Milestone Begin schrijven code
+* Donderdag: Deadline parser + in/uitlezen source en meta code, 
 
 ##Week 4
-* Vrijdag: a Bubblesort stepthrough werkend (met visualizatie) 
+* Dinsdag: Meta code run when step through
+* Vrijdag: Milestone a Bubblesort stepthrough werkend (met visualizatie) 
 
 ##Week 5
+* 
 * Werken aan prefab/high level visualisatie objecten
 
 ##Week 6
@@ -36,7 +38,8 @@ Research:
 * Add additional Examples 
 
 ##Week 7
-* Vrijdag: Must have code klaar
+* Verwerken SIG Feedback
+* Vrijdag: Milestone must have code klaar
 
 ##Week 8
 * Dinsdag: Deadline 2 SIG
