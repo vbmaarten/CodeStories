@@ -81,15 +81,25 @@ alert(result.join(', '));
       interpreter.setProperty(scope, 'alert',
           interpreter.createNativeFunction(wrapper));
     };
+    
+    
+   var displayArrayCode = 'svg.selectAll("rect").data(scope.a).enter().append("rect").attr("y",function(d){return h-d}).attr("x",function(d,i){return i*21})' +
+   '.attr("height",function(d){return d;}).attr("width",20).style("fill","blue")';
+   var highlightSelectionCode = 'svg.selectAll("rect").style("fill","blue").filter(function(d,i){return i==scope.i|| i==scope.i+1;}).style("fill","red");'
+   var switchCode = 'svg.selectAll("rect").data(scope.a).filter(function(d,i){return i==scope.i|| i==scope.i+1;}).transition().style("fill","green").attr("y",function(d){return h-d}).attr("height",function(d){return d;});';
 
     function parseButton() {
       var code = document.getElementById('code').value
       myInterpreter = new Interpreter(code, initAlert);
       disable('');
-      myInterpreter.ast.body[1].body.body[0].VCode = 'svg.selectAll("circle").data([scope.a,scope.b]).enter().append("circle").attr("cx", function(d, i) { return (i * 50) + 25; }).attr("cy", h/2).attr("r", function(d) {return d; });';
-      
-      myInterpreter.ast.body[1].body.body[1].test.VCode = 'svg.selectAll("circle").data([scope.a,scope.b]).transition().attr("r", function(d) {return d; });';
-    
+       //var swapped
+      myInterpreter.ast.body[1].body.body[0].VCode = displayArrayCode;
+
+      // if(a[i] > a[i+1])
+      myInterpreter.ast.body[1].body.body[1].body.body[1].body.body[0].test.VCode =highlightSelectionCode;
+
+      // swapped = true inside IF
+      myInterpreter.ast.body[1].body.body[1].body.body[1].body.body[0].consequent.body[3].VCode = switchCode;
     }
 
     function stepButton() {
