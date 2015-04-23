@@ -34,7 +34,7 @@
 var Interpreter = function(code, opt_initFunc) {
   this.initFunc_ = opt_initFunc;
   this.UNDEFINED = this.createPrimitive(undefined);
-  this.ast = acorn.parse(code);
+  this.ast = acorn.parse(code, {locations: true});
   var scope = this.createScope(this.ast, null);
   this.stateStack = [{node: this.ast, scope: scope, thisExpression: scope}];
 };
