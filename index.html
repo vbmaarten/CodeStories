@@ -26,9 +26,70 @@
 <script src="libs/interpreter/acorn.js"></script>
 <script src="libs/interpreter/interpreter.js"></script>
     
+<script src="libs/graphics/D3/d3.js"></script>
+
+</head>
+<body>
+  <h1>JS-Interpreter Demo</h1>
+
+  <p>Enter JavaScript code below, then click <em>Parse</em>.  To execute, either
+  click <em>Step</em> repeatedly, or click <em>Run</em> once.
+  Open your browser's console for errors.</p>
+  <p><textarea id="code">
+var result = [];
+function fibonacci(n, output) {
+  var a = 1, b = 1, sum;
+  for (var i = 0; i &lt; n; i++) {
+    output.push(a);
+    sum = a + b;
+    a = b;
+    b = sum;
+  }
+}
+fibonacci(16, result);
+alert(result.join(', '));
+</textarea><br>
+  <button onclick="parseButton()">Parse</button>
+  <button onclick="stepButton()" id="stepButton" disabled="disabled">Step</button>
+  <button onclick="runButton()" id="runButton" disabled="disabled">Run</button>
+  </p>
+
+  <div id='D3-canvas'></div>
+
 
 
   <script>
+
+      
+      //Width and height
+      var w = 500;
+      var h = 50;
+      
+      //Create SVG element
+      var svg = d3.select("#D3-canvas")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+      var el = svg.selectAll("circle")
+          .data([1])
+      var circle = el.enter()
+          .append("circle");
+
+      circle.attr("cx", function(d, i) {
+            return (i * 50) + 25;
+          })
+           .attr("cy", h/2)
+            
+           .attr("fill", "yellow")
+           .attr("stroke", "orange")
+           .attr("stroke-width", function(d) {
+            return d/2;
+           });
+
+    
+
+
     var myInterpreter;
     function initAlert(interpreter, scope) {
       var wrapper = function(text) {
@@ -43,6 +104,8 @@
       var code = document.getElementById('code').value
       myInterpreter = new Interpreter(code, initAlert);
       disable('');
+      myInterpreter.ast.body[1].body.body[1].test.VCode = 'alert(JSON.stringify(scope))'/*
+        = " el.data(a).enter().append('div').attr('class','bar').style('height',function(d){var barHeight=d*5; return barHeight+'px';});"*/
     }
 
     function stepButton() {
@@ -55,13 +118,9 @@
         var end = 0;
       }
       createSelection(start, end);
-      try {
         var ok = myInterpreter.step();
-      } finally {
-        if (!ok) {
-          disable('disabled');
-        }
-      }
+     
+      
     }
 
     function runButton() {
@@ -94,44 +153,6 @@
       field.focus();
     }
   </script>
-</head>
-<body>
-  <h1>JS-Interpreter Demo</h1>
-
-  <p>Enter JavaScript code below, then click <em>Parse</em>.  To execute, either
-  click <em>Step</em> repeatedly, or click <em>Run</em> once.
-  Open your browser's console for errors.</p>
-  <p><textarea id="code">
-var result = [];
-function fibonacci(n, output) {
-  var a = 1, b = 1, sum;
-  for (var i = 0; i &lt; n; i++) {
-    output.push(a);
-    sum = a + b;
-    a = b;
-    b = sum;
-  }
-}
-fibonacci(16, result);
-alert(result.join(', '));
-</textarea><br>
-  <button onclick="parseButton()">Parse</button>
-  <button onclick="stepButton()" id="stepButton" disabled="disabled">Step</button>
-  <button onclick="runButton()" id="runButton" disabled="disabled">Run</button>
-  </p>
-
-  <p><small>
-  <script type="text/javascript">
-    if (compressed) {
-      document.write('[ Running compressed bundle.  Switch to <A HREF="?uncompressed">raw sources</A>. ]');
-    } else {
-      document.write('[ Running raw sources.  Switch to <A HREF="?compressed">compressed bundle</A>. ]');
-    }
-  </script>
-  </small></p>
-
-  <p>Read the <a href="docs.html">JS-Interpreter documentation</a>.</p>
-  <p>Get the <a href="https://github.com/NeilFraser/JS-Interpreter">source code</a>.</p>
 
 </body>
 </html>
