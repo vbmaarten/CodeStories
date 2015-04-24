@@ -18,7 +18,7 @@
 	* stop
 	* next/previous statement
 	* next/previous visualisation 
-* Example code
+* Convex hull
 
 ### Should have:
 * Code editor for initialisation of code
@@ -30,6 +30,8 @@
 * Relative object placement in the **canvas element**
 * Convex hull algorithm example
 * Multifile javascript projects
+* Multiple visualisations/Visualisation tree
+* Video linking
 
 ### Could have:
 * Highlighting of text during execution
