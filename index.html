@@ -19,9 +19,23 @@
       width: 50%;
     }
 
+
+    #VCode-editor {
+      margin: 0;
+      position: absolute;
+      top: 50px;
+      bottom: 0;
+      right: 0;
+      left:50%;
+      width: 50%;
+      height:40%;
+    }
+
+
     #D3-canvas {
+      margin:5px;
       position:absolute;
-      top:50px;
+      top:50%;
       bottom:0;
       right:0;
       left:50%;
@@ -64,6 +78,11 @@
       background-color: #B0BEC5;
     }
 
+    #D3-canvas {
+      border-style: solid;
+    border-width: 5px;  
+    }
+
   </style>
 
 </head>
@@ -84,10 +103,18 @@
       <li>
         <button onclick="runButton()" id="runButton" disabled="disabled">Run</button>
       </li>
+      <li>
+        
+        <button id="drop_zone" onclick="import_file()">Import</button>
+        
+        </li>
+      <li>
+        <button onclick="export_file()" id="exportButton" disabled="disabled">Export</button>
+      </li>
     </ul>
   </nav>
   <textarea id="code" style="display:none;"></textarea>
-  <pre id="editor">
+  <pre id="editor" >
 var a = [90, 80, 70, 60, 50, 40, 30, 20, 10];
  
 function bubbleSort(a)
@@ -109,11 +136,16 @@ function bubbleSort(a)
 bubbleSort(a);
   </pre>
 
+    <pre id="VCode-editor" >
+aap
+  </pre>
+
 
   <div id='D3-canvas'></div>
 
   <script src="libs/interpreter/acorn.js"></script>
   <script src="libs/interpreter/interpreter.js"></script>
+  <script src="libs/interpreter/vcode_handler.js"></script>
   <script src="libs/converter.js"></script>
   <script src="libs/editor-ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>    
   <script src="libs/graphics/D3/d3.js"></script>
@@ -122,8 +154,9 @@ bubbleSort(a);
 
       
     //Width and height
-    var w = 500;
-    var h = 100;
+    var canvas = document.querySelector('#D3-canvas');
+    var w = canvas.offsetWidth -15;
+    var h = canvas.offsetHeight -15;
     
     //Create SVG element
     var svg = d3.select("#D3-canvas")
@@ -134,7 +167,10 @@ bubbleSort(a);
     //Create editor    
     var editor = ace.edit("editor");
     editor.getSession().setMode("ace/mode/javascript");
-    console.log(editor.getValue());
+
+    var VCode_editor = ace.edit("VCode-editor");
+    VCode_editor.getSession().setMode("ace/mode/javascript");
+
 
     var myInterpreter;
     function initAlert(interpreter, scope) {
@@ -146,24 +182,12 @@ bubbleSort(a);
           interpreter.createNativeFunction(wrapper));
     };
 
-  var displayArrayCode = 'svg.selectAll("rect").data(scope.a).enter().append("rect").attr("y",function(d){return h-d}).attr("x",function(d,i){return i*21})' +
-   '.attr("height",function(d){return d;}).attr("width",20).style("fill","blue")';
-   var highlightSelectionCode = 'svg.selectAll("rect").style("fill","blue").filter(function(d,i){return i==scope.i|| i==scope.i+1;}).style("fill","red");'
-   var switchCode = 'svg.selectAll("rect").data(scope.a).filter(function(d,i){return i==scope.i|| i==scope.i+1;}).transition().style("fill","green").attr("y",function(d){return h-d}).attr("height",function(d){return d;});';
-    function parseButton() {
+      function parseButton() {
       document.getElementById('code').value = editor.getValue();
       var code = document.getElementById('code').value;
       myInterpreter = new Interpreter(code, initAlert);
       disable('');
-     
-      //var swapped
-      myInterpreter.ast.body[1].body.body[0].VCode = displayArrayCode;
-
-      // if(a[i] > a[i+1])
-      myInterpreter.ast.body[1].body.body[1].body.body[1].body.body[0].test.VCode =highlightSelectionCode;
-
-      // swapped = true inside IF
-      myInterpreter.ast.body[1].body.body[1].body.body[1].body.body[0].consequent.body[3].VCode = switchCode;
+    
          }
 
     function stepButton() {
@@ -210,6 +234,7 @@ bubbleSort(a);
       document.getElementById('stepButton').disabled = disabled;
       document.getElementById('runButton').disabled = disabled;
       document.getElementById('playButton').disabled = disabled;
+      document.getElementById('exportButton').disabled = disabled;
     }
 
     function createSelection(start, end) {
@@ -229,6 +254,8 @@ bubbleSort(a);
       field.focus();
     }
   </script>
+
+  <script src="libs/file_manager.js"></script>
 
 </body>
 </html>
