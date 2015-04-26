@@ -115,25 +115,7 @@
   </nav>
   <textarea id="code" style="display:none;"></textarea>
   <pre id="editor" >
-var a = [90, 80, 70, 60, 50, 40, 30, 20, 10];
- 
-function bubbleSort(a)
-{
-    var swapped;
-    do {
-        swapped = false;
-        for (var i=0; i < a.length-1; i++) {
-            if (a[i] > a[i+1]) {
-                var temp = a[i];
-                a[i] = a[i+1];
-                a[i+1] = temp;
-                swapped = true;
-            }
-        }
-    } while (swapped);
-}
- 
-bubbleSort(a);
+import a file
   </pre>
 
     <pre id="VCode-editor" >
@@ -149,7 +131,7 @@ aap
   <script src="libs/converter.js"></script>
   <script src="libs/editor-ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>    
   <script src="libs/graphics/D3/d3.js"></script>
-
+  <script src="libs/interpreter/walk.js" type="text/javascript"></script>
   <script>
 
       
@@ -165,11 +147,41 @@ aap
           .attr("height", h);
 
     //Create editor    
-    var editor = ace.edit("editor");
-    editor.getSession().setMode("ace/mode/javascript");
-
     var VCode_editor = ace.edit("VCode-editor");
     VCode_editor.getSession().setMode("ace/mode/javascript");
+
+    //Create editor    
+    var editor = ace.edit("editor");   
+    editor.getSession().setMode("ace/mode/javascript");
+    
+    //Get node closest to cursor and make a selection on that node
+    var selectNode = function(e,selection){
+      console.log(arguments);
+      var session = editor.getSession();
+      var cursor = selection.getCursor();
+      var tree = myInterpreter.ast;
+      console.log(cursor);
+      var pos = session.getDocument().positionToIndex(cursor,0);
+      console.log(pos);
+      var node = acorn.walk.findNodeAround(tree, pos,function(a,b){return true;}).node;
+      if(node.VCode){
+        VCode_editor.setValue(node.VCode);
+      } else{
+        VCode_editor.setValue("//no vcode defined")
+      }
+
+      var range = {};
+      range.start = {};
+      range.end = {};
+      range.start.row = node.loc.start.line - 1 ;
+      range.start.column = node.loc.start.column;
+      range.end.row = node.loc.end.line - 1;
+      range.end.column = node.loc.end.column;
+
+      editor.getSession().selection.setSelectionRange(range);
+    }; 
+    editor.getSession().selection.on("changeCursor", selectNode)
+
 
 
     var myInterpreter;

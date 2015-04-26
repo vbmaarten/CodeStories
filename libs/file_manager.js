@@ -1,12 +1,17 @@
 function import_file(content){
 	console.log(content);
-	var pack = JSON.parse(content);	
-	editor.setValue(pack.sourcecode);
-	disable('');
+	var pack = JSON.parse(content);
+
 	myInterpreter = new Interpreter(pack.sourcecode, initAlert);
+	
+	try{
+	editor.setValue(pack.sourcecode);}
+	catch(e){}
+	disable('');
+	
+	editor.getSession().selection.on("changeCursor", selectNode);
 	attach_VCode(myInterpreter.ast,pack.VCode);
 }
-
 
 function attach_VCode(ast,VCode_ast){
 	for(var varname in VCode_ast){
