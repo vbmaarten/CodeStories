@@ -18,23 +18,24 @@
 	* stop
 	* next/previous statement
 	* next/previous visualisation 
-* Convex hull
+* Convex hull example
 
 ### Should have:
 * Code editor for initialisation of code
-	* Example input
-* 3D objects for use in the **canvas element**
+	* Example/Mock input
+* Automatic code layout on import for visibility
 * Animation for use in the **canvas element**
-* Playback speed buttons to control how fast each step of the algorithm lasts
+* Playback speed buttons to control how long each step of the algorithm lasts
 * Default visualisations available in **editor 2** that the user can use to display commonly used datastructures
-* Relative object placement in the **canvas element**
-* Convex hull algorithm example
 * Multifile javascript projects
 * Multiple visualisations/Visualisation tree
 * Video linking
+* Highlighting of code during execution
+
 
 ### Could have:
-* Highlighting of text during execution
+* 3D objects for use in the **canvas element**
+	* Relative object placement in the **canvas element**
 * Documentation of basic javascript functions
 * Async visualisation
 * Support for more languages other than javascript
