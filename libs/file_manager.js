@@ -69,23 +69,33 @@ function download(filename, text) {
   document.body.removeChild(pom);
 }
 
-  function handleFileSelect(evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
+function handleFileSelect(evt) {
+	evt.stopPropagation();
+	evt.preventDefault();
+	dropContainer.className = "";
 
-    var file = evt.dataTransfer.files[0]; // FileList object
-    var reader = new FileReader();
-    reader.onloadend = function(){import_file(reader.result)};
-    reader.readAsText(file);
-  }
+	var file = evt.dataTransfer.files[0]; // FileList object
+	var reader = new FileReader();
+	reader.onloadend = function(){import_file(reader.result)};
+	reader.readAsText(file);
+}
 
-  function handleDragOver(evt) {
-    evt.stopPropagation();
-    evt.preventDefault();
-    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
-  }
+function handleDragOver(evt) {
+	evt.stopPropagation();
+	evt.preventDefault();
+	evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+}
 
-  // Setup the dnd listeners.
-  var dropZone = document.getElementById('drop_zone');
-  dropZone.addEventListener('dragover', handleDragOver, false);
-  dropZone.addEventListener('drop', handleFileSelect, false);
+// Setup the dnd listeners.
+var dropZone = document.getElementById('drop-zone');
+dropZone.addEventListener('dragover', handleDragOver, false);
+dropZone.addEventListener('drop', handleFileSelect, false);
+
+var dropContainer = document.getElementById('drop-container');
+document.addEventListener("dragenter", function( event ) {
+  dropContainer.className = dropContainer.className + " active";
+}, false);
+
+dropZone.addEventListener("dragleave", function( event ) {
+	dropContainer.className = "";
+}, false);
