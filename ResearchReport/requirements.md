@@ -7,7 +7,7 @@
 * Code editor to view the contents of the javascript (**editor 1**)
 * Be able to parse the javascript file
 * Be able to debug the javascript file
-* **Canvas element** to display **visualizations** in
+* **Canvas element** to display a graphical **visualization** in
 * Code editor to input, write and edit code for manipulation of the **canvas element** (**editor 2**)
 * Ability to mark a statement in **editor 1** and write code in **editor 2** that executes when the marked statement is reached during debugging
 * Access to a graphics framework in **editor 2**
@@ -23,7 +23,7 @@
 * Code editor for initialisation of code
 	* Example/Mock input
 * Bundle a set of **visualizations** as a **narrative**
-* Allow for sub **narratives** 
+* Allow for sub **narratives**
 
 ### Should have:
 * A visual tree representation of the **narrative** structure
@@ -32,6 +32,8 @@
 * Multiple visualisations/Visualisation tree
 * Highlighting of code during execution
 * Ability to edit the code other than the code to manipulate the visualisation
+* Be able to export the project with its **narrative**
+* GitHub support for projects
 
 
 ### Could have:
