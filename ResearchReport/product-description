@@ -1,0 +1,7 @@
+## Product description
+
+Consider the following user story:
+
+Bob is a professor at the university in Delft specializing in algorithmics. Next to his work in this field he also teaches students the fundamentals, theory and science behind algorithms. For this reason he often needs to write simple programs to demonstrate these algorithms in class. However he found that often there is confusion when explaining code to his students as the code and the execution are disjoint. For this reason he wants to be able to go through his code in a step by step manner and display the effects of each step.
+
+The application 
