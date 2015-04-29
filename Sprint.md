@@ -20,10 +20,9 @@
 
 | User Story    | Priority      | Task                           | Task assigned to | Estimated effort |
 | ------------- | ------------- | ------------------------------ | ---------------- | ---------------- |
-|-|1| Product definition / userstory |  |  |
-|-|1| Code narrative explanation and definitions |  |  |
-|-|1| Existing solutions |  |  |
-|-|1| Technology we are going to use |  |  |
-|-|1| Limitations |  |  |
-|-|1| Research: change in code and its effects on ast tree and narrative code |  |  |
-|-|1| UX & UI (mockups) |  |  |
+|-|1| Product definition / userstory | salim |  |
+|-|1| Code narrative explanation and definitions | salim |  |
+|-|1| Existing solutions | maarten |  |
+|-|1| Technology we are going to use and limitations | roelof |  |
+|-|3| Research: change in code and its effects on ast tree and narrative code |  |  |
+|-|1| UX & UI (mockups) | roelof |  |
