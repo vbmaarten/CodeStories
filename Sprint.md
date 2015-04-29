@@ -27,4 +27,3 @@
 |-|1| Limitations |  |  |
 |-|1| Research: change in code and its effects on ast tree and narrative code |  |  |
 |-|1| UX & UI (mockups) |  |  |
-|-|1| Product omschrijving |  |  |
