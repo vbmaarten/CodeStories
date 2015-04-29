@@ -27,16 +27,16 @@
 
 ### Should have:
 * A visual tree representation of the **narrative** structure
-* Automatic code layout on import for visibility
 * Animation for use in the **canvas element**
 * Multiple visualisations/Visualisation tree
 * Highlighting of code during execution
-* Ability to edit the code other than the code to manipulate the visualisation
 * Be able to export the project with its **narrative**
 * GitHub support for projects
+* Ability to small make changes in the project code without losing all of the visualization data
 
 
 ### Could have:
+* Automatic code layout on import for visibility
 * Default visualisations available in **editor 2** that the user can use to display commonly used datastructures
 * Playback speed buttons to control how long each step of the algorithm lasts
 * Video linking
