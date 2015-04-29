@@ -21,7 +21,7 @@
 | User Story    | Priority      | Task                           | Task assigned to | Estimated effort |
 | ------------- | ------------- | ------------------------------ | ---------------- | ---------------- |
 |-|1| Product definition / userstory |  |  |
-|-|1| Code narrative explenation and definitions |  |  |
+|-|1| Code narrative explanation and definitions |  |  |
 |-|1| Existing solutions |  |  |
 |-|1| Technology we are going to use |  |  |
 |-|1| Limitations |  |  |
