@@ -6,4 +6,8 @@ To research some of the existing solutions we've looked at some ways to generate
 
 Code guide is a solution to generate interactive documentation from python files. It works by writing a string of documentation and linking it to one or more lines of code. When the interactive documentation is started, the lines of code for which documentation is available are highlighted in sequence and it's documentation is shown in a text bubble. 
 
-![GitHub Logo](codeguide.png)
+![codeguide screenshot](codeguide.png)
+
+##[Python  Tutor](http://www.pythontutor.com/)
+
+![pythontutor screenshot](pythontutor.png)
