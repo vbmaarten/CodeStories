@@ -18,6 +18,10 @@ These documentation tools commonly scan the code to generate a documentation. Ho
 ##Static code visualizations
 Handmade algorithm visualisations can function as inspirations for the possible animations that our application can generate. A website that contains many interesting visualizations is http://bost.ocks.org/mike/algorithms/. 
 
+##Interactive storytelling 
+Interactive storytelling is a way of article writing in which the article develops as the reader is reading it. Interaction with the document can influence the outcome of the document. This is a method that we can use for our visualization, interaction with the document will the determine what elements the reader needs explanation on. 
+An example is the following new york times article: http://www.nytimes.com/interactive/2014/09/19/travel/reif-larsen-norway.html. New views open as the reader scrolls though the document and explanatory visualizations show up as you scroll over them. 
+
 ###Notes
 http://www.academia.edu/265331/Algorithm_Explorer_Visualizing_Algorithms_In_a_3D_Multimedia_Environment.
 
