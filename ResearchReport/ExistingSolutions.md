@@ -9,5 +9,8 @@ Code guide is a solution to generate interactive documentation from python files
 ![codeguide screenshot](codeguide.png)
 
 ##[Python  Tutor](http://www.pythontutor.com/)
-
+Python tutor is a tool that explains the execution of a python script. It does ths by stepping through the code like a debugger and showing the state of the program on the right. It shows fairly low level animations with no possibility to be extended. 
 ![pythontutor screenshot](pythontutor.png)
+
+###Notes
+http://www.academia.edu/265331/Algorithm_Explorer_Visualizing_Algorithms_In_a_3D_Multimedia_Environment
