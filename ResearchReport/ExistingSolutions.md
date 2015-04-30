@@ -15,8 +15,9 @@ Python tutor is a tool that explains the execution of a python script. It does t
 There are many tools for adding for generating documentation for code. A few examples are [Doxygen](http://www.stack.nl/~dimitri/doxygen/), [JSDoc](http://www.lsauer.com/2013/05/javascript-documentation-generator.html) and [Sphinx](http://sphinx-doc.org/). 
 These documentation tools commonly scan the code to generate a documentation. However, after the documents are generated there's no further interaction with the project. 
 
-###Notes
-http://www.academia.edu/265331/Algorithm_Explorer_Visualizing_Algorithms_In_a_3D_Multimedia_Environment
+##Static code visualizations
+Handmade algorithm visualisations can function as inspirations for the possible animations that our application can generate. A website that contains many interesting visualizations is http://bost.ocks.org/mike/algorithms/. 
 
-Inspiration: http://bost.ocks.org/mike/algorithms/
+###Notes
+http://www.academia.edu/265331/Algorithm_Explorer_Visualizing_Algorithms_In_a_3D_Multimedia_Environment.
 
