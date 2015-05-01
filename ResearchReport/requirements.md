@@ -38,14 +38,13 @@
 * Highlighting of code during execution
 * GitHub support for projects
 * Ability to make small changes in the project code without losing all of the visualization data
+* Default visualisations available in  that the user can use to display commonly used datastructures
 
 
 ### Could have:
 * Automatic code layout on import for visibility
-* Default visualisations available in  that the user can use to display commonly used datastructures
 * Playback speed buttons to control how long each step of the algorithm lasts
 * Documentation of basic javascript functions
-* Plot over time / plot delta over time
 * Chose which particular graphics framework is used in **visualization**
 
 ### Won't have:
