@@ -341,6 +341,7 @@ Narative files are appended to a specific git commit. We are not sure if we will
 ## User experience & user interface
 
 Below is a list of simple actions the different users have to be able to perform in the main scenario of the application.
+A Writer will have written Visualization objects that can be called by a narative primitive with variables from the scope. 
 
 ### Writer
 1. Open project
@@ -363,12 +364,13 @@ Below is a list of simple actions the different users have to be able to perform
 ### Viewer
 1. Open project
 > Way to input link to project
-2. Select node you want to narrate
+2. Select node you want to view
 > Folder structure and ability to view the code
+ ( See related narratives )
 3. Select narrative
 > List of narratives
 4. Play back narrative
-> Step by step display of narrative primitives
+> Step by step display of narrative primitives. Highlights the file/folder/code section and creates animations. 
 
 ![alt text](https://github.com/vbmaarten/BepBvo/blob/master/ResearchReport/mockups/viewer-1.png "Viewer 1")
 
