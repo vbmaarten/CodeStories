@@ -18,7 +18,7 @@
 	* Images
 * Be able to edit **narrative elements** of a narrative 
 * Editor to input, write and edit **narrative elements**
-* **Visualion**: A narrative element to create animations that can make use of:
+* **Visualization**: A narrative element to create animations that can make use of:
 	* A graphics framework
 	* Ability to access program scope
 * Control buttons for debugging
