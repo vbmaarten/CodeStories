@@ -14,7 +14,7 @@
 
 
 
-![alt text](https://github.com/vbmaarten/BepBvo/tree/master/ResearchReport/mockups/writer-1.png "Writer 1")
-![alt text](https://github.com/vbmaarten/BepBvo/tree/master/ResearchReport/mockups/writer-2.png "Writer 2")
-![alt text](https://github.com/vbmaarten/BepBvo/tree/master/ResearchReport/mockups/viewer-1.png "Viewer 1")
+![alt text](https://github.com/vbmaarten/BepBvo/blob/master/ResearchReport/mockups/writer-1.png "Writer 1")
+![alt text](https://github.com/vbmaarten/BepBvo/blob/master/ResearchReport/mockups/writer-2.png "Writer 2")
+![alt text](https://github.com/vbmaarten/BepBvo/blob/master/ResearchReport/mockups/viewer-1.png "Viewer 1")
 
