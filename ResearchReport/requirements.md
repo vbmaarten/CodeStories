@@ -25,8 +25,8 @@
 	* play
 	* pause
 	* stop
-	* next/previous statement
-	* next/previous visualisation
+	* next/previous code statement
+	* next/previous narrative element
 * Convex hull example
 * Code editor for initialisation of code
 	* Example/Mock input
