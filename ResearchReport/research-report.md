@@ -90,9 +90,6 @@ Handmade algorithm visualisations can function as inspirations for the possible 
 Interactive storytelling is a way of article writing in which the article develops as the reader is reading it. Interaction with the document can influence the outcome of the document. This is a method that we can use for our visualization, interaction with the document will the determine what elements the reader needs explanation on. 
 An example is the following new york times article: http://www.nytimes.com/interactive/2014/09/19/travel/reif-larsen-norway.html. New views open as the reader scrolls though the document and explanatory visualizations show up as you scroll over them. 
 
-###Notes
-http://www.academia.edu/265331/Algorithm_Explorer_Visualizing_Algorithms_In_a_3D_Multimedia_Environment.
-
 
 # Technologies and Limitations
 
@@ -148,6 +145,8 @@ The question now is, which of these two approaches is optimal for use in our sol
 For the purpose of our application the smarter option would be to use either Ace or Code mirror because it requires minimal setup and minimal time to learn. The features it gives should be adequate for what we need it to do. This also allows us to have more freedom when designing the rest of the system as we do not have to implement it into the Code Editor but allows us to have a more modular design.
 
 Both of these editors are widely supported and the most actively used in their field. Ace is used and supported by c9.io and also supported by Mozilla, code mirror is used by jsfiddle.net and codepen.io, so both editors do not lack in support. Code mirror is smaller in size and is historically more stable and has better browser compatibility. Ace however has a couple more useful features and is overall more polished. Lastly the documentation of Ace is comprehensible and overall easier to use than the documentation of Code mirror. 
+
+In the end we experimented with both editors. We concluded that Ace would be the best option out of the two because it better documented and has more beneficial features.
 
 ###Interpreter 
 
@@ -279,6 +278,8 @@ Narative files are appended to a specific git commit. We are not sure if we will
 
 # Requirements
 
+Based on this research we concluded the following requirements for the application:
+
 ## Functional requirements
 
 ### Must haves:
@@ -338,12 +339,26 @@ Narative files are appended to a specific git commit. We are not sure if we will
 * Must be supported in at least latest versions of the chrome webbrower
 * Use of the git versioning system
 
-## User experience & user interface
+# User experience & user interface
 
 Below is a list of simple actions the different users have to be able to perform in the main scenario of the application.
-A Writer will have written Visualization objects that can be called by a narative primitive with variables from the scope. 
 
-### Writer
+## Viewer
+1. Open project
+> Way to input link to project
+2. Select node you want to view
+> Folder structure and ability to view the code
+ ( See related narratives )
+3. Select narrative
+> List of narratives
+4. Play back narrative
+> Step by step display of narrative primitives. Highlights the file/folder/code section and creates animations. 
+
+![alt text](https://github.com/vbmaarten/BepBvo/blob/master/ResearchReport/mockups/viewer-1.png "Viewer 1")
+
+This is the basic screen the Viewer will be navigating through. On the left the viewer can navigate through his files and select a file which will then be displayed in the middle. On the right there are the available narratives for the current location. There are buttons for stepping through the narrative and this will also update the location on the left side. The narrative can also initialize the interpreter. This will highlight the code and generate the defined visualizations for the pieces of code.
+
+## Writer
 1. Open project
 > Method to upload
 2. Select node you want to narrate
@@ -360,17 +375,4 @@ A Writer will have written Visualization objects that can be called by a narativ
 ![alt text](https://github.com/vbmaarten/BepBvo/blob/master/ResearchReport/mockups/writer-1.png "Writer 1")
 ![alt text](https://github.com/vbmaarten/BepBvo/blob/master/ResearchReport/mockups/writer-2.png "Writer 2")
 
-
-### Viewer
-1. Open project
-> Way to input link to project
-2. Select node you want to view
-> Folder structure and ability to view the code
- ( See related narratives )
-3. Select narrative
-> List of narratives
-4. Play back narrative
-> Step by step display of narrative primitives. Highlights the file/folder/code section and creates animations. 
-
-![alt text](https://github.com/vbmaarten/BepBvo/blob/master/ResearchReport/mockups/viewer-1.png "Viewer 1")
-
+The writer has a similar UI. But the additional possiblility to add narative elements, and to create new naratives and link these. 
