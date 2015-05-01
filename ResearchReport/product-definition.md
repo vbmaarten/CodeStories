@@ -34,7 +34,7 @@ Here are some definitions used throughout the document:
   * Link to a narrative
   * Visualization call
 * **Visualization**: Object with functions to animate/update a graphic. examples: Graph, table, pie-chart.
-* **Narrative graph**: A visual representation of related Narratives. 
+* **Narrative graph**: A graph representing related narratives. 
 * **Viewer**: A person that views/follows Narratives or selects a CAST Node to gain more insight about that node.
 * **Writer**: A person that writes Narratives for nodes attached to the CAST.
 
