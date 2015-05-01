@@ -3,52 +3,55 @@
 ## Functional requirements
 
 ### Must haves:
-* Be able to load a javascript file
-* Code editor to view the contents of the javascript (**editor 1**)
-* Be able to parse the javascript file
-* Be able to debug the javascript file
-* **Canvas element** to display a graphical **visualization** in
-* Code editor to input, write and edit code for manipulation of the **canvas element** (**editor 2**)
-* Ability to mark a statement in **editor 1** and write code in **editor 2** that executes when the marked statement is reached during debugging
-* Access to a graphics framework in **editor 2**
-* Ability to access variables in **editor 2** that are in scope in the selected statement in **editor 1**
+* Be able to load a javascript project
+* Project navigator to view the files in the project
+* **Code editor** to view the contents of a file
+* Ability to select a file and have it displayed in the **code editor**
+* Be able to parse the javascript files in the project to create ASTs
+* Be able to debug javascript
+* Be able to attach a narrative to either a file, folder or node in a AST
+* Be able to view all narratives attached to a file, folder or node in AST
+* An element to display a narrative in a **story panel**
+* Be able to add narrative elements to a narrative, examples:
+	* Text
+	* Video
+	* Images
+* Be able to edit **narrative elements** of a narrative 
+* Editor to input, write and edit **narrative elements**
+* **Visualion**: A narrative element to create animations that can make use of:
+	* A graphics framework
+	* Ability to access program scope
 * Control buttons for debugging
 	* play
 	* pause
 	* stop
 	* next/previous statement
-	* next/previous visualisation 
+	* next/previous visualisation
 * Convex hull example
-* Multifile javascript projects
 * Code editor for initialisation of code
 	* Example/Mock input
-* Bundle a set of **visualizations** as a **narrative**
-* Allow for sub **narratives**
 
 ### Should have:
 * A visual tree representation of the **narrative** structure
-* Animation for use in the **canvas element**
-* Multiple visualisations/Visualisation tree
 * Highlighting of code during execution
 * Be able to export the project with its **narrative**
 * GitHub support for projects
-* Ability to small make changes in the project code without losing all of the visualization data
+* Ability to make small changes in the project code without losing all of the visualization data
 
 
 ### Could have:
 * Automatic code layout on import for visibility
-* Default visualisations available in **editor 2** that the user can use to display commonly used datastructures
+* Default visualisations available in  that the user can use to display commonly used datastructures
 * Playback speed buttons to control how long each step of the algorithm lasts
-* Video linking
-* 3D objects for use in the **canvas element**
-	* Relative object placement in the **canvas element**
 * Documentation of basic javascript functions
-* Async visualisation
-* Support for more languages other than javascript
-* Nth time at a particular statement
 * Plot over time / plot delta over time
-* Chose which particular graphics framework is used in **editor 2**
+* Chose which particular graphics framework is used in **visualization**
 
+### Won't have:
+* Support for more languages other than javascript
+* 3D objects for use in the **visualization**
+* Relative object placement in the **visualization**
+* Async visualisation
 
 ## Non-functional requirements
 * Writen in javascript
