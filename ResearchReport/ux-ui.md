@@ -11,3 +11,10 @@
 > List of already defined primitives and a method to add a new primitive
 5. Select which primitive
 > List of available primitives
+
+
+
+![alt text](https://github.com/vbmaarten/BepBvo/tree/master/ResearchReport/mockups/writer-1.png "Writer 1")
+![alt text](https://github.com/vbmaarten/BepBvo/tree/master/ResearchReport/mockups/writer-2.png "Writer 2")
+![alt text](https://github.com/vbmaarten/BepBvo/tree/master/ResearchReport/mockups/viewer-1.png "Viewer 1")
+
