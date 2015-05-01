@@ -17,25 +17,23 @@ Research:
 * Bestaande debuggers (https://code.google.com/p/debug-js/ ? https://neil.fraser.name/software/JS-Interpreter/)
 
 ##Week 2
-* Class diagram maken
+* Class diagram 
 * Use cases
 * Vrijdag: Deadline research report
 
 ##Week 3
-* Maandag: Milestone Begin schrijven code
-* Donderdag: Deadline parser + in/uitlezen source en meta code, 
+* Woensdag: Milestone, Begin write code
+* Vrijdag: CAST creation, CAST location selection, stepping through narrative 
 
 ##Week 4
-* Dinsdag: Meta code run when step through
-* Vrijdag: Milestone a Bubblesort stepthrough werkend (met visualizatie) 
+* Vrijdag: Must haves, except visualization
 
 ##Week 5
-* 
-* Werken aan prefab/high level visualisatie objecten
+* Vrijdag: Visualization
 
 ##Week 6
 * Dinsdag: Deadline 1 SIG
-* Add additional Examples 
+* Catch up on delays
 
 ##Week 7
 * Verwerken SIG Feedback
@@ -43,6 +41,7 @@ Research:
 
 ##Week 8
 * Dinsdag: Deadline 2 SIG
+* Examples and user interface
 
 ##Week 9
 * Vrijdag: Final versie eindrapport
