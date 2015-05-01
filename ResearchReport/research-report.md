@@ -171,12 +171,9 @@ A simple javascript interpreter which allows stepping through the code. It uses 
 ### Visualization Libraries
 At a CodeNarative of the Reader, the CodeNarative code gets passed the scope at the moment the interpreter passes the AST Node and a VScope object containing the visualizations that are active within the narative. 
 
-It is important for the visualization framework to give the Writer an intuitaive and quick way to initiate or edit some state of the some visualization. 
-The main question is the paradigm the Writer should initiate and edit an animation. On the one end of the spectrum there is the possib ility to 
-give the Writer access to a raw HTML5 canvas context. On the other end of the spectrum is some framework that has built in objects like PieChart that the Writer can 
-call with an element of the scope to update the visual. The first option forces the Writer to write much more code. The second might lock in the Writer to the framework and restrict the Writer in its creativity. 
+It is important for the visualization framework to give the Writer an intuitaive and quick way to initiate or update some state of some visualization. 
 
-Additionally, for the purpose of visualizing a some transition it would be nice to have the ability to animate the visualizations.
+For the purpose of visualizing a some transition it would be nice to have the ability to animate the visualizations.
 When running a visualization we would like the ability to jump to the end when a user decides they want to jump to the next step. 
 The list of options that have been considered
 
