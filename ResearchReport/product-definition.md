@@ -22,7 +22,7 @@ To conclude, the aim is to allow the Writer to convey meaning through dynamic st
 Here are some definitions used throughout the document:
 * **AST**: Abstract syntax tree. A tree that represents the structure of source code written in a programming language. Nodes in this tree can be constants or variables (leaves) and operators or statements (inner nodes).
 * **File/Folder tree**. Basic file and folder structure.
-* **CAST**: Context abstract syntax tree. Combination of File/Folder & AST tree. A node in the CAST can be files, folders and nodes that are available in the AST.
+* **CAST**: Context abstract syntax tree. Combination of File/Folder tree & AST. A node in the CAST can be a file, a folder or a node that is available in the AST.
 * **Narrative**: A Sequence of Narative Primitives attached to a node in the CAST.
 * **Code Narrative**: A Narrative that is located in an AST node. 
   * Has access to the scope of the AST node.
