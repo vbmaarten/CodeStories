@@ -157,8 +157,22 @@ Cons:
 Pros: 
 * Visualization based on updating data.
 * Build in support for tree/graph layout
+* 
+
+
 
 An open question at this moment is: is it usefull to allow the Writer to choose from multiple options?
+
+
+### Storage
+
+The storage options are either local or remote. The types considered are the basic file system, git , some SQL db. 
+
+Both local and remote are desired features. We will likely begin with the local option and extend it to include remote
+import and export later on. 
+
+Naratives are indexed by their CAST path.
+A collection of naratives will be linked to a specific git commit. This ensures that naratives are linked to code that will not change. The SQL option would require an additional db setup. This would give us more options for querying. The simplicity of file system option, where naratives are simply saved to their CAST path, and the ability to change this into a git repository are the reasons we will most likely chose a simple file system. 
 
 ## Conclusion 
 For the editor we will settle on Ace. The Interpreter leaves us little choice but we have yet to encounter major obstacles. The visualizations pose more problematic choices. The InfoVis and D3 option are both very promissing. We will aim toward modularity to at least give both of them a try in the testing phase and might end up allowing a Writer to make the choice.
