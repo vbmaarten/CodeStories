@@ -27,7 +27,7 @@ Here are some definitions used throughout the document:
 * **Code Narrative**: A Narrative that is located in an AST node. 
   * Has access to the scope of the AST node.
   * Can specify locations in the AST that, when reached, display a Narrative Primitive.
-* **Narrative Primitives**: A step/element in a Narrative that user can step through. 
+* **Narrative Primitives**: A step/element in a Narrative that a user can step through. 
   * Text
   * Video 
   * Image
