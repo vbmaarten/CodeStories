@@ -32,9 +32,10 @@
 	* Example/Mock input
 
 ### Should have:
+* Be able to export the project with its **narrative**
+* Be able to share the project with **narrative** to another user (that user can't edit the narratives)
 * A visual tree representation of the **narrative** structure
 * Highlighting of code during execution
-* Be able to export the project with its **narrative**
 * GitHub support for projects
 * Ability to make small changes in the project code without losing all of the visualization data
 
