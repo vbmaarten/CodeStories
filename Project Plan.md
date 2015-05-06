@@ -23,7 +23,8 @@ Research:
 
 ##Week 3
 * Woensdag: Milestone, Begin write code
-* Vrijdag: CAST creation, CAST location selection, stepping through narrative 
+* Donderdag: Project structuur af
+* Vrijdag: CAST creation 
 
 ##Week 4
 * Vrijdag: Must haves, except visualization
