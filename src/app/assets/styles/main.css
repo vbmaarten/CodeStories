@@ -17,7 +17,7 @@ body {
   height: 50px;
   top:0;
   left:0;
-  background-color: #2196F3;
+  background-color: #9C27B0;
 }
 
 .wrapper {
@@ -38,6 +38,7 @@ body {
   height: 100%;
   width:500px;
   background-color: #EFEFEF;
+  box-sizing:border-box; 
 }
 
 

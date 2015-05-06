@@ -7,7 +7,4 @@
  * # CastCtrl
  * Controller of the cast
  */
-angular.module('cast')
-  .controller('CastCtrl', function ($scope) {
-    
-  });
+angular.module('cast', ['ui.ace']);

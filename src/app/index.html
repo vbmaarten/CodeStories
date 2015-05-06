@@ -12,6 +12,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="cast/cast.css">
     <link rel="stylesheet" href="narrator/narrator.css">
     <!-- endbuild -->
   </head>
@@ -39,16 +40,21 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="app.js"></script>
+        <script src="cast/cast.js"></script>
         <script src="cast/cast.controller.js"></script>
+        <script src="narrator/narrator.js"></script>
         <script src="narrator/narrator.controller.js"></script>
         <script src="narrator/narrative/narrative.controller.js"></script>
         <script src="narrator/narrative/narrative.directive.js"></script>
         <script src="narrator/interpreter/interpreter.controller.js"></script>
+        <script src="projectLoader/projectLoader.js"></script>
         <script src="projectLoader/projectLoader.controller.js"></script>
         <script src="projectLoader/projectParser/projectParser.controller.js"></script>
         <!-- endbuild -->

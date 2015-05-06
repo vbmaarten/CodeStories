@@ -23,7 +23,7 @@
  ]
 
 
- angular.module('narrator', [])
+ angular.module('narrator')
  .controller('NarratorCtrl', function ($scope) {
 
  	$scope.writer = false;
