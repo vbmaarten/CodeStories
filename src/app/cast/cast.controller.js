@@ -30,58 +30,45 @@ angular.module('cast')
         "type": "directory",
         "children": [{
 	            "path": "/app/narrator/narrator.html",
-	            "name": "index.html",
+	            "name": "narrator.html",
 	            "type": "file"
 	        }, {
-	            "parent": "lcov-report",
 	            "path": "lcov-report/prettify.css",
 	            "name": "prettify.css",
 	            "type": "file"
 	        }, {
-	            "parent": "lcov-report",
 	            "path": "lcov-report/prettify.js",
 	            "name": "prettify.js",
 	            "type": "file"
 	        }, {
-            "parent": "lcov-report",
-            "path": "lcov-report/src",
-            "name": "src",
+            "path": "/app/narrator/narrative",
+            "name": "narrative",
             "type": "directory",
             "children": [{
-                "parent": "lcov-report/src",
-                "path": "lcov-report/src/createDirectoryObject.js.html",
-                "name": "createDirectoryObject.js.html",
+                "path": "/app/narrator/narrative/narrative.controller.js",
+                "name": "narrative.controller.js",
                 "type": "file"
             }, {
-                "parent": "lcov-report/src",
-                "path": "lcov-report/src/index.html",
-                "name": "index.html",
+                "path": "/app/narrator/narrative/narrative.directive.js",
+                "name": "narrative.directive.js",
                 "type": "file"
-            }, {
-                "parent": "lcov-report/src",
-                "path": "lcov-report/src/main.js.html",
-                "name": "main.js.html",
-                "type": "file"
-            }]
+            }
+          ]
         }]
 	    }, {
-        "parent": "",
-        "path": "cast",
+        "path": "/app/cast",
         "name": "cast",
         "type": "directory",
         "children": [{
-            "parent": "cast",
-            "path": "cast/cast.html",
+            "path": "/app/cast/cast.html",
             "name": "cast.html",
             "type": "file"
         }, {
-            "parent": "cast",
-            "path": "cast/cast.js",
+            "path": "/app/cast/cast.js",
             "name": "cast.js",
             "type": "file"
         }, {
-            "parent": "cast",
-            "path": "cast/cast.css",
+            "path": "/app/cast/cast.css",
             "name": "cast.css",
             "type": "file"
         }]
