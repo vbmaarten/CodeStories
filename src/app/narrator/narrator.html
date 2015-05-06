@@ -1,1 +1,8 @@
-narrator
+
+<div ng-repeat="narative in stepped">
+	<div class="narrator_path"> {{ narative.path }} </div>
+	<div ng-repeat="primitive in narative.primitives"> 
+	<div class="narrator_primitive"> {{primitive.text}} </div>
+	</div>
+</div>
+	
