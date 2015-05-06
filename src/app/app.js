@@ -14,19 +14,29 @@ angular
     'ngCookies',
     'ngResource',
     'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    'ui.router',
+    'cast',
+    'narrator'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'main/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'about/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    $urlRouterProvider
+      .otherwise('/');
+
+
+    $stateProvider
+      .state('home',{
+          url: '/',
+          views: {
+            'cast': {
+              templateUrl: '/cast/cast.html',
+              controller: 'CastCtrl'
+            },
+            'narrator': {
+              templateUrl: '/narrator/narrator.html',
+              controller: 'NarratorCtrl' 
+            },
+          }
+        });
   });
+

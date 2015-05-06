@@ -20,11 +20,13 @@
     <![endif]-->
 
 
-    <main class="container" ng-view="">
+    <div class="cast" ui-view="cast">
 
-    </main>
+    </div>
 
+    <div class="narrator" ui-view="narrator">
 
+    </div>
 
 
 
@@ -47,6 +49,7 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -55,9 +58,11 @@
         <script src="main/main.js"></script>
         <script src="cast/cast.controller.js"></script>
         <script src="narrator/narrator.controller.js"></script>
-        <script src="narrator/interpreter.controller.js"></script>
-        <script src="project-loader/projectLoader.controller.js"></script>
-
+        <script src="narrator/narrative/narrative.controller.js"></script>
+        <script src="narrator/narrative/narrative.directive.js"></script>
+        <script src="narrator/interpreter/interpreter.controller.js"></script>
+        <script src="projectLoader/projectLoader.controller.js"></script>
+        <script src="projectLoader/projectParser/projectParser.controller.js"></script>
         <!-- endbuild -->
 </body>
 </html>

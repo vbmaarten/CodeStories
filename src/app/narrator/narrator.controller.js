@@ -7,7 +7,7 @@
  * # NarratorCtrl
  * Controller of the narrator
  */
-angular.module('narrator')
+angular.module('narrator', [])
   .controller('NarratorCtrl', function ($scope) {
     
   });

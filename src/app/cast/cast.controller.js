@@ -7,7 +7,7 @@
  * # CastCtrl
  * Controller of the cast
  */
-angular.module('cast')
+angular.module('cast', [])
   .controller('CastCtrl', function ($scope) {
     $scope.firstName = "John";
     $scope.lastName = "Doe";

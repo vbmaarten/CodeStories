@@ -7,7 +7,7 @@
  * # ProjectLoaderCtrl
  * Controller of the project loader
  */
-angular.module('projectLoader')
+angular.module('projectLoader', [])
   .controller('ProjectLoaderCtrl', function ($scope) {
     
   });
