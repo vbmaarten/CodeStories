@@ -11,10 +11,10 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="assets/styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="srcApp">
+  <body ng-app="codeStoriesApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -25,7 +25,7 @@
         <div class="container">
           <div class="navbar-header">
 
-            <a class="navbar-brand" href="#/">src</a>
+            <a class="navbar-brand" href="#/">codeStories</a>
           </div>
 
           <div class="collapse">
@@ -74,9 +74,14 @@
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
+        <script src="app.js"></script>
+        <script src="main/main.js"></script>
+        <script src="about/about.js"></script>
+        <script src="cast/cast.controller.js"></script>
+        <script src="narrator/narrator.controller.js"></script>
+        <script src="narrator/interpreter.controller.js"></script>
+        <script src="project-loader/projectLoader.controller.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>

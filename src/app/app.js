@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name srcApp
+ * @name codeStoriesApp
  * @description
- * # srcApp
+ * # codeStoriesApp
  *
  * Main module of the application.
  */
 angular
-  .module('srcApp', [
+  .module('codeStoriesApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -19,11 +19,11 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
+        templateUrl: 'main/main.html',
         controller: 'MainCtrl'
       })
       .when('/about', {
-        templateUrl: 'views/about.html',
+        templateUrl: 'about/about.html',
         controller: 'AboutCtrl'
       })
       .otherwise({
