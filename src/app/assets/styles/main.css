@@ -43,13 +43,15 @@ body {
 }
 
 #cast {
-
+  float:left;
+  width:55%;
   background-color:black;
 
 }
 
 #narrator{
-
+  float:right;
+  width:45%;
   background-color:grey;
 }
 
