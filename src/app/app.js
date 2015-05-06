@@ -28,6 +28,10 @@ angular
       .state('home',{
           url: '/',
           views: {
+            'projectLoader': {
+              templateUrl: '/projectLoader/projectLoader.html',
+              controller: 'ProjectLoaderCtrl' 
+            },
             'cast': {
               templateUrl: '/cast/cast.html',
               controller: 'CastCtrl'
@@ -35,8 +39,7 @@ angular
             'narrator': {
               templateUrl: '/narrator/narrator.html',
               controller: 'NarratorCtrl' 
-            },
-          }
+            }          }
         });
   });
 
