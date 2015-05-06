@@ -19,17 +19,13 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div id="projectLoader" class='header' ui-view="projectLoader">
-
+    <header class="projectLoader" ui-view="projectLoader"></header>
+    <div class="wrapper">
+      <main class="cast" ui-view="cast"></main>
+      <aside class="narrator" ui-view="narrator"></aside>
     </div>
 
-    <div id="cast" ui-view="cast">
-
-    </div>
-
-    <div id="narrator" ui-view="narrator">
-
-    </div>
+    
 
 
 
