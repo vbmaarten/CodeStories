@@ -1,3 +1,17 @@
+.cast {
+	padding-left: 200px;
+	position: relative;
+}
+
+.directory-view {
+	background-color: #f0f0f0;
+	width: 200px;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
 .ace_editor { 
 	height: 100%; 
 }

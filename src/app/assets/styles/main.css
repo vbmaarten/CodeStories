@@ -5,9 +5,12 @@ html, body {
   height: 100%;
 }
 
+* {
+  box-sizing:border-box;
+}
+
 body {
   padding-top:50px;
-  box-sizing:border-box;
   position: relative;
 }
 
@@ -38,7 +41,6 @@ body {
   height: 100%;
   width:500px;
   background-color: #EFEFEF;
-  box-sizing:border-box; 
 }
 
 
