@@ -26,3 +26,10 @@
 |-|1| Technology we are going to use and limitations | roelof |  |
 |-|3| Research: change in code and its effects on ast tree and narrative code |  |  |
 |-|1| UX & UI (mockups) | roelof |  |
+
+###Week 3
+
+|-|1| ProjectLoader | maarten |  |
+|-|1| CAST  | salim |  |
+|-|1| Narrator | roelof |  |
+
