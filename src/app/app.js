@@ -16,6 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ui.router',
+    'projectLoader',
     'cast',
     'narrator'
   ])
