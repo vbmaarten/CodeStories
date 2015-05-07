@@ -1,8 +1,18 @@
 
-<div ng-repeat="narative in stepped">
-	<div class="narrator_path"> {{ narative.path }} </div>
-	<div ng-repeat="primitive in narative.primitives"> 
-	<div class="narrator_primitive"> {{primitive.text}} </div>
+<div ng-controller="NarratorCtrl" >
+	<div style='margin:auto;width:30%'>
+		<div style='float:left' ng-click='prev()'>PREV</div>
+		<div style='float:right' ng-click='next()'>NEXT</div>
+	</div> <br>
+
+	<div ng-repeat="narrative in storyBoard">
+	<narrative></narrative>
 	</div>
+
+	
+
+
 </div>
+
+
 	

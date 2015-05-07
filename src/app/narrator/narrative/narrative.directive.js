@@ -8,6 +8,16 @@
  * Diretive of the narrative
  */
 angular.module('narrator')
-  .directive('narrative', function ($scope) {
-    
+  .directive('primitive', function () {
+    return {
+    	templateUrl:'narrator/narrative/primitives/primitive.html',
+    }
+  }).directive('addPrimitiveBtn',function(){
+  	return {
+  		template:  "<div ng-show='writerMode' ng-click='addPrimitive(narrative,$index,atindex);'>+</div>",	
+  	};
+  }).directive('removePrimitiveBtn',function(){
+ 	return {
+  		template:  "<div ng-show='writerMode' ng-click='removePrimitive(narrative,$index);'>-</div>",	
+  	};
   });
