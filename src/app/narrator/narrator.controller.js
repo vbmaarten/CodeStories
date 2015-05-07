@@ -11,15 +11,15 @@
  var nar1 =
  {'path':"/something/",
  'primitives':[
- {"text":"<p> somet text </p>"},
- {"text":"<p> more text </p>"},
+ {"text":"somet text  "},
+ {"text":" more text  "},
  ]}
 
  var nar2 = 
  {'path':"/someotherfile.js/",
  'primitives':[
- {"text":"<p> this is about otherfile.js</p>"},
- {"text":"<p> and so is this </p>"}
+ {"text":"  this is about otherfile.js "},
+ {"text":"  and so is this  "}
  ]}
  nar1.primitives.push({'link':nar2});
 
@@ -27,7 +27,7 @@
  angular.module('narrator',[])
  .controller('NarratorCtrl', function ($scope) {
 
- 	$scope.writerMode = true	;
+ 	$scope.writerMode = false	;
 
  	$scope.storyBoard = [{'path':'/','primitives':[]}]
  	$scope.activeNarrative = {'path':'/','primitives':[{'link':nar1}]};
@@ -52,12 +52,13 @@
  		
  	}
 
-    $scope.addNarrative = function(storyBoard,index){
- 		index = index ;
+    $scope.addNarrative = function(storyBoard,afterNarrative){
+ 		var i = storyBoard.indexOf(afterNarrative);
  		storyBoard.splice(index+1,0,{"path":"/todo/",'primitives':[]});
  	};
- 	$scope.removeNarrative = function(storyBoard,index){
- 		storyBoard.splice(index,1);
+ 	$scope.removeNarrative = function(storyBoard,narrative){
+ 		var i = storyBoard.indexOf(narrative);
+ 		storyBoard.splice(i,1);
 
  	};
 
@@ -71,10 +72,10 @@
     }
   }).directive('addNarrativeBtn',function(){
   	return {
-  		template:  "<div ng-show='writerMode' ng-click='addNarrative(storyBoard,$index);'>+</div>",	
+  		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='addNarrative(storyBoard,narrative);'>+</div>",	
   	}
   }).directive('removeNarrativeBtn',function(){
   	return {
-  		template:  "<div ng-show='writerMode' ng-click='removeNarrative(storyBoard,$index);'>-</div>",	
+  		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='removeNarrative(storyBoard,narrative);'>-</div>",	
   	}
   });
