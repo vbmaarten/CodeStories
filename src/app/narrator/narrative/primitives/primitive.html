@@ -3,9 +3,19 @@
 	<remove-primitive-btn style='float:left'>
 	</remove-primitive-btn>
 
+<div ng-controller="PrimitiveController" >
+	<div ng-click="edit()" ng-hide='editorEnabled'>
+   {{ primitive.text || primitive.link.path || 'Empty' }}
+  	</div>
 
-   {{ primitive.text || 'Empty' }}
-  	
+ <div ng-show="editorEnabled">
+  <a href="#" ng-click="save()">Save</a>
+      <textarea ng-model="editableText" ng-show="editorEnabled"></textarea>
+      <a href="#" ng-click="cancel()">cancel</a>.
+    </div>
+</div>
+ 
+
 	<add-primitive-btn style='float:right'>
 	</add-primitive-btn>
 </div>

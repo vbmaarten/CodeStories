@@ -20,10 +20,8 @@ angular.module('narrator')
 
  	};
 
- 	$scope.editPrimitive = function(){
- 		console.log(arguments); 
 
- 	}
+
 
     
   });
