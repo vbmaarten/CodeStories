@@ -1,22 +1,33 @@
 
-<div  ng-controller="NarrativeCtrl">
-	<div class="narrator_path"> 
-		<remove-narrative-btn style='float:left'></remove-narrative-btn>
-		  {{ narrative.path }} 
-		  <div style='float:right' ng-show='writerMode' ng-click='addPrimitive(narrative,-1);'>+</div>
-		  </div>
 
-	
-	<div ng-repeat="primitive in narrative.primitives"> 
 
-		<primitive style='text-align:center'>
+<table  ng-controller="NarrativeCtrl">
+	<tr>
+	<td>
+		<remove-narrative-btn></remove-narrative-btn>
+		</td>
+		<td class=narrative-path>
+		  <div style="width:auto;background-color:grey"> {{ narrative.path }} </div>
+		</td>
+		<td>
+		  <add-primitive-btn></add-primitive-btn>
+		  </td>
+	</tr>
+	<tr>
+	<td>
+	</td>
+	<td >
+
+		<primitive ng-repeat="primitive in narrative.primitives" >
 			
 		</primitive> 
+	</td>
 
-	</div>
-
-	<add-narrative-btn atindex='false' style='text-align:center'>
+	<td>
+	<add-narrative-btn >
 	</add-narrative-btn>
-		
+	</td>
+	</tr>
 
-</div>
+
+</table>
