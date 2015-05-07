@@ -3,12 +3,14 @@
 angular.module("projectLoader").factory("projectParser", [ "castFactory", function(castFactory) {
     return {
         loadZip: function(data) {
+            var root = {};
+
             var zip = new JSZip(data);
             files = Object.keys(zip.files);
             for (var file_i = 0; file_i < files.length; file_i++) {
                 file = zip.files[files[file_i]];
                 path = file.name.split("/");
-                save_root = this.root;
+                save_root = root;
                 for (var i = 0; i < path.length; i++) {
                     if (i == path.length - 1) {
                         if (path[i] != "") {
@@ -27,6 +29,8 @@ angular.module("projectLoader").factory("projectParser", [ "castFactory", functi
                     }
                 }
             }
+
+            return root;
         }
     };
 } ]);

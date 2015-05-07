@@ -17,17 +17,11 @@ angular.module('cast')
         if(path[path.length-1] == "")
           path.pop();
 
-        console.log(path)
-
         var current = this.cast;
         for (var i = 0; i < path.length; i ++){
-          console.log(current);
           current = current[path[i]];
         }
         return current;
-      },
-      setCast:function(c){
-        this.cast = c;
       },
       cast: {
         "app/":{
@@ -35,7 +29,7 @@ angular.module('cast')
             "directory/":{
               "directory.css":{"content":""},
               "directory.js":{"content":"","ast":""},
-              "directory.html":{"content":""}
+              "directory.html":{"content":"<html></html>"}
             },
             "cast.js":{"content":"","ast":""},
             "cast.html":{"content":""},

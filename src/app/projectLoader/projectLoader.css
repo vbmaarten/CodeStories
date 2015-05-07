@@ -1,0 +1,85 @@
+/*-----------------------------------
+  File drop zone
+-----------------------------------*/
+
+#drop-container {
+  display:none;
+}
+
+#drop-container.active {
+  display:block;
+}
+
+#drop-zone {
+  position:absolute;
+  height:100%;
+  width:100%;
+  top:0;
+  z-index:12;
+}
+
+#drop-container .drop-area {
+  z-index:10;
+  background-color: #FFFFFF;
+  opacity:0;
+  position:absolute;
+  height:100%;
+  width:100%;
+  top:0;
+  -webkit-transition: opacity .3s ease-in-out;
+  -moz-transition: opacity .3s ease-in-out;
+  -ms-transition: opacity .3s ease-in-out;
+  -o-transition: opacity .3s ease-in-out;
+  transition: opacity .3s ease-in-out;
+}
+
+#drop-container.active .drop-area{
+  opacity:0.7;
+}
+
+#drop-container .drop-circle {
+  z-index:11;
+  background-color: #EEEEEE;
+  position:absolute;
+  left:50%;
+  top:50%;
+  border-radius: 50%;
+  width:300px;
+  height:300px;
+  margin-left:-150px;
+  margin-top:-150px;
+  opacity:0;
+  -webkit-transition: opacity .3s ease-in-out;
+  -moz-transition: opacity .3s ease-in-out;
+  -ms-transition: opacity .3s ease-in-out;
+  -o-transition: opacity .3s ease-in-out;
+  transition: opacity .3s ease-in-out;
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition: width 1s ease-in-out;
+  -ms-transition: width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
+  -webkit-transition: height 1s ease-in-out;
+  -moz-transition: height 1s ease-in-out;
+  -ms-transition: height 1s ease-in-out;
+  -o-transition: height 1s ease-in-out;
+  transition: height 1s ease-in-out;
+  -webkit-transition: margin-left 1s ease-in-out;
+  -moz-transition: margin-left 1s ease-in-out;
+  -ms-transition: margin-left 1s ease-in-out;
+  -o-transition: margin-left 1s ease-in-out;
+  transition: margin-left 1s ease-in-out;
+  -webkit-transition: margin-top 1s ease-in-out;
+  -moz-transition: margin-top 1s ease-in-out;
+  -ms-transition: margin-top 1s ease-in-out;
+  -o-transition: margin-top 1s ease-in-out;
+  transition: margin-top 1s ease-in-out;
+}
+
+#drop-container.active .drop-circle{
+  width:340px;
+  height:340px;
+  margin-left:-170px;
+  margin-top:-170px;
+  opacity:1;
+}
