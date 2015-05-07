@@ -5,7 +5,7 @@
  * @name cast.directive:directory
  * @description
  * # directory
- * Directive of the cast
+ * Directive of the file folder structure
  */
 angular.module('cast')
   .directive('directory', function (RecursionHelper) {
@@ -16,8 +16,8 @@ angular.module('cast')
     	},
     	templateUrl: '/cast/directory/directory.html',
     	controller: function ($scope) {
-    		console.log($scope.data);
     	},
+    	//Used to call directives recursively
     	compile: function(element) {
         // Use the compile function from the RecursionHelper,
         // And return the linking function(s) which it returns

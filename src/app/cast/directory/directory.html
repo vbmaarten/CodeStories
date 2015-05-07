@@ -1,4 +1,4 @@
-<span>{{data.name}}</span>
+<a ng-href="#/dir{{data.path}}">{{data.name}}</a>
 <ul>
 	<li ng-repeat="child in data.children" ng-if="data.children">
 		<div directory data="child"></div>

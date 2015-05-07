@@ -32,8 +32,9 @@
 
 
 
-    <script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
     <!-- build:js(.) scripts/vendor.js -->
+    <script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+    <script src="projectLoader/projectParser/acorn.js"></script>
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -50,6 +51,7 @@
         <script src="app.js"></script>
         <script src="cast/cast.js"></script>
         <script src="cast/cast.controller.js"></script>
+        <script src="cast/cast.factory.js"></script>
         <script src="cast/directory/directory.directive.js"></script>
         <script src="cast/directory/recursionHelper.js"></script>
         <script src="narrator/narrator.js"></script>
@@ -58,7 +60,7 @@
         <script src="narrator/narrative/narrative.directive.js"></script>
         <script src="narrator/interpreter/interpreter.controller.js"></script>
         <script src="projectLoader/projectLoader.js"></script>
-        <script src="projectLoader/projectLoader.controller.js"></script>
+        <script src="projectLoader/projectLoader.factory.js"></script>
         <script src="projectLoader/projectParser/projectParser.controller.js"></script>
         <!-- endbuild -->
 </body>

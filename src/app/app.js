@@ -27,20 +27,38 @@ angular
 
     $stateProvider
       .state('home',{
-          url: '/',
-          views: {
-            'projectLoader': {
-              templateUrl: '/projectLoader/projectLoader.html',
-              controller: 'ProjectLoaderCtrl' 
-            },
-            'cast': {
-              templateUrl: '/cast/cast.html',
-              controller: 'CastCtrl'
-            },
-            'narrator': {
-              templateUrl: '/narrator/narrator.html',
-              controller: 'NarratorCtrl' 
-            }          }
-        });
+        url: '/',
+        views: {
+          'projectLoader': {
+            templateUrl: '/projectLoader/projectLoader.html',
+            controller: 'ProjectLoaderCtrl' 
+          },
+          'cast': {
+            templateUrl: '/cast/cast.html',
+            controller: 'CastCtrl'
+          },
+          'narrator': {
+            templateUrl: '/narrator/narrator.html',
+            controller: 'NarratorCtrl' 
+          }          
+        }
+      })
+      .state('file', {
+        url: '/dir/*path',
+        views: {
+          'projectLoader': {
+            templateUrl: '/projectLoader/projectLoader.html',
+            controller: 'ProjectLoaderCtrl' 
+          },
+          'cast': {
+            templateUrl: '/cast/cast.html',
+            controller: 'CastCtrl'
+          },
+          'narrator': {
+            templateUrl: '/narrator/narrator.html',
+            controller: 'NarratorCtrl' 
+          }    
+        }
+      });
   });
 
