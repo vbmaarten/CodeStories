@@ -1,7 +1,11 @@
 
 <div ng-controller="NarratorCtrl" >
 	<div style='margin:auto;width:30%'>
-		<div style='float:left' ng-click='prev()'>PREV</div>
+		<div style='float:left' ng-click='writerMode=!writerMode'>
+		[V<span ng-show="writerMode">Vrite</span><span ng-hide="writerMode">iew</span>]
+
+
+		</div>
 		<div style='float:right' ng-click='next()'>NEXT</div>
 	</div> <br>
 
