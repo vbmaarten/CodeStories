@@ -24,7 +24,7 @@
  nar1.primitives.push({'link':nar2});
 
 
- angular.module('narrator',["xeditable"])
+ angular.module('narrator',[])
  .controller('NarratorCtrl', function ($scope) {
 
  	$scope.writerMode = true	;
