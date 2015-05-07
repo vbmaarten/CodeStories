@@ -23,4 +23,46 @@ angular.module('narrator')
 
 
 
-});
+}).directive('primitiveContent', ['$compile', '$http', '$templateCache', function($compile, $http, $templateCache) {
+
+        var getTemplate = function(contentType) {
+            var templateLoader,
+            baseUrl = '/narrator/narrative/primitives/',
+            templateMap = {
+                link: 'link.html',
+                text: 'text.html',
+                photo: 'photo.html',
+                video: 'video.html',
+                quote: 'quote.html',
+                link: 'link.html',
+                chat: 'chat.html',
+                audio: 'audio.html',
+                answer: 'answer.html'
+            };
+
+            var templateUrl = baseUrl + templateMap[contentType];
+            templateLoader = $http.get(templateUrl, {cache: $templateCache});
+
+            return templateLoader;
+
+        }
+
+        var linker = function(scope, element, attrs) {
+            var loader = getTemplate(scope.primitive.type);
+            
+            var promise = loader.success(function(html) {
+                element.html(html);
+            }).then(function (response) {
+                element.replaceWith($compile(element.html())(scope));
+            });
+        
+        }
+
+        return {
+            restrict: 'E',
+            scope: {
+                primitive:'=data'
+            },
+            link: linker
+        };
+    }]);

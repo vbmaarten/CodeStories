@@ -9,19 +9,20 @@
  */
 
  var nar1 =
- {'path':"/something/",
+ {'path':'/something/',
  'primitives':[
- {"text":"somet text  "},
- {"text":" more text  "},
- ]}
+
+ {'type':'text','content':'somet text  '},
+ {'type':'text','content':' more text  '}
+ ]};
 
  var nar2 = 
- {'path':"/someotherfile.js/",
+ {'path':'/someotherfile.js/',
  'primitives':[
- {"text":"  this is about otherfile.js "},
- {"text":"  and so is this  "}
- ]}
- nar1.primitives.push({'link':nar2});
+ {'type':'text','content':' text about some other file text  '},
+ {'type':'text','content':'MOAR '}
+ ]};
+ nar1.primitives.push({'type':'link','content':nar2});
 
 
  angular.module('narrator',[])
@@ -30,31 +31,31 @@
  	$scope.writerMode = false	;
 
  	$scope.storyBoard = [{'path':'/','primitives':[]}]
- 	$scope.activeNarrative = {'path':'/','primitives':[{'link':nar1}]};
+ 	$scope.activeNarrative = {'path':'/','primitives':[{'type':'link','content':nar1}]};
  	$scope.primitiveIndex = 0
  	
  	$scope.next =function (){
  		
  		var step = $scope.activeNarrative.primitives[$scope.primitiveIndex];
+ 		console.log(step);
 
-
-			$scope.storyBoard[$scope.storyBoard.length-1].primitives.push(
-				$scope.activeNarrative.primitives[$scope.primitiveIndex]
-				)
-			$scope.primitiveIndex++;
-		if(step.link){
+ 		$scope.storyBoard[$scope.storyBoard.length-1].primitives.push(
+ 			$scope.activeNarrative.primitives[$scope.primitiveIndex]
+ 			)
+ 		$scope.primitiveIndex++;
+ 		if(step.type === 'link'){
  			$scope.storyBoard.push( 
- 				{'path':step.link.path ,'primitives':[]}
+ 				{'path':step.content.path ,'primitives':[]}
  				)
- 			$scope.activeNarrative = step.link
+ 			$scope.activeNarrative = step.content
  			$scope.primitiveIndex=0;
  		}
  		
  	}
 
-    $scope.addNarrative = function(storyBoard,afterNarrative){
+ 	$scope.addNarrative = function(storyBoard,afterNarrative){
  		var i = storyBoard.indexOf(afterNarrative);
- 		storyBoard.splice(index+1,0,{"path":"/todo/",'primitives':[]});
+ 		storyBoard.splice(index+1,0,{'path':'/todo/','primitives':[]});
  	};
  	$scope.removeNarrative = function(storyBoard,narrative){
  		var i = storyBoard.indexOf(narrative);
@@ -67,15 +68,15 @@
 
 
  }).directive('narrative', function () {
-    return {
-    	templateUrl:'narrator/narrative/narrative.html',
-    }
-  }).directive('addNarrativeBtn',function(){
-  	return {
-  		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='addNarrative(storyBoard,narrative);'>+</div>",	
-  	}
-  }).directive('removeNarrativeBtn',function(){
-  	return {
-  		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='removeNarrative(storyBoard,narrative);'>-</div>",	
-  	}
-  });
+ 	return {
+ 		templateUrl:'narrator/narrative/narrative.html',
+ 	}
+ }).directive('addNarrativeBtn',function(){
+ 	return {
+ 		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='addNarrative(storyBoard,narrative);'>+</div>",	
+ 	}
+ }).directive('removeNarrativeBtn',function(){
+ 	return {
+ 		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='removeNarrative(storyBoard,narrative);'>-</div>",	
+ 	}
+ });
