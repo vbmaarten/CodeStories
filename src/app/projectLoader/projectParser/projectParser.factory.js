@@ -8,11 +8,11 @@
  * Factory for parsing a project into an CAST
  */
 angular.module('projectLoader')
-  .factory('projectParser', function ($scope) {
+  .factory('projectParser', ['castFactory', function (castFactory) {
     return {
     	parse: function (code) {
     		
-    		return code;
+    		castFactory.setCast(code);
     	}
     }
-  });
+  }]);

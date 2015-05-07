@@ -7,73 +7,107 @@
  * # CastFactory
  * Factory of the cast
  */
+
 angular.module('cast')
   .factory('castFactory', function () {
-    return  { cast: {
-  	    "path": "/app",
-  	    "name": "app",
-  	    "type": "directory",
-  	    "children": [
-  	    {
-          "path": "/app/index.html",
+    return  { 
+      getNode: function(p) {
+        var path = p.split('/').join('/,').split(',');
+        
+        if(path[path.length-1] == "")
+          path.pop();
+
+        console.log(path)
+
+        var current = this.cast;
+        for (var i = 0; i < path.length; i ++){
+          console.log(current);
+          current = current[path[i]];
+        }
+        return current;
+      },
+      setCast:function(c){
+        this.cast = c;
+      },
+      cast: {
+        "app/":{
+          "cast/": {
+            "directory/":{
+              "directory.css":{"content":""},
+              "directory.js":{"content":"","ast":""},
+              "directory.html":{"content":""}
+            },
+            "cast.js":{"content":"","ast":""},
+            "cast.html":{"content":""},
+            "cast.css":{"content":""},
+            "cast.factory.js":{"content":"","ast":""}
+          },
+          "narrator/": {
+            "narrator.html":{"content":""},
+            "narrator.js":{"content":"","ast":""},
+            "narrator.css":{"content":""},
+            "narrator.controller.js":{"content":"","ast":""}
+          },
+          "index.html":{"content":""},
+          "app.js": {"content":"","ast":""}
+        }
+      }
+    }
+  });
+
+
+/*
+
+      {
+        "name": "app",
+        "type": "directory",
+        "children": [
+        {
           "name": "index.html",
-          "type": "file"
-  	    }, 
-  	    {
-          "path": "/app/app.js",
+          "type": "file",
+          "content" : "<html></html>"
+        }, 
+        {
           "name": "app.js",
           "type": "file"
-  	    }, 
-  	    {
-          "path": "/app/narrator",
+        }, 
+        {
           "name": "narrator",
           "type": "directory",
           "children": [{
-            "path": "/app/narrator/narrator.html",
             "name": "narrator.html",
             "type": "file"
           }, {
-            "path": "/app/narrator/narrator.js",
             "name": "narrator.js",
             "type": "file"
           }, {
-            "path": "/app/narrator/narrator.controller.js",
             "name": "narrator.controller.js",
             "type": "file"
           }, {
-            "path": "/app/narrator/narrative",
             "name": "narrative",
             "type": "directory",
             "children": [{
-              "path": "/app/narrator/narrative/narrative.controller.js",
               "name": "narrative.controller.js",
               "type": "file"
             }, {
-              "path": "/app/narrator/narrative/narrative.directive.js",
               "name": "narrative.directive.js",
               "type": "file"
             }]
           }]
-  	    }, {
-          "path": "/app/cast",
+        }, {
           "name": "cast",
           "type": "directory",
           "children": [{
-            "path": "/app/cast/cast.html",
             "name": "cast.html",
             "type": "file"
           }, {
-            "path": "/app/cast/cast.js",
             "name": "cast.js",
             "type": "file"
           }, {
-            "path": "/app/cast/cast.css",
             "name": "cast.css",
             "type": "file"
           }]
-  	    }]
-  		}
-    }
+        }]
+      }
 
-		
-  });
+*/

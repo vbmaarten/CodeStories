@@ -12,7 +12,8 @@ angular.module('cast')
     return {
     	restrict: 'A',
     	scope: {
-    		data: '='
+    		data: '=',
+            castUrl: '='
     	},
     	templateUrl: '/cast/directory/directory.html',
     	controller: function ($scope) {
