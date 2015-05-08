@@ -16,24 +16,21 @@
 
  	$scope.writerMode = false	;
 
- 	$scope.storyBoard = []
- 	$scope.activeNarrative = CAST.getNode("/narratives/teststory"); //[{'link-choice':CAST.cast['/']['narratives/']}]
+ 	$scope.storyBoard = [[]]
+ 	$scope.activeNarrative = CAST.getNode("/").narratives["teststory"]; //[{'link-choice':CAST.cast['/']['narratives/']}]
+ 	$scope.activeNarrativePath = "/"; 
  	$scope.primitiveIndex = 0
  	
  	$scope.next =function (){
  		
  		var step = $scope.activeNarrative[$scope.primitiveIndex];
- 		console.log(step);
-
  		$scope.storyBoard[$scope.storyBoard.length-1].push(
  			$scope.activeNarrative[$scope.primitiveIndex]
  			)
  		$scope.primitiveIndex++;
  		if(step.type === 'link'){
- 			$scope.storyBoard.push( 
- 				{'path':step.content.path ,'primitives':[]}
- 				)
- 			$scope.activeNarrative = step.content
+ 			$scope.storyBoard.push( [] )
+ 			$scope.activeNarrative = CAST.getNode( step.content.node ).narratives[step.content.id];
  			$scope.primitiveIndex=0;
  		}
  		
@@ -41,7 +38,7 @@
 
  	$scope.addNarrative = function(storyBoard,afterNarrative){
  		var i = storyBoard.indexOf(afterNarrative);
- 		storyBoard.splice(index+1,0,{'path':'/todo/','primitives':[]});
+ 		storyBoard.splice(index+1,0,[]);
  	};
  	$scope.removeNarrative = function(storyBoard,narrative){
  		var i = storyBoard.indexOf(narrative);
