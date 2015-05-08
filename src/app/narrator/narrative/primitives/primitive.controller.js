@@ -29,6 +29,7 @@ angular.module('narrator')
             var templateLoader,
             baseUrl = '/narrator/narrative/primitives/',
             templateMap = {
+                empty: 'empty.html'
                 link: 'link.html',
                 text: 'text.html',
                 photo: 'photo.html',

@@ -13,7 +13,7 @@ angular.module('narrator')
   	$scope.addPrimitive = function(primitives,afterPrimitive){
 
   		var i = primitives.indexOf(afterPrimitive);
- 		primitives.splice(i+1,0,{"text":"Empty"});
+ 		primitives.splice(i+1,0,{"type":"empty"});
 
  	};
  	 $scope.removePrimitive = function(primitives,primitive){

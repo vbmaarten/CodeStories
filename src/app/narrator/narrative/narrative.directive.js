@@ -14,10 +14,10 @@ angular.module('narrator')
     }
   }).directive('addPrimitiveBtn',function(){
   	return {
-  		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='addPrimitive(narrative.primitives,primitive);'>+</div>",	
+  		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='addPrimitive(narrative,primitive);'>+</div>",	
   	};
   }).directive('removePrimitiveBtn',function(){
  	return {
-  		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='removePrimitive(narrative.primitives,primitive);'>-</div>",	
+  		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='removePrimitive(narrative,primitive);'>-</div>",	
   	};
   });
