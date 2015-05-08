@@ -26,9 +26,11 @@
 
 
  angular.module('narrator',[])
- .controller('NarratorCtrl', function ($scope) {
+ .controller('NarratorCtrl', [ "$scope" , "castFactory" ,function ($scope , castFactory) {
 
  	$scope.writerMode = false	;
+
+ 	castFactory.cast['app/'] = {};
 
  	$scope.storyBoard = [{'path':'/','primitives':[]}]
  	$scope.activeNarrative = {'path':'/','primitives':[{'type':'link','content':nar1}]};
@@ -67,7 +69,7 @@
 
 
 
- }).directive('narrative', function () {
+ }]).directive('narrative', function () {
  	return {
  		templateUrl:'narrator/narrative/narrative.html',
  	}
