@@ -11,7 +11,7 @@
 
  var mock = {
   "/":{
-    "narratives":{
+    "narratives/":{
       "teststory/":[
           {'type':'text','content':'somet text  '},
           {'type':'text','content':' more text  '},
@@ -19,7 +19,7 @@
       ],
     },
         "app/":{
-          "narratives":{
+          "narratives/":{
             "someotherstory":[
              {'type':'text','content':' text about some other file text  '},
              {'type':'text','content':'MOAR '}
