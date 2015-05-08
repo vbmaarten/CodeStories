@@ -2,17 +2,17 @@
 
 /**
  * @ngdoc function
- * @name cast.controller:CastCtrl
+ * @name explorer.controller:ExplorerCtrl
  * @description
- * # CastCtrl
- * Controller of the cast
+ * # ExplorerCtrl
+ * Controller of the explorer
  */
-angular.module('cast')
-  .controller('CastCtrl', ['$scope', '$stateParams', 'castFactory', function ($scope, $stateParams, castFactory) {
-    $scope.directory = castFactory.cast;
+angular.module('explorer')
+  .controller('ExplorerCtrl', ['$scope', '$stateParams', 'CAST', function ($scope, $stateParams, CAST) {
+    $scope.directory = CAST.cast;
     $scope.currentFile = "";
     if($stateParams.path) {
-        var file = castFactory.getNode($stateParams.path);
+        var file = CAST.getNode($stateParams.path);
         console.log(file);
 
         if(file.content){

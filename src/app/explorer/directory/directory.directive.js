@@ -7,7 +7,7 @@
  * # directory
  * Directive of the file folder structure
  */
-angular.module('cast')
+angular.module('explorer')
   .directive('directory', function (RecursionHelper) {
     return {
     	restrict: 'A',
@@ -15,7 +15,7 @@ angular.module('cast')
     		data: '=',
             castUrl: '='
     	},
-    	templateUrl: '/cast/directory/directory.html',
+    	templateUrl: '/explorer/directory/directory.html',
     	controller: function ($scope) {
     	},
     	//Used to call directives recursively

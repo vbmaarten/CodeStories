@@ -12,8 +12,8 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="assets/styles/main.css">
-    <link rel="stylesheet" href="cast/cast.css">
-    <link rel="stylesheet" href="cast/directory/directory.css">
+    <link rel="stylesheet" href="explorer/explorer.css">
+    <link rel="stylesheet" href="explorer/directory/directory.css">
     <link rel="stylesheet" href="narrator/narrator.css">
     <link rel="stylesheet" heref="projectLoader/projectLoader.css">
     <!-- endbuild -->
@@ -25,7 +25,7 @@
 
     <header class="projectLoader" ui-view="projectLoader"></header>
     <div class="wrapper">
-      <main class="cast" ui-view="cast"></main>
+      <main class="explorer" ui-view="explorer"></main>
       <aside class="narrator" ui-view="narrator"></aside>
     </div>
 
@@ -52,10 +52,11 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="app.js"></script>
         <script src="cast/cast.js"></script>
-        <script src="cast/cast.controller.js"></script>
         <script src="cast/cast.factory.js"></script>
-        <script src="cast/directory/directory.directive.js"></script>
-        <script src="cast/directory/recursionHelper.js"></script>
+        <script src="explorer/explorer.js"></script>
+        <script src="explorer/explorer.controller.js"></script>
+        <script src="explorer/directory/directory.directive.js"></script>
+        <script src="explorer/directory/recursionHelper.js"></script>
         <script src="narrator/narrator.js"></script>
         <script src="narrator/narrator.controller.js"></script>
         <script src="narrator/narrative/narrative.controller.js"></script>

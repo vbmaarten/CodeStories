@@ -26,11 +26,11 @@
 
 
  angular.module('narrator',[])
- .controller('NarratorCtrl', [ "$scope" , "castFactory" ,function ($scope , castFactory) {
+ .controller('NarratorCtrl', [ "$scope" , "CAST" ,function ($scope , CAST) {
 
  	$scope.writerMode = false	;
 
- 	castFactory.cast['app/'] = {};
+ 	CAST.cast['app/'] = {};
 
  	$scope.storyBoard = [{'path':'/','primitives':[]}]
  	$scope.activeNarrative = {'path':'/','primitives':[{'type':'link','content':nar1}]};

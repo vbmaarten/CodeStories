@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("projectLoader").factory("projectParser", [ "castFactory", function(castFactory) {
+angular.module("projectLoader").factory("projectParser", [ "CAST", function(CAST) {
     return {
         loadZip: function(data) {
             var root = {};

@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc function
- * @name cast.factory:CastFactory
+ * @name cast.factory:CAST
  * @description
- * # CastFactory
+ * # CAST
  * Factory of the cast
  */
 
 angular.module('cast')
-  .factory('castFactory', function () {
+  .factory('CAST', function () {
     return  { 
       getNode: function(p) {
         var path = p.split('/').join('/,').split(',');

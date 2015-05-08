@@ -1,4 +1,4 @@
-angular.module('cast')
+angular.module('explorer')
 .factory('RecursionHelper', ['$compile', function($compile){
   return {
     /**

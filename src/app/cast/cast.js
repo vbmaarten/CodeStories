@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc function
- * @name cast.controller:CastCtrl
+ * @name cast.module
  * @description
- * # CastCtrl
- * Controller of the cast
+ * # cast
+ * Module of the cast
  */
-angular.module('cast', ['ui.ace']);
+angular.module('cast',[]);

@@ -18,7 +18,8 @@ angular
     'ui.router',
     'projectLoader',
     'cast',
-    'narrator'
+    'narrator',
+    'explorer'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
@@ -33,9 +34,9 @@ angular
             templateUrl: '/projectLoader/projectLoader.html',
             controller: 'ProjectLoaderCtrl' 
           },
-          'cast': {
-            templateUrl: '/cast/cast.html',
-            controller: 'CastCtrl'
+          'explorer': {
+            templateUrl: '/explorer/explorer.html',
+            controller: 'ExplorerCtrl'
           },
           'narrator': {
             templateUrl: '/narrator/narrator.html',
@@ -50,9 +51,9 @@ angular
             templateUrl: '/projectLoader/projectLoader.html',
             controller: 'ProjectLoaderCtrl' 
           },
-          'cast': {
-            templateUrl: '/cast/cast.html',
-            controller: 'CastCtrl'
+          'explorer': {
+            templateUrl: '/explorer/explorer.html',
+            controller: 'ExplorerCtrl'
           },
           'narrator': {
             templateUrl: '/narrator/narrator.html',
