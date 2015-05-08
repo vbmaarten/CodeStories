@@ -45,7 +45,7 @@ angular
         }
       })
       .state('file', {
-        url: '/dir/*path',
+        url: '/dir*path',
         views: {
           'projectLoader': {
             templateUrl: '/projectLoader/projectLoader.html',

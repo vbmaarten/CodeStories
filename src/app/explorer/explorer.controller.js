@@ -12,6 +12,7 @@ angular.module('explorer')
     $scope.directory = CAST.cast;
     $scope.currentFile = "";
     if($stateParams.path) {
+        console.log($stateParams);
         var file = CAST.getNode($stateParams.path);
         console.log(file);
 

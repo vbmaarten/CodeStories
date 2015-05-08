@@ -1,6 +1,6 @@
 <ul>
-	<li ng-repeat="(key, value) in data" ng-if="key != 'content' && key != 'ast'">
-		<a ng-href="#/dir/{{castUrl}}{{key}}">{{key}}</a>
+	<li ng-repeat="(key, value) in data" ng-if="key != 'content' && key != 'ast' && key != 'narratives'">
+		<a ng-href="#/dir{{castUrl}}{{key}}">{{key}}</a>
 		<div directory data="value" cast-url="castUrl+key"></div>
 	</li>
 </ul>

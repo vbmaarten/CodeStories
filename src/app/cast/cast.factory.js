@@ -8,23 +8,25 @@
  * Factory of the cast
  */
 
-angular.module('cast')
-  .factory('CAST', function () {
-    return  { 
-      getNode: function(p) {
-        var path = p.split('/').join('/,').split(',');
-        
-        if(path[path.length-1] == "")
-          path.pop();
 
-        var current = this.cast;
-        for (var i = 0; i < path.length; i ++){
-          current = current[path[i]];
-        }
-        return current;
-      },
-      cast: {
+ var mock = {
+  "/":{
+    "narratives":{
+      "teststory/":[
+          {'type':'text','content':'somet text  '},
+          {'type':'text','content':' more text  '},
+          {'type':'link','content':'/app/narratives/someotherstory'}
+      ],
+    },
         "app/":{
+          "narratives":{
+            "someotherstory":[
+             {'type':'text','content':' text about some other file text  '},
+             {'type':'text','content':'MOAR '}
+             ],
+
+
+          },
           "cast/": {
             "directory/":{
               "directory.css":{"content":""},
@@ -46,6 +48,26 @@ angular.module('cast')
           "app.js": {"content":"","ast":""}
         }
       }
+    }
+
+angular.module('cast')
+  .factory('CAST', function () {
+    return  { 
+      selected: undefined,
+
+      getNode: function(p) {
+        var path = p.split('/').join('/,').split(',');
+        
+        if(path[path.length-1] == "")
+          path.pop();
+
+        var current = this.cast;
+        for (var i = 0; i < path.length; i ++){
+          current = current[path[i]];
+        }
+        return current;
+      },
+      cast: mock
     }
   });
 

@@ -8,21 +8,7 @@
  * Controller of the narrator
  */
 
- var nar1 =
- {'path':'/something/',
- 'primitives':[
 
- {'type':'text','content':'somet text  '},
- {'type':'text','content':' more text  '}
- ]};
-
- var nar2 = 
- {'path':'/someotherfile.js/',
- 'primitives':[
- {'type':'text','content':' text about some other file text  '},
- {'type':'text','content':'MOAR '}
- ]};
- nar1.primitives.push({'type':'link','content':nar2});
 
 
  angular.module('narrator',[])
@@ -30,10 +16,8 @@
 
  	$scope.writerMode = false	;
 
- 	CAST.cast['app/'] = {};
-
- 	$scope.storyBoard = [{'path':'/','primitives':[]}]
- 	$scope.activeNarrative = {'path':'/','primitives':[{'type':'link','content':nar1}]};
+ 	$scope.storyBoard = []
+ 	$scope.activeNarrative = {}
  	$scope.primitiveIndex = 0
  	
  	$scope.next =function (){
