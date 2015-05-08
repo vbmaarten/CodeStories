@@ -17,7 +17,7 @@
       "teststory":[
         {'type':'text','content':"some text"},
         {'type':'text','content':"more text"},
-        {'type':'link','content':{'node':'app/','id':'teststories2'}}
+        {'type':'link','content':{'node':'/app/','id':'teststories2'}}
       ]
     },
     "children": {
