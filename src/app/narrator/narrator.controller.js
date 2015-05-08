@@ -17,16 +17,16 @@
  	$scope.writerMode = false	;
 
  	$scope.storyBoard = []
- 	$scope.activeNarrative = {}
+ 	$scope.activeNarrative = CAST.getNode("/narratives/teststory"); //[{'link-choice':CAST.cast['/']['narratives/']}]
  	$scope.primitiveIndex = 0
  	
  	$scope.next =function (){
  		
- 		var step = $scope.activeNarrative.primitives[$scope.primitiveIndex];
+ 		var step = $scope.activeNarrative[$scope.primitiveIndex];
  		console.log(step);
 
- 		$scope.storyBoard[$scope.storyBoard.length-1].primitives.push(
- 			$scope.activeNarrative.primitives[$scope.primitiveIndex]
+ 		$scope.storyBoard[$scope.storyBoard.length-1].push(
+ 			$scope.activeNarrative[$scope.primitiveIndex]
  			)
  		$scope.primitiveIndex++;
  		if(step.type === 'link'){

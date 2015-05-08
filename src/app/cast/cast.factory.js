@@ -12,7 +12,7 @@
  var mock = {
   "/":{
     "narratives/":{
-      "teststory/":[
+      "teststory":[
           {'type':'text','content':'somet text  '},
           {'type':'text','content':' more text  '},
           {'type':'link','content':'/app/narratives/someotherstory'}
