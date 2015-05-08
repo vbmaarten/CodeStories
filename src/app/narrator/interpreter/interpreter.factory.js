@@ -8,7 +8,7 @@
  * Controller of the narrator
  */
 angular.module('narrator')
-  .controller('InterpreterCtrl', function ($scope) {
+  .factory('InterpreterCtrl', function () {
     
     
 
