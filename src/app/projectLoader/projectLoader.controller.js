@@ -9,9 +9,5 @@
  */
 angular.module('projectLoader')
   .controller('ProjectLoaderCtrl', ['$scope','CAST', function ($scope, CAST) {
-  	$scope.test = function(){
-  		console.log('test');
-  		CAST.cast = {};
-  		console.log(CAST.cast);
-  	};
+
   }]);

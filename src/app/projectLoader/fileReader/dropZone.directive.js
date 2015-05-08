@@ -13,9 +13,7 @@ angular.module('projectLoader')
     	restrict: 'A',
     	templateUrl: '/projectLoader/fileReader/dropZone.html',
     	link: function (scope, element, attributes) {
-            console.log(element);
             element.bind("dragenter", function (changeEvent) {
-                console.log(test);
                 element[0].className = element[0].className + " active";
             });
         }

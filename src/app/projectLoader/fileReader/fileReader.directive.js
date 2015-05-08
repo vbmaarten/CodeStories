@@ -16,13 +16,13 @@ angular.module('projectLoader')
         link: function (scope, element, attributes) {
             element.bind("change", function (changeEvent) {
                 var reader = new FileReader();
+                reader.readAsBinaryString(changeEvent.target.files[0]);
                 reader.onload = function (loadEvent) {
                     scope.$apply(function () {
                         scope.fileread = loadEvent.target.result;
                         console.log(scope.fileread);
                     });
                 }
-                reader.readAsDataURL(changeEvent.target.files[0]);
             });
         }
     }

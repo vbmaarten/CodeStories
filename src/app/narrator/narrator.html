@@ -1,17 +1,15 @@
 
-<div ng-controller="NarratorCtrl" >
-	<div style='margin:auto;width:30%'>
-		<div style='float:left' ng-click='writerMode=!writerMode'>
-		[V<span ng-show="writerMode">Vrite</span><span ng-hide="writerMode">iew</span>]
 
 
-		</div>
-		<div style='float:right' ng-click='next()'>NEXT</div>
-	</div> <br>
-
-	<narrative ng-repeat="narrative in storyBoard" ></narrative>
-
+<div style='float:left' ng-click='writerMode=!writerMode'>
+	<span ng-show="writerMode">Write</span><span ng-hide="writerMode">View</span>
 </div>
+<div style='float:right' ng-click='next()'>Next</div>
 
 
-	
+<button>Write</button>
+<button>Previous</button>
+<button>Next</button>
+
+<narrative ng-repeat="narrative in storyBoard" ></narrative>
+
