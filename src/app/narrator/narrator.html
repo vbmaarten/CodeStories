@@ -1,15 +1,16 @@
 
 
 
-<div style='float:left' ng-click='writerMode=!writerMode'>
+<div ng-click='writerMode=!writerMode'>
 	<span ng-show="writerMode">Write</span><span ng-hide="writerMode">View</span>
 </div>
-<div style='float:right' ng-click='next()'>Next</div>
+<div ng-click='next()'>Next</div>
 
-
+<!--
 <button>Write</button>
 <button>Previous</button>
 <button>Next</button>
+-->
 
-<narrative ng-repeat="narrative in storyBoard" ></narrative>
+<div narrative ng-repeat="(title, narrative) in storyBoard" class="narrative"></div>
 

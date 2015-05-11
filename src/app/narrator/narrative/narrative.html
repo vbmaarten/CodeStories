@@ -1,33 +1,7 @@
 
+<remove-narrative-btn></remove-narrative-btn>
+<h2>{{title}}</h2>
+<primitive ng-repeat="primitive in narrative" class="primitive"></primitive> 
 
+<add-narrative-btn ></add-narrative-btn>
 
-<table  ng-controller="NarrativeCtrl">
-	<tr>
-	<td>
-		<remove-narrative-btn></remove-narrative-btn>
-		</td>
-		<td class=narrative-path>
-		  <div style="width:auto;background-color:grey"> {{ narrative.path }} </div>
-		</td>
-		<td>
-		  <add-primitive-btn></add-primitive-btn>
-		  </td>
-	</tr>
-	<tr>
-	<td>
-	</td>
-	<td >
-
-		<primitive ng-repeat="primitive in narrative" >
-			
-		</primitive> 
-	</td>
-
-	<td>
-	<add-narrative-btn >
-	</add-narrative-btn>
-	</td>
-	</tr>
-
-
-</table>

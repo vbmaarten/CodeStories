@@ -23,11 +23,11 @@
     "children": {
       "app/": {
         "narratives":{
-      "teststories2":[
-        {'type':'text','content':"2 text"},
-        {'type':'text','content':"more 2"},
-        ]
-        } ,
+          "teststories2":[
+            {'type':'text','content':"2 text"},
+            {'type':'text','content':"more 2"},
+          ]
+        },
         "name": "app/",
         "type": "directory",
         "children":{

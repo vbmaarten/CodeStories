@@ -21,9 +21,5 @@ angular.module('narrator')
  		primitives.splice(i+1,1);
 
  	};
-
-
-
-
     
   });

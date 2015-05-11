@@ -1,37 +1,28 @@
 
 .narrator{
-	padding-left:20px;
-	padding-right:20px;
+	padding:0 20px;
 	background-color: #f0f0f0;
+	overflow-y: scroll; 
 }
 
-narrative table {
+.narrative{
 	width:100%;
-}
-td {
-	text-align: center;
+	background-color:#FFFFFF;
+	padding:10px;
+	margin-top: 20px;
 }
 
-.narrative-path{
-	text-align: center;
-	padding:4px;
-	border-top:2px solid;
-	border-bottom:2px solid;
-	text-align:center;
-	border-radius:5px;
-}
+
+
 
 .narrator-btn{
-
 	background-color:#FFE0E0;
 }
 
 .primitive{
-	padding:1em;
-	padding-bottom:0em;
-
-	border-top:1px dashed;
-	border-bottom:1px dashed;
-
-
+	padding:.7em 0;
+	border-bottom:1px solid #333;
+}
+.primitive:last-child{
+	border:none;
 }

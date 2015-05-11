@@ -8,21 +8,30 @@
  * Controller of the narrator
  */
 
-
-
-
  angular.module('narrator',[])
- .controller('NarratorCtrl', [ "$scope" , "CAST" ,function ($scope , CAST) {
+ .controller('NarratorCtrl', [ "$scope",'$stateParams', "CAST" ,function ($scope, $stateParams, CAST) {
 
- 	$scope.writerMode = false	;
+ 	$scope.writerMode = false;
+ 	$scope.storyBoard = [[]];
+ 	if($stateParams.path)
+    $scope.activeNode = CAST.getNode($stateParams.path);
+  else
+   	$scope.activeNode = CAST.getNode('/');
 
- 	$scope.storyBoard = [[]]
- 	$scope.activeNarrative = CAST.getNode("/").narratives["teststory"]; //[{'link-choice':CAST.cast['/']['narratives/']}]
- 	$scope.activeNarrativePath = "/"; 
- 	$scope.primitiveIndex = 0
+ 	$scope.activeNarrative = $scope.activeNode.narratives["teststory"]; //[{'link-choice':CAST.cast['/']['narratives/']}]
+ 	$scope.activeNarrativePath = "/";
+ 	$scope.primitiveIndex = 0;
  	
- 	$scope.next =function (){
- 		
+
+
+
+
+
+
+
+
+
+ 	$scope.next =function (){		
  		var step = $scope.activeNarrative[$scope.primitiveIndex];
  		$scope.storyBoard[$scope.storyBoard.length-1].push(
  			$scope.activeNarrative[$scope.primitiveIndex]
@@ -32,8 +41,7 @@
  			$scope.storyBoard.push( [] )
  			$scope.activeNarrative = CAST.getNode( step.content.node ).narratives[step.content.id];
  			$scope.primitiveIndex=0;
- 		}
- 		
+ 		} 		
  	}
 
  	$scope.addNarrative = function(storyBoard,afterNarrative){
@@ -46,20 +54,4 @@
 
  	};
 
- 	
-
-
-
- }]).directive('narrative', function () {
- 	return {
- 		templateUrl:'narrator/narrative/narrative.html',
- 	}
- }).directive('addNarrativeBtn',function(){
- 	return {
- 		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='addNarrative(storyBoard,narrative);'>+</div>",	
- 	}
- }).directive('removeNarrativeBtn',function(){
- 	return {
- 		template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='removeNarrative(storyBoard,narrative);'>-</div>",	
- 	}
- });
+ }]);

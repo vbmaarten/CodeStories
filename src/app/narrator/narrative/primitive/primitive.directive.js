@@ -1,33 +1,32 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name narrator.directive:primitive
+ * @description
+ * # primitive
+ * Diretive of the primitive
+ */
 angular.module('narrator')
-.controller('PrimitiveController',function($scope){
-
-
-
-
-  $scope.editorEnabled = false;
-
-  $scope.edit = function() {
-  	console.log($scope)
-    $scope.editorEnabled = true;
-    $scope.editableContent = $scope.$parent.primitive.text;
-  };
-
-  $scope.cancel = function() {
-    $scope.editorEnabled = false;
-  };
-
-  $scope.save = function() {
-    $scope.$parent.primitive.text = $scope.editableContent;
-    $scope.cancel();
-  };
-
-
-
-}).directive('primitiveContent', ['$compile', '$http', '$templateCache', function($compile, $http, $templateCache) {
+  .directive('primitive', function () {
+    return {
+      templateUrl:'narrator/narrative/primitive/primitive.html',
+      controller:'PrimitiveCtrl'
+    }
+  }).directive('addPrimitiveBtn',function(){
+    return {
+      template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='addPrimitive(narrative,primitive);'>+</div>",  
+    };
+  }).directive('removePrimitiveBtn',function(){
+  return {
+      template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='removePrimitive(narrative,primitive);'>-</div>", 
+    };
+  })
+  .directive('primitiveContent', ['$compile', '$http', '$templateCache', function($compile, $http, $templateCache) {
 
         var getTemplate = function(contentType) {
             var templateLoader,
-            baseUrl = '/narrator/narrative/primitives/',
+            baseUrl = '/narrator/narrative/primitive/',
             templateMap = {
                 empty: 'empty.html',
                 link: 'link.html',
