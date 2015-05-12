@@ -4,21 +4,22 @@ var CASTNode = function(name, parent, children){
 	this.children = children;
 	this.getType = function(){
 		if(this instanceof FolderNode)
-			return 'folder';
+			return 'directory';
 		else if(this instanceof FileNode)
 			return 'file';
 		else if(this instanceof ASTNode)
-			return 'ast_node';
+			return 'ast';
+		console.error('This node has a false type');
 		throw 'BadNodeTypeError';
 	}
 	this.isFolder = function(){
-		return (this.getType() === 'folder')
+		return (this.getType() === 'directory')
 	}
 	this.isFile = function(){
 		return (this.getType() === 'file')
 	}
 	this.isASTNode = function(){
-		return (this.getType() === 'ast_node')
+		return (this.getType() === 'ast')
 	}
 	this.up = function(){
 		if(!this.parent){
@@ -30,20 +31,37 @@ var CASTNode = function(name, parent, children){
 	}
 }
 
+
 var FolderNode = function (name, parent, children) {
 	CASTNode.call(this,name,parent,children);
 };
-
 FolderNode.prototype = Object.create(CASTNode.prototype);
 
-FolderNode.prototype.type = 'directory';
+
+var FileNode = function (name, parent, children, content) {
+	CASTNode.call(this,name,parent,children);
+	this.content = content;
+};
+FileNode.prototype = Object.create(CASTNode.prototype);
+
+
+var ASTNode = function (name, parent, children) {
+	CASTNode.call(this,name,parent,children);
+};
+ASTNode.prototype = Object.create(CASTNode.prototype);
+
+
+
+
 
 
 /*
-var node = new FolderNode('test','parent','child');
+var node = new FileNode('test','parent','child','<html>');
 
-console.log(node.type); //directory
+console.log(node.content); //directory
 console.log(node instanceof CASTNode); //true
-console.log(node instanceof FolderNode); //true
-
+console.log(node instanceof FileNode); //true
+console.log(node instanceof FolderNode); //false
 */
+
+
