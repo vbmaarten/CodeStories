@@ -26,3 +26,14 @@
 |-|1| Technology we are going to use and limitations | roelof |  |
 |-|3| Research: change in code and its effects on ast tree and narrative code |  |  |
 |-|1| UX & UI (mockups) | roelof |  |
+
+###Week 3
+
+| User Story    | Priority      | Task                           | Task assigned to | Estimated effort |
+| ------------- | ------------- | ------------------------------ | ---------------- | ---------------- |
+
+
+###Week 4
+
+| User Story    | Priority      | Task                           | Task assigned to | Estimated effort |
+| ------------- | ------------- | ------------------------------ | ---------------- | ---------------- |
