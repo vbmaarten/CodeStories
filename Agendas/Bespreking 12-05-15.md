@@ -11,5 +11,4 @@ Diagrammen:
 - CAST              
 - Overicht controllers
 - Narrative datastructuur
-
 - Controller sequence diagram
