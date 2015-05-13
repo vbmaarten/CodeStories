@@ -10,15 +10,15 @@
 angular.module('narrator')
   .controller('NarrativeCtrl', function ($scope) {
 
-  	$scope.addPrimitive = function(primitives,afterPrimitive){
+  	$scope.addItem = function(items,afterItem){
 
-  		var i = primitives.indexOf(afterPrimitive);
- 		primitives.splice(i+1,0,{"type":"empty"});
+  		var i = items.indexOf(afterItem);
+ 		items.splice(i+1,0,{"type":"empty"});
 
  	};
- 	 $scope.removePrimitive = function(primitives,primitive){
- 	 	var i = primitives.indexOf(primitive)
- 		primitives.splice(i+1,1);
+ 	 $scope.removeItem = function(items,item){
+ 	 	var i = items.indexOf(item)
+ 		items.splice(i+1,1);
 
  	};
     

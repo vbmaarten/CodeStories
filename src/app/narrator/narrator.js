@@ -3,9 +3,28 @@
 
 /**
  * @ngdoc function
- * @name narrator.controller:NarratorCtrl
+ * @name narrator.module
  * @description
- * # NarratorCtrl
- * Controller of the narrator
+ * # narrator
+ * Narrator module
  */
-angular.module('narrator', []);
+angular.module('narrator', [])
+  .config(function ($stateProvider) {
+    $stateProvider
+      .state('writer',{
+        views: {
+          'narratives': {
+            templateUrl: '/writer/writer.html',
+            controller: 'WriterCtrl' 
+          },       
+        }
+      })
+      .state('viewer', {
+        views: {
+          'narratives': {
+            templateUrl: '/viewer/viewer.html',
+            controller: 'ViewerCtrl'
+          },  
+        }
+      });
+  });

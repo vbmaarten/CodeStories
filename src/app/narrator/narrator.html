@@ -1,16 +1,8 @@
 
+<button ng-show"writerMode" ng-click="switchMode()">Writer</button>
+<button ng-hide"writerMode" ng-click="switchMode()">Viewer</button>
 
 
-<div ng-click='writerMode=!writerMode'>
-	<span ng-show="writerMode">Write</span><span ng-hide="writerMode">View</span>
-</div>
-<div ng-click='next()'>Next</div>
+<div ui-view="narratives"></div>
 
-<!--
-<button>Write</button>
-<button>Previous</button>
-<button>Next</button>
--->
-
-<div narrative ng-repeat="(title, narrative) in storyBoard" class="narrative"></div>
 
