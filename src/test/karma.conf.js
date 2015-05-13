@@ -29,7 +29,13 @@ module.exports = function(config) {
       'bower_components/angular-ui-ace/ui-ace.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
-      //'app/{,*/}*.js',
+      'app/app.js',
+      'app/cast/cast.js',
+      'app/explorer/explorer.js',
+      'app/narrator/narrator.js',
+      'app/projectLoader/projectLoader.js',
+      'app/libs/interpreter.js',
+      'app/{,*/}*.js',
       'test/mock/{,*/}*.js',
       'test/spec/{,*/}*.js'
     ],
@@ -50,7 +56,7 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      'PhantomJS'
+      'PhantomJS',
     ],
 
     // Which plugins to enable

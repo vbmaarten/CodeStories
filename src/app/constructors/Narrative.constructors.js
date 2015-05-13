@@ -47,7 +47,7 @@ var FSNarrative = function (name, CASTNode) {
 	this.Items = new Items();
 };
 
-FSNarrative.prototype = Object.create(CASTNode.prototype);
+FSNarrative.prototype = Object.create(Narrative.prototype);
 
 var CodeNarrative = function (name, CASTNode) {
 	if( !CASTNode.isCodeNarrative() ) {
@@ -65,4 +65,4 @@ var CodeNarrative = function (name, CASTNode) {
 
 };
 
-CodeNarrative.prototype = Object.create(CASTNode.prototype);
+CodeNarrative.prototype = Object.create(Narrative.prototype);

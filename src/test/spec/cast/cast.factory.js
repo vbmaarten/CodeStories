@@ -1,4 +1,9 @@
-describe('cast', function () {
+'use strict';
+
+describe('Factory: CAST', function () {
+
+  // load the controller's module
+  beforeEach(module('cast'));
 
   it('test', function () {
     expect(true).toBe(true);

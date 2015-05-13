@@ -2,6 +2,14 @@ var CASTNode = function(name, parent, children){
 	this.name = name;
 	this.parent = parent;
 	this.children = children;
+
+	this.getChild = function(name){
+
+		return this.children[name];
+	}
+	this.getChildren = function(){
+		return this.children;
+	}
 	this.getType = function(){
 		if(this instanceof FolderNode)
 			return 'directory';
@@ -24,7 +32,7 @@ var CASTNode = function(name, parent, children){
 	this.up = function(){
 		if(!this.parent){
 			console.error('This node has no parent');
-			throw 'NoParrentError'
+			throw 'NoParentError'
 			return this.parent;
 		}
 		return this.parent;
@@ -45,13 +53,24 @@ var FileNode = function (name, parent, children, content) {
 FileNode.prototype = Object.create(CASTNode.prototype);
 
 
-var ASTNode = function (name, parent, children) {
-	CASTNode.call(this,name,parent,children);
+var ASTNode = function (ast, parent) {
+	console.log(ast.type,parent && parent.type)
+	CASTNode.call(this,ast.type,parent);
+	for(var key in ast){
+		var subNode = ast[key];
+		if(subNode.end || subNode instanceof Array){
+			ast[key] = new ASTNode(ast[key],ast)
+			this.children[key] = ast[key];
+		}
+	}
+	this.getChildren = function(){
+		return children;
+	}
+	this.getChild = function(name){
+		return children[name];
+	}
 };
 ASTNode.prototype = Object.create(CASTNode.prototype);
-
-
-
 
 
 
