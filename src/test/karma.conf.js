@@ -34,6 +34,7 @@ module.exports = function(config) {
       'app/explorer/explorer.js',
       'app/narrator/narrator.js',
       'app/projectLoader/projectLoader.js',
+      'app/libs/interpreter.js',
       'app/{,*/}*.js',
       'test/mock/{,*/}*.js',
       'test/spec/{,*/}*.js'
