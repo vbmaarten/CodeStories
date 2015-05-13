@@ -1,4 +1,1 @@
-<button ng-click="">Load project</button>
-
-<input type="file" fileread="projectFile"  webkitdirectory directory multiple>
-<div id="drop-container" drop-zone></div>
+<input type="file" ng-model="zipfile" on-read-file="loadZip($fileContent)"></input>
