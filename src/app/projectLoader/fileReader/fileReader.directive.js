@@ -17,6 +17,7 @@ angular.module('projectLoader')
             element.bind("change", function (changeEvent) {
                 var reader = new FileReader();
                 reader.readAsBinaryString(changeEvent.target.files[0]);
+                console.log(changevent.target.files);
                 reader.onload = function (loadEvent) {
                     scope.$apply(function () {
                         scope.fileread = loadEvent.target.result;

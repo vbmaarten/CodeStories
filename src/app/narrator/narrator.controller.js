@@ -8,8 +8,8 @@
  * Controller of the narrator
  */
 
- angular.module('narrator',[])
- .controller('NarratorCtrl', [ "$scope",'$stateParams', "CAST" ,function ($scope, $stateParams, CAST) {
+angular.module('narrator',[])
+  .controller('NarratorCtrl', [ "$scope",'$stateParams', "CAST" ,function ($scope, $stateParams, CAST) {
 
  	$scope.writerMode = false;
  	$scope.storyBoard = [[]];
@@ -22,9 +22,6 @@
  	$scope.activeNarrativePath = "/";
  	$scope.primitiveIndex = 0;
  	
-
-
-
 
 
 
