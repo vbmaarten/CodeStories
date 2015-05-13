@@ -24,7 +24,7 @@ angular.module('narrator')
 
  	factory.narrativeStep = function(){
  		this.interpreter.step();
- 		while(!this.interpreter.stateStack[0].node.primitives){
+ 		while(!this.interpreter.stateStack[0].node.item){
  			this.interpreter.step();
  		}
  		return this.interpreter.stateStack[0].node;

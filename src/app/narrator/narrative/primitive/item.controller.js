@@ -1,5 +1,5 @@
 angular.module('narrator')
-.controller('PrimitiveCtrl',function($scope){
+.controller('ItemCtrl',function($scope){
 
   $scope.editorEnabled = false;
 
