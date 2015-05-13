@@ -11,7 +11,7 @@ angular.module('projectLoader')
   .controller('ProjectLoaderCtrl', ['$scope','CAST', function ($scope, CAST) {
   		var BuildCASTFromZip = function(zip){
   			console.log(zip.files);
-		    var root = new FolderNode('/', null, {});
+		    var root = new FolderNode('rootnode', null, {});
 		    Object.getOwnPropertyNames(zip.files).forEach(function(element, index, array){
 		        var isDirectory = element.slice(-1) == "/";
 		        var isJS = false;
@@ -47,7 +47,7 @@ angular.module('projectLoader')
 	                	console.log(element); 
                         new_root.children[last] = new FileNode(last,root,{},zip.file(element).asText());
                         if(isJS){
-                                new_root.children[last].children["program"] = ASTNode("program",new_root.children[last], acorn.parse(zip.file(element).asText()));
+                                new_root.children[last].children["program"] = new ASTNode("program",new_root.children[last], acorn.parse(zip.file(element).asText()));
                         }
 	                }
 		        }
@@ -58,7 +58,8 @@ angular.module('projectLoader')
 
 	$scope.loadZip = function(data){
 		var zip = new JSZip(data);
-		CAST.cast["/"	] = BuildCASTFromZip(new JSZip(data));
+		CAST.cast.rootnode = BuildCASTFromZip(new JSZip(data));
+		console.log(CAST.cast);
 	}
 }])
 	.directive('onReadFile', function ($parse) {
