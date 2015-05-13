@@ -1,6 +1,5 @@
 
-<button ng-show"writerMode" ng-click="switchMode()">Writer</button>
-<button ng-hide"writerMode" ng-click="switchMode()">Viewer</button>
+<button ng-click="switchMode()">{{state}}</button>
 
 
 <div ui-view="narratives"></div>

@@ -25,25 +25,30 @@ angular.module('narrator')
  	$scope.writerMode = narratorFactory.writerMode;
 
  	// Navigate to corresponding state
-  if(narratorFactory.writerMode)
-  	$state.go('writer');
-  else
-  	$state.go('viewer');
+  if(narratorFactory.writerMode) {
+  	$state.go('narrating.writer');
+  	$scope.state = "Writer";
+  }
+  else {
+  	$state.go('narrating.viewer');
+  	$scope.state = "Viewer";
+  }
 
   // Function to switch between states
   $scope.switchMode = function(){
   	if(narratorFactory.writerMode){
   		narratorFactory.writerMode = false;
   		$scope.writerMode = narratorFactory.writerMode;
-	  	$state.go('viewer');
+  		$scope.state="Viewer";
+	  	$state.go('narrating.viewer');
   	}
 	  else{
 	  	narratorFactory.writerMode = true;
   		$scope.writerMode = narratorFactory.writerMode;
-	  	$state.go('writer');
+  		$scope.state="Writer"
+	  	$state.go('narrating.writer');
 	  }
   }
 
- 	//$scope.activeNarrative = $scope.activeNode.narratives["teststory"]; //[{'link-choice':CAST.cast['/']['narratives/']}]
 
 }]);

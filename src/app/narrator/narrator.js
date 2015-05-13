@@ -11,18 +11,18 @@
 angular.module('narrator', [])
   .config(function ($stateProvider) {
     $stateProvider
-      .state('writer',{
+      .state('narrating.writer',{
         views: {
           'narratives': {
-            templateUrl: '/writer/writer.html',
+            templateUrl: '/narrator//writer/writer.html',
             controller: 'WriterCtrl' 
           },       
         }
       })
-      .state('viewer', {
+      .state('narrating.viewer', {
         views: {
           'narratives': {
-            templateUrl: '/viewer/viewer.html',
+            templateUrl: '/narrator/viewer/viewer.html',
             controller: 'ViewerCtrl'
           },  
         }
