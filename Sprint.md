@@ -33,3 +33,13 @@
 |-|1| CAST  | salim |  |
 |-|1| Narrator | roelof |  |
 
+###Week 4 
+
+|-|1| Diagrams | everyone |
+|-|1| Tests | everyone |
+|-|2| primitives | roelof |
+|-|2| Narrative service | Salim |
+|-|2| Project-loader  | maarten |
+|-|2| CodeNarrative | roelof |
+
+
