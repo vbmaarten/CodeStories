@@ -47,7 +47,7 @@ angular.module('projectLoader')
 	                	console.log(element); 
                         new_root.children[last] = new FileNode(last,root,{},zip.file(element).asText());
                         if(isJS){
-                                //new_root.children[last].children.push(ASTNode("program",new_root.children[last], acorn.parse(zip.file(element).asText())));
+                                new_root.children[last].children["program"] = ASTNode("program",new_root.children[last], acorn.parse(zip.file(element).asText()));
                         }
 	                }
 		        }
