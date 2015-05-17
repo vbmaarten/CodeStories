@@ -15,7 +15,6 @@
 |-|3| Userstory |  | 2u |
 |-|4| Requirements specification | salim | 1u |
 
-
 ###Week 2
 
 | User Story    | Priority      | Task                           | Task assigned to | Estimated effort |
@@ -37,9 +36,10 @@
 
 |-|1| Diagrams | everyone |
 |-|1| Tests | everyone |
-|-|2| primitives | roelof |
+|-|2| primitives | salim |
 |-|2| Narrative service | Salim |
 |-|2| Project-loader  | maarten |
 |-|2| CodeNarrative | roelof |
+|-|3| Explorer/editor | roelof 
 
 

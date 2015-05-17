@@ -11,7 +11,7 @@
 
 var CastMock = {
   'rootnode': new FolderNode('rootnode',null,{})
-};
+}
 
 angular.module('cast')
   .factory('CAST', function () {

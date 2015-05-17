@@ -8,47 +8,47 @@
  * Controller of the narrator
  */
 
-angular.module('narrator',[])
-  .controller('NarratorCtrl', [ "$scope",'$stateParams', "CAST" ,function ($scope, $stateParams, CAST) {
+angular.module('narrator')
+  .controller('NarratorCtrl', [ '$scope', '$stateParams', '$state', 'CAST', 'narratorFactory', 
+  	function ($scope, $stateParams, $state, CAST, narratorFactory) {
 
- 	$scope.writerMode = false;
- 	$scope.storyBoard = [[]];
+ 	// State of the narrator, contains a list of the active narratives
+ 	$scope.narratorState = narratorFactory.narratorState;
+
+ 	// Get the current active node in the CAST
  	if($stateParams.path)
     $scope.activeNode = CAST.getNode($stateParams.path);
   else
    	$scope.activeNode = CAST.getNode('/');
 
- 	$scope.activeNarrative = $scope.activeNode.narratives["teststory"]; //[{'link-choice':CAST.cast['/']['narratives/']}]
- 	$scope.activeNarrativePath = "/";
- 	$scope.primitiveIndex = 0;
- 	
+  // If the user is able to edit the narratives or not (boolean)
+ 	$scope.writerMode = narratorFactory.writerMode;
+
+ 	// Navigate to corresponding state
+  if(narratorFactory.writerMode) {
+  	$state.go('narrating.writer');
+  	$scope.state = "Writer";
+  }
+  else {
+  	$state.go('narrating.viewer');
+  	$scope.state = "Viewer";
+  }
+
+  // Function to switch between states
+  $scope.switchMode = function(){
+  	if(narratorFactory.writerMode){
+  		narratorFactory.writerMode = false;
+  		$scope.writerMode = narratorFactory.writerMode;
+  		$scope.state="Viewer";
+	  	$state.go('narrating.viewer');
+  	}
+	  else{
+	  	narratorFactory.writerMode = true;
+  		$scope.writerMode = narratorFactory.writerMode;
+  		$scope.state="Writer"
+	  	$state.go('narrating.writer');
+	  }
+  }
 
 
-
-
-
-
- 	$scope.next =function (){		
- 		var step = $scope.activeNarrative[$scope.primitiveIndex];
- 		$scope.storyBoard[$scope.storyBoard.length-1].push(
- 			$scope.activeNarrative[$scope.primitiveIndex]
- 			)
- 		$scope.primitiveIndex++;
- 		if(step.type === 'link'){
- 			$scope.storyBoard.push( [] )
- 			$scope.activeNarrative = CAST.getNode( step.content.node ).narratives[step.content.id];
- 			$scope.primitiveIndex=0;
- 		} 		
- 	}
-
- 	$scope.addNarrative = function(storyBoard,afterNarrative){
- 		var i = storyBoard.indexOf(afterNarrative);
- 		storyBoard.splice(i+1,0,[]);
- 	};
- 	$scope.removeNarrative = function(storyBoard,narrative){
- 		var i = storyBoard.indexOf(narrative);
- 		storyBoard.splice(i,1);
-
- 	};
-
- }]);
+}]);

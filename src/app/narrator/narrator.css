@@ -19,10 +19,10 @@
 	background-color:#FFE0E0;
 }
 
-.primitive{
+.item{
 	padding:.7em 0;
 	border-bottom:1px solid #333;
 }
-.primitive:last-child{
+.item:last-child{
 	border:none;
 }

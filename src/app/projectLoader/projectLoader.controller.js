@@ -9,6 +9,8 @@
  */
 angular.module('projectLoader')
   .controller('ProjectLoaderCtrl', ['$scope','CAST', function ($scope, CAST) {
+  		$scope.showImportPopup = true;
+
   		var BuildCASTFromZip = function(zip){
   			console.log(zip.files);
 		    var root = new FolderNode('rootnode', null, {});
@@ -83,4 +85,4 @@ angular.module('projectLoader')
 				});
 			}
 		};
-});
+})

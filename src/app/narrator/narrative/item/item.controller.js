@@ -6,7 +6,7 @@ angular.module('narrator')
   $scope.edit = function() {
   	console.log($scope)
     $scope.editorEnabled = true;
-    $scope.editableContent = $scope.$parent.primitive.text;
+    $scope.editableContent = $scope.$parent.item.text;
   };
 
   $scope.cancel = function() {
@@ -14,7 +14,7 @@ angular.module('narrator')
   };
 
   $scope.save = function() {
-    $scope.$parent.primitive.text = $scope.editableContent;
+    $scope.$parent.item.text = $scope.editableContent;
     $scope.cancel();
   };
 

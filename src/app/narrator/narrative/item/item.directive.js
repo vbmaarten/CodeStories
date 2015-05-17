@@ -2,31 +2,31 @@
 
 /**
  * @ngdoc function
- * @name narrator.directive:primitive
+ * @name narrator.directive:item
  * @description
- * # primitive
- * Diretive of the primitive
+ * # item
+ * Diretive of the item
  */
 angular.module('narrator')
-  .directive('primitive', function () {
+  .directive('item', function () {
     return {
-      templateUrl:'narrator/narrative/primitive/primitive.html',
-      controller:'PrimitiveCtrl'
+      templateUrl:'narrator/narrative/item/item.html',
+      controller:'ItemCtrl'
     }
-  }).directive('addPrimitiveBtn',function(){
+  }).directive('addItemBtn',function(){
     return {
-      template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='addPrimitive(narrative,primitive);'>+</div>",  
+      template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='addItem(narrative,item);'>+</div>",  
     };
-  }).directive('removePrimitiveBtn',function(){
+  }).directive('removeItemBtn',function(){
   return {
-      template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='removePrimitive(narrative,primitive);'>-</div>", 
+      template:  "<div ng-show='writerMode' class='narrator-btn' ng-click='removeItem(narrative,item);'>-</div>", 
     };
   })
-  .directive('primitiveContent', ['$compile', '$http', '$templateCache', function($compile, $http, $templateCache) {
+  .directive('itemContent', ['$compile', '$http', '$templateCache', function($compile, $http, $templateCache) {
 
         var getTemplate = function(contentType) {
             var templateLoader,
-            baseUrl = '/narrator/narrative/primitive/',
+            baseUrl = '/narrator/narrative/item/',
             templateMap = {
                 empty: 'empty.html',
                 link: 'link.html',
@@ -48,7 +48,7 @@ angular.module('narrator')
         }
 
         var linker = function(scope, element, attrs) {
-            var loader = getTemplate(scope.primitive.type);
+            var loader = getTemplate(scope.item.type);
             
             var promise = loader.success(function(html) {
                 element.html(html);
@@ -61,7 +61,7 @@ angular.module('narrator')
         return {
             restrict: 'E',
             scope: {
-                primitive:'=data'
+                item:'=data'
             },
             link: linker
         };

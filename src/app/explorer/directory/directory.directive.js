@@ -18,7 +18,6 @@ angular.module('explorer')
     	templateUrl: '/explorer/directory/directory.html',
     	controller: function ($scope) {
             $scope.isNotASTNode = function (o){
-                console.log(o);
                 return ! (o instanceof ASTNode);
             }
     	},

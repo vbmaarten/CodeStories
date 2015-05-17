@@ -23,28 +23,11 @@ angular
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/dir/');
 
 
     $stateProvider
-      .state('home',{
-        url: '/',
-        views: {
-          'projectLoader': {
-            templateUrl: '/projectLoader/projectLoader.html',
-            controller: 'ProjectLoaderCtrl' 
-          },
-          'explorer': {
-            templateUrl: '/explorer/explorer.html',
-            controller: 'ExplorerCtrl'
-          },
-          'narrator': {
-            templateUrl: '/narrator/narrator.html',
-            controller: 'NarratorCtrl' 
-          }          
-        }
-      })
-      .state('file', {
+      .state('narrating', {
         url: '/dir*path',
         views: {
           'projectLoader': {

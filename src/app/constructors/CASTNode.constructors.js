@@ -54,7 +54,6 @@ FileNode.prototype = Object.create(CASTNode.prototype);
 
 
 var ASTNode = function (ast, parent) {
-	console.log(ast.type,parent && parent.type)
 	CASTNode.call(this,ast.type,parent);
 	for(var key in ast){
 		var subNode = ast[key];
