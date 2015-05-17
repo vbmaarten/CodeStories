@@ -23,7 +23,7 @@ angular
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
-      .otherwise('/dir/');
+      .otherwise('/dir');
 
 
     $stateProvider

@@ -10,13 +10,21 @@
 
 angular.module('narrator')
   .factory('narratorFactory', function () {
-    return  { 
-      writerMode: false,
-      narratorState: [],
-
+    return  {
+      writerMode: true,
+      narrativePlaying: false,
+      narratives:[],
+      narrativeQueue: [],
+      selectNarrative: function(narrative){
+      	this.narrativePlaying = true;
+      	this.narrativeQueue = [narrative];
+      },
+      deselectNarrative: function(){
+        this.narrativePlaying = false;
+        this.narrativeQueue = [];
+      }
     }
   });
-
 
 
 

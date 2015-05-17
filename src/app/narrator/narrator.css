@@ -1,28 +1,122 @@
 
-.narrator{
+.narrator {
 	padding:0 20px;
 	background-color: #f0f0f0;
 	overflow-y: scroll; 
 }
 
+.narrator input[type="text"] {
+	background-color: transparent;
+	outline: none;
+	border: none;
+	padding:0;
+}
+
+.narrator .remove {
+	width:1.4em;
+	height: 1.4em;
+	background-color:#000000;
+	opacity:.2;
+	position: absolute;
+	top:0;
+	right:0;
+	text-align: center;
+	color:#ffffff;
+	cursor:pointer;
+	z-index:2;
+}
+
+
+.narrator h2 {
+	width:100%;
+	margin:0;
+	padding:10px 20px;
+	background-color:#9C27B0;
+	color:white;
+	font-weight:300;
+	position:relative;
+}
+
+.narrator h2 input[type="text"] {
+	color:white;
+	font-size:1em;
+	font-weight: 300;
+}
+
+.narrator h2 .return, .narrator h2 .remove {
+	height: 100%;
+	width:50px;
+	position:absolute;
+	right:0;
+	top:0;
+	background-color: #000000;
+	opacity:.2;
+	padding:.1em 0;
+	font-size:1.3em;
+	font-weight:500;
+	text-align: center;
+}
+
+.narrator .button-wide {
+	background-color:#cccccc;
+	padding:5px;
+	width: 100%;
+	text-align: center;
+	margin-bottom:15px;
+	cursor:pointer;
+}
+
+.narrator .button-wide:active {
+	background-color:#bbbbbb;
+}
+
+.narrator .button-wide.next {
+	position: absolute;
+	bottom:0px;
+	width:460px;
+}
+
+.narrator .button-wide.add {
+	width:420px;
+	margin:20px;
+	background-color:transparent;
+	border:2px dashed #ccc;
+	border-radius: 5px;
+	color:#ccc;
+}
+
+.narrator .button-wide.add:before {
+	content:'+';
+}
+
+.narrator .button-wide.add:hover {
+	border-color: #999;
+	color: #999;
+}
+
 .narrative{
 	width:100%;
+	position:relative;
+	margin-bottom:30px;
+}
+
+
+.narrative .remove:before {
+	content:'x';
+}
+
+div[item], .item{
 	background-color:#FFFFFF;
-	padding:10px;
-	margin-top: 20px;
+	padding:25px 15px;
+	width:100%;
+	border-bottom:1px solid #ddd;
+	position:relative;
 }
 
-
-
-
-.narrator-btn{
-	background-color:#FFE0E0;
+div[item] input {
+	font-size:1em;
 }
 
-.item{
-	padding:.7em 0;
-	border-bottom:1px solid #333;
-}
-.item:last-child{
+div[item]:last-child, .item:last-child{
 	border:none;
 }

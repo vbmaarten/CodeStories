@@ -1,7 +1,10 @@
+<div ng-transclude></div>
 
-<remove-narrative-btn></remove-narrative-btn>
-<h2>{{narrative.name}}</h2>
-<item ng-repeat="item in narrative.items" class="item"></item> 
+<div class="item button-wide add" ng-if="edit" ng-click="addItem()"></div>
 
-<add-narrative-btn ></add-narrative-btn>
-
+<div ng-repeat="item in narrative.items" item-type="item.type">
+	<div item>
+		<div class="remove" ng-if="edit" ng-click="removeItem(item)"></div>
+	</div>
+	<div class="item button-wide add" ng-if="edit" ng-click="addItem(item)"></div>
+</div>

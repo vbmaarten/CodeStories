@@ -8,18 +8,19 @@
  * Controller of the narrative
  */
 angular.module('narrator')
-  .controller('NarrativeCtrl', function ($scope) {
+  .controller('NarrativeCtrl', ['$scope', function ($scope) {
 
-  	$scope.addItem = function(items,afterItem){
 
+  	$scope.addItem = function(afterItem){
+  		var items = $scope.narrative.items;
   		var i = items.indexOf(afterItem);
- 		items.splice(i+1,0,{"type":"empty"});
+ 			items.splice(i+1,0,{"type":"empty","content":"New item"});
+ 		};
+		
+		$scope.removeItem = function(item){
+  		var items = $scope.narrative.items;
+			var i = items.indexOf(item);
+			items.splice(i,1);
+ 		};
 
- 	};
- 	 $scope.removeItem = function(items,item){
- 	 	var i = items.indexOf(item)
- 		items.splice(i+1,1);
-
- 	};
-    
-  });
+  }]);
