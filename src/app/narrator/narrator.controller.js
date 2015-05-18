@@ -14,9 +14,7 @@ angular.module('narrator')
 
  	// State of the narrator, contains a list of the active narratives
 
-  $scope.$watch('CAST.selected',function(old,newVal){
-    $scope.activeNode = newVal;
-  })
+    $scope.activeNode = CAST.selected
 
   	$scope.state = "Writer";
 
