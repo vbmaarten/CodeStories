@@ -8,18 +8,11 @@
  * Controller of the explorer
  */
 angular.module('explorer')
-  .controller('ExplorerCtrl', ['$scope', '$stateParams', 'CAST', function ($scope, $stateParams, CAST) {
+  .controller('ExplorerCtrl', ['$scope', 'CAST', function ($scope, CAST) {
     $scope.directory = CAST.cast;
-    $scope.currentFile = "";
-    if($stateParams.path) {
-        console.log($stateParams);
-        var file = CAST.getNode($stateParams.path);
-        console.log(file);
-
-        if(file.content){
-        	$scope.currentFile = file.content;
-        }
-    }
+    $scope.project = CAST.project;
+    $scope.selected = CAST.selected;
+    
 
     $scope.aceLoaded = function(_editor){
 	    // Editor part

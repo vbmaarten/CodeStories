@@ -16,6 +16,7 @@ angular.module('cast')
   .factory('CAST', function () {
     return  { 
 
+      project:'',
       appendNarrative:function(narratives){
 
         for(var castPath in narratives){

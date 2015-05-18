@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("projectLoader").factory("projectParser", [ "CAST", function(CAST) {
+angular.module("projectLoader").factory("projectParser", function() {
     return {
         loadZip: function(data) {
             var root = {};
@@ -33,4 +33,4 @@ angular.module("projectLoader").factory("projectParser", [ "CAST", function(CAST
             return root;
         }
     };
-} ]);
+} );

@@ -23,12 +23,12 @@ angular
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
-      .otherwise('/dir/');
+      .otherwise('/home/');
 
 
     $stateProvider
       .state('narrating', {
-        url: '/dir*path',
+        url: '/:project/{path:.*}',
         views: {
           'projectLoader': {
             templateUrl: '/projectLoader/projectLoader.html',

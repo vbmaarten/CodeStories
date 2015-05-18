@@ -8,7 +8,39 @@
  * Controller of the project loader
  */
 angular.module('projectLoader')
-  .controller('ProjectLoaderCtrl', ['$scope','CAST', function ($scope, CAST) {
+  .controller('ProjectLoaderCtrl', ['$scope','$http','$stateParams','CAST', function ($scope,$http,$stateParams, CAST) {
+
+
+
+
+	if(CAST.project != $stateParams.project) {
+        console.log($stateParams);
+        CAST.project = $stateParams.project;
+        if(CAST.project.endsWith('.zip')){
+
+        	 $http({
+		        url: '/stories/'+$stateParams.project,
+		        method: 'GET',
+		        responseType: 'arraybuffer'
+		      }).success( function(data){
+		        $scope.loadZip(data);
+
+		        CAST.selected_path = $stateParams.path;
+        		CAST.selected = CAST.cast.rootnode.getNode($stateParams.path);
+
+
+        	} )
+        	.error(function(){
+        		console.error("project not found");
+        	})
+        }
+        
+    } else if( CAST.project == $stateParams.project && CAST.selected_path != $stateParams.path ){
+	    CAST.selected_path = $stateParams.path;
+        CAST.selected = CAST.cast.rootnode.getNode($stateParams.path);
+    }
+
+
   		var BuildCASTFromZip = function(zip){
   			console.log(zip.files);
 		    var root = new FolderNode('project', null, {});
@@ -57,18 +89,23 @@ angular.module('projectLoader')
 	};
 
 	var addNarrativesToCast = function(narratives){
-		//todo error check
-		var parsed = JSON.parse(narratives);
+		if(typeof narratives === 'string')
+			narratives = JSON.parse(narratives);
 
-		CAST.appendNarrative(parsed);
+		CAST.appendNarrative(narratives);
 	}
 
 	$scope.loadZip = function(data){
-		var zip = new JSZip(data);
 		CAST.cast.rootnode = BuildCASTFromZip(new JSZip(data));
-		addNarrativesToCast(CAST.getNode('/.CodeStories/narratives.json').content)
+
+		var narrative_path = $stateParams.project.substr(0,$stateParams.project.length-4) + ".json";
+
+		$http.get(/stories/+ narrative_path)
+			.success(function(data){
+				addNarrativesToCast(data);
+			})
+		
 	}
-	$scope.addNarrativesToCast = addNarrativesToCast;
 
 }])
 	.directive('onReadFile', function ($parse) {
