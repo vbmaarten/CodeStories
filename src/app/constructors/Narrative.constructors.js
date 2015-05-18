@@ -56,7 +56,7 @@ var FSNarrative = function (name, CASTNode,items) {
 
 FSNarrative.prototype = Object.create(Narrative.prototype);
 
-var CodeNarrative = function (name, CASTNode) {
+var CodeNarrative = function (name, CASTNode,items) {
 	if( !CASTNode.isCodeNarrative() ) {
 		console.log(' You can not add a CodeNarrative on',CASTNode);
 		throw "BadNarrativeForCASTNode";

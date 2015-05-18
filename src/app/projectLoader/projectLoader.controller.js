@@ -13,6 +13,7 @@ angular.module('projectLoader')
 
 
 
+
 	if(CAST.project != $stateParams.project) {
         console.log($stateParams);
         CAST.project = $stateParams.project;
@@ -79,7 +80,8 @@ angular.module('projectLoader')
 	                	console.log(element); 
                         new_root.children[last] = new FileNode(last,root,{},zip.file(element).asText());
                         if(isJS){
-                                new_root.children[last].children["program"] = new ASTNode("program",new_root.children[last], acorn.parse(zip.file(element).asText()));
+                                new_root.children[last].children["program"] = acorn.parse(zip.file(element).asText());
+                                new_root.children[last].children["program"].setParent(last);
                         }
 	                }
 		        }

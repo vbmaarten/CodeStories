@@ -1,5 +1,5 @@
 <ul>
-	<li ng-repeat="(key, value) in data" ng-if="isNotASTNode(value)">
+	<li ng-repeat="(key, value) in data" ng-if="!value.isASTNode()">
 		<a ng-href="#/{{castUrl}}{{key}}">{{key}}</a>
 		<div directory data="value.children" cast-url="castUrl+key+'/'"></div>
 	</li>

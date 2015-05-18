@@ -16,11 +16,6 @@ angular.module('explorer')
             castUrl: '='
     	},
     	templateUrl: '/explorer/directory/directory.html',
-    	controller: function ($scope) {
-            $scope.isNotASTNode = function (o){
-                return ! (o instanceof ASTNode);
-            }
-    	},
     	//Used to call directives recursively
     	compile: function(element) {
         // Use the compile function from the RecursionHelper,

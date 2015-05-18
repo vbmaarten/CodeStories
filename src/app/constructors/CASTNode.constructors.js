@@ -3,16 +3,33 @@ var CASTNode = function(name, parent, children){
 	this.parent = parent;
 	this.children = children;
 
-	this.getNode = function(path){
+}
+
+
+CASTNode.prototype = {
+	getName : function(){
+		return this.name;
+	},
+
+	setName : function(name){
+		this.name= name;
+	},
+
+	getParent : function(){
+		return this.parent;
+	},
+
+	setParent : function(parent){
+		this.parent = parent;
+	},
+
+	getNode : function(path){
 
 
 		//ensure path is a array
 		if(typeof path == "string"){
 			path = path.split('/');
 		}
-
-
-
 		//filter empty and '.' directories
 		do{
 			var directChild = path.shift(); 
@@ -22,16 +39,16 @@ var CASTNode = function(name, parent, children){
 			return this.getChild(directChild) || this;
 
 		return this.getChild(directChild).getNode(path);
-	}
+	},
 
-	this.getChild = function(name){
+	getChild : function(name){
 
-		return this.children[name];
-	}
-	this.getChildren = function(){
+		return this.getChildren()[name]	
+	},
+	getChildren : function(){
 		return this.children;
-	}
-	this.getType = function(){
+	},
+	getType : function(){
 		if(this instanceof FolderNode)
 			return 'directory';
 		else if(this instanceof FileNode)
@@ -40,25 +57,26 @@ var CASTNode = function(name, parent, children){
 			return 'ast';
 		console.error('This node has a false type');
 		throw 'BadNodeTypeError';
-	}
-	this.isFolder = function(){
+	},
+	isFolder : function(){
 		return (this.getType() === 'directory')
-	}
-	this.isFile = function(){
+	},
+	isFile : function(){
 		return (this.getType() === 'file')
-	}
-	this.isASTNode = function(){
+	},
+	isASTNode : function(){
 		return (this.getType() === 'ast')
-	}
-	this.up = function(){
+	},
+	up : function(){
 		if(!this.parent){
 			console.error('This node has no parent');
 			throw 'NoParentError'
 			return this.parent;
 		}
 		return this.parent;
-	}
-	this.addNarratives = function(narratives){
+	},
+	
+	addNarratives : function(narratives){
 		this.narratives = {}
 		var i , new_narrative, name;
 		for( i in narratives){
@@ -84,33 +102,40 @@ var FileNode = function (name, parent, children, content) {
 FileNode.prototype = Object.create(CASTNode.prototype);
 
 
-var ASTNode = function (ast, parent) {
-	CASTNode.call(this,ast.type,parent);
-	for(var key in ast){
-		var subNode = ast[key];
-		if(subNode.end || subNode instanceof Array){
-			ast[key] = new ASTNode(ast[key],ast)
-			this.children[key] = ast[key];
-		}
+var ASTNode = function(){}
+
+var ast_CAST_wrapper = Object.create(CASTNode.prototype);
+ast_CAST_wrapper.getChildren = function(){
+		return this;
+
 	}
-	this.getChildren = function(){
-		return children;
+ast_CAST_wrapper.getName = function(){
+	return this.name || this.type
+}
+ast_CAST_wrapper.getType = function(){ return 'ast';};
+ast_CAST_wrapper.getNode = function(path){
+
+	if(path[0] === 'body' && path[1] != undefined){
+		path.shift();
+		var i = path.shift();
+		return this.body[i].getNode(path);
 	}
-	this.getChild = function(name){
-		return children[name];
+	return CASTNode.prototype.getNode.call(this,path);
+
+}
+ast_CAST_wrapper.addNarratives = function(narratives){
+		this.narratives = {}
+		var i , new_narrative, name;
+		for( i in narratives){
+  			name = narratives[i]
+			new_narrative = new CodeNarrative( name , this , narratives[i].items);
+			this.narratives.name = new_narrative;
+
+		
 	}
-};
-ASTNode.prototype = Object.create(CASTNode.prototype);
 
 
+}
 
-/*
-var node = new FileNode('test','parent','child','<html>');
-
-console.log(node.content); //directory
-console.log(node instanceof CASTNode); //true
-console.log(node instanceof FileNode); //true
-console.log(node instanceof FolderNode); //false
-*/
-
+acorn.parse('1').constructor.prototype = ast_CAST_wrapper;
 
