@@ -3,6 +3,27 @@ var CASTNode = function(name, parent, children){
 	this.parent = parent;
 	this.children = children;
 
+	this.getNode = function(path){
+
+
+		//ensure path is a array
+		if(typeof path == "string"){
+			path = path.split('/');
+		}
+
+
+
+		//filter empty and '.' directories
+		do{
+			var directChild = path.shift(); 
+		} while(directChild === ""  || directChild === "." )
+
+		if(!path || path.length == 0)
+			return this.getChild(directChild) || this;
+
+		return this.getChild(directChild).getNode(path);
+	}
+
 	this.getChild = function(name){
 
 		return this.children[name];
@@ -36,6 +57,16 @@ var CASTNode = function(name, parent, children){
 			return this.parent;
 		}
 		return this.parent;
+	}
+	this.addNarratives = function(narratives){
+		this.narratives = {}
+		var i , new_narrative, name;
+		for( i in narratives){
+  			name = narratives[i]
+			new_narrative = new FSNarrative( name , this , narratives[i].items);
+			this.narratives.name = new_narrative;
+
+		}
 	}
 }
 

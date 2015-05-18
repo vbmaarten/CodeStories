@@ -12,23 +12,22 @@
 var CastMock = {
   'rootnode': new FolderNode('rootnode',null,{})
 }
-
 angular.module('cast')
   .factory('CAST', function () {
     return  { 
+
+      appendNarrative:function(narratives){
+
+        for(var castPath in narratives){
+          this.getNode(castPath).addNarratives( narratives[castPath] );
+        }
+      
+
+      },
       selected: undefined,
 
-      getNode: function(p) {
-        var path = p.split('/');
-        
-        if(path[path.length-1] == "")
-          path.pop();
-
-        var current = this.cast.rootnode;
-        for (var i = 1; i < path.length; i ++){
-          current = current.children[path[i]];
-        }
-        return current;
+      getNode: function(path) {
+        return this.cast.rootnode.getNode(path);
       },
       cast: CastMock
     }

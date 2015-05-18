@@ -1,0 +1,42 @@
+{
+    "/": [
+        {
+            "name": " hello world narrative",
+            "type": "FS",
+            "items": [
+                {
+                    "type": "text",
+                    "content": "HelloWorld!"
+                },
+                {
+                    "type": "text",
+                    "content": "Thisisastoryallabouthow...."
+                },
+                {
+                    "type": "link",
+                    "content": "/src/graham_scan.js"
+                }
+            ]
+        }
+    ],
+    "/src/graham_scan.js" : [
+            {
+                "name": "grahamscannarrative",
+                "type": "FS",
+                "items": [
+                    {
+                        "type": "text",
+                        "content": "Thisisthemainsrcfileoftheproject"
+                    },
+                    {
+                        "type": "text",
+                        "content": "Letsseewhatitdoes"
+                    },
+                    {
+                        "type": "link",
+                        "content": "/src/graham_scan.js/PROGRAM/body/0"
+                    }
+                ]
+            }
+        ]
+    }

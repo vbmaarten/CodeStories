@@ -9,11 +9,9 @@
  */
 angular.module('projectLoader')
   .controller('ProjectLoaderCtrl', ['$scope','CAST', function ($scope, CAST) {
-  		$scope.showImportPopup = true;
-
   		var BuildCASTFromZip = function(zip){
   			console.log(zip.files);
-		    var root = new FolderNode('rootnode', null, {});
+		    var root = new FolderNode('project', null, {});
 		    Object.getOwnPropertyNames(zip.files).forEach(function(element, index, array){
 		        var isDirectory = element.slice(-1) == "/";
 		        var isJS = false;
@@ -58,11 +56,20 @@ angular.module('projectLoader')
 		return root;
 	};
 
+	var addNarrativesToCast = function(narratives){
+		//todo error check
+		var parsed = JSON.parse(narratives);
+
+		CAST.appendNarrative(parsed);
+	}
+
 	$scope.loadZip = function(data){
 		var zip = new JSZip(data);
 		CAST.cast.rootnode = BuildCASTFromZip(new JSZip(data));
-		console.log(CAST.cast);
+		addNarrativesToCast(CAST.getNode('/.CodeStories/narratives.json').content)
 	}
+	$scope.addNarrativesToCast = addNarrativesToCast;
+
 }])
 	.directive('onReadFile', function ($parse) {
 		//from http://jsfiddle.net/alexsuch/6aG4x/
@@ -85,4 +92,4 @@ angular.module('projectLoader')
 				});
 			}
 		};
-})
+});
