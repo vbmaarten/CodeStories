@@ -23,4 +23,20 @@ angular.module('narrator')
  		$scope.deselectNarrative();
  	};
 
+ 	// Select a narrative to edit or view
+  $scope.selectNarrative = function(narrative){
+    $scope.selected = true;
+    $scope.selectedNarrative = narrative;
+    $scope.playing = true;
+    narratorFactory.selectNarrative(narrative);
+    console.log('playing ' + $scope.playing);
+  };
+
+  // Deselect the narrative being edited or viewed
+  $scope.deselectNarrative = function(){
+    $scope.selected = false;
+    $scope.playing = false;
+    narratorFactory.deselectNarrative();
+  }
+
 }]);

@@ -14,7 +14,6 @@ angular.module('narrator')
       transclude: true,
       scope: {
       	narrative : '=data',
-        edit: '='
       },
       templateUrl:'narrator/narrative/narrative.html',
       controller: 'NarrativeCtrl'

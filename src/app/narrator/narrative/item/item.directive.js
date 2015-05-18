@@ -11,6 +11,10 @@ angular.module('narrator')
   .directive('item', function () {
     return {
       transclude: true,
+      restrict: 'A',
+      scope : {
+        'item': '=',
+      },
       templateUrl:'narrator/narrative/item/item.html',
       controller:'ItemCtrl'
     }

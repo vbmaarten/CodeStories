@@ -8,8 +8,9 @@
  * Controller of the narrative
  */
 angular.module('narrator')
-  .controller('NarrativeCtrl', ['$scope', function ($scope) {
+  .controller('NarrativeCtrl', ['$scope', 'narratorFactory', function ($scope, narratorFactory) {
 
+    $scope.edit = narratorFactory.writerMode;
 
   	$scope.addItem = function(afterItem){
   		var items = $scope.narrative.items;
