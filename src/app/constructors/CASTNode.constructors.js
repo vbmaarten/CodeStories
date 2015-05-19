@@ -82,7 +82,7 @@ CASTNode.prototype = {
 		for( i in narratives){
   			name = narratives[i]
 			new_narrative = new FSNarrative( name , this , narratives[i].items);
-			this.narratives.name = new_narrative;
+			this.narratives[name] = new_narrative;
 
 		}
 	}

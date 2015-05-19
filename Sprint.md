@@ -42,4 +42,13 @@
 |-|2| CodeNarrative | roelof |
 |-|3| Explorer/editor | roelof 
 
-
+###Week 5
+|-|2| JSHINT |
+|-|1| CodeNarrative |
+|-|2| Node selection |
+|-|1| VCodeController |
+|-|2| Documentatie |
+|-|2| Meer primitives |
+|-|3| pretty folders |
+|-|4| Home Screen |
+|-|3| tests |
