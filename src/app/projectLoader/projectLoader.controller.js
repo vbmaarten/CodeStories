@@ -48,12 +48,10 @@
     }
         
     $scope.loadZip = function (data) {
-    	CAST.cast.rootnode = projectLoaderFactory.BuildCASTFromZip( new JSZip(data) );
-    	var narrativePath = $stateParams.project.substr(0, $stateParams.project.length - 4) + '.json';
-    	$http.get(/stories/ + narrativePath).success(function (data) {
-    		projectLoaderFactory.addNarrativesToCast(data);
-    	});
+    	var contents = projectLoaderFactory.UnpackZip( new JSZip(data) );
 
+      CAST.cast.rootnode = contents.cast;
+      CAST.appendNarrative(contents.narratives);
     };
   }
 ]);
