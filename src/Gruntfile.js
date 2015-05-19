@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/{,*/}*.js'],
+        files: ['<%= yeoman.app %>/{,*/}*.js','!<%= yeoman.app %>/libs/**'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -123,7 +123,8 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/{,*/}*.js'
+          '<%= yeoman.app %>/{,*/}*.js',
+          '!<%= yeoman.app %>/libs/**'
         ]
       },
       test: {

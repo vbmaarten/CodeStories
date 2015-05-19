@@ -42,6 +42,8 @@ module.exports = function(config) {
 
     // list of files / patterns to exclude
     exclude: [
+      'app/libs/*',
+      'app/stories/*',
     ],
 
     // web server port
