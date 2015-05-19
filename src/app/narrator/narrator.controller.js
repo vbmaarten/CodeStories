@@ -8,25 +8,19 @@
  */
  angular.module('narrator').controller('NarratorCtrl', [
   '$scope',
-  '$stateParams',
   '$state',
   'CAST',
   'narratorFactory',
-  function ($scope, $stateParams, $state, CAST, narratorFactory) {
+  function ($scope, $state, CAST, narratorFactory) {
     // Get the current active node in the CAST
-    if ($stateParams.path){
-      $scope.activeNode = CAST.getNode($stateParams.path);
-    }
-    else{
-      $scope.activeNode = CAST.getNode('/');
-    }
-    console.log($stateParams.path);
+    $scope.activeNode = CAST.selected;
+
+    console.log($scope.activeNode);
+
     // Get the narratives of the current node
     $scope.narratives = narratorFactory.narratives = $scope.activeNode.narratives;
     // If the user is able to edit the narratives or not (boolean)
     $scope.writerMode = narratorFactory.writerMode;
-    console.log($scope.activeNode);
-    console.log($scope.narratives);
     // Navigate to corresponding state
     if (narratorFactory.writerMode) {
       $state.go('narrating.writer');
