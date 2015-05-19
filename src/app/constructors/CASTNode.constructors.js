@@ -80,15 +80,18 @@ CASTNode.prototype = {
 	},
 	
 	addNarratives : function(narratives){
-		this.narratives = {}
+		this.narratives = this.narratives || [];
 		var i , new_narrative, name;
-		for( i in narratives){
-  			name = narratives[i].name
+		for(i in narratives) {
+  		name = narratives[i].name;
 			new_narrative = new FSNarrative( name , this , narratives[i].items);
-			this.narratives[name] = new_narrative;
-
+			this.narratives.push(new_narrative);
 		}
+	},
+	addNarrative: function(){
+		this.narratives.push(new FSNarrative('New Narrative', this, []));
 	}
+
 }
 
 
