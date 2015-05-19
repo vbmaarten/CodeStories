@@ -28,9 +28,7 @@ angular.module('explorer')
 	    _editor.setTheme("ace/theme/crimson_editor");
 
 	    // Node selection
-	    if($scope.selected.isASTNode()) {
 
-	    }
 
 	    // Events
 	    //_editor.on("changeSession", function(){ ... });

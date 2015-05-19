@@ -40,6 +40,8 @@
         CAST.content = parent.content;
       } else if(CAST.selected.isFile()){
         CAST.content = CAST.selected.content;
+      } else {
+        CAST.content = "This is a folder";
       }
 
  		}

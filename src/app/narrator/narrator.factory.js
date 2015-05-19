@@ -54,7 +54,7 @@ angular.module('narrator')
           var nextItem = this.queue[0].items[this.queueCounter[0]];
           
           // If the next item is a link to another narrative
-          if(nextItem.type instanceof LinkItem){
+          if(nextItem instanceof LinkItem){
             this.narrativeLink = nextItem.content.id;
             this.queueCounter[0]++;
             this.queuePaths.unshift($location.path());

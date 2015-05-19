@@ -1,5 +1,5 @@
 {
-    "/": [
+    "/example": [
         {
             "name": " hello world narrative",
             "type": "FS",
@@ -14,7 +14,11 @@
                 },
                 {
                     "type": "link",
-                    "content": "/src/graham_scan.js"
+                    "content": {"id":"grahamscannarrative","node":"/src/graham_scan.js"}
+                },
+                {
+                    "type": "text",
+                    "content": "retuuurn...."
                 }
             ]
         }
@@ -31,10 +35,6 @@
                     {
                         "type": "text",
                         "content": "Letsseewhatitdoes"
-                    },
-                    {
-                        "type": "link",
-                        "content": "/src/graham_scan.js/PROGRAM/body/0"
                     }
                 ]
             }
