@@ -22,6 +22,7 @@
 
         var root = new FolderNode('project', null, {});
 
+        //Loop through files that are packed in the zip
         Object.getOwnPropertyNames(zip.files).forEach(function (element, index, array) {
           var isDirectory = element.slice(-1) === '/';
           var isJS = false;
@@ -48,6 +49,7 @@
 
           var newRoot = root;
 
+          //Walk through the path, until the newRoot is the path the file is being added at
           path.forEach(function (element, index, arary) {
             if (root.children[element]) {                                  //If the folder is already defined, step into it
               newRoot = root.children[element];
@@ -58,14 +60,14 @@
           });
 
           if (!newRoot.children[last]) {
-            if(isCodestoriesFile){
+            if(isCodestoriesFile){   //Parse the narratives file
               ret.narratives = JSON.parse(zip.file(element).asText());
-            } else if (isDirectory) {
+            } else if (isDirectory) {  //Create the new directory
               newRoot.children[last] = new FolderNode(last, root, {});
-            } else {
+            } else {   //Create the new file
               newRoot.children[last] = new FileNode(last, root, {}, zip.file(element).asText());
-              if (isJS) {
-                newRoot.children[last].children.program = acorn.parse(zip.file(element).asText());
+              if (isJS) { //If it is a json file, add it's AST to the cast
+                newRoot.children[last].children.program = acorn.parse(zip.file(element).asText(), {location: true});
                 newRoot.children[last].children.program.setParent( newRoot.children[last] );
               }
             }
