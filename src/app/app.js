@@ -21,11 +21,21 @@ angular
     'narrator',
     'explorer'
   ])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider', function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
     $urlRouterProvider
       .otherwise('/home/');
 
-
+    (function() {
+      function valToString(val) { return val !== null ? val.toString() : val; }//.replace("%252F", "").toString()
+      function valFromString(val) { return val !== null ? val.toString(): val; }//.replace("%2F", "").toString()
+      function regexpMatches(val) { /*jshint validthis:true */ return this.pattern.test(val); }
+      $urlMatcherFactoryProvider.type('string', {
+        encode: valFromString,
+        decode: valFromString,
+        is: regexpMatches,
+        pattern: /[^/]*/
+      });
+    })();
 
     $stateProvider
       .state('narrating', {
@@ -45,5 +55,5 @@ angular
           }    
         }
       });
-  });
+  }]);
 
