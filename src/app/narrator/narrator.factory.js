@@ -9,10 +9,10 @@
  */
 
 angular.module('narrator')
-  .factory('narratorFactory',['$location', function ($location) {
+  .factory('narratorFactory',['$location', 'CAST', function ($location, CAST) {
     return  {
       // Stores the current mode of the app
-      writerMode: false,
+      writerMode: true,
       // Tells the view mode if there is a narrative playing
       narrativePlaying: false,
       // Stores the narratives of the current node
@@ -54,11 +54,11 @@ angular.module('narrator')
           var nextItem = this.queue[0].items[this.queueCounter[0]];
           
           // If the next item is a link to another narrative
-          if(nextItem.type == 'link'){
+          if(nextItem.type instanceof LinkItem){
             this.narrativeLink = nextItem.content.id;
             this.queueCounter[0]++;
             this.queuePaths.unshift($location.path());
-            $location.path('/dir' + nextItem.content.node);
+            $location.path(CAST.project + nextItem.content.node);
           } 
           // Push the next item of the narrative
           else { 

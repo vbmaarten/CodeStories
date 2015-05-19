@@ -1,13 +1,14 @@
 
-<div class="button-wide add" ng-click="addNarrative()" ng-hide="selected"></div>	
 
 <div class="narrative" ng-hide="selected" ng-repeat="narrative in narratives">
 	<h2 ng-click="selectNarrative(narrative)">
 		{{narrative.name}}
 		<div class="remove" ng-click="removeNarrative(narrative)"></div>
 	</h2>
-	<div class="button-wide add" ng-click="addNarrative(narrative)"></div>	
 </div>
+
+<div class="button-wide add" ng-click="addNarrative()" ng-hide="selected"></div>	
+
 
 <narrative class="narrative" ng-show="selected" data="selectedNarrative">
 	<h2>
