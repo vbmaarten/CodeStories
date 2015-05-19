@@ -1,1 +1,12 @@
-<div ng-click='next()'>Next</div>
+<div class="narrative" ng-hide="playing" ng-repeat="narrative in narratives">
+	<h2  ng-click="selectNarrative(narrative)">{{narrative.name}}</h2>
+</div>
+
+
+
+
+<div narrative class="narrative" ng-show="playing" ng-repeat="narrative in storyboard" data="narrative" edit="false">
+	<h2>{{narrative.name}}</h2>
+</div>
+
+<div class="button-wide next" ng-show="playing" ng-click='next()'>Next</div>

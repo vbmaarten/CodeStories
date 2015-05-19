@@ -9,23 +9,37 @@
  */
 
 angular.module('narrator')
-  .controller('ViewerCtrl', [ '$scope',	function ($scope) {
+  .controller('ViewerCtrl', [ '$scope', 'narratorFactory',	function ($scope, narratorFactory) {
 
-
- 	$scope.itemIndex = 0;
- 	
+ 	$scope.storyboard = narratorFactory.storyboard;
 
  	$scope.next =function (){
- 		var step = $scope.activeNarrative[$scope.itemIndex];
- 		$scope.storyBoard[$scope.storyBoard.length-1].push(
- 			$scope.activeNarrative[$scope.itemIndex]
- 			)
- 		$scope.itemIndex++;
- 		if(step.type === 'link'){
- 			$scope.storyBoard.push( [] )
- 			$scope.activeNarrative = CAST.getNode( step.content.node ).narratives[step.content.id];
- 			$scope.itemIndex=0;
- 		} 		
+
+ 		// Do one step in the narrative
+ 		narratorFactory.step();
+ 		// Check if the narrative is still playing after the last step
+ 		$scope.playing = narratorFactory.narrativePlaying;
+ 		
+ 		if(!$scope.playing){
+ 			$scope.deselectNarrative();
+ 		}
+
  	}
+
+	// Select a narrative to edit or view
+  $scope.selectNarrative = function(narrative){
+    $scope.selected = true;
+    $scope.selectedNarrative = narrative;
+    $scope.playing = true;
+    narratorFactory.selectNarrative(narrative);
+    console.log('playing ' + $scope.playing);
+  };
+
+  // Deselect the narrative being edited or viewed
+  $scope.deselectNarrative = function(){
+    $scope.selected = false;
+    $scope.playing = false;
+    narratorFactory.deselectNarrative();
+  }
 
 }]);

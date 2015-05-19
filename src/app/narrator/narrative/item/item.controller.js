@@ -1,21 +1,7 @@
 angular.module('narrator')
-.controller('ItemCtrl',function($scope){
+.controller('ItemCtrl',['$scope', 'narratorFactory', function($scope, narratorFactory){
 
-  $scope.editorEnabled = false;
+  $scope.edit = narratorFactory.writerMode;
 
-  $scope.edit = function() {
-  	console.log($scope)
-    $scope.editorEnabled = true;
-    $scope.editableContent = $scope.$parent.item.text;
-  };
 
-  $scope.cancel = function() {
-    $scope.editorEnabled = false;
-  };
-
-  $scope.save = function() {
-    $scope.$parent.item.text = $scope.editableContent;
-    $scope.cancel();
-  };
-
-});
+}]);

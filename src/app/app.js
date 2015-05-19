@@ -26,6 +26,7 @@ angular
       .otherwise('/home/');
 
 
+
     $stateProvider
       .state('narrating', {
         url: '/:project/{path:.*}',
