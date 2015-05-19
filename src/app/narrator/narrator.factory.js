@@ -9,7 +9,7 @@
  */
 
 angular.module('narrator')
-  .factory('narratorFactory',['$location', 'CAST', function ($location, CAST) {
+  .factory('narratorFactory',['$location', 'CAST','interpreterFactory', function ($location, CAST, interpreterFactory) {
     return  {
       // Stores the current mode of the app
       writerMode: true,
@@ -45,25 +45,41 @@ angular.module('narrator')
         this.queue.unshift(narrative);
         this.queueCounter.unshift(0);
         this.storyboard.push({'name':this.queue[0].name, 'items':[]});
+        if(narrative.isCodeNarrative()){
+          interpreterFactory.loadAst(narrative.CASTNode);
+        }
       },
 
-      step: function(){
-        // If the narrative isnt done playing
-        if(this.queue[0].items.length > this.queueCounter[0]){
 
-          var nextItem = this.queue[0].items[this.queueCounter[0]];
-          
+
+      step: function(){
+        var nextItem;
+
+        // Get the next Item
+        if(this.queue[0].isCodeNarrative()){
+          nextItem = interpreterFactory.narrativeStep();
+        } 
+        else {
+          if(this.queue[0].items.length > this.queueCounter[0]){
+            nextItem = this.queue[0].items[this.queueCounter[0]];
+          } else {
+            nextItem = false;
+          }
+        }
+
+        // If the narrative isnt done playing
+        if(nextItem){            
           // If the next item is a link to another narrative
           if(nextItem instanceof LinkItem){
-            this.linkNarrative(nextItem);
+            this.loadNarrative(nextItem);
           } 
           // Push the next item of the narrative
           else { 
             this.storyboard[this.storyboard.length-1].items.push(nextItem);
             this.queueCounter[0]++;
           }
-
         }
+
         // If the narrative is done playing
         else{
           // Remove the first item from the queue
@@ -80,16 +96,18 @@ angular.module('narrator')
             console.log('go back');
             $location.path(this.queuePaths.shift());
           }
-        }        
+        }      
       },
 
-      linkNarrative: function (nextItem) {
+      loadNarrative: function (nextItem) {
         // Set this value to true to let the controller know a narrative is playing
         this.narrativeLink = true;
         this.queueCounter[0]++;
 
         // Get the node of the narrative that is linked to and find the narrative
         var node = CAST.getNode(nextItem.content.node);
+
+
         var linked;
         for (var index in node.narratives) {
           if (node.narratives[index].name == nextItem.content.id){

@@ -112,7 +112,7 @@ astCASTPrototype.getNode = function (path) {
 	if (typeof path === 'string') {
     	path = path.split('/');
     }
-	if (path[0] === 'body' && path[1] !== undefined) {
+	if (path[0] === 'body' && typeof path[1] === 'number') {
 		path.shift();
 		var i = path.shift();
 		return this.body[i].getNode(path);
@@ -128,4 +128,16 @@ astCASTPrototype.addNarratives = function (narratives) {
 		this.narratives.push(newNarrative);
 	}
 };
-acorn.parse('1').constructor.prototype = astCASTPrototype;
+
+var tnode = acorn.parse('1').constructor
+
+for(var key in astCASTPrototype){
+	Object.defineProperty(tnode, key ,{
+		enumarable : false
+	})
+}
+
+
+
+
+tnode.prototype = astCASTPrototype;

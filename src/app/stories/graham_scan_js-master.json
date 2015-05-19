@@ -35,13 +35,20 @@
                     {
                         "type": "text",
                         "content": "Letsseewhatitdoes"
+                    },
+                    {
+                        "type": "link",
+                        "content": {
+                            "id":"codetest",
+                            "node":"/src/graham_scan.js/program"
+                        }
                     }
                 ]
             }
         ],
     "/src/graham_scan.js/program":[
         {
-            "name":"code narrative test",
+            "name":"codetest",
             "type":"Code",
             "ASTItems":[
                 {"node":"body/0",
