@@ -1,30 +1,23 @@
 'use strict';
-
-var CASTNode = function(name, parent, children){
+var CASTNode = function (name, parent, children) {
 	this.name = name;
 	this.parent = parent;
 	this.children = children;
 	this.narratives = [];
-
 };
-
 CASTNode.prototype = {
-	getName : function(){
+	getName: function () {
 		return this.name;
 	},
-
-	setName : function(name){
-		this.name= name;
+	setName: function (name) {
+		this.name = name;
 	},
-
-	getParent : function(){
+	getParent: function () {
 		return this.parent;
 	},
-
-	setParent : function(parent){
+	setParent: function (parent) {
 		this.parent = parent;
 	},
-
 	getNode : function(path){
 
 
@@ -86,68 +79,56 @@ CASTNode.prototype = {
 		return this.parent;
 	},
 	
-	addNarratives : function(narratives){
-		var i , new_narrative, name;
-		for(i in narratives) {
-  		name = narratives[i].name;
-			new_narrative = new FSNarrative( name , this , narratives[i].items);
-			this.narratives.push(new_narrative);
+
+	addNarratives: function (narratives) {
+		this.narratives = this.narratives || [];
+		var i, newNarrative, name;
+		for (i in narratives) {
+			name = narratives[i].name;
+			newNarrative = new FSNarrative(name, this, narratives[i].items);
+			this.narratives.push(newNarrative);
 		}
 	},
-	addNarrative: function(){
+	addNarrative: function () {
 		this.narratives.push(new FSNarrative('New Narrative', this, []));
 	}
-
-}
-
-
+};
 var FolderNode = function (name, parent, children) {
-	CASTNode.call(this,name,parent,children);
+	CASTNode.call(this, name, parent, children);
 };
 FolderNode.prototype = Object.create(CASTNode.prototype);
-
-
 var FileNode = function (name, parent, children, content) {
-	CASTNode.call(this,name,parent,children);
+	CASTNode.call(this, name, parent, children);
 	this.content = content;
 };
 FileNode.prototype = Object.create(CASTNode.prototype);
-
-
-var ASTNode = function(){}
-
-var ast_CAST_wrapper = Object.create(CASTNode.prototype);
-ast_CAST_wrapper.getChildren = function(){
-		return this;
-
-	}
-ast_CAST_wrapper.getName = function(){
-	return this.name || this.type
-}
-ast_CAST_wrapper.getType = function(){ return 'ast';};
-ast_CAST_wrapper.getNode = function(path){
-
-	if(path[0] === 'body' && path[1] != undefined){
+var ASTNode = function () {
+};
+var astCASTPrototype = Object.create(CASTNode.prototype);
+astCASTPrototype.getChildren = function () {
+	return this;
+};
+astCASTPrototype.getName = function () {
+	return this.name || this.type;
+};
+astCASTPrototype.getType = function () {
+	return 'ast';
+};
+astCASTPrototype.getNode = function (path) {
+	if (path[0] === 'body' && path[1] !== undefined) {
 		path.shift();
 		var i = path.shift();
 		return this.body[i].getNode(path);
 	}
-	return CASTNode.prototype.getNode.call(this,path);
-
-}
-ast_CAST_wrapper.addNarratives = function(narratives){
-		this.narratives = {}
-		var i , new_narrative, name;
-		for( i in narratives){
-  			name = narratives[i].name
-			new_narrative = new CodeNarrative( name , this , narratives[i].items);
-			this.narratives[name] = new_narrative;
-
-		
+	return CASTNode.prototype.getNode.call(this, path);
+};
+astCASTPrototype.addNarratives = function (narratives) {
+	this.narratives = {};
+	var i, newNarrative, name;
+	for (i in narratives) {
+		name = narratives[i].name;
+		newNarrative = new CodeNarrative(name, this, narratives[i].items);
+		this.narratives[name] = newNarrative;
 	}
-
-
-}
-
-acorn.parse('1').constructor.prototype = ast_CAST_wrapper;
-
+};
+acorn.parse('1').constructor.prototype = astCASTPrototype;

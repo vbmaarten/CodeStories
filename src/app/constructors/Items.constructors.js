@@ -1,3 +1,5 @@
+"use strict";
+
 var Item = function(content){
 	this.content = content;
 }
