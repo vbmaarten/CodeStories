@@ -114,12 +114,12 @@ astCASTPrototype.getNode = function (path) {
 	return CASTNode.prototype.getNode.call(this, path);
 };
 astCASTPrototype.addNarratives = function (narratives) {
-	this.narratives = {};
+	this.narratives = this.narratives || [];
 	var i, newNarrative, name;
 	for (i in narratives) {
 		name = narratives[i].name;
 		newNarrative = new CodeNarrative(name, this, narratives[i].items);
-		this.narratives[name] = newNarrative;
+		this.narratives.push(newNarrative);
 	}
 };
 acorn.parse('1').constructor.prototype = astCASTPrototype;

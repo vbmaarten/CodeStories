@@ -38,5 +38,22 @@
                     }
                 ]
             }
-        ]
-    }
+        ],
+    "/src/graham_scan.js/program":[
+        {
+            "name":"code narrative test",
+            "type":"Code",
+            "items":[
+                {"node":"body/0",
+                 "items":[
+                    {"type":"text",
+                    "content":"This is some code"
+                 },
+                  {"type":"vcode",
+                    "content":"var piechart = new PieChart(); "}
+
+                ]}
+            ]
+        }
+    ]
+}

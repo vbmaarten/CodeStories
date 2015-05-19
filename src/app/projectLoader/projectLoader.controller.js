@@ -65,7 +65,7 @@
  						newRoot.children[last] = new FileNode(last, root, {}, zip.file(element).asText());
  						if (isJS) {
  							newRoot.children[last].children.program = acorn.parse(zip.file(element).asText());
- 							newRoot.children[last].children.program.setParent(last);
+ 							newRoot.children[last].children.program.setParent( newRoot.children[last] );
  						}
  					}
  				}
