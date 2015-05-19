@@ -105,7 +105,13 @@ astCASTPrototype.getName = function () {
 astCASTPrototype.getType = function () {
 	return 'ast';
 };
+astCASTPrototype.getParent = function () {
+	return this.parent;
+};
 astCASTPrototype.getNode = function (path) {
+	if (typeof path === 'string') {
+    	path = path.split('/');
+    }
 	if (path[0] === 'body' && path[1] !== undefined) {
 		path.shift();
 		var i = path.shift();
@@ -118,7 +124,7 @@ astCASTPrototype.addNarratives = function (narratives) {
 	var i, newNarrative, name;
 	for (i in narratives) {
 		name = narratives[i].name;
-		newNarrative = new CodeNarrative(name, this, narratives[i].items);
+		newNarrative = new CodeNarrative(name, this, narratives[i].ASTItems);
 		this.narratives.push(newNarrative);
 	}
 };

@@ -8,6 +8,8 @@ Item.prototype.buildNewItem = function (item) {
 		return new TextItem(item.content);
 	} else if (type === 'link') {
 		return new LinkItem(item.content);
+	} else if (type === 'vcode'){
+		return new VCodeItem(item.content);
 	}
 	console.error('unknown item type', item);
 	throw 'unidentifiedItem';
