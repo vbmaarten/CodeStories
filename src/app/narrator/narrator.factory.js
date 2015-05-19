@@ -26,7 +26,7 @@ angular.module('narrator')
       // The currently displayed items of the playing narrative
       storyboard: [],
       // True if the there was a narrative linked
-      narrativeLink: undefined,
+      narrativeLink: false,
 
       selectNarrative: function(narrative){
         this.deselectNarrative();
@@ -55,10 +55,7 @@ angular.module('narrator')
           
           // If the next item is a link to another narrative
           if(nextItem instanceof LinkItem){
-            this.narrativeLink = nextItem.content.id;
-            this.queueCounter[0]++;
-            this.queuePaths.unshift($location.path());
-            $location.path(CAST.project + nextItem.content.node);
+            this.linkNarrative(nextItem);
           } 
           // Push the next item of the narrative
           else { 
@@ -80,11 +77,31 @@ angular.module('narrator')
           else{
             this.storyboard.push({'name':this.queue[0].name, 'items':[]});
             this.narrativeLink = true;
-            console.log('goback');
+            console.log('go back');
             $location.path(this.queuePaths.shift());
           }
         }        
       },
+
+      linkNarrative: function (nextItem) {
+        // Set this value to true to let the controller know a narrative is playing
+        this.narrativeLink = true;
+        this.queueCounter[0]++;
+
+        // Get the node of the narrative that is linked to and find the narrative
+        var node = CAST.getNode(nextItem.content.node);
+        var linked;
+        for (var index in node.narratives) {
+          if (node.narratives[index].name == nextItem.content.id){
+            linked = node.narratives[index];
+          }
+        }
+
+        // Push the narrative on the stack and navigate to the node
+        this.pushNarrative(linked);
+        this.queuePaths.unshift($location.path());
+        $location.path(CAST.project + nextItem.content.node);
+      }
     }
   }]);
 

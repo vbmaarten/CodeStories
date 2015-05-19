@@ -43,19 +43,10 @@
         $state.go('narrating.writer');
       }
     };
+    
     // If there was a narrative linked, continue that narrative
     if (narratorFactory.narrativeLink) {
-      console.log(narratorFactory.narrativeLink);
-      if (!(narratorFactory.narrativeLink === true)) {
-        var linked;
-        for (var index in $scope.narratives) {
-          if ($scope.narratives[index].name === narratorFactory.narrativeLink){
-            linked = $scope.narratives[index];
-          }
-        }
-        narratorFactory.pushNarrative(linked);
-      }
-      narratorFactory.narrativeLink = undefined;
+      narratorFactory.narrativeLink = false;
       $scope.playing = true;
     } else {
       $scope.selected = false;
