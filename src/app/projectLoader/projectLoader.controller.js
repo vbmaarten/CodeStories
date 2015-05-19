@@ -10,10 +10,6 @@
 angular.module('projectLoader')
   .controller('ProjectLoaderCtrl', ['$scope','$http','$stateParams','CAST', function ($scope,$http,$stateParams, CAST) {
 
-
-
-
-
 	if(CAST.project != $stateParams.project) {
         console.log($stateParams);
         CAST.project = $stateParams.project;
@@ -62,26 +58,26 @@ angular.module('projectLoader')
 	                }
 		        }
 
-		        var new_root = root;
+		        var newRoot = root;
 
 		        path.forEach(function(element, index, arary){
 		                if(root.children[element]){
-	                        new_root = root.children[element];
+	                        newRoot = root.children[element];
 		                } else {
 	                        root.children[element] = new FolderNode(element, root, {});
-	                        new_root = root.children[element]
+	                        newRoot = root.children[element]
 		                }
 		        });
 
-		        if(!new_root.children[last]){
+		        if(!newRoot.children[last]){
 	                if(isDirectory){
-                        new_root.children[last] = new FolderNode(last, root, {});
+                        newRoot.children[last] = new FolderNode(last, root, {});
 	                } else {
 	                	console.log(element); 
-                        new_root.children[last] = new FileNode(last,root,{},zip.file(element).asText());
+                        newRoot.children[last] = new FileNode(last,root,{},zip.file(element).asText());
                         if(isJS){
-                                new_root.children[last].children["program"] = acorn.parse(zip.file(element).asText());
-                                new_root.children[last].children["program"].setParent(last);
+                                newRoot.children[last].children["program"] = acorn.parse(zip.file(element).asText());
+                                newRoot.children[last].children["program"].setParent(last);
                         }
 	                }
 		        }
