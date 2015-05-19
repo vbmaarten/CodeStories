@@ -2,7 +2,7 @@ var CASTNode = function(name, parent, children){
 	this.name = name;
 	this.parent = parent;
 	this.children = children;
-
+	this.narratives = [];
 }
 
 
@@ -80,7 +80,6 @@ CASTNode.prototype = {
 	},
 	
 	addNarratives : function(narratives){
-		this.narratives = this.narratives || [];
 		var i , new_narrative, name;
 		for(i in narratives) {
   		name = narratives[i].name;
