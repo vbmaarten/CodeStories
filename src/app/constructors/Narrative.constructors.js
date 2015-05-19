@@ -27,21 +27,6 @@ Narrative.prototype = {
 	},
 	validItem : function () {
 		return false;
-	},
-	addItem : function (item, index) {
-		if (!this.validItem(item)) {
-			console.error('Trying to add a wrong type of item', item, this);
-			throw 'BadItemForNarrative';
-		}
-		if (index === undefined) {
-			index = this.items.length;
-		}
-		this.items.splice(index, 0, item);
-	},
-	addItems : function (items) {
-		for (var i in items) {
-			this.addItem(Item.prototype.buildNewItem(items[i]));
-		}
 	}
 }
 
@@ -61,19 +46,37 @@ FSNarrative.prototype = Object.create(Narrative.prototype);
 FSNarrative.prototype.validItem = function (item) {
 		return item instanceof Item;
 	};
+FSNarrative.prototype.addItem = function (item, index) {
+		if (!this.validItem(item)) {
+			console.error('Trying to add a wrong type of item', item, this);
+			throw 'BadItemForNarrative';
+		}
+		if (index === undefined) {
+			index = this.items.length;
+		}
+		this.items.splice(index, 0, item);
+	}
+FSNarrative.prototype.addItems = function (items) {
+		for (var i in items) {
+			this.addItem(Item.prototype.buildNewItem(items[i]));
+		}
+	}
 
 
 
 //items is an array that contains objects {'node' , 'items'}
 // the goal is to append to the subnodes of the AST nodes the proper items under the proper name
-var CodeNarrative = function (name, CASTNode, items) {
+var CodeNarrative = function (name, CASTNode, ASTItems) {
 	if (!CASTNode.isASTNode()) {
 		console.log(' You can not add a CodeNarrative on', CASTNode);
 		throw 'BadNarrativeForCASTNode';
 	}
-	Narrative.call(this, CASTNode);
+	Narrative.call(this,name, CASTNode);
+	this.ASTItems = ASTItems;
+	for(var i in ASTItems){
+		this.addSubNodeItems(ASTItems[i] , name);
+	}
 	
-	this.items = [];
 };
 
 
@@ -84,3 +87,15 @@ CodeNarrative.prototype.validItem = function (item) {
 		}
 		return item instanceof Item;
 	};
+CodeNarrative.prototype.addSubNodeItems = function( subNode , name){
+	var astNode = this.CASTNode.getNode(subNode.node);
+	astNode.codeItems = astNode.codeItems || {};
+	astNode.codeItems[name] = []
+	for(var i in subNode.items){
+		var item = Item.prototype.buildNewItem(subNode.items[i]);
+		if(!this.validItem(item)){
+			throw "BadItemForNarrative";
+		}
+		astNode.codeItems[name].push(item);
+	}
+}
