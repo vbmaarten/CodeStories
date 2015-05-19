@@ -52,3 +52,5 @@
 |-|3| pretty folders |
 |-|4| Home Screen |
 |-|3| tests |
+|-|3| git tags |
+|-|1| code cleanup

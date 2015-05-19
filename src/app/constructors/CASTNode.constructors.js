@@ -42,8 +42,11 @@ CASTNode.prototype = {
 	},
 
 	getChild : function(name){
-
-		return this.getChildren()[name]	
+		var child = this.getChildren()[name];
+		if(child && !child.getParent()){
+			child.setParent(this);
+		} 
+		return child;
 	},
 	getChildren : function(){
 		return this.children;
@@ -80,7 +83,7 @@ CASTNode.prototype = {
 		this.narratives = {}
 		var i , new_narrative, name;
 		for( i in narratives){
-  			name = narratives[i]
+  			name = narratives[i].name
 			new_narrative = new FSNarrative( name , this , narratives[i].items);
 			this.narratives[name] = new_narrative;
 
@@ -127,9 +130,9 @@ ast_CAST_wrapper.addNarratives = function(narratives){
 		this.narratives = {}
 		var i , new_narrative, name;
 		for( i in narratives){
-  			name = narratives[i]
+  			name = narratives[i].name
 			new_narrative = new CodeNarrative( name , this , narratives[i].items);
-			this.narratives.name = new_narrative;
+			this.narratives[name] = new_narrative;
 
 		
 	}
