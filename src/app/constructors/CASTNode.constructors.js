@@ -1,10 +1,12 @@
+'use strict';
+
 var CASTNode = function(name, parent, children){
 	this.name = name;
 	this.parent = parent;
 	this.children = children;
 	this.narratives = [];
-}
 
+};
 
 CASTNode.prototype = {
 	getName : function(){
@@ -27,16 +29,18 @@ CASTNode.prototype = {
 
 
 		//ensure path is a array
-		if(typeof path == "string"){
+		if(typeof path === 'string'){
 			path = path.split('/');
 		}
 		//filter empty and '.' directories
+		var directChild;
 		do{
-			var directChild = path.shift(); 
-		} while(directChild === ""  || directChild === "." )
+			directChild = path.shift(); 
+		} while(directChild === ''  || directChild === '.' );
 
-		if(!path || path.length == 0)
+		if(!path || path.length == 0) {
 			return this.getChild(directChild) || this;
+		}
 
 		return this.getChild(directChild).getNode(path);
 	},
@@ -52,12 +56,15 @@ CASTNode.prototype = {
 		return this.children;
 	},
 	getType : function(){
-		if(this instanceof FolderNode)
+		if(this instanceof FolderNode){
 			return 'directory';
-		else if(this instanceof FileNode)
+		}
+		else if(this instanceof FileNode){
 			return 'file';
-		else if(this instanceof ASTNode)
+		}
+		else if(this instanceof ASTNode){
 			return 'ast';
+		}
 		console.error('This node has a false type');
 		throw 'BadNodeTypeError';
 	},

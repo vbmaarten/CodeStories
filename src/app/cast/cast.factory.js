@@ -12,7 +12,7 @@
 
 var CastMock = {
   'rootnode': new FolderNode('rootnode',null,{})
-}
+};
  
 angular.module('cast')
   .factory('CAST', function () {
@@ -33,7 +33,7 @@ angular.module('cast')
         return this.cast.rootnode.getNode(path);
       },
       cast: CastMock
-    }
+    };
   });
 
 

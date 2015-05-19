@@ -8,7 +8,7 @@ Item.prototype.buildNewItem = function(item){
 		
 			return new TextItem(item.content);
 		}
-	else if(type ==="link"){
+	else if(type === "link"){
 		return new LinkItem(item.content);
 
 	}

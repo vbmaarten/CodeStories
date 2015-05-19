@@ -21,7 +21,7 @@ angular
     'narrator',
     'explorer'
   ])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider
       .otherwise('/home/');
 
