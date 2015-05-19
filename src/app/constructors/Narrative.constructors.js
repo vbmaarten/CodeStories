@@ -29,8 +29,8 @@ var Narrative = function(name, CASTNode){
 			throw "BadItemForNarrative"
 		}
 		if(index === undefined)
-			index = this.Items.length
-		this.Items.splice(index,0,item);
+			index = this.items.length
+		this.items.splice(index,0,item);
 	}
 	this.addItems = function(items){
 		for(var i in items){
@@ -50,7 +50,7 @@ var FSNarrative = function (name, CASTNode,items) {
 	this.validItem = function(item){
 		return item instanceof Item;
 	}
-	this.Items = [];
+	this.items = [];
 	this.addItems(items);
 };
 
@@ -68,7 +68,7 @@ var CodeNarrative = function (name, CASTNode,items) {
 			return false;
 		return item instanceof Item;
 	}
-	this.Items = [];
+	this.items = [];
 
 };
 
