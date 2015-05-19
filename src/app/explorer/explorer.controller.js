@@ -12,6 +12,8 @@ angular.module('explorer')
     $scope.directory = CAST.cast;
     $scope.project = CAST.project;
     $scope.selected = CAST.selected;
+    $scope.content = CAST.content;
+
     
 
     $scope.aceLoaded = function(_editor){
@@ -22,9 +24,17 @@ angular.module('explorer')
 	    // Options
 	    _editor.setReadOnly(true);
 	    _session.setUndoManager(new ace.UndoManager());
+	    _session.setMode("ace/mode/javascript");
+	    _editor.setTheme("ace/theme/crimson_editor");
+
+	    // Node selection
+	    if($scope.selected.isASTNode()) {
+
+	    }
 
 	    // Events
 	    //_editor.on("changeSession", function(){ ... });
 	    //_session.on("change", function(){ ... });
+
 	  };
   }]);

@@ -2,4 +2,4 @@
 <div class="directory-view">
 	<div directory data="directory.rootnode.children" cast-url="project + '/'"></div>
 </div>
-<div ui-ace readonly ng-model="selected.content"></div>
+<div ui-ace="{ onLoad: aceLoaded }" readonly ng-model="content"></div>

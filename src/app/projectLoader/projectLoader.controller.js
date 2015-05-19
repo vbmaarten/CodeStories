@@ -31,6 +31,17 @@
  		} else if (CAST.project === $stateParams.project && CAST.selectedPath !== $stateParams.path) {
  			CAST.selectedPath = $stateParams.path;
  			CAST.selected = CAST.cast.rootnode.getNode($stateParams.path);
+
+      if(CAST.selected.isASTNode()){
+        var parent = CAST.selected.getParent();
+        while (!parent.content){
+          parent = parent.getParent();
+        }
+        CAST.content = parent.content;
+      } else if(CAST.selected.isFile()){
+        CAST.content = CAST.selected.content;
+      }
+
  		}
  		var BuildCASTFromZip = function (zip) {
  			console.log(zip.files);
