@@ -43,13 +43,14 @@ angular.module('narrator')
 
 	 	factory.evaluateVCode = function(vcode){
 
-	 		
+
 	 	};
 
 	 	
 	 	factory.narrativeStep = function(){
  		
-	 		if(currentASTItems[i++]){
+	 		if(currentASTItems && currentASTItems[i+1]){
+	 			i++;
 	 			return currentASTItems[i];
 	 		}
 	 		var step = true;
