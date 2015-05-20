@@ -22,8 +22,7 @@ angular
     'explorer'
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider', function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
-    $urlRouterProvider
-      .otherwise('/home/');
+    
 
     (function() {
       function valToString(val) { return val !== null ? val.toString() : val; }//.replace("%252F", "").toString()
@@ -37,9 +36,32 @@ angular
       });
     })();
 
+    $urlRouterProvider
+      .otherwise('/');
+
+
     $stateProvider
+      .state('home',{
+        url: '/',
+        views: {
+          'app': {
+            templateUrl: '/homeScreen/homeScreen.html',
+            controller:'HomeScreenCtrl'
+          }
+        }
+      })
       .state('narrating', {
         url: '/:project/{path:.*}',
+        views: {
+          'app': {
+            templateUrl: 'app.html',
+            controller: function($scope, $state){
+              $state.go('narrating.default');
+            }
+          }
+        }
+      })
+      .state('narrating.default', {
         views: {
           'projectLoader': {
             templateUrl: '/projectLoader/projectLoader.html',
@@ -52,7 +74,7 @@ angular
           'narrator': {
             templateUrl: '/narrator/narrator.html',
             controller: 'NarratorCtrl' 
-          }    
+          }
         }
       });
   }]);

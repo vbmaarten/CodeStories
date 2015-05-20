@@ -10,8 +10,6 @@ html, body {
 }
 
 body {
-  padding-top:50px;
-  position: relative;
   font-family: "Helvetica Neue", Helvetica,Arial,sans-serif;
   font-size: 14px;
   color:#333;
@@ -21,36 +19,5 @@ a{
   color:#333;
   text-decoration: none;
 }
-
-
-.projectLoader{
-  position: absolute;
-  width: 100%;
-  height: 50px;
-  top:0;
-  left:0;
-  background-color: #9C27B0;
-}
-
-.wrapper {
-  height: 100%;
-  position: relative;
-  padding-right:500px;
-}
-
-.explorer {
-  height: 100%;
-  width: 100%;
-}
-
-.narrator {
-  position:absolute;
-  top:0;
-  right:0;
-  height: 100%;
-  width:500px;
-  background-color: #EFEFEF;
-}
-
 
 
