@@ -41,6 +41,11 @@ angular.module('narrator')
 	 		return this.interpreter.stateStack[0].node;
 	 	};
 
+	 	factory.evaluateVCode = function(vcode){
+
+	 		
+	 	}
+
 	 	
 	 	factory.narrativeStep = function(){
  		
@@ -49,12 +54,15 @@ angular.module('narrator')
 	 			return currentASTItems[i];
 	 		}
 	 		var step = true;
-	 		while(!this.interpreter.stateStack[0].node.codeNarrative[ currentNarrative ] ){
+	 		
+	 		do{
+	 			var stackSize = this.interpreter.stateStack.length;
 	 			step = this.interpreter.step()
+	 			var newStackSize = this.interpreter.stateStack.length;
 	 			if( !step ){
 	 				return false;
 	 			}
-	 		}
+	 		} while( ! ( stackSize > newStackSize && this.interpreter.stateStack[0].node.codeNarrative[ currentNarrative ] ) );
 	 		currentASTItems = this.interpreter.stateStack[0].node.codeNarrative[currentNarrative];
 	 		i=0;
 	 		return currentASTItems[i];
