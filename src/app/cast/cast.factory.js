@@ -11,7 +11,6 @@
 var CastMock = {
     'rootnode': new FolderNode('rootnode', null, {})
 };
-CastMock.rootnode.path = '/';
 
 angular.module('cast')
     .factory('CAST', function() {
@@ -20,9 +19,9 @@ angular.module('cast')
             // CAST object
             cast: CastMock,
             // Currently selected node in the CAST
-            selected: undefined,
+            selected: CastMock.rootnode,
             // Path to the currently selected node
-            selectedPath: '',
+            selectedPath: '/',
             // File content corresponding to the current node
             content: '',
             // Root url
@@ -34,33 +33,32 @@ angular.module('cast')
             appendNarrative: function(narratives) {
                 var i, newNarrative, name;
                 for (var castPath in narratives) {
-                    this.narratives[castPath] = this.narratives[castPath] || {};
+                    this.narratives[castPath] = this.narratives[castPath] || [];
 
                     var narrative = narratives[castPath];
                     for (i in narrative) {
                         name = narrative[i].name;
                         //hack: ASTNodes are only loaded once the filenode.getChild('program') has been called. 
                         //  check if the path contains '/program' to determine if its an ast node
-                        if (!castPath.contains('/program')) {
+                        if (!castPath.indexOf('/program') > 0) {
                             newNarrative = new CodeNarrative(name, castPath, narrative[i].ASTItems);
                         } else {
                             newNarrative = new FSNarrative(name, castPath, narrative[i].items);
                         }
 
-                        this.narratives[castPath][name] = newNarrative;
+                        this.narratives[castPath].push(newNarrative );
                     }
                 }
             },
 
             setSelected:function(node){
               if(typeof node === 'string'){
-                this.selectedPath = node;
+                
                 this.selected = this.getNode(node);
               } else if ( node instanceof CASTNode){
                 this.selected = node;
-                this.selectedPath = node.getPath();
               }
-
+               this.selectedPath = this.selected.getPath();
             },
 
             // Return node that corresponds to the given path
@@ -69,7 +67,7 @@ angular.module('cast')
             },
 
             getSelectedNarratives: function(){
-               this.narratives[this.selectedPath] = this.narratives[this.selectedPath] || {};
+               this.narratives[this.selectedPath] = this.narratives[this.selectedPath] || [];
               return  this.narratives[this.selectedPath];
             },
 

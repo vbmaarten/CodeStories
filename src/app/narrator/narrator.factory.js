@@ -97,21 +97,29 @@ angular.module('narrator')
         }      
       },
 
-      loadNarrative: function (nextItem) {
+      loadNarrative: function (linkItem) {
         // Set this value to true to let the controller know a narrative is playing
         this.narrativeLink = true;
         this.queueCounter[0]++;
 
         // Get the node of the narrative that is linked to and find the narrative
-        var node = CAST.getNode(nextItem.content.node);
+        var node = CAST.getNode(linkItem.content.node);
 
 
-        var linked = CAST.getNarrative(nextItem.content.node , nextItem.content.id);
+        var narratives = CAST.getNarratives(linkItem.content.node);
+
+
+        var linked;
+        for (var index in narratives) {
+          if (narratives[index].name == linkItem.content.id){
+            linked = narratives[index];
+          }
+        }
 
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
         this.queuePaths.unshift($location.path());
-        $location.path(CAST.project + nextItem.content.node);
+        $location.path(CAST.project + linkItem.content.node);
       }
     }
   }]);
