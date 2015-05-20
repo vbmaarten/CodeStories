@@ -52,15 +52,26 @@
             "name":"codetest",
             "type":"Code",
             "ASTItems":[
-                {"node":"body/0",
+                {"node":"body/0/body/body/0/",
                  "items":[
                     {"type":"text",
                     "content":"This is some code"
                  },
                   {"type":"vcode",
-                    "content":"var piechart = new PieChart(); "}
+                    "content":"var barchart = new BarChart(); "}
 
-                ]}
+                ]},
+                {
+                "node":"body/0/body/body/1/body/body/1/body/body/0/test",
+                 "items":[
+                    {"type":"text",
+                    "content":"This is executed on the if >"
+                 },
+                  {"type":"vcode",
+                    "content":"barchart.select([i,i+1]);"}
+
+                ]
+                }
             ]
         }
     ]
