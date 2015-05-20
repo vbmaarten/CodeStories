@@ -40,7 +40,7 @@ angular.module('cast')
         return this.cast.rootnode.getNode(path);
       },
 
-      getNarrative: function(path){
+      getNarratives: function(path){
         return this.narratives[path];
       }
     };

@@ -15,8 +15,6 @@ angular.module('narrator')
       writerMode: true,
       // Tells the view mode if there is a narrative playing
       narrativePlaying: false,
-      // Stores the narratives of the current node
-      narratives:[],
       // Stores the narratives that are currently playing
       queue: [],
       // Stores state of the narrative thats currently playing
