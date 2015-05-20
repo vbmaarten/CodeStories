@@ -19,6 +19,29 @@
 
         CAST.cast.rootnode = contents.cast;
         CAST.appendNarrative(contents.narratives);
+
+        this.packZip();
+      },
+
+      packZip: function(){
+        zip = new JSZip();
+
+        root_node = CAST.cast.rootnode;
+        _packZip(root,zip);
+
+        saveAs(zip.generate({type: 'blob'}), "test.zip");
+      },
+
+      _packZip: function(root, zip){
+        if(root.children){
+          for(child in root.children){
+            if(child.isDirectory){
+              _packZip(child, zip.folder(child.name));
+            } else {
+              zip.file(child.name, child.content)
+            }
+          }
+        }
       },
 
       UnpackZip : function (zip) {

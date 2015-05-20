@@ -75,6 +75,7 @@ angular.module('cast')
 
             getNarrative:function(path,id){
                 return this.narratives[path][id];
+
             },
 
             getNarratives: function(path) {
