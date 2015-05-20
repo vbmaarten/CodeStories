@@ -78,7 +78,6 @@
         return ret;
       }
 
-      PackZip()
     }
   }
 ]);
