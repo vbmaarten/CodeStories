@@ -18,25 +18,25 @@
         var contents = this.UnpackZip( new JSZip(data) );
 
         CAST.cast.rootnode = contents.cast;
-        CAST.appendNarrative(contents.narratives);
+        //CAST.appendNarrative(contents.narratives);
 
-        this.packZip();
       },
 
       packZip: function(){
-        zip = new JSZip();
+        var zip = new JSZip();
 
-        root_node = CAST.cast.rootnode;
-        _packZip(root,zip);
+        var root_node = CAST.cast.rootnode;
+        this._packZip(root_node,zip);
 
         saveAs(zip.generate({type: 'blob'}), "test.zip");
       },
 
       _packZip: function(root, zip){
         if(root.children){
-          for(child in root.children){
-            if(child.isDirectory){
-              _packZip(child, zip.folder(child.name));
+          for(var _child in root.children){
+            var child = root.children[_child];
+            if(child.isFolder()){
+              this._packZip(child, zip.folder(child.name));
             } else {
               zip.file(child.name, child.content)
             }
@@ -50,11 +50,12 @@
           narratives: undefined
         };
 
-        var root = new FolderNode('project', null, {});
+        var root = new FolderNode('', null, {});
         root.path = '';
 
         //Loop through files that are packed in the zip
         Object.getOwnPropertyNames(zip.files).forEach(function (element, index, array) {
+          console.log(element);
           var isDirectory = element.slice(-1) === '/';
           var isJS = false;
           var isCodestoriesFile = false;
@@ -75,21 +76,20 @@
             } else if(file_extension === 'codestories'){
               isCodestoriesFile = true;
             }
-          }
-          
+          }          
 
           var newRoot = root;
 
           //Walk through the path, until the newRoot is the path the file is being added at
           path.forEach(function (element, index, arary) {
-            if (root.children[element]) {                                  //If the folder is already defined, step into it
-              newRoot = root.children[element];
+            if (newRoot.children[element]) {                                  //If the folder is already defined, step into it
+              newRoot = newRoot.children[element];
             } else {                                                       //Otherwise, create the folder node. 
-              root.children[element] = new FolderNode(element, root, {});  
-              newRoot = root.children[element];
+              newRoot.children[element] = new FolderNode(element, newRoot, {});  
+              newRoot = newRoot.children[element];
             }
           });
-
+          console.log(newRoot);
           if (!newRoot.children[last]) {
             if(isCodestoriesFile){   //Parse the narratives file
               ret.narratives = JSON.parse(zip.file(element).asText());
