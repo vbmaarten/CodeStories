@@ -8,12 +8,12 @@
  * Directive of the file folder structure
  */
 angular.module('explorer')
-  .directive('directory', function (RecursionHelper) {
+  .directive('directory', ['RecursionHelper', function (RecursionHelper) {
     return {
     	restrict: 'A',
     	scope: {
     		data: '=',
-            castUrl: '='
+        castUrl: '='
     	},
     	templateUrl: '/explorer/directory/directory.html',
     	//Used to call directives recursively
@@ -23,4 +23,4 @@ angular.module('explorer')
         return RecursionHelper.compile(element);
       }
     }
-  });
+  }]);

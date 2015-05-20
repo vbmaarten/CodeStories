@@ -54,11 +54,28 @@ angular
         }
       })
       .state('narrating', {
-        url: '/:project/{path:.*}',
+        url: '/:project',
         views: {
           'app': {
             templateUrl: 'app.html'
+          },          
+          'projectLoader@narrating': {
+            templateUrl: '/projectLoader/projectLoader.html',
+            controller: 'ProjectLoaderCtrl' 
           },
+          'explorer@narrating': {
+            templateUrl: '/explorer/explorer.html',
+            controller: 'ExplorerCtrl'
+          },
+          'narrator@narrating': {
+            templateUrl: '/narrator/narrator.html',
+            controller: 'NarratorCtrl' 
+          }
+        }
+      })
+      .state('narrating.node', {
+        url: '/{path:.*}',
+        views: {
           'projectLoader@narrating': {
             templateUrl: '/projectLoader/projectLoader.html',
             controller: 'ProjectLoaderCtrl' 
@@ -73,7 +90,6 @@ angular
           }
         }
       });
-
 
   }]);
 
