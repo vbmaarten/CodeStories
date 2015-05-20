@@ -11,6 +11,7 @@
 var CastMock = {
     'rootnode': new FolderNode('rootnode', null, {})
 };
+CastMock.rootnode.path = '/';
 
 angular.module('cast')
     .factory('CAST', function() {
@@ -33,17 +34,18 @@ angular.module('cast')
                 var i, newNarrative, name;
                 for (var castPath in narratives) {
 
-                    var isASTNode = this.getNode(castPath).isASTNode();
+                    var CASTNode = this.getNode(castPath)
 
                     this.narratives[castPath] = this.narratives[castPath] || {}
 
 
                     for (i in narratives) {
                         name = narratives[i].name;
-                        if (isASTNode) {
-                            newNarrative = new CodeNarrative(name, this, narratives[i].ASTItems);
+                        if (CASTNode.isASTNode()) {
+                            newNarrative = new CodeNarrative(name, CASTNode, narratives[i].ASTItems);
                         } else {
-                            newNarrative = new FSNarrative(name, this, narratives[i].items);
+                            newNarrative = new FSNarrative(name, CASTNode, narratives[i].items);
+
 
                         }
 

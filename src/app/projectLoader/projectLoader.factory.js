@@ -73,10 +73,6 @@
               newRoot.children[last] = new FolderNode(last, root, {});
             } else {   //Create the new file
               newRoot.children[last] = new FileNode(last, root, {}, zip.file(element).asText());
-              if (isJS) { //If it is a json file, add it's AST to the cast
-                newRoot.children[last].children.program = acorn.parse(zip.file(element).asText(), {location: true});
-                newRoot.children[last].children.program.setParent( newRoot.children[last] );
-              }
             }
           }
         });
