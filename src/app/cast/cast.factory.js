@@ -38,15 +38,14 @@ angular.module('cast')
 
                     this.narratives[castPath] = this.narratives[castPath] || {}
 
+                    console.log(narratives[castPath])
 
-                    for (i in narratives) {
-                        name = narratives[i].name;
+                    for (i in narratives[castPath]) {
+                        name = narratives[castPath][i].name;
                         if (CASTNode.isASTNode()) {
-                            newNarrative = new CodeNarrative(name, CASTNode, narratives[i].ASTItems);
+                            newNarrative = new CodeNarrative(name, CASTNode, narratives[castPath][i].ASTItems);
                         } else {
-                            newNarrative = new FSNarrative(name, CASTNode, narratives[i].items);
-
-
+                            newNarrative = new FSNarrative(name, CASTNode, narratives[castPath][i].items);
                         }
 
                         this.narratives[castPath][name] = newNarrative;
