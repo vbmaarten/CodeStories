@@ -21,7 +21,8 @@ angular
     'narrator',
     'explorer'
   ])
-  .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider', function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider', '$locationProvider',
+    function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider, $locationProvider) {
     
 
     (function() {
@@ -39,6 +40,8 @@ angular
     $urlRouterProvider
       .otherwise('/');
 
+    // use the HTML5 History API
+    $locationProvider.html5Mode(true);
 
     $stateProvider
       .state('home',{
@@ -70,5 +73,7 @@ angular
           }
         }
       });
+
+
   }]);
 
