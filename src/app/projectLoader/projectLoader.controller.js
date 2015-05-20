@@ -13,6 +13,7 @@
  	'CAST',
   'projectLoaderFactory',
  	function ($scope, $http, $stateParams, CAST, projectLoaderFactory) {
+    $scope.projectLoaded = false;
 
     if (CAST.project !== $stateParams.project) {
       console.log($stateParams);
@@ -48,6 +49,11 @@
         
     $scope.loadZip = function(data){
       projectLoaderFactory.loadZip(data);
+      $scope.projectLoaded = true;
     };
+
+    $scope.packZip = function(data){
+      projectLoaderFactory.packZip();
+    }
   }
 ]);

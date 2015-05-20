@@ -67,7 +67,6 @@ angular.module('cast')
             },
 
             getSelectedNarratives: function(){
-               this.narratives[this.selectedPath] = this.narratives[this.selectedPath] || [];
               return  this.narratives[this.selectedPath];
             },
 

@@ -18,7 +18,7 @@
         var contents = this.UnpackZip( new JSZip(data) );
 
         CAST.cast.rootnode = contents.cast;
-        //CAST.appendNarrative(contents.narratives);
+        CAST.appendNarrative(contents.narratives);
 
       },
 
@@ -26,17 +26,42 @@
         var zip = new JSZip();
 
         var root_node = CAST.cast.rootnode;
-        this._packZip(root_node,zip);
 
-        saveAs(zip.generate({type: 'blob'}), "test.zip");
+        //pack cast
+        this._packCastZip(root_node,zip);
+
+        //pack narratives
+        var narratives = CAST.narratives;
+        var codestories = {};
+        for(var path in narratives){
+          codestories[path] = [];
+          var path_narratives = codestories[path];
+          narratives[path].forEach(function(path_narrative){
+            var narrative = {};
+            path_narratives.push(narrative);
+            narrative.name = path_narrative.name;   
+            narrative.type = path_narrative.type; 
+            narrative.items = [];
+            path_narrative.items.forEach(function(path_item){
+                var item = {};
+                item.type = path_item.type;
+                item.content = path_item.content;
+                narrative.items.push(item);
+            });   
+          });
+        };
+
+        zip.file(".codestories", JSON.stringify(codestories,null,'  '));
+
+        saveAs(zip.generate({type: 'blob'}), "project.zip");
       },
 
-      _packZip: function(root, zip){
+      _packCastZip: function(root, zip){
         if(root.children){
           for(var _child in root.children){
             var child = root.children[_child];
             if(child.isFolder()){
-              this._packZip(child, zip.folder(child.name));
+              this._packCastZip(child, zip.folder(child.name));
             } else {
               zip.file(child.name, child.content)
             }
@@ -70,7 +95,7 @@
           var last = path.pop();
 
           if(!isDirectory){
-            var file_extension = last.split('.').pop();
+             var file_extension = last.split('.').pop();
             if (file_extension === 'js') {
               isJS = true;
             } else if(file_extension === 'codestories'){
