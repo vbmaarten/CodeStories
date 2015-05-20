@@ -8,8 +8,6 @@
  * Factory of the cast
  */
 
-
-
 var CastMock = {
   'rootnode': new FolderNode('rootnode',null,{})
 };
@@ -27,16 +25,24 @@ angular.module('cast')
       content: '',
       // Root url
       project: '',
+      //narrative list
+      narratives: {},
+
       // Appends narratives 
       appendNarrative:function(narratives){
         for(var castPath in narratives){
-          this.getNode(castPath).addNarratives( narratives[castPath] );
+          this.narratives[castPath] = narratives[castpath];
         }
       },
+
       // Return node that corresponds to the given path
       getNode: function(path) {
         return this.cast.rootnode.getNode(path);
       },
+
+      getNarrative: function(path){
+        return this.narratives[path];
+      }
     };
   });
 

@@ -33,7 +33,7 @@
 
           if (isDirectory){
             path.pop();     //avoid empty string at end of path
-          } 
+          }
 
           var last = path.pop();
 
@@ -77,6 +77,8 @@
 
         return ret;
       }
+
+      PackZip()
     }
   }
 ]);
