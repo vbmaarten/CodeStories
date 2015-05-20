@@ -73,9 +73,9 @@ body :-ms-input-placeholder {
   font-weight: 300;
 }
 .wrapper {
-  background: #50a3a2;
-  background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
-  background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+  background: #7c339b;
+  background: -webkit-linear-gradient(top left, #7c339b 0%, #a033a0 100%);
+  background: linear-gradient(to bottom right, #7c339b 0%, #a033a0 100%);
   position: absolute;
   top: 50%;
   left: 0;
@@ -132,7 +132,7 @@ form input:hover, form .fileUpload:hover {
 form input:focus, form .fileUpload:focus {
   background-color: white;
   width: 400px;
-  color: #53e3a6;
+  color: #a033a0;
 }
 form button {
   appearance: none;
@@ -140,7 +140,7 @@ form button {
   background-color: white;
   border: 0;
   padding: 10px 15px;
-  color: #53e3a6;
+  color: #a033a0;
   border-radius: 3px;
   width: 350px;
   cursor: pointer;
