@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="assets/styles/homeScreen.css">
+<div class="wrapper">
+	<div class="container">
+		<h1>Welcome</h1>
+		
+		<form class="form">
+			<div class="fileUpload">
+				<span>{{message}}</span>
+				<input class="upload" type="file" ng-model="zipfile" on-read-file="loadZip($fileContent)" fileread="message"></input>
+			</div>
+			<!--<input type="text" placeholder="Username">-->
+			<!--<input type="password" placeholder="Password">-->
+			<button ng-click="goToNarrator()" ng-disabled="castReady">Narrate</button>
+		</form>
+	</div>
+	
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>

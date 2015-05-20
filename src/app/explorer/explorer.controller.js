@@ -24,7 +24,12 @@ angular.module('explorer')
 	    // Options
 	    _editor.setReadOnly(true);
 	    _session.setUndoManager(new ace.UndoManager());
-	    _session.setMode("ace/mode/javascript");
+	    if($scope.selected)
+	    	if($scope.selected.name.split(".").pop() == "js"){
+	   	 		_session.setMode("ace/mode/javascript");
+	   		} else {
+	   		 _session.setMode("ace/mode/text");
+	   	}
 	    _editor.setTheme("ace/theme/crimson_editor");
 
 	    // Node selection

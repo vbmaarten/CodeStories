@@ -14,6 +14,13 @@
 
     return {
 
+      loadZip : function (data) {
+        var contents = this.UnpackZip( new JSZip(data) );
+
+        CAST.cast.rootnode = contents.cast;
+        CAST.appendNarrative(contents.narratives);
+      },
+
       UnpackZip : function (zip) {
         var ret = {
           cast: undefined,

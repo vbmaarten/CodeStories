@@ -23,7 +23,7 @@
           method: 'GET',
           responseType: 'arraybuffer'
         }).success(function (data) {
-          $scope.loadZip(data);
+          projectLoaderFactory.loadZip(data);
           CAST.selectedPath = $stateParams.path;
           CAST.selected = CAST.cast.rootnode.getNode($stateParams.path);
         }).error(function () {
@@ -47,11 +47,8 @@
       }
     }
         
-    $scope.loadZip = function (data) {
-    	var contents = projectLoaderFactory.UnpackZip( new JSZip(data) );
-
-      CAST.cast.rootnode = contents.cast;
-      CAST.appendNarrative(contents.narratives);
+    $scope.loadZip = function(data){
+      projectLoaderFactory.loadZip(data);
     };
   }
 ]);

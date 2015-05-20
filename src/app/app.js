@@ -21,9 +21,9 @@ angular
     'narrator',
     'explorer'
   ])
-  .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider', function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
-    $urlRouterProvider
-      .otherwise('/home/');
+  .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider', '$locationProvider',
+    function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider, $locationProvider) {
+    
 
     (function() {
       function valToString(val) { return val !== null ? val.toString() : val; }//.replace("%252F", "").toString()
@@ -37,23 +37,43 @@ angular
       });
     })();
 
+    $urlRouterProvider
+      .otherwise('/');
+
+    // use the HTML5 History API
+    $locationProvider.html5Mode(true);
+
     $stateProvider
+      .state('home',{
+        url: '/',
+        views: {
+          'app': {
+            templateUrl: '/homeScreen/homeScreen.html',
+            controller:'HomeScreenCtrl'
+          }
+        }
+      })
       .state('narrating', {
         url: '/:project/{path:.*}',
         views: {
-          'projectLoader': {
+          'app': {
+            templateUrl: 'app.html'
+          },
+          'projectLoader@narrating': {
             templateUrl: '/projectLoader/projectLoader.html',
             controller: 'ProjectLoaderCtrl' 
           },
-          'explorer': {
+          'explorer@narrating': {
             templateUrl: '/explorer/explorer.html',
             controller: 'ExplorerCtrl'
           },
-          'narrator': {
+          'narrator@narrating': {
             templateUrl: '/narrator/narrator.html',
             controller: 'NarratorCtrl' 
-          }    
+          }
         }
       });
+
+
   }]);
 
