@@ -13,7 +13,9 @@ angular.module('narrator')
 
     factory.interpreter = new Interpreter("");
 
-    this.currentNarrative;
+    	var currentNarrative;
+    	var currentASTItems;
+	 	var i = 0;
 
 	 	factory.setupNarratedAST = function(ASTNode,narrative){
 
@@ -29,7 +31,8 @@ angular.module('narrator')
 	 		}
 
 
-	 		this.currentNarrative = narrative.name;
+	 		currentNarrative = narrative.name;
+	 		i=0;
 	 		this.interpreter.setAst(ASTNode.ast);
 	 	};
 
@@ -38,8 +41,7 @@ angular.module('narrator')
 	 		return this.interpreter.stateStack[0].node;
 	 	};
 
-	 	var currentASTItems;
-	 	var i = 0;
+	 	
 	 	factory.narrativeStep = function(){
  		
 	 		if(currentASTItems && currentASTItems[i+1]){
@@ -47,13 +49,13 @@ angular.module('narrator')
 	 			return currentASTItems[i];
 	 		}
 	 		var step = true;
-	 		while(!this.interpreter.stateStack[0].node.codeNarrative[ this.currentNarrative ] ){
+	 		while(!this.interpreter.stateStack[0].node.codeNarrative[ currentNarrative ] ){
 	 			step = this.interpreter.step()
 	 			if( !step ){
 	 				return false;
 	 			}
 	 		}
-	 		currentASTItems = this.interpreter.stateStack[0].node.codeNarrative;
+	 		currentASTItems = this.interpreter.stateStack[0].node.codeNarrative[currentNarrative];
 	 		i=0;
 	 		return currentASTItems[i];
 	 	};

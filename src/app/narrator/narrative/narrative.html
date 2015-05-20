@@ -2,7 +2,10 @@
 
 <div class="item button-wide add" ng-if="edit" ng-click="addItem()"></div>
 
-<div ng-repeat="item in narrative.items">
+<div ng-repeat="item in narrative.items track by $index">
+<div class="item debug-controlls" ng-if="narrative.isCodeNarrative()">
+	<div ng-click='debugStep()'> '>' </div>
+</div>
 	<div item="item">
 		<div class="remove" ng-if="edit" ng-click="removeItem(item)"></div>
 	</div>

@@ -49,6 +49,10 @@ angular.module('narrator')
       },
 
 
+      debugStep:function(){
+        var node = interpreterFactory.debugStep();
+        console.log(node);
+      },
 
       step: function(){
         var nextItem;
