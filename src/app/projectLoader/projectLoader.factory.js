@@ -20,6 +20,11 @@
         CAST.cast.rootnode = contents.cast;
         CAST.appendNarrative(contents.narratives);
 
+         // hack: quick add narratives 
+         $http.get('/stories/'+$stateParams.project +'.json').success(function(data){
+           CAST.appendNarrative(data);
+         })
+
       },
 
       packZip: function(){

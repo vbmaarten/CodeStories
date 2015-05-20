@@ -44,7 +44,7 @@ angular.module('narrator')
 	 	factory.evaluateVCode = function(vcode){
 
 	 		
-	 	}
+	 	};
 
 	 	
 	 	factory.narrativeStep = function(){
@@ -52,14 +52,6 @@ angular.module('narrator')
 	 		if(currentASTItems[i++]){
 	 			return currentASTItems[i];
 	 		}
-<<<<<<< HEAD
-	 		while(!this.interpreter.stateStack[0].node.codeNarrative[ this.currentNarrative ] ){
-	 			if( !this.interpreter.step() ){
-	 				return false;
-	 			}
-	 		}
-	 		currentASTItems = this.interpreter.stateStack[0].codeNarrative;
-=======
 	 		var step = true;
 	 		
 	 		do{
@@ -71,7 +63,6 @@ angular.module('narrator')
 	 			}
 	 		} while( ! ( stackSize > newStackSize && this.interpreter.stateStack[0].node.codeNarrative[ currentNarrative ] ) );
 	 		currentASTItems = this.interpreter.stateStack[0].node.codeNarrative[currentNarrative];
->>>>>>> 10405a3654510cc2bfb6f4ef54a16066ad8b6271
 	 		i=0;
 	 		return currentASTItems[i];
 	 	};
