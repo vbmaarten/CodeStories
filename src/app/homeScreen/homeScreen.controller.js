@@ -7,7 +7,7 @@
  * Controller of the project loader
  */
 angular.module('codeStoriesApp')
-.controller('HomeScreenCtrl', ['$scope', '$location', 'projectLoaderFactory', 'CAST', function ($scope, $location, projectLoaderFactory, CAST) {
+.controller('HomeScreenCtrl', ['$scope', '$state', 'projectLoaderFactory', 'CAST', function ($scope, $state, projectLoaderFactory, CAST) {
 	
 	$scope.message = "Upload a .zip file of your project";
 
@@ -15,15 +15,14 @@ angular.module('codeStoriesApp')
 
 	$scope.loadZip = function(data){
 		$scope.castReady = false;
-		console.log(data);
 		projectLoaderFactory.loadZip(data);
 	};
 
 	$scope.goToNarrator = function () {
 		console.log(CAST);
-		$location.path(CAST.project);
+		$scope.message;
+		$state.go('narrating', {'project' : $scope.message});
 	}
-
 
 }])
 .directive("fileread", [function () {

@@ -54,24 +54,17 @@ angular
         url: '/:project/{path:.*}',
         views: {
           'app': {
-            templateUrl: 'app.html',
-            controller: function($scope, $state){
-              $state.go('narrating.default');
-            }
-          }
-        }
-      })
-      .state('narrating.default', {
-        views: {
-          'projectLoader': {
+            templateUrl: 'app.html'
+          },
+          'projectLoader@narrating': {
             templateUrl: '/projectLoader/projectLoader.html',
             controller: 'ProjectLoaderCtrl' 
           },
-          'explorer': {
+          'explorer@narrating': {
             templateUrl: '/explorer/explorer.html',
             controller: 'ExplorerCtrl'
           },
-          'narrator': {
+          'narrator@narrating': {
             templateUrl: '/narrator/narrator.html',
             controller: 'NarratorCtrl' 
           }
