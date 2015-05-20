@@ -15,8 +15,6 @@ angular.module('narrator')
       writerMode: true,
       // Tells the view mode if there is a narrative playing
       narrativePlaying: false,
-      // Stores the narratives of the current node
-      narratives:[],
       // Stores the narratives that are currently playing
       queue: [],
       // Stores state of the narrative thats currently playing
@@ -46,11 +44,15 @@ angular.module('narrator')
         this.queueCounter.unshift(0);
         this.storyboard.push({'name':this.queue[0].name, 'items':[]});
         if(narrative.isCodeNarrative()){
-          interpreterFactory.loadAst(narrative.CASTNode);
+          interpreterFactory.setupNarratedAST(CAST.getNode(narrative.CASTPath),narrative);
         }
       },
 
 
+      debugStep:function(){
+        var node = interpreterFactory.debugStep();
+        console.log(node);
+      },
 
       step: function(){
         var nextItem;
@@ -99,26 +101,33 @@ angular.module('narrator')
         }      
       },
 
-      loadNarrative: function (nextItem) {
+      loadNarrative: function (linkItem) {
         // Set this value to true to let the controller know a narrative is playing
         this.narrativeLink = true;
         this.queueCounter[0]++;
 
         // Get the node of the narrative that is linked to and find the narrative
-        var node = CAST.getNode(nextItem.content.node);
+        var node = CAST.getNode(linkItem.content.node);
+
+
+        var narratives = CAST.getNarratives(linkItem.content.node);
 
 
         var linked;
-        for (var index in node.narratives) {
-          if (node.narratives[index].name == nextItem.content.id){
-            linked = node.narratives[index];
+        for (var index in narratives) {
+          if (narratives[index].name == linkItem.content.id){
+            linked = narratives[index];
           }
         }
 
+        if(linked === undefined){
+          linked = node.isASTNode() ? 
+            new CodeNarrative('A new narrative appears',linkItem.content.node ) : new FSNarrative('A new narrative appears',linkItem.content.node);
+        } 
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
         this.queuePaths.unshift($location.path());
-        $location.path(CAST.project + nextItem.content.node);
+        $location.path(CAST.project + linkItem.content.node);
       }
     }
   }]);

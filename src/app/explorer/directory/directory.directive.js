@@ -16,6 +16,7 @@ angular.module('explorer')
             castUrl: '='
     	},
     	templateUrl: '/explorer/directory/directory.html',
+        
     	//Used to call directives recursively
     	compile: function(element) {
         // Use the compile function from the RecursionHelper,

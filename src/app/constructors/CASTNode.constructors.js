@@ -1,143 +1,146 @@
 'use strict';
-var CASTNode = function (name, parent, children) {
-	this.name = name;
-	this.parent = parent;
-	this.children = children;
-	this.narratives = [];
+
+var CASTNode = function(name, parent, children) {
+    this.name = name;
+    this.parent = parent;
+    this.children = children;
+    this.narratives = [];
+    this.path = null;
 };
 CASTNode.prototype = {
-	getName: function () {
-		return this.name;
-	},
-	setName: function (name) {
-		this.name = name;
-	},
-	getParent: function () {
-		return this.parent;
-	},
-	setParent: function (parent) {
-		this.parent = parent;
-	},
-	getNode: function (path) {
-    //ensure path is a array
-    if (typeof path === 'string') {
-    	path = path.split('/');
+    getName: function() {
+        return this.name;
+    },
+    getPath: function() {
+        if (this.path === null) {
+            this.path = this.getParent().getPath() + '/' + this.name;
+        }
+        return this.path
+    },
+    setName: function(name) {
+        this.name = name;
+    },
+    getParent: function() {
+        return this.parent;
+    },
+    setParent: function(parent) {
+        this.parent = parent;
+    },
+    getNode: function(path) {
+        //ensure path is a array
+        if (typeof path === 'string') {
+            path = path.split('/');
+        }
+        //filter empty and '.' directories
+        var directChild;
+        do {
+            directChild = path.shift();
+        } while (directChild === '' || directChild === '.');
+        if (!path || path.length == 0) {
+            return this.getChild(directChild) || this;
+        }
+        return this.getChild(directChild).getNode(path);
+    },
+    getChild: function(name) {
+        var child = this.getChildren()[name];
+        if (child && !child.getParent()) {
+            child.setParent(this);
+        }
+        return child;
+    },
+    getChildren: function() {
+        return this.children;
+    },
+    getType: function() {
+        if (this instanceof FolderNode) {
+            return 'directory';
+        } else if (this instanceof FileNode) {
+            return 'file';
+        } else if (this instanceof ASTNode) {
+            return 'ast';
+        }
+        console.error('This node has a false type');
+        throw 'BadNodeTypeError';
+    },
+    isFolder: function() {
+        return this.getType() === 'directory';
+    },
+    isFile: function() {
+        return this.getType() === 'file';
+    },
+    isASTNode: function() {
+        return this.getType() === 'ast';
+    },
+    up: function() {
+        if (!this.parent) {
+            console.error('This node has no parent');
+            throw 'NoParentError';
+            return this.parent;
+        }
+        return this.parent;
     }
-    //filter empty and '.' directories
-    var directChild;
-    do {
-    	directChild = path.shift();
-    } while (directChild === '' || directChild === '.');
-    if (!path || path.length == 0) {
-    	return this.getChild(directChild) || this;
-    }
-    return this.getChild(directChild).getNode(path);
-},
-getChild: function (name) {
-	var child = this.getChildren()[name];
-	if (child && !child.getParent()) {
-		child.setParent(this);
-	}
-	return child;
-},
-getChildren: function () {
-	return this.children;
-},
-getType: function () {
-	if (this instanceof FolderNode) {
-		return 'directory';
-	} else if (this instanceof FileNode) {
-		return 'file';
-	} else if (this instanceof ASTNode) {
-		return 'ast';
-	}
-	console.error('This node has a false type');
-	throw 'BadNodeTypeError';
-},
-isFolder: function () {
-	return this.getType() === 'directory';
-},
-isFile: function () {
-	return this.getType() === 'file';
-},
-isASTNode: function () {
-	return this.getType() === 'ast';
-},
-up: function () {
-	if (!this.parent) {
-		console.error('This node has no parent');
-		throw 'NoParentError';
-		return this.parent;
-	}
-	return this.parent;
-},
-addNarratives: function (narratives) {
-	this.narratives = this.narratives || [];
-	var i, newNarrative, name;
-	for (i in narratives) {
-		name = narratives[i].name;
-		newNarrative = new FSNarrative(name, this, narratives[i].items);
-		this.narratives.push(newNarrative);
-	}
-},
-addNarrative: function () {
-	this.narratives.push(new FSNarrative('New Narrative', this, []));
-}
 };
-var FolderNode = function (name, parent, children) {
-	CASTNode.call(this, name, parent, children);
+var FolderNode = function(name, parent, children) {
+    CASTNode.call(this, name, parent, children);
 };
 FolderNode.prototype = Object.create(CASTNode.prototype);
-var FileNode = function (name, parent, children, content) {
-	CASTNode.call(this, name, parent, children);
-	this.content = content;
+var FileNode = function(name, parent, children, content) {
+    CASTNode.call(this, name, parent, children);
+    this.content = content;
 };
 FileNode.prototype = Object.create(CASTNode.prototype);
-var ASTNode = function () {
-};
-var astCASTPrototype = Object.create(CASTNode.prototype);
-astCASTPrototype.getChildren = function () {
-	return this;
-};
-astCASTPrototype.getName = function () {
-	return this.name || this.type;
-};
-astCASTPrototype.getType = function () {
-	return 'ast';
-};
-astCASTPrototype.getParent = function () {
-	return this.parent;
-};
-astCASTPrototype.getNode = function (path) {
-	if (typeof path === 'string') {
-    	path = path.split('/');
+
+//return filenode child. only parseAs for the moment is 'program';
+FileNode.prototype.getChild = function(parseAs) {
+    var children = this.getChildren();
+    if (!children[parseAs]) {
+        if (parseAs === 'program') {
+            if (this.name.endsWith('.js')) { //If it is a json file, add it's AST to the cast
+                var AST = acorn.parse(this.content, {
+                    location: true
+                });
+                this.children.program = wrapAcornAsASTNode(AST, this);
+            }
+
+        }
     }
-	if (path[0] === 'body' && typeof path[1] === 'number') {
-		path.shift();
-		var i = path.shift();
-		return this.body[i].getNode(path);
-	}
-	return CASTNode.prototype.getNode.call(this, path);
-};
-astCASTPrototype.addNarratives = function (narratives) {
-	this.narratives = this.narratives || [];
-	var i, newNarrative, name;
-	for (i in narratives) {
-		name = narratives[i].name;
-		newNarrative = new CodeNarrative(name, this, narratives[i].ASTItems);
-		this.narratives.push(newNarrative);
-	}
-};
 
-var tnode = acorn.parse('1').constructor
-
-for(var key in astCASTPrototype){
-	Object.defineProperty(tnode, key ,{
-		enumarable : false
-	})
+    return children[parseAs];
 }
 
 
+var t_node_constructor = acorn.parse('1').constructor;
 
 
-tnode.prototype = astCASTPrototype;
+var ASTNode = function (ast,parent,children) {
+
+	CASTNode.call(this, ast.name || ast.type, parent, children);
+	this.ast = ast
+};
+ASTNode.prototype = Object.create(CASTNode.prototype);
+ASTNode.getChildren = function() {
+    return this;
+};
+ASTNode.getName = function() {
+    return this.name || this.type;
+};
+ASTNode.getType = function() {
+    return 'ast';
+};
+ASTNode.getParent = function() {
+    return this.parent;
+};
+ASTNode.getChildren = function() {}
+
+function wrapAcornAsASTNode(ast,parent){
+
+	var children = {}
+	var newASTNode = new ASTNode(ast,parent,children);
+	for(var node in ast){
+		if( ast[node] instanceof t_node_constructor || ast[node] instanceof Array ){
+			children[node] = wrapAcornAsASTNode(ast[node] , newASTNode);
+		}
+	}
+
+    return newASTNode;
+}

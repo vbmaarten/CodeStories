@@ -12,13 +12,35 @@
   'CAST',
   'narratorFactory',
   function ($scope, $state, CAST, narratorFactory) {
+
+
+    $scope.addNarrative = function(){
+      var newNarrative  ;
+      if($scope.activeNode.isASTNode()){
+        newNarrative = new CodeNarrative('New Narrative', CAST.selectedPath);
+      } else {
+        newNarrative = new FSNarrative('New Narrative', CAST.selectedPath);
+      }
+      $scope.narratives.push(newNarrative);
+    };
+
     // Get the current active node in the CAST
-    $scope.activeNode = CAST.selected;
+    $scope.narratives = [];
+    $scope.activeNode = '/';
+    $scope.$watch('CAST.selectedPath',function(newval,oldval,scope){
+      scope.activeNode = CAST.selected;
+      scope.narratives = CAST.getSelectedNarratives();
+      console.log(scope);
+    })
+
+    
 
     console.log($scope.activeNode);
 
     // Get the narratives of the current node
-    $scope.narratives = narratorFactory.narratives = $scope.activeNode.narratives;
+    
+
+    
     // If the user is able to edit the narratives or not (boolean)
     $scope.writerMode = narratorFactory.writerMode;
     // Navigate to corresponding state

@@ -13,6 +13,7 @@
  	'CAST',
   'projectLoaderFactory',
  	function ($scope, $http, $stateParams, CAST, projectLoaderFactory) {
+    $scope.projectLoaded = false;
 
     if (CAST.project !== $stateParams.project) {
       console.log($stateParams);
@@ -24,15 +25,14 @@
           responseType: 'arraybuffer'
         }).success(function (data) {
           projectLoaderFactory.loadZip(data);
-          CAST.selectedPath = $stateParams.path;
-          CAST.selected = CAST.cast.rootnode.getNode($stateParams.path);
+          CAST.setSelected($stateParams.path);
         }).error(function () {
           console.error('project not found');
         });
       }
     } else if (CAST.project === $stateParams.project && CAST.selectedPath !== $stateParams.path) {
       CAST.selectedPath = $stateParams.path;
-      CAST.selected = CAST.cast.rootnode.getNode($stateParams.path);
+      CAST.setSelected($stateParams.path);
 
       if(CAST.selected.isASTNode()){
         var parent = CAST.selected.getParent();
@@ -49,6 +49,11 @@
         
     $scope.loadZip = function(data){
       projectLoaderFactory.loadZip(data);
+      $scope.projectLoaded = true;
     };
+
+    $scope.packZip = function(data){
+      projectLoaderFactory.packZip();
+    }
   }
 ]);
