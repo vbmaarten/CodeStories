@@ -108,16 +108,23 @@ FileNode.prototype.getChild = function(parseAs) {
     return children[parseAs];
 }
 
+function wrapAcornAsASTNode(ast,parent){
 
-var t_node_constructor = acorn.parse('1').constructor;
+	var children = {}
+	var newASTNode = new ASTNode(this.name || this.type,parent,children,ast);
+	for(var node in ast){
+		wrapAcornAsASTNode(ast[node] , newASTNode);
+	}
 
+    return newASTNode;
+}
 
-var ASTNode = function (ast,parent,children) {
+var ASTNode = function (name,parent,children,ast) {
 
-	CASTNode.call(this, ast.name || ast.type, parent, children);
-	this.ast = ast
+	CASTNode.call(this, name, parent, children);
+	this.node = ast
 };
-ASTNode.prototype = Object.create(CASTNode.prototype);
+var ASTNode = Object.create(CASTNode.prototype);
 ASTNode.getChildren = function() {
     return this;
 };
@@ -131,16 +138,3 @@ ASTNode.getParent = function() {
     return this.parent;
 };
 ASTNode.getChildren = function() {}
-
-function wrapAcornAsASTNode(ast,parent){
-
-	var children = {}
-	var newASTNode = new ASTNode(ast,parent,children);
-	for(var node in ast){
-		if( ast[node] instanceof t_node_constructor || ast[node] instanceof Array ){
-			children[node] = wrapAcornAsASTNode(ast[node] , newASTNode);
-		}
-	}
-
-    return newASTNode;
-}
