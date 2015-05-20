@@ -67,15 +67,8 @@ FSNarrative.prototype.addItems = function (items) {
 //items is an array that contains objects {'node' , 'items'}
 // the goal is to append to the subnodes of the AST nodes the proper items under the proper name
 var CodeNarrative = function (name, CASTPath, ASTItems) {
-	/*if (!CASTPath.isASTNode()) {
-		console.log(' You can not add a CodeNarrative on', CASTPath);
-		throw 'BadNarrativeForCASTPath';
-	}*/
 	Narrative.call(this,name, CASTPath);
 	this.ASTItems = ASTItems;
-	for(var i in ASTItems){
-		this.addSubNodeItems(ASTItems[i] , name);
-	}
 	
 };
 
@@ -87,15 +80,3 @@ CodeNarrative.prototype.validItem = function (item) {
 		}
 		return item instanceof Item;
 	};
-CodeNarrative.prototype.addSubNodeItems = function( subNode , name){
-	var astNode = this.CASTPath.getNode(subNode.node);
-	astNode.codeItems = astNode.codeItems || {};
-	astNode.codeItems[name] = []
-	for(var i in subNode.items){
-		var item = Item.prototype.buildNewItem(subNode.items[i]);
-		if(!this.validItem(item)){
-			throw "BadItemForNarrative";
-		}
-		astNode.codeItems[name].push(item);
-	}
-}
