@@ -15,13 +15,14 @@ CastMock.rootnode.path = '/';
 
 angular.module('cast')
     .factory('CAST', function() {
+
         return {
             // CAST object
             cast: CastMock,
             // Currently selected node in the CAST
             selected: undefined,
             // Path to the currently selected node
-            selectePath: '',
+            selectedPath: '',
             // File content corresponding to the current node
             content: '',
             // Root url
@@ -33,19 +34,17 @@ angular.module('cast')
             appendNarrative: function(narratives) {
                 var i, newNarrative, name;
                 for (var castPath in narratives) {
+                    this.narratives[castPath] = this.narratives[castPath] || {};
 
-                    var CASTNode = this.getNode(castPath)
-
-                    this.narratives[castPath] = this.narratives[castPath] || {}
-
-                    console.log(narratives[castPath])
-
-                    for (i in narratives[castPath]) {
-                        name = narratives[castPath][i].name;
-                        if (CASTNode.isASTNode()) {
-                            newNarrative = new CodeNarrative(name, CASTNode, narratives[castPath][i].ASTItems);
+                    var narrative = narratives[castPath];
+                    for (i in narrative) {
+                        name = narrative[i].name;
+                        //hack: ASTNodes are only loaded once the filenode.getChild('program') has been called. 
+                        //  check if the path contains '/program' to determine if its an ast node
+                        if (!castPath.contains('/program')) {
+                            newNarrative = new CodeNarrative(name, castPath, narrative[i].ASTItems);
                         } else {
-                            newNarrative = new FSNarrative(name, CASTNode, narratives[castPath][i].items);
+                            newNarrative = new FSNarrative(name, castPath, narrative[i].items);
                         }
 
                         this.narratives[castPath][name] = newNarrative;
