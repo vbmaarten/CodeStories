@@ -11,7 +11,6 @@
 var CastMock = {
     'rootnode': new FolderNode('rootnode', null, {})
 };
-CastMock.rootnode.path = '/';
 
 angular.module('cast')
     .factory('CAST', function() {
@@ -41,7 +40,7 @@ angular.module('cast')
                         name = narrative[i].name;
                         //hack: ASTNodes are only loaded once the filenode.getChild('program') has been called. 
                         //  check if the path contains '/program' to determine if its an ast node
-                        if (!castPath.contains('/program')) {
+                        if (!castPath.indexOf('/program') > 0) {
                             newNarrative = new CodeNarrative(name, castPath, narrative[i].ASTItems);
                         } else {
                             newNarrative = new FSNarrative(name, castPath, narrative[i].items);
@@ -54,13 +53,12 @@ angular.module('cast')
 
             setSelected:function(node){
               if(typeof node === 'string'){
-                this.selectedPath = node;
+                
                 this.selected = this.getNode(node);
               } else if ( node instanceof CASTNode){
                 this.selected = node;
-                this.selectedPath = node.getPath();
               }
-
+               this.selectedPath = this.selected.getPath();
             },
 
             // Return node that corresponds to the given path

@@ -28,6 +28,7 @@
         };
 
         var root = new FolderNode('project', null, {});
+        root.path = '';
 
         //Loop through files that are packed in the zip
         Object.getOwnPropertyNames(zip.files).forEach(function (element, index, array) {

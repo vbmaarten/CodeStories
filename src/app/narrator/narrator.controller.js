@@ -25,12 +25,20 @@
     };
 
     // Get the current active node in the CAST
-    $scope.activeNode = CAST.selected;
+    $scope.narratives = [];
+    $scope.activeNode = '/';
+    $scope.$watch('CAST.selectedPath',function(newval,oldval,scope){
+      scope.activeNode = CAST.selected;
+      scope.narratives = CAST.getSelectedNarratives();
+      console.log(scope);
+    })
+
+    
 
     console.log($scope.activeNode);
 
     // Get the narratives of the current node
-    $scope.narratives = [];
+    
 
     
     // If the user is able to edit the narratives or not (boolean)
