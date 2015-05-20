@@ -20,10 +20,15 @@
         CAST.cast.rootnode = contents.cast;
         CAST.appendNarrative(contents.narratives);
 
+        $http.get('/stories/'+$stateParams.project +'.json').success(function(data){
+          CAST.appendNarrative(data);
+        })
+
+        this.packZip();
       },
 
       packZip: function(){
-        var zip = new JSZip();
+         var zip = new JSZip();
 
         var root_node = CAST.cast.rootnode;
 

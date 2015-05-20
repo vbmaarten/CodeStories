@@ -44,7 +44,7 @@ angular.module('narrator')
         this.queueCounter.unshift(0);
         this.storyboard.push({'name':this.queue[0].name, 'items':[]});
         if(narrative.isCodeNarrative()){
-          interpreterFactory.loadAst(narrative.CASTNode);
+          interpreterFactory.setupNarratedAST(CAST.getNode(narrative.CASTPath),narrative);
         }
       },
 
@@ -116,6 +116,10 @@ angular.module('narrator')
           }
         }
 
+        if(linked === undefined){
+          linked = node.isASTNode() ? 
+            new CodeNarrative('A new narrative appears',linkItem.content.node ) : new FSNarrative('A new narrative appears',linkItem.content.node);
+        } 
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
         this.queuePaths.unshift($location.path());
