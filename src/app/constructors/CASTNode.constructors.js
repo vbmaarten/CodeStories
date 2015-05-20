@@ -107,10 +107,10 @@ FileNode.prototype.getChild = function(parseAs){
 }
 
 
-wrapAcornAsASTNode = function(ast,parent){
+function wrapAcornAsASTNode(ast,parent){
 
 	var children = {}
-	var newASTNode = new ASTNode(this.name || this.type,parent,children);
+	var newASTNode = new ASTNode(this.name || this.type,parent,children,ast);
 	for(var node in ast){
 		wrapAcornAsASTNode(ast[node] , newASTNode);
 	}
@@ -118,9 +118,10 @@ wrapAcornAsASTNode = function(ast,parent){
 	return newASTNode;
 }
 
-var ASTNode = function (name,parent,children) {
+var ASTNode = function (name,parent,children,ast) {
 
 	CASTNode.call(this, name, parent, children);
+	this.node = ast
 
 };
 var ASTNode = Object.create(CASTNode.prototype);

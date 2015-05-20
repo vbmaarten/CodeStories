@@ -18,7 +18,7 @@
     console.log($scope.activeNode);
 
     // Get the narratives of the current node
-    $scope.narratives = CAST.getNarratives($scope.activeNode.getPath());
+    $scope.narratives = CAST.getSelectedNarratives();
     // If the user is able to edit the narratives or not (boolean)
     $scope.writerMode = narratorFactory.writerMode;
     // Navigate to corresponding state

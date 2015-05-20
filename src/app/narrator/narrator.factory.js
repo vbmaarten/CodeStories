@@ -106,12 +106,7 @@ angular.module('narrator')
         var node = CAST.getNode(nextItem.content.node);
 
 
-        var linked;
-        for (var index in node.narratives) {
-          if (node.narratives[index].name == nextItem.content.id){
-            linked = node.narratives[index];
-          }
-        }
+        var linked = CAST.getNarrative(nextItem.content.node , nextItem.content.id);
 
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);

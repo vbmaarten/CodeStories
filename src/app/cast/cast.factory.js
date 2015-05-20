@@ -52,9 +52,29 @@ angular.module('cast')
                 }
             },
 
+            setSelected:function(node){
+              if(typeof node === 'string'){
+                this.selectedPath = node;
+                this.selected = this.getNode(node);
+              } else if ( node instanceof CASTNode){
+                this.selected = node;
+                this.selectedPath = node.getPath();
+              }
+
+            },
+
             // Return node that corresponds to the given path
             getNode: function(path) {
                 return this.cast.rootnode.getNode(path);
+            },
+
+            getSelectedNarratives: function(){
+               this.narratives[this.selectedPath] = this.narratives[this.selectedPath] || {};
+              return  this.narratives[this.selectedPath];
+            },
+
+            getNarrative:function(path,id){
+                return this.narratives[path][id];
             },
 
             getNarratives: function(path) {
