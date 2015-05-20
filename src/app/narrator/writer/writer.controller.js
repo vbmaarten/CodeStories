@@ -13,9 +13,6 @@ angular.module('narrator')
 
   var narratives = narratorFactory.narratives;
 
- 	$scope.addNarrative = function(){
- 		$scope.activeNode.addNarrative();
- 	};
  	$scope.removeNarrative = function(narrative){
  		var i = narratives.indexOf(narrative);
  		narratives.splice(i,1);

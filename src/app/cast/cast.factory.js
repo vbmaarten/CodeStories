@@ -20,9 +20,9 @@ angular.module('cast')
             // CAST object
             cast: CastMock,
             // Currently selected node in the CAST
-            selected: undefined,
+            selected: CastMock.rootnode,
             // Path to the currently selected node
-            selectedPath: '',
+            selectedPath: '/',
             // File content corresponding to the current node
             content: '',
             // Root url
@@ -34,7 +34,7 @@ angular.module('cast')
             appendNarrative: function(narratives) {
                 var i, newNarrative, name;
                 for (var castPath in narratives) {
-                    this.narratives[castPath] = this.narratives[castPath] || {};
+                    this.narratives[castPath] = this.narratives[castPath] || [];
 
                     var narrative = narratives[castPath];
                     for (i in narrative) {
@@ -47,7 +47,7 @@ angular.module('cast')
                             newNarrative = new FSNarrative(name, castPath, narrative[i].items);
                         }
 
-                        this.narratives[castPath][name] = newNarrative;
+                        this.narratives[castPath].push(newNarrative );
                     }
                 }
             },
@@ -69,7 +69,7 @@ angular.module('cast')
             },
 
             getSelectedNarratives: function(){
-               this.narratives[this.selectedPath] = this.narratives[this.selectedPath] || {};
+               this.narratives[this.selectedPath] = this.narratives[this.selectedPath] || [];
               return  this.narratives[this.selectedPath];
             },
 
