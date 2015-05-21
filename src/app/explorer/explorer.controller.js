@@ -8,7 +8,7 @@
  * Controller of the explorer
  */
 angular.module('explorer')
-  .controller('ExplorerCtrl', ['$scope', 'CAST', function ($scope, CAST) {
+  .controller('ExplorerCtrl', ['$scope', 'CAST', '$state', function ($scope, CAST,$state) {
     $scope.directory = CAST.cast;
     $scope.project = CAST.project;
     $scope.selected = CAST.selected;
@@ -16,10 +16,18 @@ angular.module('explorer')
 
 
 
+
+
     $scope.aceLoaded = function(_editor){
 	    // Editor part
 	    var _session = _editor.getSession();
 	    var _renderer = _editor.renderer;
+	    
+
+
+
+
+
 
 	    // Options
 	    _editor.setReadOnly(true);
@@ -32,6 +40,16 @@ angular.module('explorer')
 	   	}
 	    _editor.setTheme("ace/theme/crimson_editor");
 	    _editor.setValue($scope.content, -1);
+
+	    var selectNode = function(e,selection){
+
+		  var cursor = selection.getCursor();
+		  var pos = _session.getDocument().positionToIndex(cursor,0);
+		  var node =  CAST.getASTNodeByRange(pos);
+		  console.log(node);
+		  //$state.go('narrating.node', {'path': node.getPath()});
+		}; 
+		_session.selection.on("changeCursor", selectNode);
 
 	    // Node selection
 	    if($scope.selected.isASTNode()){
