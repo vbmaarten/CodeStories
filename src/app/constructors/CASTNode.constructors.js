@@ -94,12 +94,12 @@ FileNode.prototype = Object.create(CASTNode.prototype);
 FileNode.prototype.getChild = function(parseAs) {
     var children = this.getChildren();
     if (!children[parseAs]) {
-        if (parseAs === 'program') {
+        if (parseAs === 'Program') {
             if (this.name.endsWith('.js')) { //If it is a json file, add it's AST to the cast
                 var AST = acorn.parse(this.content, {
                     locations: true
                 });
-                this.children.program = wrapAcornAsASTNode(AST, this);
+                this.children.Program = wrapAcornAsASTNode(AST, 'Program',this);
             }
 
         }
@@ -110,37 +110,40 @@ FileNode.prototype.getChild = function(parseAs) {
 
 
 var t_node_constructor = acorn.parse('1').constructor;
+Object.defineProperty(t_node_constructor,'ASTNode',{
+    'enumerable': false
+})
 
-
-var ASTNode = function (ast,parent,children) {
-
-    CASTNode.call(this, ast.name || ast.type, parent, children);
-    this.ast = ast
+var ASTNode = function (name,parent,children,tnode) {
+    CASTNode.call(this, name , parent, children);
+    this.tnode = tnode
 };
 ASTNode.prototype = Object.create(CASTNode.prototype);
-ASTNode.getChildren = function() {
-    return this;
-};
-ASTNode.getName = function() {
-    return this.name || this.type;
-};
-ASTNode.getType = function() {
-    return 'ast';
-};
-ASTNode.getParent = function() {
-    return this.parent;
-};
 
-function wrapAcornAsASTNode(ast,parent){
+
+
+function wrapAcornAsASTNode(tnode,name,parent){
 
     var children = {}
-    var newASTNode = new ASTNode(ast,parent,children);
-    for(var node in ast){
-        if( ast[node] instanceof t_node_constructor || ast[node] instanceof Array ){
-            children[node] = wrapAcornAsASTNode(ast[node] , newASTNode);
+    var newASTNode = new ASTNode(name,parent,children,tnode);
+    tnode.ASTNode = newASTNode;
+
+    for(var index in tnode){
+        var subNode = tnode[index];
+        if( subNode instanceof t_node_constructor || subNode instanceof Array ){
+            var name = subNode.name || subNode.type || 'Body';
+            if(subNode.name && subNode.type){
+                name += '_' + subNode.type;
+            }
+            name = name.split('Statement').join('');
+            if(tnode instanceof Array){
+                name = index+name;
+            } 
+
+            var child = wrapAcornAsASTNode( subNode, name , newASTNode);
+            children[name] = child; 
         }
     }
-
     return newASTNode;
 
 }
