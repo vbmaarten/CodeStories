@@ -9,7 +9,7 @@
  */
 
 angular.module('narrator')
-  .factory('narratorFactory',['$state', 'CAST','interpreterFactory', function ($state, CAST, interpreterFactory) {
+  .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', function ($state, $stateParams, CAST, interpreterFactory) {
     return  {
       // Stores the current mode of the app
       writerMode: true,
@@ -96,8 +96,9 @@ angular.module('narrator')
           else{
             this.storyboard.push({'name':this.queue[0].name, 'items':[]});
             this.narrativeLink = true;
-            console.log('go back');
-            $state.go('narrating.node.viewer', {'path': this.queuePaths.shift()});
+            var path = this.queuePaths.shift();
+            console.log('go back: ' + path);
+            $state.go('narrating.node', {'path': path});
           }
         }      
       },
@@ -129,11 +130,13 @@ angular.module('narrator')
 
         console.log(linked);
 
+        console.log('store: ' + $stateParams.path);
+        this.queuePaths.unshift($stateParams.path);
 
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
-        this.queuePaths.unshift(linkItem.content.node);
-        $state.go('narrating.node.viewer', {'path': linkItem.content.node});
+
+        $state.go('narrating.node', {'path': linkItem.content.node});
       }
     }
   }]);
