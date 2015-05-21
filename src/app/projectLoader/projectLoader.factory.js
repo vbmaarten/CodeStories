@@ -85,7 +85,6 @@
 
         //Loop through files that are packed in the zip
         Object.getOwnPropertyNames(zip.files).forEach(function (element, index, array) {
-          console.log(element);
           var isDirectory = element.slice(-1) === '/';
           var isJS = false;
           var isCodestoriesFile = false;
@@ -119,7 +118,6 @@
               newRoot = newRoot.children[element];
             }
           });
-          console.log(newRoot);
           if (!newRoot.children[last]) {
             if(isCodestoriesFile){   //Parse the narratives file
               ret.narratives = JSON.parse(zip.file(element).asText());

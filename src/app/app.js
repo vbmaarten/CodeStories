@@ -40,6 +40,51 @@ angular
     $urlRouterProvider
       .otherwise('/');
 
+
+    var resolveCASTObj = {
+      resolveCAST : ['$stateParams', '$http', 'CAST', 'projectLoaderFactory', 
+        function($stateParams, $http, CAST, projectLoaderFactory){
+
+          var setPath = function () {
+            if (CAST.selectedPath !== $stateParams.path) {
+              CAST.setSelected($stateParams.path);
+
+              if(CAST.selected.isASTNode()){
+                var parent = CAST.selected.getParent();
+                while (!parent.content){
+                  parent = parent.getParent();
+                }
+                CAST.content = parent.content;
+              } else if(CAST.selected.isFile()){
+                CAST.content = CAST.selected.content;
+              } else {
+                CAST.content = "This is a folder";
+              }
+            }
+          }
+
+          if (CAST.project !== $stateParams.project) {
+            if ($stateParams.project.endsWith('.zip')) {
+              return $http({
+                url: '/stories/' + $stateParams.project,
+                method: 'GET',
+                responseType: 'arraybuffer'
+              }).success(function (data) {
+                projectLoaderFactory.loadZip(data);
+                CAST.project = $stateParams.project;
+                setPath();
+              }).error(function () {
+                console.error('project not found');
+              });
+            }
+          }
+          else {
+            setPath();
+          }
+      }]
+    }
+
+
     $stateProvider
       .state('home',{
         url: '/',
@@ -72,6 +117,7 @@ angular
       })
       .state('narrating.node', {
         url: '/{path:.*}',
+        resolve: resolveCASTObj,
         views: {
           'projectLoader': {
             templateUrl: '/projectLoader/projectLoader.html',

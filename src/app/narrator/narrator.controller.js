@@ -17,11 +17,6 @@ angular.module('narrator').controller('NarratorCtrl', [
     $scope.activeNode = CAST.selected || '/';
     $scope.narratives = CAST.getSelectedNarratives() || [];
 
-    console.log('active node:');
-    console.log($scope.activeNode);
-
-    console.log('active node narratives:');
-    console.log($scope.narratives);
     
     // If the user is able to edit the narratives or not (boolean)
     $scope.writerMode = narratorFactory.writerMode;
