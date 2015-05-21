@@ -27,34 +27,36 @@
 |-|1| UX & UI (mockups) | roelof |  |
 
 ###Week 3
-| Priority      | Task                           | Task assigned to | Estimated effort |
+| User Story    | Priority      | Task                           | Task assigned to | Estimated effort |
+| ------------- | ------------- | ------------------------------ | ---------------- | ---------------- |
 |-|1| ProjectLoader | maarten |  |
 |-|1| CAST  | salim |  |
 |-|1| Narrator | roelof |  |
 
 ###Week 4 
-| Priority      | Task                           | Task assigned to | Estimated effort |
-|-|1| Diagrams | everyone |
-|-|1| Tests | everyone |
-|-|2| Story Items | salim |
-|-|2| Narrative service | Salim |
-|-|2| Project-loader  | maarten |
-|-|2| CodeNarrative | roelof |
-|-|3| Explorer/editor | roelof 
-|
+| User Story    | Priority      | Task                           | Task assigned to | Estimated effort |
+| ------------- | ------------- | ------------------------------ | ---------------- | ---------------- |
+|-|1| Diagrams | everyone |  |
+|-|1| Tests | everyone |  |
+|-|2| Story Items | salim |  |
+|-|2| Narrative service | Salim |  |
+|-|2| Project-loader  | maarten |  |
+|-|2| CodeNarrative | roelof |  |
+|-|3| Explorer/editor | roelof |  |
 
-| Priority      | Task                           | Task assigned to | Estimated effort |
 ###Week 5
-|-|2| JSHINT | Roelof |
-|-|2| State logic to app.js | Salim
-|-|1| CodeNarrative | Roelof 
-|-|2| Node selection | Maarten
-|-|2| VCodeController | 
-|-|1| Documentatie | Roelof
-|-|4| Home Screen | Salim
-|-|3| tests |
-|-|3| git tags |
-|-|1| code cleanup | 
-|-|2| code selection | Maarten
-|-|1| Save codestories | Maarten
-|-|3| visualization objects editor |
+| User Story    | Priority      | Task                           | Task assigned to | Estimated effort |
+| ------------- | ------------- | ------------------------------ | ---------------- | ---------------- |
+|-|2| JSHINT | Roelof |  |
+|-|2| State logic to app.js | Salim |  |
+|-|1| CodeNarrative | Roelof |  |
+|-|2| Node selection | Maarten |  |
+|-|2| VCodeController |   |
+|-|1| Documentatie | Roelof |  |
+|-|4| Home Screen | Salim |  |
+|-|3| tests |   | |
+|-|3| git tags |   | |
+|-|1| code cleanup |    | |
+|-|2| code selection | Maarten  |  |
+|-|1| Save codestories | Maarten  |  |
+|-|3| visualization objects editor |  |  |
