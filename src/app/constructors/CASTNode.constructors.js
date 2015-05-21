@@ -116,6 +116,14 @@ var ASTNode = function (name,parent,children,tnode) {
     this.tnode = tnode;
 };
 ASTNode.prototype = Object.create(CASTNode.prototype);
+ASTNode.prototype.containsPosition = function(pos){
+    var tnode = this.tnode;
+    if(tnode instanceof Array){
+        tnode = this.parent.tnode;
+    }
+    return (tnode.start < pos && tnode.end > pos)
+
+}
 
 
 
