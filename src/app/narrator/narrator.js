@@ -11,15 +11,15 @@
 angular.module('narrator', [])
   .config(function ($stateProvider) {
     $stateProvider
-      .state('narrating.writer',{
+      .state('narrating.node.writer',{
         views: {
           'narratives': {
-            templateUrl: '/narrator//writer/writer.html',
+            templateUrl: '/narrator/writer/writer.html',
             controller: 'WriterCtrl' 
-          },       
+          },
         }
       })
-      .state('narrating.viewer', {
+      .state('narrating.node.viewer', {
         views: {
           'narratives': {
             templateUrl: '/narrator/viewer/viewer.html',

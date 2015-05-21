@@ -9,7 +9,7 @@
  */
 
 angular.module('narrator')
-  .factory('narratorFactory',['$location', 'CAST','interpreterFactory', function ($location, CAST, interpreterFactory) {
+  .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', function ($state, $stateParams, CAST, interpreterFactory) {
     return  {
       // Stores the current mode of the app
       writerMode: true,
@@ -44,7 +44,7 @@ angular.module('narrator')
         this.queueCounter.unshift(0);
         this.storyboard.push({'name':this.queue[0].name, 'items':[]});
         if(narrative.isCodeNarrative()){
-                    interpreterFactory.setupNarratedAST(CAST.getNode(narrative.CASTPath),narrative);
+          interpreterFactory.setupNarratedAST(CAST.getNode(narrative.CASTPath),narrative);
         }
       },
 
@@ -88,14 +88,17 @@ angular.module('narrator')
           this.queueCounter.shift();
 
           // If there are no more items left in the queue stop playing
-          if(this.queue.length == 0)
+          if(this.queue.length == 0){
+            console.log('narrative done');
             this.deselectNarrative();
+          }
           // Else continue with the queued up narrative
           else{
             this.storyboard.push({'name':this.queue[0].name, 'items':[]});
             this.narrativeLink = true;
-            console.log('go back');
-            $location.path(this.queuePaths.shift());
+            var path = this.queuePaths.shift();
+            console.log('go back: ' + path);
+            $state.go('narrating.node', {'path': path});
           }
         }      
       },
@@ -119,15 +122,21 @@ angular.module('narrator')
           }
         }
 
-             if(linked === undefined){
+
+        if(linked === undefined){
           linked = node.isASTNode() ? 
             new CodeNarrative('A new narrative appears',linkItem.content.node ) : new FSNarrative('A new narrative appears',linkItem.content.node);
         } 
 
+        console.log(linked);
+
+        console.log('store: ' + $stateParams.path);
+        this.queuePaths.unshift($stateParams.path);
+
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
-        this.queuePaths.unshift($location.path());
-        $location.path(CAST.project + linkItem.content.node);
+
+        $state.go('narrating.node', {'path': linkItem.content.node});
       }
     }
   }]);

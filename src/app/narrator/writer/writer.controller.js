@@ -9,30 +9,41 @@
  */
 
 angular.module('narrator')
-  .controller('WriterCtrl', [ '$scope',	'narratorFactory', function ($scope, narratorFactory) {
+  .controller('WriterCtrl', [ '$scope', 'CAST',	'narratorFactory', function ($scope, CAST, narratorFactory) {
 
-  var narratives = narratorFactory.narratives;
+    // Add a narrative
+    $scope.addNarrative = function(){
+      var newNarrative  ;
+      if($scope.activeNode.isASTNode()){
+        newNarrative = new CodeNarrative('New Narrative', CAST.selectedPath);
+      } else {
+        newNarrative = new FSNarrative('New Narrative', CAST.selectedPath);
+      }
+      $scope.narratives.push(newNarrative);
+    };
 
- 	$scope.removeNarrative = function(narrative){
- 		var i = narratives.indexOf(narrative);
- 		narratives.splice(i,1);
- 		$scope.deselectNarrative();
- 	};
+    // Remove a narrative
+   	$scope.removeNarrative = function(narrative){
+   		var i = $scope.narratives.indexOf(narrative);
+   		$scope.narratives.splice(i,1);
+   		$scope.deselectNarrative();
+   	};
 
- 	// Select a narrative to edit or view
-  $scope.selectNarrative = function(narrative){
-    $scope.selected = true;
-    $scope.selectedNarrative = narrative;
-    $scope.playing = true;
-    narratorFactory.selectNarrative(narrative);
-    console.log('playing ' + $scope.playing);
-  };
+   	// Select a narrative to edit or view
+    $scope.selectNarrative = function(narrative){
+      $scope.selected = true;
+      $scope.selectedNarrative = narrative;
+      $scope.playing = true;
+      narratorFactory.selectNarrative(narrative);
+      console.log('playing ' + $scope.playing);
+    };
 
-  // Deselect the narrative being edited or viewed
-  $scope.deselectNarrative = function(){
-    $scope.selected = false;
-    $scope.playing = false;
-    narratorFactory.deselectNarrative();
-  }
+    // Deselect the narrative being edited or viewed
+    $scope.deselectNarrative = function(){
+      $scope.selected = false;
+      $scope.playing = false;
+      narratorFactory.deselectNarrative();
+    }
+
 
 }]);

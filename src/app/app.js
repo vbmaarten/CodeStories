@@ -73,15 +73,15 @@ angular
       .state('narrating.node', {
         url: '/{path:.*}',
         views: {
-          'projectLoader@narrating': {
+          'projectLoader': {
             templateUrl: '/projectLoader/projectLoader.html',
             controller: 'ProjectLoaderCtrl' 
           },
-          'explorer@narrating': {
+          'explorer': {
             templateUrl: '/explorer/explorer.html',
             controller: 'ExplorerCtrl'
           },
-          'narrator@narrating': {
+          'narrator': {
             templateUrl: '/narrator/narrator.html',
             controller: 'NarratorCtrl' 
           }
