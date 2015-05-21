@@ -42,6 +42,20 @@ module.exports = function(config) {
       'test/spec/{,*/}*.js'
     ],
 
+
+    preprocessors : {
+      'app/cast/cast.factory.js': 'coverage'
+    },
+
+    // coverage reporter generates the coverage
+    reporters: ['progress', 'coverage'],
+
+    // optionally, configure the reporter
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
+
     // list of files / patterns to exclude
     exclude: [
       'app/stories/*',
@@ -65,7 +79,8 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-coverage',
     ],
 
     // Continuous Integration mode
