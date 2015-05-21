@@ -42,17 +42,17 @@
                     },
                     {
                     "type": "link",
-                    "content": {"id":"codetest2","node":"/bubblesort.js/program"}
+                    "content": {"id":"codetest2","node":"/bubblesort.js/Program"}
                     }
                 ]
             }
         ],
-    "/bubblesort.js/program":[
+    "/bubblesort.js/Program":[
         {
             "name":"codetest2",
             "type":"Code",
             "ASTItems":[
-                {"node":"body/0/body/body/0/",
+                {"node":"Body/0FunctionDeclaration/Block/Body/0VariableDeclaration",
                  "items":[
                     {"type":"text",
                     "content":"This is some code"
@@ -62,7 +62,7 @@
 
                 ]},
                 {
-                "node":"body/0/body/body/1/body/body/1/body/body/0/test",
+                "node":"Body/0FunctionDeclaration/Block/Body/1DoWhile/Block/Body/1For/Block/Body/0If/BinaryExpression",
                  "items":[
                     {"type":"text",
                     "content":"This is executed on the if >"

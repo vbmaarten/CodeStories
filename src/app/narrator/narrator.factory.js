@@ -8,11 +8,11 @@
  * Factory of the narrator, containers logic of the state of the narrator.
  */
 
-angular.module('narrator')
-  .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', function ($state, $stateParams, CAST, interpreterFactory) {
-    return  {
+ angular.module('narrator')
+ .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', function ($state, $stateParams, CAST, interpreterFactory) {
+  return  {
       // Stores the current mode of the app
-      writerMode: true,
+      writerMode: false,
       // Tells the view mode if there is a narrative playing
       narrativePlaying: false,
       // Stores the narratives that are currently playing
@@ -28,8 +28,8 @@ angular.module('narrator')
 
       selectNarrative: function(narrative){
         this.deselectNarrative();
-      	this.narrativePlaying = true;
-      	this.pushNarrative(narrative);
+        this.narrativePlaying = true;
+        this.pushNarrative(narrative);
       },
 
       deselectNarrative: function(){
@@ -60,7 +60,13 @@ angular.module('narrator')
 
         // Get the next Item
         if(this.queue[0].isCodeNarrative()){
-          nextItem = interpreterFactory.narrativeStep();
+          var next = interpreterFactory.narrativeStep();
+          nextItem = next.item;
+          this.narrativeLink = true;
+
+          $state.go('narrating.node', {'path': next.node.getPath()});
+          //CAST.setSelected(next.node);
+
         } 
         else {
           if(this.queue[0].items.length > this.queueCounter[0]){
@@ -81,10 +87,10 @@ angular.module('narrator')
             this.storyboard[this.storyboard.length-1].items.push(nextItem);
             this.queueCounter[0]++;
           }
-        }
+        } else {  // If the narrative is done playing
 
-        // If the narrative is done playing
-        else{
+       
+        
           // Remove the first item from the queue
           this.queue.shift();
           this.queueCounter.shift();
@@ -127,7 +133,7 @@ angular.module('narrator')
 
         if(linked === undefined){
           linked = node.isASTNode() ? 
-            new CodeNarrative('A new narrative appears',linkItem.content.node ) : new FSNarrative('A new narrative appears',linkItem.content.node);
+          new CodeNarrative('A new narrative appears',linkItem.content.node ) : new FSNarrative('A new narrative appears',linkItem.content.node);
         } 
 
         console.log(linked);

@@ -24,18 +24,20 @@ angular.module('narrator')
 	 		var node;
 
 	 		for(var i in items){
+	 			console.log(items[i].node);
 	 			var node = ASTNode.getNode(items[i].node);
-	 			node.ast.codeNarrative = node.ast.codeNarrative || {};
-	 			node.ast.codeNarrative[narrative.name] = [];
+	 			node.tnode.codeNarrative = node.tnode.codeNarrative || {};
+	 			node.tnode.codeNarrative[narrative.name] = [];
 	 			for(var j in items[i].items)
-	 				node.ast.codeNarrative[narrative.name].push(Item.prototype.buildNewItem(items[i].items[j]));
+	 				node.tnode.codeNarrative[narrative.name].push(Item.prototype.buildNewItem(items[i].items[j]));
 	 		}
 
 
 	 		currentNarrative = narrative.name;
 	 		i=0;
-	 		this.interpreter.setAst(ASTNode.ast);
+	 		this.interpreter.setAst(ASTNode.tnode);
 	 	};
+
 
 	 	factory.debugStep = function(){
 	 		this.interpreter.step();
@@ -48,29 +50,29 @@ angular.module('narrator')
 	 	};
 
 
-	 	
+	 	var processedNode;
 	 	factory.narrativeStep = function(){
  		
 	 		if(currentASTItems && currentASTItems[i+1]){
 	 			i++;
-	 			return currentASTItems[i];
+	 			return {'node':processedNode.ASTNode,'item':currentASTItems[i]};
 	 		}
 	 		var step = true;
 	 		
-	 		var processedNode;
+	 		
 	 		do{
 	 			processedNode = this.interpreter.stateStack[0].node;
 	 			var oldStackSize = this.interpreter.stateStack.length;
 	 			step = this.interpreter.step()
 	 			var newStackSize = this.interpreter.stateStack.length;
 	 			if( !step ){
-	 				return false;
+	 				return {'node':processedNode.ASTNode,'item':false};
 	 			}
 	 			//stop when the processedNode has a current narrative and the stack size has decreased (node has been poped)
 	 		} while(  ( oldStackSize < newStackSize ) || !(processedNode.codeNarrative && processedNode.codeNarrative[ currentNarrative ]) );
 	 		currentASTItems = processedNode.codeNarrative[currentNarrative];
 	 		i=0;
-	 		return currentASTItems[i];
+	 		return {'node':processedNode.ASTNode,'item':currentASTItems[i]};
 	 	};
 
     return factory;        
