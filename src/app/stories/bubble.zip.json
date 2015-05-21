@@ -42,14 +42,14 @@
                     },
                     {
                     "type": "link",
-                    "content": {"id":"codetest","node":"/bubblesort.js/program"}
+                    "content": {"id":"codetest2","node":"/bubblesort.js/program"}
                     }
                 ]
             }
         ],
     "/bubblesort.js/program":[
         {
-            "name":"codetest",
+            "name":"codetest2",
             "type":"Code",
             "ASTItems":[
                 {"node":"body/0/body/body/0/",

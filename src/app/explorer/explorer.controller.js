@@ -31,10 +31,20 @@ angular.module('explorer')
 	   		 _session.setMode("ace/mode/text");
 	   	}
 	    _editor.setTheme("ace/theme/crimson_editor");
+	    _editor.setValue($scope.content, -1);
 
 	    // Node selection
+	    if($scope.selected.isASTNode()){
+	        var range = {};
+	        range.start = {};
+	        range.end = {};
+	        range.start.row = $scope.selected.ast.loc.start.line - 1;
+	        range.start.column = $scope.selected.ast.loc.start.column;
+	        range.end.row = $scope.selected.ast.loc.end.line - 1;
+	        range.end.column = $scope.selected.ast.loc.end.column;
 
-
+	        _editor.getSession().selection.setSelectionRange(range);
+    	}
 	    // Events
 	    //_editor.on("changeSession", function(){ ... });
 	    //_session.on("change", function(){ ... });

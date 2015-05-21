@@ -43,8 +43,10 @@ angular.module('narrator')
         this.queue.unshift(narrative);
         this.queueCounter.unshift(0);
         this.storyboard.push({'name':this.queue[0].name, 'items':[]});
-        if(narrative.isCodeNarrative()){
-          interpreterFactory.setupNarratedAST(CAST.getNode(narrative.CASTPath),narrative);
+        if( narrative.isCodeNarrative() ){
+          var CASTNode = CAST.getNode(narrative.CASTPath);
+          console.log(narrative);
+          interpreterFactory.setupNarratedAST(CASTNode,narrative);
         }
       },
 
