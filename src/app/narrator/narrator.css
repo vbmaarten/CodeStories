@@ -1,6 +1,6 @@
 
 .narrator {
-	padding:0 20px;
+	padding:0 20px 20px 20px;
 	background-color: #f0f0f0;
 	overflow-y: scroll; 
 }
@@ -71,9 +71,11 @@
 }
 
 .narrator .button-wide.next {
-	position: absolute;
-	bottom:0px;
+	position: fixed;
+	bottom:0;
 	width:460px;
+	background-color: #9C27B0;
+	color: #FFFFFF;
 }
 
 .narrator .button-wide.add {
