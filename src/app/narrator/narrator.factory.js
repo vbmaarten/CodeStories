@@ -62,7 +62,11 @@
         if(this.queue[0].isCodeNarrative()){
           var next = interpreterFactory.narrativeStep();
           nextItem = next.item;
-          CAST.setSelected(next.node);
+          this.narrativeLink = true;
+
+          $state.go('narrating.node', {'path': next.node.getPath()});
+          //CAST.setSelected(next.node);
+
         } 
         else {
           if(this.queue[0].items.length > this.queueCounter[0]){

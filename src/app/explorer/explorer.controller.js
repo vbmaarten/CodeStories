@@ -14,7 +14,7 @@ angular.module('explorer')
     $scope.selected = CAST.selected;
     $scope.content = CAST.content;
 
-    
+
 
     $scope.aceLoaded = function(_editor){
 	    // Editor part
@@ -38,10 +38,10 @@ angular.module('explorer')
 	        var range = {};
 	        range.start = {};
 	        range.end = {};
-	        range.start.row = $scope.selected.ast.loc.start.line - 1;
-	        range.start.column = $scope.selected.ast.loc.start.column;
-	        range.end.row = $scope.selected.ast.loc.end.line - 1;
-	        range.end.column = $scope.selected.ast.loc.end.column;
+	        range.start.row = $scope.selected.tnode.loc.start.line - 1;
+	        range.start.column = $scope.selected.tnode.loc.start.column;
+	        range.end.row = $scope.selected.tnode.loc.end.line - 1;
+	        range.end.column = $scope.selected.tnode.loc.end.column;
 
 	        _editor.getSession().selection.setSelectionRange(range);
     	}

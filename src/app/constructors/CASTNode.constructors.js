@@ -42,11 +42,8 @@ CASTNode.prototype = {
         return this.getChild(directChild).getNode(path);
     },
     getChild: function(name) {
-        var child = this.getChildren()[name];
-        if (child && !child.getParent()) {
-            child.setParent(this);
-        }
-        return child;
+        
+        return this.children[name];
     },
     getChildren: function() {
         return this.children;
@@ -116,7 +113,7 @@ Object.defineProperty(t_node_constructor,'ASTNode',{
 
 var ASTNode = function (name,parent,children,tnode) {
     CASTNode.call(this, name , parent, children);
-    this.tnode = tnode
+    this.tnode = tnode;
 };
 ASTNode.prototype = Object.create(CASTNode.prototype);
 
