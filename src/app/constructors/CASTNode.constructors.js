@@ -136,7 +136,7 @@ ASTNode.prototype.containsPosition = function(pos){
 
 ASTNode.prototype.attachItemsToAcornAST = function(codeNarrative){
 
-        var items = narrative.ASTItems
+        var items = narrative.itemHooks
         var node;
         for(var i in items){
             var node = ASTNode.getNode(items[i].node);

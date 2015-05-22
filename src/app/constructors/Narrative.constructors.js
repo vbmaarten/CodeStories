@@ -41,7 +41,7 @@ FSNarrative.prototype.validItem = function (item) {
 
 FSNarrative.prototype.removeItem = function(item){
 			var i = this.items.indexOf(item);
-			this.items.splice(i,1);
+			this.	items.splice(i,1);
 }
 
 FSNarrative.prototype.addItem = function (item, index) {
@@ -73,9 +73,9 @@ FSNarrative.prototype.addItems = function (items) {
 
 //items is an array that contains objects {'node' , 'items'}
 // the goal is to append to the subnodes of the AST nodes the proper items under the proper name
-var CodeNarrative = function (name, CASTPath, ASTItems) {
+var CodeNarrative = function (name, CASTPath, itemHooks) {
 	Narrative.call(this,name, CASTPath);
-	this.ASTItems = ASTItems;
+	this.itemHooks = itemHooks;
 	
 };
 
@@ -87,3 +87,28 @@ CodeNarrative.prototype.validItem = function (item) {
 		}
 		return item instanceof Item;
 	};
+CodeNarrative.prototype.removeItem = function(subnode,item){
+	this.itemHooks
+			var i = this.items.indexOf(item);
+			this.	items.splice(i,1);
+}
+
+CodeNarrative.prototype.addItem = function (subnode,item, index) {
+		if(!item){
+			item = new EmptyItem();
+		}
+		if (!this.validItem(item)) {
+			console.error('Trying to add a wrong type of item', item, this);
+			throw 'BadItemForNarrative';
+		}
+		if (index === undefined) {
+			index = this.items.length;
+		}
+
+		if(index instanceof Item){
+			index = item.indexOf(index) +1;
+		}
+
+
+		this.items.splice(index, 0, item);
+	}

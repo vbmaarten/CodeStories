@@ -43,7 +43,7 @@ angular.module('cast')
                         //hack: ASTNodes are only loaded once the filenode.getChild('program') has been called. 
                         //  check if the path contains '/program' to determine if its an ast node
                         if ( castPath.toLowerCase().indexOf('.js/program') > 0) {
-                            newNarrative = new CodeNarrative(name, castPath, narrative[i].ASTItems);
+                            newNarrative = new CodeNarrative(name, castPath, narrative[i].itemHooks);
                         } else {
                             newNarrative = new FSNarrative(name, castPath, narrative[i].items);
                         }

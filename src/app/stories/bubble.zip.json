@@ -51,7 +51,7 @@
         {
             "name":"codetest2",
             "type":"Code",
-            "ASTItems":[
+            "itemHooks":[
                 {"node":"Body/0FunctionDeclaration/Block/Body/0VariableDeclaration",
                  "items":[
                     {"type":"text",

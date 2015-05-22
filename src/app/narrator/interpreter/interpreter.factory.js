@@ -14,7 +14,7 @@ angular.module('narrator')
     factory.interpreter = new Interpreter("");
 
     	var currentNarrative;
-    	var currentASTItems;
+    	var currentitemHooks;
 	 	var i = 0;
 
 	 	
@@ -44,9 +44,9 @@ angular.module('narrator')
 	 	var processedNode;
 	 	factory.narrativeStep = function(){
  		
-	 		if(currentASTItems && currentASTItems[i+1]){
+	 		if(currentitemHooks && currentitemHooks[i+1]){
 	 			i++;
-	 			return {'node':processedNode.ASTNode,'item':currentASTItems[i]};
+	 			return {'node':processedNode.ASTNode,'item':currentitemHooks[i]};
 	 		}
 	 		var step = true;
 	 		
@@ -61,9 +61,9 @@ angular.module('narrator')
 	 			}
 	 			//stop when the processedNode has a current narrative and the stack size has decreased (node has been poped)
 	 		} while(  ( oldStackSize < newStackSize ) || !(processedNode.codeNarrative && processedNode.codeNarrative[ currentNarrative ]) );
-	 		currentASTItems = processedNode.codeNarrative[currentNarrative];
+	 		currentitemHooks = processedNode.codeNarrative[currentNarrative];
 	 		i=0;
-	 		return {'node':processedNode.ASTNode,'item':currentASTItems[i]};
+	 		return {'node':processedNode.ASTNode,'item':currentitemHooks[i]};
 	 	};
 
     return factory;        
