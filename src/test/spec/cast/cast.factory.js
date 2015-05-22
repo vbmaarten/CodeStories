@@ -9,6 +9,7 @@ describe('Factory: CAST', function () {
   var CAST;
   var folderNode;
   var fileNode;
+  var astNode;
 
   beforeEach(inject(function (_CAST_){
     CAST = _CAST_;
@@ -58,7 +59,7 @@ describe('Factory: CAST', function () {
     beforeEach(function () {
       folderNode = CAST.cast.rootnode.children['folderNode'] = new FolderNode('folderNode', CAST.cast.rootnode, {});
       fileNode = folderNode.children['fileNode.js'] = new FileNode('fileNode.js', folderNode, { });
-      ASTNode = fileNode.children['program'] = new ASTNode('program', fileNode, {}, null);
+      astNode = fileNode.children['program'] = new ASTNode('program', fileNode, {}, null);
     });
 
     var narratives = {
