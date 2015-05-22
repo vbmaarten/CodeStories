@@ -62,39 +62,16 @@ describe('Factory: CAST', function () {
       astNode = fileNode.children['program'] = new ASTNode('program', fileNode, {}, null);
     });
 
-    var narratives = {
-      '/folderNode': [
-        {
-          "name": "hello world narrative",
-          "type": "FS",
-          "items": []
-        }
-      ],
-      '/folderNode/fileNode.js': [
-        {
-          "name": "hello world narrative 2",
-          "type": "FS",
-          "items": []
-        }
-      ],
-      '/folderNode/fileNode.js/program': [
-        {
-          "name": "hello world narrative 3",
-          "type": "Code",
-          "ASTItems": []
-        }
-      ]
-    }
 
     it('should be able to append a list of narratives', function () {
-      CAST.appendNarrative(narratives);
+      CAST.appendNarrative(narrativesMock);
 
       expect(CAST.narratives['/folderNode'][0]['name']).toBe('hello world narrative');
       expect(CAST.getSelectedNarratives()).toEqual( [] );
     });
 
     it('should be able to return a selected narrative', function() {
-      CAST.appendNarrative(narratives);
+      CAST.appendNarrative(narrativesMock);
 
       CAST.setSelected('folderNode/fileNode.js');
 

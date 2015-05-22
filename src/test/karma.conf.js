@@ -38,6 +38,7 @@ module.exports = function(config) {
       'app/narrator/narrator.js',
       'app/projectLoader/projectLoader.js',
       'app/cast/cast.factory.js',
+      'app/narrator/interpreter/interpreter.factory.js',
       'app/{,*/}*.js',
       'test/mock/{,*/}*.js',
       'test/spec/{,*/}*.js'
@@ -49,6 +50,10 @@ module.exports = function(config) {
       'app/constructors/**.js': 'coverage',
       'app/projectLoader/projectLoader.factory.js': 'coverage',
       'app/narrator/narrator.factory.js': 'coverage',
+      'app/narrator/narrator.controller.js': 'coverage',
+      'app/narrator/writer/writer.controller.js': 'coverage',
+      'app/narrator/interpreter/interpreter.factory.js': 'coverage',
+      'app/explorer/explorer.controler.js': 'coverage',
     },
 
     // coverage reporter generates the coverage
