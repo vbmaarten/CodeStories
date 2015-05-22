@@ -7,11 +7,8 @@
  * Service of the project loader
  */
  angular.module('projectLoader').factory('projectLoaderFactory', [
- 	'$http',
- 	'$stateParams',
- 	'CAST',
- 	function ($http, $stateParams, CAST) {
-
+  'CAST',
+  function (CAST) {
     return {
 
       loadZip : function (data) {
@@ -19,46 +16,21 @@
 
         CAST.cast.rootnode = contents.cast;
         CAST.appendNarrative(contents.narratives);
-
-         // hack: quick add narratives 
-         $http.get('/stories/'+$stateParams.project +'.json').success(function(data){
-           CAST.appendNarrative(data);
-         })
-
       },
 
       packZip: function(){
         var zip = new JSZip();
 
-        var root_node = CAST.cast.rootnode;
+        var rootNode = CAST.cast.rootnode;
 
         //pack cast
-        this._packCastZip(root_node,zip);
+        this._packCastZip(rootNode,zip);
 
         //pack narratives
-        var narratives = CAST.narratives;
-        var codestories = {};
-        for(var path in narratives){
-          codestories[path] = [];
-          var path_narratives = codestories[path];
-          narratives[path].forEach(function(path_narrative){
-            var narrative = {};
-            path_narratives.push(narrative);
-            narrative.name = path_narrative.name;   
-            narrative.type = path_narrative.type; 
-            narrative.items = [];
-            path_narrative.items.forEach(function(path_item){
-                var item = {};
-                item.type = path_item.type;
-                item.content = path_item.content;
-                narrative.items.push(item);
-            });   
-          });
-        };
+        var codestories = this._generateCodeStories(CAST.narratives);      
+        zip.file('.codestories', JSON.stringify(codestories,null,'  '));
 
-        zip.file(".codestories", JSON.stringify(codestories,null,'  '));
-
-        saveAs(zip.generate({type: 'blob'}), "project.zip");
+        saveAs(zip.generate({type: 'blob'}), 'project.zip');
       },
 
       _packCastZip: function(root, zip){
@@ -68,10 +40,49 @@
             if(child.isFolder()){
               this._packCastZip(child, zip.folder(child.name));
             } else {
-              zip.file(child.name, child.content)
+              zip.file(child.name, child.content);
             }
           }
         }
+      },
+
+      _generateCodeStories: function(narratives){
+        var codestories = {};
+
+        for(var path in narratives){
+          codestories[path] = [];
+          
+          var $this = this;
+          narratives[path].forEach(function(narrative){
+            if(narrative.isFSNarrative()){  //Only supports filesystem narratives now
+               codestories[path].push($this._generateFSNarrative(narrative));
+            } 
+          });
+        }
+
+        return codestories;
+      },
+
+      _generateFSNarrative: function(fsNarrative){
+        var narrative = {};
+        narrative.name = fsNarrative.name; 
+        narrative.type = 'FS';
+        narrative.items = [];
+
+        var $this = this;
+        fsNarrative.items.forEach(function(fsItem){
+          var item = $this._generateItem(fsItem);
+          narrative.items.push(item);
+        }); 
+
+        return narrative;
+      },
+
+      _generateItem: function(itemObj){
+        var item = {};
+        item.type = itemObj.type;
+        item.content = itemObj.content;
+        return item;
       },
 
       UnpackZip : function (zip) {
@@ -83,8 +94,9 @@
         var root = new FolderNode('', null, {});
         root.path = '';
 
+        var $this = this;
         //Loop through files that are packed in the zip
-        Object.getOwnPropertyNames(zip.files).forEach(function (element, index, array) {
+        Object.getOwnPropertyNames(zip.files).forEach(function (element) {
           var isDirectory = element.slice(-1) === '/';
           var isJS = false;
           var isCodestoriesFile = false;
@@ -99,25 +111,16 @@
           var last = path.pop();
 
           if(!isDirectory){
-             var file_extension = last.split('.').pop();
-            if (file_extension === 'js') {
+             var fileExtension = last.split('.').pop();
+            if (fileExtension === 'js') {
               isJS = true;
-            } else if(file_extension === 'codestories'){
+            } else if(fileExtension === 'codestories'){
               isCodestoriesFile = true;
             }
-          }          
+          }
 
-          var newRoot = root;
-
-          //Walk through the path, until the newRoot is the path the file is being added at
-          path.forEach(function (element, index, arary) {
-            if (newRoot.children[element]) {                                  //If the folder is already defined, step into it
-              newRoot = newRoot.children[element];
-            } else {                                                       //Otherwise, create the folder node. 
-              newRoot.children[element] = new FolderNode(element, newRoot, {});  
-              newRoot = newRoot.children[element];
-            }
-          });
+          var newRoot = $this._walkTo(root, path);
+          
           if (!newRoot.children[last]) {
             if(isCodestoriesFile){   //Parse the narratives file
               ret.narratives = JSON.parse(zip.file(element).asText());
@@ -131,8 +134,23 @@
         ret.cast = root;
 
         return ret;
+      },
+
+      _walkTo: function(root, path){
+        var higherRoot = root;
+
+        path.forEach(function (element) {
+          if (higherRoot.children[element]) {       //If the folder is already defined, step into it
+            higherRoot = higherRoot.children[element];
+          } else {                                  //Otherwise, create the folder node. 
+            higherRoot.children[element] = new FolderNode(element, higherRoot, {});  
+            higherRoot = higherRoot.children[element];
+          }
+        });
+
+        return higherRoot;
       }
 
-    }
+    };
   }
 ]);
