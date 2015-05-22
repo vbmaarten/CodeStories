@@ -86,11 +86,15 @@ describe('Factory: CAST', function () {
       ]
     }
 
-    it('should be able to append a list of narratives and be able to return a selected narrative', function () {
+    it('should be able to append a list of narratives', function () {
       CAST.appendNarrative(narratives);
 
       expect(CAST.narratives['/folderNode'][0]['name']).toBe('hello world narrative');
       expect(CAST.getSelectedNarratives()).toEqual( [] );
+    });
+
+    it('should be able to return a selected narrative', function() {
+      CAST.appendNarrative(narratives);
 
       CAST.setSelected('folderNode/fileNode.js');
 
