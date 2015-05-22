@@ -3,7 +3,7 @@
 var CASTNode = function(name, parent, children) {
     this.name = name;
     this.parent = parent;
-    this.children = children;
+    this.children = children || {};
     this.narratives = [];
     this.path = null;
 };
@@ -134,16 +134,19 @@ ASTNode.prototype.containsPosition = function(pos){
 
 }
 
-ASTNode.prototype.attachItemsToAcornAST = function(codeNarrative){
+// Attach items to the interpreter ast nodes, under the attribute .codeNarrative[ narrative name ]
+ASTNode.prototype.attachItemHooks = function(codeNarrative){
 
-        var items = narrative.itemHooks
+        var hooks = narrative.itemHooks
         var node;
-        for(var i in items){
-            var node = ASTNode.getNode(items[i].node);
+        for(var i in hooks){
+            var node = ASTNode.getNode(hooks[i].node);
             node.tnode.codeNarrative = node.tnode.codeNarrative || {};
             node.tnode.codeNarrative[narrative.name] = [];
-            for(var j in items[i].items)
-                node.tnode.codeNarrative[narrative.name].push(Item.prototype.buildItem(items[i].items[j]));
+            for(var j in hooks[i].items){
+                var item = Item.prototype.buildItem(hooks[i].items[j]);
+                node.tnode.codeNarrative[narrative.name].push( item );
+            }
         }
 }
 

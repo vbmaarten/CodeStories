@@ -22,7 +22,7 @@ angular.module('narrator')
 
 
 	 		
-	 		ASTNode.attachItemsToAcornAST(codeNarrative);
+	 		ASTNode.attachItemHooks(codeNarrative);
 
 	 		currentNarrative = narrative.name;
 	 		i=0;

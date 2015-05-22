@@ -51,17 +51,18 @@
         {
             "name":"codetest2",
             "type":"Code",
-            "itemHooks":[
-                {"node":"Body/0FunctionDeclaration/Block/Body/0VariableDeclaration",
-                 "items":[
-                    {"type":"text",
-                    "content":"This is some code"
-                 },
-                  {"type":"vcode",
-                    "content":"var barchart = new BarChart(); "}
+            "itemHooks":{
+                "Body/0FunctionDeclaration/Block/Body/0VariableDeclaration":{
+                    "node":"Body/0FunctionDeclaration/Block/Body/0VariableDeclaration",
+                     "items":[
+                        {"type":"text",
+                        "content":"This is some code"
+                     },
+                      {"type":"vcode",
+                        "content":"var barchart = new BarChart(); "}
 
-                ]},
-                {
+                    ]},
+                "Body/0FunctionDeclaration/Block/Body/1DoWhile/Block/Body/1For/Block/Body/0If/BinaryExpression":{
                 "node":"Body/0FunctionDeclaration/Block/Body/1DoWhile/Block/Body/1For/Block/Body/0If/BinaryExpression",
                  "items":[
                     {"type":"text",
@@ -69,10 +70,9 @@
                  },
                   {"type":"vcode",
                     "content":"barchart.select([i,i+1]);"}
-
-                ]
+                    ]
                 }
-            ]
+            }
         }
     ]
 }

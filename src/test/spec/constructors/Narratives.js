@@ -1,14 +1,11 @@
 'use strict';
 
-describe ( 'Item constructors', function ( ) {
+describe ( 'Narratives', function ( ) {
 
 
 var textitemObj = {
 	'type':'text',
-	'content': {
-		'node':'/',
-		'id':'testnarrative'
-	}
+	'content': "text"
 }
 
 var linkitemObj = {
@@ -54,9 +51,12 @@ var CodeN;
 
 		expect( FSN.items[2].isEmptyItem() ).toEqual(true);
 
-		FSN.addItem(textitem,linkitem); //add text item again after link item 
-
+		FSN.addItem(textitem,2); //add text item again after link item 
+		console.log(FSN.items);
 		expect( FSN.items[2].isTextItem() ).toEqual(true);
+
+		FSN.addItem( undefined, FSN.items[0])//add empty item after first item;
+		expect(FSN.items[1].isEmptyItem() ).toEqual(true);;
 
 
 	 });
@@ -65,20 +65,24 @@ var CodeN;
 		expect( CodeN.isFSNarrative() ).toEqual(false);
 		expect( CodeN.isCodeNarrative() ).toEqual(true);
 
-		CodeN.addItems( '/' , [textitem] );
-		CodeN.addItems( '/0VariableDeclaration' , [textitem] );
+		CodeN.addItem( '/' , textitem );
 
 
-		expect( CodeN.items[0] ).toEqual(textitem);
 
-		CodeN.addItem();//add empty item at the end
+		expect( CodeN.itemHooks['/'].items[0] ).toEqual(textitem);
 
-		expect( CodeN.items[2].isEmptyItem() ).toEqual(true);
+		CodeN.addItem( );//add empty item at the end of '/'
 
-		CodeN.addItem(textitem,linkitem); //add text item again after link item 
+		expect( CodeN.itemHooks['/'].items[1].isEmptyItem() ).toEqual(true);
 
-		expect( CodeN.items[2].isTextItem() ).toEqual(true);
-		
+		CodeN.addItem( '/0VariableDeclaration' , textitem );
+
+		expect( CodeN.itemHooks['/0VariableDeclaration'].items[0] ).toEqual(textitem);
+
+		expect( function(){ 
+				CodeN.addItem(linkitem);
+				}).toThrow(new TypeError("Trying to add a bad item to narrative"));
+
 
 	 });
 
