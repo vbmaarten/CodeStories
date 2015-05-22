@@ -11,12 +11,6 @@ Narrative.prototype = {
 	isFSNarrative : function () {
 		return this instanceof FSNarrative
 	},
-	removeItem : function (index) {
-		if (index instanceof Item) {
-			index : this.Items.indexOf(index);
-		}
-		this.Items.splice(index, 1);
-	},
 	validItem : function () {
 		return false;
 	}
@@ -41,7 +35,10 @@ FSNarrative.prototype.validItem = function (item) {
 
 FSNarrative.prototype.removeItem = function(item){
 			var i = this.items.indexOf(item);
-			this.items.splice(i,1);
+
+			if(i >= 0){
+				this.items.splice(i,1);
+			}
 }
 
 FSNarrative.prototype.addItem = function (item, index) {
@@ -49,8 +46,7 @@ FSNarrative.prototype.addItem = function (item, index) {
 			item = new EmptyItem();
 		}
 		if (!this.validItem(item)) {
-			console.error('Trying to add a wrong type of item', item, this);
-			throw 'BadItemForNarrative';
+			throw new TypeError("Trying to add a bad item to narrative",item , this) ;
 		}
 		if (index === undefined) {
 			index = this.items.length;
@@ -65,7 +61,8 @@ FSNarrative.prototype.addItem = function (item, index) {
 	}
 FSNarrative.prototype.addItems = function (items) {
 		for (var i in items) {
-			this.addItem(Item.prototype.buildItem(items[i]));
+			var item = (items[i] instanceof Item) ? items[i] : Item.prototype.buildItem(items[i]);
+			this.addItem( item );
 		}
 	}
 
