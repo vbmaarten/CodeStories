@@ -61,5 +61,3 @@ Interpreter.prototype.EvaluateInScope =  function(code){
        JSON.stringify(scope) + ')';
     eval(evalStr);
   } 
-
- 

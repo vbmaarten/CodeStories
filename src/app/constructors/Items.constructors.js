@@ -1,19 +1,57 @@
 'use strict';
+
 var Item = function (content) {
 	this.content = content;
 };
-Item.prototype.buildNewItem = function (item) {
-	var type = item.type;
-	if (type === 'text') {
-		return new TextItem(item.content);
-	} else if (type === 'link') {
-		return new LinkItem(item.content);
-	} else if (type === 'vcode'){
-		return new VCodeItem(item.content);
+
+
+
+Item.prototype = {
+	buildItem : function (item) {
+		if(!item.content){
+			throw new TypeError("Item content ")
+		}
+		var type = item.type;
+		switch(type){
+			case "text":
+			return new TextItem(item.content);
+			case "link":
+			return new LinkItem(item.content);
+			case "vcode":
+			return new VCodeItem(item.content);
+			case "video":
+			return new VideoItem(item.content);
+			case "picture":
+			return new PictureItem(item.content);
+			default:
+			throw new TypeError("Unkown item type",item);
+		}
+		
+	},
+
+	isLinkItem : function(){
+		return this instanceof LinkItem;
+	},
+	isVideoItem : function(){
+		return this instanceof VideoItem;
+	},
+	isPictureItem : function(){
+		return this instanceof PictureItem;
+	},
+	isVCodeItem : function(){
+		return this instanceof VCodeItem;
+	},
+	isTextItem : function(){
+		return this instanceof TextItem;
+	},
+	isEmptyItem : function(){
+		return this instanceof EmptyItem;
 	}
-	console.error('unknown item type', item);
-	throw 'unidentifiedItem';
-};
+}
+
+
+
+
 var TextItem = function (content) {
 	Item.call(this, content);
 };
@@ -39,7 +77,15 @@ VCodeItem.prototype = Object.create(Item.prototype);
 VCodeItem.prototype.type = "vcode";
 
 var LinkItem = function (content) {
+
 	Item.call(this, content);
 };
 LinkItem.prototype = Object.create(Item.prototype);
 LinkItem.prototype.type = "link";
+
+var EmptyItem = function () {
+
+	Item.call(this, "Empty");
+};
+EmptyItem.prototype = Object.create(Item.prototype);
+EmptyItem.prototype.type = "empty";

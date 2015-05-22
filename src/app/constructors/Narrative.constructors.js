@@ -5,19 +5,11 @@ var Narrative = function (name, CASTPath) {
 };
 
 Narrative.prototype = {
-	getType : function () {
-		if (this instanceof FSNarrative) {
-			return 'fs_narrative';
-		} else if (this instanceof CodeNarrative) {
-			return 'code_narrative';
-		}
-		throw 'BadNarrativeTypeError';
-	},
 	isCodeNarrative : function () {
-		return this.getType() === 'code_narrative';
+		return this instanceof CodeNarrative;
 	},
 	isFSNarrative : function () {
-		return this.getType() === 'fs_narrative';
+		return this instanceof FSNarrative
 	},
 	removeItem : function (index) {
 		if (index instanceof Item) {
@@ -46,7 +38,16 @@ FSNarrative.prototype = Object.create(Narrative.prototype);
 FSNarrative.prototype.validItem = function (item) {
 		return item instanceof Item;
 	};
+
+FSNarrative.prototype.removeItem = function(item){
+			var i = this.items.indexOf(item);
+			this.items.splice(i,1);
+}
+
 FSNarrative.prototype.addItem = function (item, index) {
+		if(!item){
+			item = new EmptyItem();
+		}
 		if (!this.validItem(item)) {
 			console.error('Trying to add a wrong type of item', item, this);
 			throw 'BadItemForNarrative';
@@ -54,11 +55,17 @@ FSNarrative.prototype.addItem = function (item, index) {
 		if (index === undefined) {
 			index = this.items.length;
 		}
+
+		if(index instanceof Item){
+			index = item.indexOf(index) +1;
+		}
+
+
 		this.items.splice(index, 0, item);
 	}
 FSNarrative.prototype.addItems = function (items) {
 		for (var i in items) {
-			this.addItem(Item.prototype.buildNewItem(items[i]));
+			this.addItem(Item.prototype.buildItem(items[i]));
 		}
 	}
 
@@ -75,7 +82,7 @@ var CodeNarrative = function (name, CASTPath, ASTItems) {
 
 CodeNarrative.prototype = Object.create(Narrative.prototype);
 CodeNarrative.prototype.validItem = function (item) {
-		if (item instanceof LinkItem) {
+		if (item.isLinkItem()) {
 			return false;
 		}
 		return item instanceof Item;

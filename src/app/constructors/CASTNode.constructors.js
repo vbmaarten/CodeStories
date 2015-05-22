@@ -118,6 +118,8 @@ Object.defineProperty(t_node_constructor,'ASTNode',{
     'enumerable': false
 })
 
+//ASTNodes are a wrapper arround the parse tree that acorn generates
+
 var ASTNode = function (name,parent,children,tnode) {
     CASTNode.call(this, name , parent, children);
     this.tnode = tnode;
@@ -130,6 +132,19 @@ ASTNode.prototype.containsPosition = function(pos){
     }
     return (tnode.start < pos && tnode.end > pos)
 
+}
+
+ASTNode.prototype.attachItemsToAcornAST = function(codeNarrative){
+
+        var items = narrative.ASTItems
+        var node;
+        for(var i in items){
+            var node = ASTNode.getNode(items[i].node);
+            node.tnode.codeNarrative = node.tnode.codeNarrative || {};
+            node.tnode.codeNarrative[narrative.name] = [];
+            for(var j in items[i].items)
+                node.tnode.codeNarrative[narrative.name].push(Item.prototype.buildItem(items[i].items[j]));
+        }
 }
 
 

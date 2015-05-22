@@ -18,20 +18,11 @@ angular.module('narrator')
 	 	var i = 0;
 
 	 	
-	 	factory.setupNarratedAST = function(ASTNode,narrative){
+	 	factory.setupNarratedAST = function(ASTNode,codeNarrative){
 
-	 		var items = narrative.ASTItems
-	 		var node;
 
-	 		for(var i in items){
-	 			console.log(items[i].node);
-	 			var node = ASTNode.getNode(items[i].node);
-	 			node.tnode.codeNarrative = node.tnode.codeNarrative || {};
-	 			node.tnode.codeNarrative[narrative.name] = [];
-	 			for(var j in items[i].items)
-	 				node.tnode.codeNarrative[narrative.name].push(Item.prototype.buildNewItem(items[i].items[j]));
-	 		}
-
+	 		
+	 		ASTNode.attachItemsToAcornAST(codeNarrative);
 
 	 		currentNarrative = narrative.name;
 	 		i=0;
