@@ -62,5 +62,4 @@ Interpreter.prototype.EvaluateInScope =  function(code){
     eval(evalStr);
   } 
 
-
-} 
+ 
