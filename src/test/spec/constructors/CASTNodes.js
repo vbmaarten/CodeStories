@@ -35,7 +35,6 @@ var bubblesort_str = ' function sort(values) {' +
 		root = new RootNode();
 		folder = new FolderNode('afolder',root);
 		file = new FileNode('afile.js',folder,{},bubblesort_str);
-		codeNarrative = new CodeNarrative()
 		root.children['afolder'] = folder;
 		folder.children['afile.js'] = file;
 	});
