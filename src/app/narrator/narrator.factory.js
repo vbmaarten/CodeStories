@@ -79,7 +79,7 @@
         // If the narrative isnt done playing
         if(nextItem){            
           // If the next item is a link to another narrative
-          if(nextItem instanceof LinkItem){
+          if( nextItem.isLinkItem() ){
             this.loadNarrative(nextItem);
           } 
           // Push the next item of the narrative
