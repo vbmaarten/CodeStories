@@ -38,7 +38,7 @@ var CodeN;
      });
 
 
-	it(' tests FSNarrative ', function() {  
+	it(' should tests FSNarrative add items', function() {  
 		expect( FSN.isFSNarrative() ).toEqual(true);
 		expect( FSN.isCodeNarrative() ).toEqual(false);
 
@@ -60,7 +60,7 @@ var CodeN;
 
 	 });
 
-	it(' tests CodeNarrative ', function() {  
+	it(' should tests CodeNarrative add items', function() {  
 		expect( CodeN.isFSNarrative() ).toEqual(false);
 		expect( CodeN.isCodeNarrative() ).toEqual(true);
 

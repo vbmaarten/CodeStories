@@ -47,7 +47,7 @@ var linkitem;
 	});
 
 
-	it('checks instance of LinkItem ', function() {  
+	it('should be a link item ', function() {  
 
 		expect( linkitem instanceof Item ).toEqual(true);
 		expect( linkitem.isLinkItem() ).toEqual(true);
@@ -57,7 +57,7 @@ var linkitem;
 
 
 
-it('checks valid constructors ', function() {  
+it(' should be  be the right kind of item ', function() {  
 
 
 	expect( textitem.isTextItem() ).toEqual(true);
@@ -70,7 +70,7 @@ it('checks valid constructors ', function() {
 
 });
 
-it('checks invalid items ', function() {  
+it(' should not throw an error when a bad type is used ', function() {  
 
 	var baditemObj = textitemObj;
 	baditemObj.type = 'nothing'

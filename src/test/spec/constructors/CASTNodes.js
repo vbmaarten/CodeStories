@@ -19,7 +19,7 @@ var file;
 	});
 
 
-	it('check get node ', function() {  
+	it(' should get the subnodes by their path ', function() {  
 
 		expect( root.getNode('/afolder')).toEqual(folder);
 		expect( root.getNode('/afolder/afile.js') ).toEqual(file);

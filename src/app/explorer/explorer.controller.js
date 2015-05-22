@@ -15,7 +15,7 @@ angular.module('explorer')
     $scope.content = CAST.content;
 
 
-    getASTNodeByRange = function(pos){
+    var getASTNodeByRange = function(pos){
       var ASTNode = $scope.selected;
       if(ASTNode.isFile())
       {

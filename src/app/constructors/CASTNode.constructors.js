@@ -55,9 +55,10 @@ CASTNode.prototype = {
             return 'file';
         } else if (this instanceof ASTNode) {
             return 'ast';
+        } else if (this instanceof RootNode){
+            return 'root';
         }
-        console.error('This node has a false type');
-        throw 'BadNodeTypeError';
+        throw new TypeError('Unknown node type',this);;
     },
     isFolder: function() {
         return this.getType() === 'directory';
