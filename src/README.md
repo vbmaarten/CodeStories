@@ -1,4 +1,4 @@
-# code-stories
+# Code Stories
 
 ## Build & development
 
@@ -25,4 +25,4 @@ $ grunt test
 
 Running `grunt test` will run the unit tests with karma.
 
-Opening the a browser at the given url will run the test suite and build a coverage report with istanbul, located in the coverage folder.
+Opening a browser at the given url will run the test suite and build a coverage report with istanbul, located in the coverage folder.
