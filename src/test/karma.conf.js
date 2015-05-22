@@ -37,6 +37,7 @@ module.exports = function(config) {
       'app/explorer/explorer.js',
       'app/narrator/narrator.js',
       'app/projectLoader/projectLoader.js',
+      'app/cast/cast.factory.js',
       'app/{,*/}*.js',
       'test/mock/{,*/}*.js',
       'test/spec/{,*/}*.js'
@@ -44,7 +45,10 @@ module.exports = function(config) {
 
 
     preprocessors : {
-      'app/cast/cast.factory.js': 'coverage'
+      'app/cast/cast.factory.js': 'coverage',
+      'app/constructors/**.js': 'coverage',
+      'app/projectLoader/projectLoaderFactory.js': 'coverage',
+      'app/narrator/narrator.factory.js': 'coverage',
     },
 
     // coverage reporter generates the coverage
