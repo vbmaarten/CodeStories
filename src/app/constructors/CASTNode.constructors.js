@@ -77,6 +77,13 @@ CASTNode.prototype = {
         return this.parent;
     }
 };
+
+var RootNode = function(name,children) {
+    CASTNode.call(this, name, null, children);
+    this.path = '/';
+};
+RootNode.prototype = Object.create(CASTNode.prototype);
+
 var FolderNode = function(name, parent, children) {
     CASTNode.call(this, name, parent, children);
 };

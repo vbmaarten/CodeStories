@@ -47,7 +47,7 @@ module.exports = function(config) {
     preprocessors : {
       'app/cast/cast.factory.js': 'coverage',
       'app/constructors/**.js': 'coverage',
-      'app/projectLoader/projectLoaderFactory.js': 'coverage',
+      'app/projectLoader/projectLoader.factory.js': 'coverage',
       'app/narrator/narrator.factory.js': 'coverage',
     },
 

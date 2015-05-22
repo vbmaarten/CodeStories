@@ -8,18 +8,20 @@
  * Factory of the cast
  */
 
-var CastMock = {
-    'rootnode': new FolderNode('rootnode', null, {})
-};
+
 
 angular.module('cast')
     .factory('CAST', function() {
 
+        var EmptyCast = {
+            'rootnode': new RootNode('rootnode', {})
+        };
+
         return {
             // CAST object
-            cast: CastMock,
+            cast: EmptyCast,
             // Currently selected node in the CAST
-            selected: CastMock.rootnode,
+            selected: EmptyCast.rootnode,
             // Path to the currently selected node
             selectedPath: '/',
             // File content corresponding to the current node
@@ -79,10 +81,10 @@ angular.module('cast')
             },
 
             setSelected:function(node){
-              if(typeof node === 'string'){
-                
+              if (typeof node === 'string'){
                 this.selected = this.getNode(node);
-              } else if ( node instanceof CASTNode){
+              }
+              if ( node instanceof CASTNode){
                 this.selected = node;
               }
                this.selectedPath = this.selected.getPath();
