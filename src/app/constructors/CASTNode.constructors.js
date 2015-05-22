@@ -8,23 +8,14 @@ var CASTNode = function(name, parent, children) {
     this.path = null;
 };
 CASTNode.prototype = {
-    getName: function() {
-        return this.name;
-    },
     getPath: function() {
         if (this.path === null) {
             this.path = this.getParent().getPath() + '/' + this.name;
         }
         return this.path
     },
-    setName: function(name) {
-        this.name = name;
-    },
     getParent: function() {
         return this.parent;
-    },
-    setParent: function(parent) {
-        this.parent = parent;
     },
     getNode: function(path) {
         //ensure path is a array
@@ -48,34 +39,17 @@ CASTNode.prototype = {
     getChildren: function() {
         return this.children;
     },
-    getType: function() {
-        if (this instanceof FolderNode) {
-            return 'directory';
-        } else if (this instanceof FileNode) {
-            return 'file';
-        } else if (this instanceof ASTNode) {
-            return 'ast';
-        } else if (this instanceof RootNode){
-            return 'root';
-        }
-        throw new TypeError('Unknown node type',this);;
-    },
     isFolder: function() {
-        return this.getType() === 'directory';
+        return this instanceof FolderNode
     },
     isFile: function() {
-        return this.getType() === 'file';
+        return this instanceof FileNode
     },
     isASTNode: function() {
-        return this.getType() === 'ast';
+        return this instanceof ASTNode
     },
-    up: function() {
-        if (!this.parent) {
-            console.error('This node has no parent');
-            throw 'NoParentError';
-            return this.parent;
-        }
-        return this.parent;
+    isRootNode: function(){
+        return this instanceof RootNode
     }
 };
 
@@ -131,7 +105,7 @@ ASTNode.prototype.containsPosition = function(pos){
     if(tnode instanceof Array){
         tnode = this.parent.tnode;
     }
-    return (tnode.start < pos && tnode.end > pos)
+    return (tnode.start <= pos && tnode.end >= pos)
 
 }
 
@@ -162,16 +136,16 @@ function wrapAcornAsASTNode(tnode,name,parent){
     for(var index in tnode){
         var subNode = tnode[index];
         if( subNode instanceof t_node_constructor || subNode instanceof Array ){
-            var name = subNode.name || subNode.type || 'Body';
+            var name = index;
             if(subNode.name && subNode.type){
                 name += '_' + subNode.type;
             }
             name = name.split('Statement').join('');
-            if(tnode instanceof Array){
-                name = index+name;
-            } 
 
             var child = wrapAcornAsASTNode( subNode, name , newASTNode);
+            if(children[name]){
+                throw new Error('Wohoooaaah , same cast paths',children[name],child)
+            }
             children[name] = child; 
         }
     }
