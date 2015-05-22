@@ -99,7 +99,7 @@ FileNode.prototype.getChild = function(parseAs) {
     var children = this.getChildren();
     if (!children[parseAs]) {
         if (parseAs === 'Program') {
-            if (this.name.endsWith('.js')) { //If it is a json file, add it's AST to the cast
+            if (this.name.substr(-3) === ".js") { //If it is a json file, add it's AST to the cast
                 var AST = acorn.parse(this.content, {
                     locations: true
                 });

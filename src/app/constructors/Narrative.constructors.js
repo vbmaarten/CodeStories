@@ -106,8 +106,7 @@ CodeNarrative.prototype.addItem = function (subnode,item, index) {
 			item = new EmptyItem();
 		}
 		if (!this.validItem(item)) {
-			console.error('Trying to add a wrong type of item', item, this);
-			throw new TypeError(" Trying to add a bad item to narrative",item , this) ;
+			throw new TypeError("Trying to add a bad item to narrative",item , this) ;
 		}
 		if (index === undefined) {
 			index = hook.items.length;

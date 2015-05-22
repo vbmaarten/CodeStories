@@ -24,7 +24,7 @@ Item.prototype = {
 			case "picture":
 			return new PictureItem(item.content);
 			default:
-			throw new TypeError("Unkown item type",item);
+			throw new TypeError("Unknown item type",item);
 		}
 		
 	},

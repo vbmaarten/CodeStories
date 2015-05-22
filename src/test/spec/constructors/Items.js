@@ -77,7 +77,7 @@ it('checks invalid items ', function() {
 
 	expect( function(){ 
 		Item.prototype.buildItem(baditemObj); 
-		}).toThrow(new TypeError("Unkown item type"));
+		}).toThrow(new TypeError("Unknown item type"));
 
 });
 

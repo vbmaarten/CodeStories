@@ -52,7 +52,6 @@ var CodeN;
 		expect( FSN.items[2].isEmptyItem() ).toEqual(true);
 
 		FSN.addItem(textitem,2); //add text item again after link item 
-		console.log(FSN.items);
 		expect( FSN.items[2].isTextItem() ).toEqual(true);
 
 		FSN.addItem( undefined, FSN.items[0])//add empty item after first item;
@@ -80,7 +79,7 @@ var CodeN;
 		expect( CodeN.itemHooks['/0VariableDeclaration'].items[0] ).toEqual(textitem);
 
 		expect( function(){ 
-				CodeN.addItem(linkitem);
+				CodeN.addItem('/',linkitem);
 				}).toThrow(new TypeError("Trying to add a bad item to narrative"));
 
 
