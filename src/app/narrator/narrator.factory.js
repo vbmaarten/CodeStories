@@ -45,7 +45,6 @@
         this.storyboard.push({'name':this.queue[0].name, 'items':[]});
         if( narrative.isCodeNarrative() ){
           var CASTNode = CAST.getNode(narrative.CASTPath);
-          console.log(narrative);
           interpreterFactory.setupNarratedAST(CASTNode,narrative);
         }
       },
