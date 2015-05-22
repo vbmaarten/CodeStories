@@ -53,7 +53,7 @@ module.exports = function(config) {
       'app/narrator/narrator.controller.js': 'coverage',
       'app/narrator/writer/writer.controller.js': 'coverage',
       'app/narrator/interpreter/interpreter.factory.js': 'coverage',
-      'app/explorer/explorer.controler.js': 'coverage',
+      'app/explorer/explorer.controller.js': 'coverage',
     },
 
     // coverage reporter generates the coverage
