@@ -18,7 +18,7 @@ describe('Factory: CAST', function () {
     expect(CAST.cast).toEqual({'rootnode': new RootNode('rootnode', {})});
   });
 
-  describe('CAST node lookup and selection functionality', function () {
+  describe('node lookup', function () {
 
     beforeEach(function () {
       folderNode = CAST.cast.rootnode.children['folderNode'] = new FolderNode('folderNode', CAST.cast.rootnode, {});
@@ -51,30 +51,55 @@ describe('Factory: CAST', function () {
 
   });
 
+  describe('narratives lookup', function() {
 
-  describe('CAST narratives', function() {
+
 
     beforeEach(function () {
       folderNode = CAST.cast.rootnode.children['folderNode'] = new FolderNode('folderNode', CAST.cast.rootnode, {});
-      fileNode = folderNode.children['fileNode'] = new FileNode('fileNode', folderNode, { });
+      fileNode = folderNode.children['fileNode.js'] = new FileNode('fileNode.js', folderNode, { });
+      ASTNode = fileNode.children['program'] = new ASTNode('program', fileNode, {}, null);
     });
 
     var narratives = {
-      '/folderNode': {
-        "name": " hello world narrative",
-        "type": "FS",
-        "items": []
-      },
-      '/folderNode/FileNode': {
-        "name": " hello world narrative 2",
-        "type": "FS",
-        "items": []
-      },
+      '/folderNode': [
+        {
+          "name": "hello world narrative",
+          "type": "FS",
+          "items": []
+        }
+      ],
+      '/folderNode/fileNode.js': [
+        {
+          "name": "hello world narrative 2",
+          "type": "FS",
+          "items": []
+        }
+      ],
+      '/folderNode/fileNode.js/program': [
+        {
+          "name": "hello world narrative 3",
+          "type": "Code",
+          "ASTItems": []
+        }
+      ]
     }
 
-    it('should be able to append a list of narratives', function () {
+    it('should be able to append a list of narratives and be able to return a selected narrative', function () {
       CAST.appendNarrative(narratives);
+
+      expect(CAST.narratives['/folderNode'][0]['name']).toBe('hello world narrative');
+      expect(CAST.getSelectedNarratives()).toEqual( [] );
+
+      CAST.setSelected('folderNode/fileNode.js');
+
+      expect(CAST.getSelectedNarratives()[0].name).toEqual( "hello world narrative 2" );
+      expect(CAST.getNarratives('/folderNode')[0].name).toEqual( "hello world narrative" );
+      expect(CAST.getNarrative('/folderNode/fileNode.js/program', 0).name).toEqual( "hello world narrative 3" );
+
     });
+
+
   });
 
 });

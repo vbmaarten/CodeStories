@@ -80,7 +80,7 @@ CASTNode.prototype = {
 
 var RootNode = function(name,children) {
     CASTNode.call(this, name, null, children);
-    this.path = '/';
+    this.path = '';
 };
 RootNode.prototype = Object.create(CASTNode.prototype);
 

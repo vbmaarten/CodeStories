@@ -52,33 +52,7 @@ angular.module('cast')
                     }
                 }
             },
-            getASTNodeByRange: function(pos){
-                var ASTNode = this.selected;
-                if(ASTNode.isFile())
-                {
-                    ASTNode = ASTNode.getChild('Program');
-                }
-                var hasBetterSelection = true;
-                while(!ASTNode.containsPosition(pos) && ASTNode.isASTNode()){
-                    ASTNode = ASTNode.parent;
-                }
-                
-
-                while(hasBetterSelection){
-                    hasBetterSelection = false;
-                    var child, children = ASTNode.getChildren();
-                    for( child in children){
-                        if( children[child].containsPosition(pos) ){
-                            hasBetterSelection = true;
-                            ASTNode = children[child];
-                        }
-                    }
-
-                }
-                if(ASTNode.tnode instanceof Array)
-                    ASTNode = ASTNode.getParent()
-                return ASTNode;
-            },
+            
 
             setSelected:function(node){
               if (typeof node === 'string'){
@@ -96,7 +70,7 @@ angular.module('cast')
             },
 
             getSelectedNarratives: function(){
-              return  this.narratives[this.selectedPath];
+              return  this.narratives[this.selectedPath] || [];
             },
 
             getNarrative:function(path,id){
