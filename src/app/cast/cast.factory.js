@@ -8,18 +8,20 @@
  * Factory of the cast
  */
 
-var CastMock = {
-    'rootnode': new FolderNode('rootnode', null, {})
-};
+
 
 angular.module('cast')
     .factory('CAST', function() {
 
+        var EmptyCast = {
+            'rootnode': new RootNode('rootnode', {})
+        };
+
         return {
             // CAST object
-            cast: CastMock,
+            cast: EmptyCast,
             // Currently selected node in the CAST
-            selected: CastMock.rootnode,
+            selected: EmptyCast.rootnode,
             // Path to the currently selected node
             selectedPath: '/',
             // File content corresponding to the current node
@@ -41,7 +43,7 @@ angular.module('cast')
                         //hack: ASTNodes are only loaded once the filenode.getChild('program') has been called. 
                         //  check if the path contains '/program' to determine if its an ast node
                         if ( castPath.toLowerCase().indexOf('.js/program') > 0) {
-                            newNarrative = new CodeNarrative(name, castPath, narrative[i].ASTItems);
+                            newNarrative = new CodeNarrative(name, castPath, narrative[i].itemHooks);
                         } else {
                             newNarrative = new FSNarrative(name, castPath, narrative[i].items);
                         }
@@ -50,39 +52,13 @@ angular.module('cast')
                     }
                 }
             },
-            getASTNodeByRange: function(pos){
-                var ASTNode = this.selected;
-                if(ASTNode.isFile())
-                {
-                    ASTNode = ASTNode.getChild('Program');
-                }
-                var hasBetterSelection = true;
-                while(!ASTNode.containsPosition(pos) && ASTNode.isASTNode()){
-                    ASTNode = ASTNode.parent;
-                }
-                
-
-                while(hasBetterSelection){
-                    hasBetterSelection = false;
-                    var child, children = ASTNode.getChildren();
-                    for( child in children){
-                        if( children[child].containsPosition(pos) ){
-                            hasBetterSelection = true;
-                            ASTNode = children[child];
-                        }
-                    }
-
-                }
-                if(ASTNode.tnode instanceof Array)
-                    ASTNode = ASTNode.getParent()
-                return ASTNode;
-            },
+            
 
             setSelected:function(node){
-              if(typeof node === 'string'){
-                
+              if (typeof node === 'string'){
                 this.selected = this.getNode(node);
-              } else if ( node instanceof CASTNode){
+              }
+              if ( node instanceof CASTNode){
                 this.selected = node;
               }
                this.selectedPath = this.selected.getPath();
@@ -94,7 +70,7 @@ angular.module('cast')
             },
 
             getSelectedNarratives: function(){
-              return  this.narratives[this.selectedPath];
+              return  this.narratives[this.selectedPath] || [];
             },
 
             getNarrative:function(path,id){

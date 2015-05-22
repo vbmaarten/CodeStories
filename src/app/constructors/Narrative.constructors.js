@@ -5,19 +5,11 @@ var Narrative = function (name, CASTPath) {
 };
 
 Narrative.prototype = {
-	getType : function () {
-		if (this instanceof FSNarrative) {
-			return 'fs_narrative';
-		} else if (this instanceof CodeNarrative) {
-			return 'code_narrative';
-		}
-		throw 'BadNarrativeTypeError';
-	},
 	isCodeNarrative : function () {
-		return this.getType() === 'code_narrative';
+		return this instanceof CodeNarrative;
 	},
 	isFSNarrative : function () {
-		return this.getType() === 'fs_narrative';
+		return this instanceof FSNarrative
 	},
 	removeItem : function (index) {
 		if (index instanceof Item) {
@@ -46,7 +38,16 @@ FSNarrative.prototype = Object.create(Narrative.prototype);
 FSNarrative.prototype.validItem = function (item) {
 		return item instanceof Item;
 	};
+
+FSNarrative.prototype.removeItem = function(item){
+			var i = this.items.indexOf(item);
+			this.items.splice(i,1);
+}
+
 FSNarrative.prototype.addItem = function (item, index) {
+		if(!item){
+			item = new EmptyItem();
+		}
 		if (!this.validItem(item)) {
 			console.error('Trying to add a wrong type of item', item, this);
 			throw 'BadItemForNarrative';
@@ -54,11 +55,17 @@ FSNarrative.prototype.addItem = function (item, index) {
 		if (index === undefined) {
 			index = this.items.length;
 		}
+
+		if(index instanceof Item){
+			index = this.items.indexOf(index) +1;
+		}
+
+
 		this.items.splice(index, 0, item);
 	}
 FSNarrative.prototype.addItems = function (items) {
 		for (var i in items) {
-			this.addItem(Item.prototype.buildNewItem(items[i]));
+			this.addItem(Item.prototype.buildItem(items[i]));
 		}
 	}
 
@@ -66,17 +73,49 @@ FSNarrative.prototype.addItems = function (items) {
 
 //items is an array that contains objects {'node' , 'items'}
 // the goal is to append to the subnodes of the AST nodes the proper items under the proper name
-var CodeNarrative = function (name, CASTPath, ASTItems) {
+var CodeNarrative = function (name, CASTPath, itemHooks) {
 	Narrative.call(this,name, CASTPath);
-	this.ASTItems = ASTItems;
+	this.itemHooks = itemHooks || [];
 	
 };
 
 
 CodeNarrative.prototype = Object.create(Narrative.prototype);
 CodeNarrative.prototype.validItem = function (item) {
-		if (item instanceof LinkItem) {
+		if (item.isLinkItem()) {
 			return false;
 		}
 		return item instanceof Item;
 	};
+CodeNarrative.prototype.removeItem = function(subnode,item){
+			var hook = this.itemHooks[subnode];
+			var i = hook.items.indexOf(item);
+			hook.items.splice(i,1);
+}
+
+CodeNarrative.prototype.addItem = function (subnode,item, index) {
+
+		if(!subnode){
+			subnode = '/'
+		}
+
+		this.itemHooks[subnode] = this.itemHooks[subnode] || {'node':subnode,'items':[]};
+		var hook = this.itemHooks[subnode];
+
+		if(!item){
+			item = new EmptyItem();
+		}
+		if (!this.validItem(item)) {
+			throw new TypeError("Trying to add a bad item to narrative",item , this) ;
+		}
+		if (index === undefined) {
+			index = hook.items.length;
+		}
+
+		if(index instanceof Item){
+			index = hook.items.indexOf(index) +1;
+		}
+
+
+		hook.items.splice(index, 0, item);
+	}

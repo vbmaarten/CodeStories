@@ -3,7 +3,7 @@
 var CASTNode = function(name, parent, children) {
     this.name = name;
     this.parent = parent;
-    this.children = children;
+    this.children = children || {};
     this.narratives = [];
     this.path = null;
 };
@@ -55,9 +55,10 @@ CASTNode.prototype = {
             return 'file';
         } else if (this instanceof ASTNode) {
             return 'ast';
+        } else if (this instanceof RootNode){
+            return 'root';
         }
-        console.error('This node has a false type');
-        throw 'BadNodeTypeError';
+        throw new TypeError('Unknown node type',this);;
     },
     isFolder: function() {
         return this.getType() === 'directory';
@@ -77,6 +78,13 @@ CASTNode.prototype = {
         return this.parent;
     }
 };
+
+var RootNode = function(name,children) {
+    CASTNode.call(this, name, null, children);
+    this.path = '';
+};
+RootNode.prototype = Object.create(CASTNode.prototype);
+
 var FolderNode = function(name, parent, children) {
     CASTNode.call(this, name, parent, children);
 };
@@ -92,7 +100,7 @@ FileNode.prototype.getChild = function(parseAs) {
     var children = this.getChildren();
     if (!children[parseAs]) {
         if (parseAs === 'Program') {
-            if (this.name.endsWith('.js')) { //If it is a json file, add it's AST to the cast
+            if (this.name.substr(-3) === ".js") { //If it is a json file, add it's AST to the cast
                 var AST = acorn.parse(this.content, {
                     locations: true
                 });
@@ -111,6 +119,8 @@ Object.defineProperty(t_node_constructor,'ASTNode',{
     'enumerable': false
 })
 
+//ASTNodes are a wrapper arround the parse tree that acorn generates
+
 var ASTNode = function (name,parent,children,tnode) {
     CASTNode.call(this, name , parent, children);
     this.tnode = tnode;
@@ -123,6 +133,22 @@ ASTNode.prototype.containsPosition = function(pos){
     }
     return (tnode.start < pos && tnode.end > pos)
 
+}
+
+// Attach items to the interpreter ast nodes, under the attribute .codeNarrative[ narrative name ]
+ASTNode.prototype.attachItemHooks = function(codeNarrative){
+
+        var hooks = codeNarrative.itemHooks
+        var node;
+        for(var i in hooks){
+            var node = ASTNode.getNode(hooks[i].node);
+            node.tnode.codeNarrative = node.tnode.codeNarrative || {};
+            node.tnode.codeNarrative[narrative.name] = [];
+            for(var j in hooks[i].items){
+                var item = Item.prototype.buildItem(hooks[i].items[j]);
+                node.tnode.codeNarrative[narrative.name].push( item );
+            }
+        }
 }
 
 
