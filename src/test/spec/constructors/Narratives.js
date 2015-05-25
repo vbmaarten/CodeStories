@@ -55,10 +55,20 @@ var CodeN;
 		expect( FSN.items[2].isTextItem() ).toEqual(true);
 
 		FSN.addItem( undefined, FSN.items[0])//add empty item after first item;
-		expect(FSN.items[1].isEmptyItem() ).toEqual(true);;
+		expect(FSN.items[1].isEmptyItem() ).toEqual(true);
+
 
 
 	 });
+
+	it(' should remove some items', function(){
+		FSN.addItems( [textitem , linkitem] );
+		FSN.removeItem(textitem);
+		expect( FSN.items[0] ).toEqual(linkitem);
+		FSN.removeItem(textitem);
+		expect( FSN.items[0] ).toEqual(linkitem);
+
+	});
 
 	it(' should tests CodeNarrative add items', function() {  
 		expect( CodeN.isFSNarrative() ).toEqual(false);
@@ -82,6 +92,22 @@ var CodeN;
 				CodeN.addItem('/',linkitem);
 				}).toThrow(new TypeError("Trying to add a bad item to narrative"));
 
+
+	 });
+
+	it(' should tests CodeNarrative remove items', function() {  
+		expect( CodeN.isFSNarrative() ).toEqual(false);
+		expect( CodeN.isCodeNarrative() ).toEqual(true);
+
+		CodeN.addItem( '/test' , textitem );
+
+
+
+		expect( CodeN.itemHooks['/test'].items.length ).toEqual(1);
+
+		CodeN.removeItem( '/test' , textitem );//add empty item at the end of '/'
+
+		expect( CodeN.itemHooks['/test'].items.length ).toEqual(0);
 
 	 });
 
