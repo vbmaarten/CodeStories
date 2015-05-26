@@ -1,10 +1,11 @@
 'use strict';
 /**
- * @ngdoc function
+ * @ngdoc controller
  * @name narrator.controller:NarratorCtrl
  * @description
- * # NarratorCtrl
- * Controller of the narrator
+ * Controls the current state of the narrator; viewing or editing. As well as
+ * obtaining the currently selected node and narrative. Also checks if there was
+ * a narrative playing (Will be replaced by $state in the future).
  */
 angular.module('narrator').controller('NarratorCtrl', [
   '$scope',

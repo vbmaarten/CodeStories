@@ -5,8 +5,8 @@
  * @ngdoc overview
  * @name narrator
  * @description
- * # narrator
- * Narrator module.
+ * Narrator module. This module contains the narrator functionality i.e.
+ * viewing and editing narratives. 
  */
 angular.module('narrator', [])
   .config(function ($stateProvider) {
