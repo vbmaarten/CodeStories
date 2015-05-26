@@ -4,6 +4,7 @@
  * @ngdoc function
  * @name explorer.controller:ExplorerCtrl
  * @description
+ * @requires cast.factory:CAST 
  * 
  * Provides functionality to the CAST Explorer
  */
