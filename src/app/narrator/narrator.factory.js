@@ -1,20 +1,36 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name narrator.factory:narrator
+ * @ngdoc service
+ * @name narrator.factory:narratorFactory
  * @description
- * # narratorFactory
- * Factory of the narrator, containers logic of the state of the narrator.
+ *
+ * Factory of the narrator, containers logic of the narrator like selecting, deselecting
+ * and stepping through a narrative.
  */
 
  angular.module('narrator')
  .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', function ($state, $stateParams, CAST, interpreterFactory) {
   return  {
-      // Stores the current mode of the app
+      /**
+       * @ngdoc property
+       * @name writerMode
+       * @propertyOf narrator.factory:narratorFactory
+       * @description
+       * Stores the current mode of the app, false for viewer mode and true for 
+       * writer mode. (Will be replaced by $state in the future.)
+       */ 
       writerMode: false,
-      // Tells the view mode if there is a narrative playing
+
+      /**
+       * @ngdoc property
+       * @name narrativePlaying
+       * @propertyOf narrator.factory:narratorFactory
+       * @description
+       * Tells the view mode if there is a narrative playing
+       */ 
       narrativePlaying: false,
+
       // Stores the narratives that are currently playing
       queue: [],
       // Stores state of the narrative thats currently playing
@@ -23,15 +39,41 @@
       queuePaths: [],
       // The currently displayed items of the playing narrative
       storyboard: [],
-      // True if the there was a narrative linked
-      narrativeLink: false,
 
+      /**
+       * @ngdoc property
+       * @name narrativeLink
+       * @propertyOf narrator.factory:narratorFactory
+       * @description
+       * Boolean that records when a narrative is being linked. 
+       * (Will be replaced by $state in the future.)
+       */
+       narrativeLink: false,
+ 
+      /**
+       * @ngdoc method
+       * @name selectNarrative
+       * @methodOf narrator.factory:narratorFactory
+       * @description
+       * First deselects a narrative if any narrative is still playing. Then sets the
+       * current state to playing and pushes the given narrative on the queue.
+       *
+       * @param {object} narrative a narrative object to play.
+       */     
       selectNarrative: function(narrative){
         this.deselectNarrative();
         this.narrativePlaying = true;
         this.pushNarrative(narrative);
       },
 
+      /**
+       * @ngdoc method
+       * @name deselectNarrative
+       * @methodOf narrator.factory:narratorFactory
+       * @description
+       * Deselects the current playing narrative. This empties the queue and sets
+       * the playing state to false.
+       */ 
       deselectNarrative: function(){
         this.narrativePlaying = false;
         this.queue.length = 0;
@@ -134,7 +176,6 @@
             linked = narratives[index];
           }
         }
-
 
         if(linked === undefined){
           linked = node.isASTNode() ? 

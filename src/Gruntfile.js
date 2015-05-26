@@ -136,9 +136,14 @@ module.exports = function (grunt) {
       }
     },
 
-  ngdocs: {
-    all: ['app/app.js']
-  },
+    // Files to build documentation from
+    ngdocs: {
+      all: [
+        '<%= yeoman.app %>/{,*/}*.js', 
+        '!<%= yeoman.app %>/libs/**'
+      ]
+    },
+
     // Empties folders to start fresh
     clean: {
       dist: {
