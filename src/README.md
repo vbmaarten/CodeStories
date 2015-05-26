@@ -36,3 +36,7 @@ $ grunt ngdocs
 Running `grunt ngdocs` will generate a documentation web page in the docs folder.
 
 Set up a quick server at the docs/ directory to view the documentation.
+
+## Examples
+
+The directory `/app/stories` contains some example projects that already have some narration.
