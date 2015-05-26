@@ -12,10 +12,10 @@ Narrative items on ast nodes are pressented in the order they are processed by r
 Install node & grunt
 
 ```sh
-$ npm install
+$ npm install && bower install
 ```
 
-Run `npm install` to get the necessary modules
+Run `npm install && bower install` to get the necessary modules
 
 ```sh
 $ grunt
