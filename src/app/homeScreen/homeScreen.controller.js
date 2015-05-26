@@ -1,11 +1,4 @@
 'use strict';
-/**
- * @ngdoc function
- * @name projectLoader.controller:ProjectLoaderCtrl
- * @description
- * # ProjectLoaderCtrl
- * Controller of the project loader
- */
 angular.module('codeStoriesApp')
 .controller('HomeScreenCtrl', ['$scope', '$state', 'projectLoaderFactory', 'CAST', function ($scope, $state, projectLoaderFactory, CAST) {
 	

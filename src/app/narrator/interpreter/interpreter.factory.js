@@ -15,12 +15,10 @@ angular.module('narrator')
 		var currentNarrative;
 		var currentitemHooks;
 	 	var i = 0;
-	 	
-	 	
-        /**
+	 	/**
          * @ngdoc method
          * @name setupNarratedASt
-         * @methodOf interpreter.factory:interpreterFactory
+         * @methodOf narrator.factory:interpreterFactory
          * @description
          * load in an AST and it's narrative
          *
@@ -38,7 +36,7 @@ angular.module('narrator')
 	 	/**
          * @ngdoc method
          * @name debugStep
-         * @methodOf interpreter.factory:interpreterFactory
+         * @methodOf narrator.factory:interpreterFactory
          * @description
          * Steps one step through the code
          *
@@ -55,11 +53,11 @@ angular.module('narrator')
 	 	/**
          * @ngdoc method
          * @name narrativeStep
-         * @methodOf interpreter.factory:interpreterFactory
+         * @methodOf narrator.factory:interpreterFactory
          * @description
          * Steps through the code, until the next narrative occurs
          *
-         * @return {{node: tnode item: Item} object} The node the interpreter stepped to, with it's item.
+         * @return { node: tnode item: Item } The node the interpreter stepped to, with it's item.
          */
 	 	var processedNode;
 	 	factory.narrativeStep = function(){ 		

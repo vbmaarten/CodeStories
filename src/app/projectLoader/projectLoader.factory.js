@@ -1,16 +1,27 @@
 'use strict';
 /**
- * @ngdoc function
- * @name projectLoader.factory:ProjectLoaderCtrl
+ * @ngdoc service
+ * @name projectLoader.factory:projectLoaderFactory
  * @description
- * # ProjectLoaderCtrl
- * Service of the project loader
+ *
+ * Factory of the projectLoader, contains logic for importing and exporting
+ * project files. 
  */
+
  angular.module('projectLoader').factory('projectLoaderFactory', [
   'CAST',
   function (CAST) {
     return {
 
+      /**
+       * @ngdoc method
+       * @name loadZip
+       * @methodOf projectLoader.factory:projectLoaderFactory
+       * @description
+       * Loads a project from a zip file  
+       *
+       * @param {String} data Raw data of the zip file
+       */
       loadZip : function (data) {
         var contents = this.UnpackZip( new JSZip(data) );
 
@@ -18,6 +29,14 @@
         CAST.appendNarrative(contents.narratives);
       },
 
+      /**
+       * @ngdoc method
+       * @name packZip
+       * @methodOf projectLoader.factory:projectLoaderFactory
+       * @description
+       * Generates a zip of the current project state and makes it downloadable in the browser.   
+       *
+       */
       packZip: function(){
         var zip = new JSZip();
 
