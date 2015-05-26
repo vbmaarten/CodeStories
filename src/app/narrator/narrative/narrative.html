@@ -1,6 +1,6 @@
 <div ng-transclude></div>
 
-<div class="item button-wide add" ng-if="edit" ng-click="narrative.addItem()"></div>
+<div class="item button-wide add" ng-if="edit" ng-click="narrative.addItem(null,0)"></div>
 
 <div ng-repeat="item in narrative.items track by $index">
 <div class="item debug-controlls" ng-if="narrative.isCodeNarrative()">
@@ -9,5 +9,5 @@
 	<div item="item">
 		<div class="remove" ng-if="edit" ng-click="narrative.removeItem(item)"></div>
 	</div>
-	<div class="item button-wide add" ng-if="edit" ng-click="narrative.addItem()"></div>
+	<div class="item button-wide add" ng-if="edit" ng-click="narrative.addItem(null,item)"></div>
 </div>

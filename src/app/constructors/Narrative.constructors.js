@@ -43,18 +43,19 @@ FSNarrative.prototype.removeItem = function(item){
 	}
 };
 
-FSNarrative.prototype.addItem = function (item) {
-	console.log('FSNarrative.additem');
-	console.log(item);
-	var index;
+FSNarrative.prototype.addItem = function (item, index) {
 	if(!item){
 		item = new EmptyItem();
 	}
 	if (!this.validItem(item)) {
-		throw new TypeError("Trying to add a bad item to narrative", item , this) ;
+		throw new TypeError("Trying to add a bad item to narrative",item , this) ;
 	}
-	if(item instanceof Item){
-		index = this.items.indexOf(index);
+	if (index === undefined) {
+		index = this.items.length;
+	}
+
+	if(index instanceof Item){
+		index = this.items.indexOf(index) +1;
 	}
 
 	this.items.splice(index, 0, item);
