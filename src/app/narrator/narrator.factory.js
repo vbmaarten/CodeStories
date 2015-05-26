@@ -57,7 +57,8 @@
       queueCounter: [],
       // Stores the paths to the queued up nodes
       queuePaths: [],
-
+      // The current node of a code narrative. (Will be replaced by $state in the future.)
+      lastCodeNarrativeNode: "",
 
       /**
        * @ngdoc method
@@ -109,11 +110,7 @@
         var nextItem;
         if(this.queue[0].isCodeNarrative()){
           var next = interpreterFactory.narrativeStep();
-          nextItem = next.item;
-          this.narrativeLink = true;
-
-          $state.go('narrating.node', {'path': next.node.getPath()});
-          //CAST.setSelected(next.node);
+          nextItem = next;
         } 
         else {
           if(this.queue[0].items.length > this.queueCounter[0]){
@@ -139,11 +136,15 @@
         var nextItem = this.getNextItem();
 
         // If the narrative isnt done playing
-        if(nextItem){            
+        if(nextItem){ 
+          // If a code narrative is playing
+          if( this.queue[0].isCodeNarrative() ){
+            this.codeNarrativeStep(nextItem);
+          }          
           // If the next item is a link to another narrative
-          if( nextItem.isLinkItem() ){
+          else if( nextItem.isLinkItem() ){
             this.loadNarrative(nextItem);
-          } 
+          }
           // Push the next item of the narrative
           else { 
             this.storyboard[this.storyboard.length-1].items.push(nextItem);
@@ -155,6 +156,18 @@
         else {  
           this.popNarrative();
         }      
+      },
+
+      // Puts the next item of a code narrative on the storyboard
+      codeNarrativeStep: function(next) {
+        this.storyboard[this.storyboard.length-1].items.push(next.item);
+
+        if(this.lastCodeNarrativeNode != next.node.getPath()){
+          this.narrativeLink = true;
+          this.lastCodeNarrativeNode = next.node.getPath();
+          $state.go('narrating.node', {'path': next.node.getPath()});
+        }
+        this.lastCodeNarrativeNode = next.node.getPath();
       },
 
       popNarrative: function() {
