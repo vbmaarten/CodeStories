@@ -1,4 +1,11 @@
-# Code Stories
+# Code Stories : A glorified debugger
+
+## What
+
+Code Stories allows developers to create a 'live' introduction to their (javascript) code and allow newcommer to quickly gain an overview of the project without risking the possiblity that they might miss an important aspect of the system. 
+Narrative items can be added on nodes in the project (folder,files and ast nodes) and can be linked together to create a Narrative.
+Narrative items on ast nodes are pressented in the order they are processed by running the code, and CodeNarrative items can use/display the content of the variables in their scope. 
+
 
 ## Build & development
 
@@ -36,3 +43,7 @@ $ grunt ngdocs
 Running `grunt ngdocs` will generate a documentation web page in the docs folder.
 
 Set up a quick server at the docs/ directory to view the documentation.
+
+## Examples
+
+The directory `/app/stories` contains some example projects that already have some narration.
