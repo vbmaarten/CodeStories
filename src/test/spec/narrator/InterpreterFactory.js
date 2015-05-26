@@ -12,7 +12,9 @@ describe('Factory: Interpreter factory', function() {
   	sum += i;\
   }";
 
-  var astNode = new ASTNode("/", null, {}, acorn.parse(script));
+  //var astNode = new ASTNode("/", null, {}, acorn.parse(script));
+  var astNode = wrapAcornAsASTNode(acorn.parse(script), "/", null);
+
 
   beforeEach(inject(function (_interpreterFactory_){
     interpreterFactory = _interpreterFactory_;
