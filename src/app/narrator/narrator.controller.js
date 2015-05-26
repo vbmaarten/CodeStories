@@ -52,7 +52,6 @@ angular.module('narrator').controller('NarratorCtrl', [
       narratorFactory.narrativeLink = false;
       $scope.playing = true;
     } else {
-      console.log('test');
       $scope.selected = false;
       $scope.selectedNarrative = {};
       $scope.playing = false;
