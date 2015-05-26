@@ -1,11 +1,13 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name cast.directive:directory
+ * @ngdoc directive
+ * @name explorer.directive:directory
+ * @scope
+ * @restrict AE
  * @description
- * # directory
- * Directive of the file folder structure
+ * Recursive directive that contains a link to the corresponding node in the tree
+ * and a list of its subnodes.
  */
 angular.module('explorer')
   .directive('directory', ['RecursionHelper', function (RecursionHelper) {

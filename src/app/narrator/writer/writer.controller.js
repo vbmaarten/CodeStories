@@ -1,11 +1,12 @@
 'use strict';
 
 /**
- * @ngdoc function
+ * @ngdoc controller
  * @name narrator.controller:WriterCtrl
+ * @requires narrator.factory:narratorFactory
  * @description
- * # WriterCtrl
- * Controller of the writer state of the narrator
+ * Controller of the writer state of the narrator. Allows for adding and removing
+ * narratives as well as selecting and deselecting narratives for editing. 
  */
 
 angular.module('narrator')

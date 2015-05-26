@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * @ngdoc function
+ * @ngdoc controller
  * @name narrator.controller:NarrativeCtrl
+ * @requires narrator.factory:narratorFactory
  * @description
- * # NarrativeCtrl
- * Controller of the narrative
+ * Controls the narrative directive. Determines the edit mode.
  */
 angular.module('narrator')
   .controller('NarrativeCtrl', ['$scope', 'narratorFactory', function ($scope, narratorFactory) {
