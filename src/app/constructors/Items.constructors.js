@@ -11,6 +11,9 @@ Item.prototype = {
 		if(!item.content){
 			throw new TypeError("Item content ")
 		}
+		if(item instanceof Item){
+			return item;
+		}
 		var type = item.type;
 		switch(type){
 			case "text":

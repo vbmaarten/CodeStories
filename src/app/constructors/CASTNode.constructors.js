@@ -115,12 +115,12 @@ ASTNode.prototype.attachItemHooks = function(codeNarrative){
         var hooks = codeNarrative.itemHooks
         var node;
         for(var i in hooks){
-            var node = ASTNode.getNode(hooks[i].node);
+            node = this.getNode(hooks[i].node);
             node.tnode.codeNarrative = node.tnode.codeNarrative || {};
-            node.tnode.codeNarrative[narrative.name] = [];
+            node.tnode.codeNarrative[codeNarrative.name] = [];
             for(var j in hooks[i].items){
                 var item = Item.prototype.buildItem(hooks[i].items[j]);
-                node.tnode.codeNarrative[narrative.name].push( item );
+                node.tnode.codeNarrative[codeNarrative.name].push( item );
             }
         }
 }
