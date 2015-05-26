@@ -26,3 +26,13 @@ $ grunt test
 Running `grunt test` will run the unit tests with karma.
 
 Opening a browser at localhost on the given port will run the test suite and build a coverage report with istanbul, located in the coverage folder.
+
+## Documentation
+
+```sh
+$ grunt ngdocs
+```
+
+Running `grunt ngdocs` will generate a documentation web page in the docs folder.
+
+Set up a quick server at the docs/ directory to view the documentation.
