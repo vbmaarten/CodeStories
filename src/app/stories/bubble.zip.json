@@ -52,8 +52,8 @@
             "name":"codetest2",
             "type":"Code",
             "itemHooks":{
-                "Body/0FunctionDeclaration/Block/Body/0VariableDeclaration":{
-                    "node":"Body/0FunctionDeclaration/Block/Body/0VariableDeclaration",
+                "body/0/body/body/0":{
+                    "node":"body/0/body/body/0",
                      "items":[
                         {"type":"text",
                         "content":"This is some code"
@@ -62,8 +62,8 @@
                         "content":"var barchart = new BarChart(); "}
 
                     ]},
-                "Body/0FunctionDeclaration/Block/Body/1DoWhile/Block/Body/1For/Block/Body/0If/BinaryExpression":{
-                "node":"Body/0FunctionDeclaration/Block/Body/1DoWhile/Block/Body/1For/Block/Body/0If/BinaryExpression",
+                "body/0/body/body/1/body/body/1/body/body/0/test":{
+                "node":"body/0/body/body/1/body/body/1/body/body/0/test",
                  "items":[
                     {"type":"text",
                     "content":"This is executed on the if >"
