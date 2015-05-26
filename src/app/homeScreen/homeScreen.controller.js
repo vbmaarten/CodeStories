@@ -21,7 +21,6 @@ angular.module('codeStoriesApp')
 	};
 
 	$scope.goToNarrator = function () {
-		console.log(CAST);
 		$scope.message;
 		$state.go('narrating', {'project' : $scope.message});
 	}

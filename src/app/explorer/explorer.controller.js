@@ -77,7 +77,6 @@ angular.module('explorer')
 		  var cursor = selection.getCursor();
 		  var pos = _session.getDocument().positionToIndex(cursor,0);
 		  var node =  getASTNodeByRange(pos);
-		  console.log(node);
 		  //$state.go('narrating.node', {'path': node.getPath()});
 		}; 
 		_session.selection.on("changeCursor", selectNode);

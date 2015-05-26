@@ -177,7 +177,6 @@
 
         // If there are no more items left in the queue stop playing
         if(this.queue.length == 0){
-          console.log('narrative done');
           this.deselectNarrative();
         }
         // Else continue with the queued up narrative
@@ -185,7 +184,6 @@
           this.storyboard.push({'name':this.queue[0].name, 'items':[]});
           this.narrativeLink = true;
           var path = this.queuePaths.shift();
-          console.log('go back: ' + path);
           $state.go('narrating.node', {'path': path});
         }
       },
@@ -210,9 +208,6 @@
           linked = node.isASTNode() ? 
           new CodeNarrative('A new narrative appears',linkItem.content.node ) : new FSNarrative('A new narrative appears',linkItem.content.node);
         } 
-
-        console.log(linked);
-        console.log('store: ' + $stateParams.path);
         this.queuePaths.unshift($stateParams.path);
 
         // Push the narrative on the stack and navigate to the node

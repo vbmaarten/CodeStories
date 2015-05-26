@@ -110,7 +110,5 @@ describe('Factory: projectLoaderFactory', function () {   // Load your module.
 
     expect(zip.files['folder/']).toBeDefined();
     expect(zip.files['folder/file.js']).toBeDefined();
-
-    console.log(zip);
   });
 });

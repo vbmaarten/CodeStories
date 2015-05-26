@@ -11,7 +11,6 @@ describe('Factory: Narrator', function() {
           this.narrative = narrative;
         },
         narrativeStep : function() {
-          console.log(this.narrative.itemHooks);
           return this.narrative.itemHooks['Body/0FunctionDeclaration/Block/Body/0VariableDeclaration'];
         }
     });

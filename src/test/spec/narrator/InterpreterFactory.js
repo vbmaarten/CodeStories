@@ -44,7 +44,6 @@ describe('Factory: Interpreter factory', function() {
     var node = astNode.tnode.body[1];
 
     var codeNarrative = new CodeNarrative("codeNarrative", "/", [{node: "body/1", items: [new TextItem("textitem")]}]);
-    console.log(codeNarrative);
     interpreterFactory.setupNarratedAST(astNode, codeNarrative);
 
     var step = interpreterFactory.narrativeStep();
