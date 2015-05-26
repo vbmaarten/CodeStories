@@ -139,7 +139,7 @@ module.exports = function (grunt) {
     // Files to build documentation from
     ngdocs: {
       all: [
-        '<%= yeoman.app %>/{,*/}*.js', 
+        '<%= yeoman.app %>/**/*.js', 
         '!<%= yeoman.app %>/libs/**'
       ]
     },
