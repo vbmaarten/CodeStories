@@ -3,6 +3,8 @@
 /**
  * @ngdoc service
  * @name narrator.factory:narratorFactory
+ * @requires cast.factory:CAST
+ * @requires interpreterFactory
  * @description
  *
  * Factory of the narrator, containers logic of the narrator like selecting, deselecting
@@ -10,8 +12,9 @@
  */
 
  angular.module('narrator')
- .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', function ($state, $stateParams, CAST, interpreterFactory) {
-  return  {
+ .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 
+  function ($state, $stateParams, CAST, interpreterFactory) {
+  return {
       /**
        * @ngdoc property
        * @name writerMode
@@ -31,15 +34,6 @@
        */ 
       narrativePlaying: false,
 
-      // Stores the narratives that are currently playing
-      queue: [],
-      // Stores state of the narrative thats currently playing
-      queueCounter: [],
-      // Stores the paths to the queued up nodes
-      queuePaths: [],
-      // The currently displayed items of the playing narrative
-      storyboard: [],
-
       /**
        * @ngdoc property
        * @name narrativeLink
@@ -49,7 +43,22 @@
        * (Will be replaced by $state in the future.)
        */
        narrativeLink: false,
- 
+       /**
+       * @ngdoc property
+       * @name storyboard
+       * @propertyOf narrator.factory:narratorFactory
+       * @description
+       * Array that contains she currently displayed items of the playing narrative
+       */
+      storyboard: [], 
+      // Stores the narratives that are currently playing
+      queue: [],
+      // Stores state of the narrative thats currently playing
+      queueCounter: [],
+      // Stores the paths to the queued up nodes
+      queuePaths: [],
+
+
       /**
        * @ngdoc method
        * @name selectNarrative
@@ -116,6 +125,16 @@
         return nextItem;
       },
 
+      /**
+       * @ngdoc method
+       * @name step
+       * @methodOf narrator.factory:narratorFactory
+       * @description
+       * Performs a narrative step. Adds an item to the storyboard if available.
+       * Links to another narrative if an item is a link. If there is no more item
+       * then it pops the narrative of the queue and continues with the next narrative
+       * or halts playback.
+       */ 
       step: function(){
         var nextItem = this.getNextItem();
 
