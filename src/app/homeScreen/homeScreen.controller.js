@@ -1,4 +1,13 @@
 'use strict';
+/**
+ * @ngdoc controller
+ * @name codeStoriesApp.controller:HomeScreenCtrl
+ * @requires projectLoader.factory:projectLoaderFactory
+ * @requires cast.factory:CAST
+ * @description
+ * The home screen of the app. Starting page and allows for the user to upload a
+ * compressed project to narrate using the app.
+ */
 angular.module('codeStoriesApp')
 .controller('HomeScreenCtrl', ['$scope', '$state', 'projectLoaderFactory', 'CAST', function ($scope, $state, projectLoaderFactory, CAST) {
 	

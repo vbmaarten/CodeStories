@@ -1,11 +1,12 @@
 'use strict';
 
 /**
- * @ngdoc function
+ * @ngdoc controller
  * @name narrator.controller:ViewerCtrl
+ * @requires narrator.factory:narratorFactory
  * @description
- * # ViewerCtrl
- * Controller of the viewer state of the narrator
+ * controls the narrator viewer. Allows for selecting and deselecting narratives 
+ * for playback and advance a selected narrative. Displays the playing narrative.
  */
 
 angular.module('narrator')

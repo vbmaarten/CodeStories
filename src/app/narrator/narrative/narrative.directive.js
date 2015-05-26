@@ -1,11 +1,13 @@
 'use strict';
 
 /**
- * @ngdoc function
+ * @ngdoc directive
  * @name narrator.directive:narrative
+ * @scope
+ * @restrict AE
  * @description
- * # narrative
  * Diretive of the narrative
+ * @param {object} data Narrative object.
  */
 angular.module('narrator')
   .directive('narrative', function () {

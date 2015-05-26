@@ -184,12 +184,9 @@
 
         // Get the node of the narrative that is linked to and find the narrative
         var node = CAST.getNode(linkItem.content.node);
-
-
         var narratives = CAST.getNarratives(linkItem.content.node);
-
-
         var linked;
+
         for (var index in narratives) {
           if (narratives[index].name == linkItem.content.id){
             linked = narratives[index];
@@ -202,7 +199,6 @@
         } 
 
         console.log(linked);
-
         console.log('store: ' + $stateParams.path);
         this.queuePaths.unshift($stateParams.path);
 

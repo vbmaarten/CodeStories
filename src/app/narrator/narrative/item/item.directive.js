@@ -1,17 +1,19 @@
 'use strict';
 
 /**
- * @ngdoc function
+ * @ngdoc directive
  * @name narrator.directive:item
+ * @scope
+ * @restrict AE
  * @description
- * # item
  * Diretive of the item
+ * @param {object} item Item object.
  */
 angular.module('narrator')
   .directive('item', function () {
     return {
       transclude: true,
-      restrict: 'A',
+      restrict: 'AE',
       scope : {
         'item': '=',
       },

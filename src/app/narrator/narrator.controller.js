@@ -2,6 +2,8 @@
 /**
  * @ngdoc controller
  * @name narrator.controller:NarratorCtrl
+ * @requires cast.factory:CAST
+ * @requires narrator.factory:narratorFactory
  * @description
  * Controls the current state of the narrator; viewing or editing. As well as
  * obtaining the currently selected node and narrative. Also checks if there was
