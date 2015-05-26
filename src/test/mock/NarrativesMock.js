@@ -3,7 +3,20 @@ var narrativesMock = {
     {
       "name": "hello world narrative",
       "type": "FS",
-      "items": []
+      "items": [
+          {
+              "type": "text",
+              "content": "HelloWorld!"
+          },
+          {
+              "type": "text",
+              "content": "Thisisastoryallabouthow...."
+          },
+          {
+              "type": "link",
+              "content": {"id":"hello world narrative 2","node":"/folderNode/fileNode.js"}
+          },
+      ]
     }
   ],
   '/folderNode/fileNode.js': [
@@ -17,7 +30,21 @@ var narrativesMock = {
     {
       "name": "hello world narrative 3",
       "type": "Code",
-      "ASTItems": []
+      "itemHooks":{
+        "Body/0FunctionDeclaration/Block/Body/0VariableDeclaration":{
+          "node":"Body/0FunctionDeclaration/Block/Body/0VariableDeclaration",
+          "items":[
+            {
+              "type":"text",
+              "content":"This is some code"
+            },
+            {
+              "type":"vcode",
+              "content":"var barchart = new BarChart(); "
+            }
+          ]
+        },
+      }
     }
   ]
 }

@@ -7,7 +7,22 @@ describe('Factory: Narrator', function() {
 
   beforeEach(module(function ($provide) {
     $provide.value('interpreterFactory', {
-        setupNarratedAST : function (CASTNode, narrative) {}
+        setupNarratedAST : function (CASTNode, narrative) {
+          this.narrative = narrative;
+        },
+        narrativeStep : function() {
+          console.log(this.narrative.itemHooks);
+          return this.narrative.itemHooks['Body/0FunctionDeclaration/Block/Body/0VariableDeclaration'];
+        }
+    });
+  }));
+
+  beforeEach(module(function ($provide) {
+    $provide.value('$state', {
+      go : function (state, params) {
+        this.state = state;
+        this.params = params;
+      }
     });
   }));
 
@@ -37,7 +52,7 @@ describe('Factory: Narrator', function() {
     expect(narrator.narrativeLink).toEqual( false );
   });
 
-  it('should be able to push a narrative on the narrative stack', function(){
+  it('should be able to push a narrative on the narrative queue', function(){
     narrator.pushNarrative(CAST.getNarrative('/folderNode', 0));
     expect(narrator.queue.length).toBe( 1 );
     expect(narrator.queue[0].name).toBe( narrativesMock['/folderNode'][0].name );
@@ -66,6 +81,56 @@ describe('Factory: Narrator', function() {
 
   });
 
+  it('should return the next item that should be shown to the user and false if there is no next item', function() {
+    narrator.selectNarrative(CAST.getNarrative('/folderNode', 0));
+    expect(narrator.getNextItem()).toBe(CAST.getNarrative('/folderNode',0).items[0]);
 
+    narrator.queueCounter[0] = 4;
+
+    expect(narrator.getNextItem()).toBe(false);
+
+    narrator.selectNarrative(CAST.getNarrative('/folderNode/fileNode.js/program',0));
+
+    // expect(narrator.getNextItem()).toBe(CAST.getNarrative('/folderNode/fileNode.js/program',0).itemHooks[0])
+
+  });
+
+  it('should be possible to pop an item from the narrative queue', inject(function($state){
+    narrator.selectNarrative(CAST.getNarrative('/folderNode', 0));
+    narrator.pushNarrative(CAST.getNarrative('/folderNode/fileNode.js', 0));
+    narrator.queuePaths.push('somepath');
+    expect(narrator.queue.length).toBe( 2 );
+
+    narrator.popNarrative();
+    expect(narrator.queue.length).toBe( 1 );
+    expect($state.params.path).toBeDefined();
+
+    narrator.popNarrative();
+    expect(narrator.queue.length).toBe( 0 );
+  }));
+
+  it('should perform a narrative step, where it either adds an item or pops the narrative', function(){
+    narrator.selectNarrative(CAST.getNarrative('/folderNode', 0));
+    expect(narrator.storyboard.length).toBe( 1 );
+    expect(narrator.storyboard[0].items.length).toBe( 0 );
+
+    narrator.step();
+
+    expect(narrator.storyboard[0].items.length).toBe( 1 );
+  });
+
+  it('should load a narrative from a narrative link', inject(function($state){
+    expect($state.params).toBeUndefined();
+
+    narrator.loadNarrative({
+      "type": "link",
+      "content": {"id":"hello world narrative 2","node":"/folderNode/fileNode.js"}
+    });
+
+    expect(narrator.narrativeLink).toBe(true);
+    expect($state.params.path).toBe("/folderNode/fileNode.js");
+  }));
 
 });
+
+

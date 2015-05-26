@@ -49,15 +49,13 @@
         }
       },
 
-      debugStep:function(){
-        var node = interpreterFactory.debugStep();
-        console.log(node);
-      },
+      // debugStep:function(){
+      //   var node = interpreterFactory.debugStep();
+      //   console.log(node);
+      // },
 
-      step: function(){
+      getNextItem: function(){
         var nextItem;
-
-        // Get the next Item
         if(this.queue[0].isCodeNarrative()){
           var next = interpreterFactory.narrativeStep();
           nextItem = next.item;
@@ -65,7 +63,6 @@
 
           $state.go('narrating.node', {'path': next.node.getPath()});
           //CAST.setSelected(next.node);
-
         } 
         else {
           if(this.queue[0].items.length > this.queueCounter[0]){
@@ -74,6 +71,11 @@
             nextItem = false;
           }
         }
+        return nextItem;
+      },
+
+      step: function(){
+        var nextItem = this.getNextItem();
 
         // If the narrative isnt done playing
         if(nextItem){            
@@ -86,28 +88,32 @@
             this.storyboard[this.storyboard.length-1].items.push(nextItem);
             this.queueCounter[0]++;
           }
-        } else {  // If the narrative is done playing
+        } 
 
-       
-        
-          // Remove the first item from the queue
-          this.queue.shift();
-          this.queueCounter.shift();
-
-          // If there are no more items left in the queue stop playing
-          if(this.queue.length == 0){
-            console.log('narrative done');
-            this.deselectNarrative();
-          }
-          // Else continue with the queued up narrative
-          else{
-            this.storyboard.push({'name':this.queue[0].name, 'items':[]});
-            this.narrativeLink = true;
-            var path = this.queuePaths.shift();
-            console.log('go back: ' + path);
-            $state.go('narrating.node', {'path': path});
-          }
+        // If the narrative is done playing
+        else {  
+          this.popNarrative();
         }      
+      },
+
+      popNarrative: function() {
+        // Remove the first item from the queue
+        this.queue.shift();
+        this.queueCounter.shift();
+
+        // If there are no more items left in the queue stop playing
+        if(this.queue.length == 0){
+          console.log('narrative done');
+          this.deselectNarrative();
+        }
+        // Else continue with the queued up narrative
+        else{
+          this.storyboard.push({'name':this.queue[0].name, 'items':[]});
+          this.narrativeLink = true;
+          var path = this.queuePaths.shift();
+          console.log('go back: ' + path);
+          $state.go('narrating.node', {'path': path});
+        }
       },
 
       loadNarrative: function (linkItem) {

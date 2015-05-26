@@ -50,7 +50,6 @@ module.exports = function(config) {
       'app/constructors/**.js': 'coverage',
       'app/projectLoader/projectLoader.factory.js': 'coverage',
       'app/narrator/narrator.factory.js': 'coverage',
-      'app/narrator/narrator.controller.js': 'coverage',
       'app/narrator/writer/writer.controller.js': 'coverage',
       'app/narrator/interpreter/interpreter.factory.js': 'coverage',
       'app/explorer/explorer.controller.js': 'coverage',
