@@ -7,3 +7,7 @@
 .directory-view li {
 	margin: 7px 0;
 }
+
+.folder-reference {
+	font-weight: bold;
+}
