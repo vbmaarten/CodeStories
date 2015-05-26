@@ -3,6 +3,7 @@
  * @ngdoc controller
  * @name projectLoader.controller:ProjectLoaderCtrl
  * @description
+ * @requires projectLoader.factory:projectLoaderFactory
  * Adds the functionality to the app to load and export projects
  */
  angular.module('projectLoader').controller('ProjectLoaderCtrl', [

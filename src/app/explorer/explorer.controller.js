@@ -4,9 +4,11 @@
  * @ngdoc function
  * @name explorer.controller:ExplorerCtrl
  * @description
- * # ExplorerCtrl
- * Controller of the explorer
+ * @requires cast.factory:CAST 
+ * 
+ * Provides functionality to the CAST Explorer
  */
+
 angular.module('explorer')
   .controller('ExplorerCtrl', ['$scope', 'CAST', '$state', function ($scope, CAST,$state) {
     $scope.directory = CAST.cast;
@@ -14,6 +16,16 @@ angular.module('explorer')
     $scope.selected = CAST.selected;
     $scope.content = CAST.content;
 
+    /**
+    * @ngdoc method
+    * @name getASTNodeByRange
+    * @methodOf explorer.controller:ExplorerCtrl
+    * @description
+    * Determines the ASTNode at a given position
+    *
+    * @param {int} pos The position at which the closest AST Node has to be found
+	* @return {ASTNode} The ASTNode that corresponds to the given position in the code
+    */
 
     var getASTNodeByRange = function(pos){
       var ASTNode = $scope.selected;

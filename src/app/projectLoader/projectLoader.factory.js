@@ -2,7 +2,8 @@
 /**
  * @ngdoc service
  * @name projectLoader.factory:projectLoaderFactory
- * @description
+ * @description 
+ * @requires cast.factory:CAST
  *
  * Factory of the projectLoader, contains logic for importing and exporting
  * project files. 
