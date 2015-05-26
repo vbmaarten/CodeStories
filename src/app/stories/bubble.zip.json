@@ -14,7 +14,7 @@
                 },
                 {
                     "type": "link",
-                    "content": {"id":"bubble narrative","node":"/bubblesort.js"}
+                    "content": {"id":"code link","node":"/bubblesort.js"}
                 },
                 {
                     "type": "link",
@@ -34,11 +34,11 @@
                 "items": [
                     {
                         "type": "text",
-                        "content": "Thisisthemainsrcfileoftheproject"
+                        "content": "A bubble sort program"
                     },
                     {
                         "type": "text",
-                        "content": "Letsseewhatitdoes"
+                        "content": "Lets see it in action "
                     },
                     {
                     "type": "link",
@@ -56,7 +56,7 @@
                     "node":"body/0/body/body/0",
                      "items":[
                         {"type":"text",
-                        "content":"This is some code"
+                        "content":"Here we set the length"
                      },
                       {"type":"vcode",
                         "content":"var barchart = new BarChart(); "}
@@ -66,7 +66,7 @@
                 "node":"body/0/body/body/1/body/body/1/body/body/0/test",
                  "items":[
                     {"type":"text",
-                    "content":"This is executed on the if >"
+                    "content":"Here it checks if it should swap these values"
                  },
                   {"type":"vcode",
                     "content":"barchart.select([i,i+1]);"}
