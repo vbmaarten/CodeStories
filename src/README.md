@@ -1,4 +1,10 @@
-# Code Stories
+# Code Stories : A glorified debugger
+
+## What
+
+Code Stories allows developers to create a 'live' introduction to their (javascript) code. Narrative items can be added on nodes in the project (folder,files and ast nodes) and linked together to create a narrative that allows a newcommer to quickly gain an overview of the project without risking the 
+possiblity that they might miss an important aspect of the system. Narrative items on ast nodes are pressented in the order they are processed by running the code, and their items can use/display the content of the variables in their scope. 
+
 
 ## Build & development
 
