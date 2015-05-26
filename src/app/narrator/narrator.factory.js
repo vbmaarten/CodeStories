@@ -4,7 +4,7 @@
  * @ngdoc service
  * @name narrator.factory:narratorFactory
  * @requires cast.factory:CAST
- * @requires interpreterFactory
+ * @requires narrator.factory:interpreterFactory
  * @description
  *
  * Factory of the narrator, containers logic of the narrator like selecting, deselecting
