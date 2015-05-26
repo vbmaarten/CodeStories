@@ -2,11 +2,11 @@
 
 
 /**
- * @ngdoc function
- * @name narrator.module
+ * @ngdoc overview
+ * @name narrator
  * @description
  * # narrator
- * Narrator module
+ * Narrator module.
  */
 angular.module('narrator', [])
   .config(function ($stateProvider) {

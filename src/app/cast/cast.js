@@ -1,10 +1,9 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name cast.module
+ * @ngdoc overview
+ * @name cast
  * @description
- * # cast
- * Module of the cast
+ * CAST module.
  */
 angular.module('cast',[]);

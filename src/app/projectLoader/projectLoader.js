@@ -1,10 +1,9 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name projectLoader.controller:ProjectLoaderCtrl
+ * @ngdoc overview
+ * @name projectLoader
  * @description
- * # ProjectLoaderCtrl
- * Controller of the project loader
+ * Project loader module.
  */
 angular.module('projectLoader', []);

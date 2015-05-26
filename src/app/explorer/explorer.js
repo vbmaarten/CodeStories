@@ -1,10 +1,9 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name explorer.module
+ * @ngdoc overview
+ * @name explorer
  * @description
- * # CastCtrl
- * Controller of the cast
+ * Exmplorer module.
  */
 angular.module('explorer', ['ui.ace']);
