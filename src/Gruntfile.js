@@ -1,4 +1,4 @@
-// Generated on 2015-05-06 using generator-angular 0.11.1
+/// Generated on 2015-05-06 using generator-angular 0.11.1
 'use strict';
 
 // # Globbing
@@ -14,6 +14,7 @@ module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+  grunt.loadNpmTasks('grunt-ngdocs');
 
   // Configurable paths for the application
   var appConfig = {
@@ -135,6 +136,9 @@ module.exports = function (grunt) {
       }
     },
 
+  ngdocs: {
+    all: ['app/app.js']
+  },
     // Empties folders to start fresh
     clean: {
       dist: {
@@ -391,6 +395,7 @@ module.exports = function (grunt) {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
 
+
     grunt.task.run([
       'clean:server',
       'wiredep',
@@ -435,6 +440,8 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
+    'ngdocs',
     'build'
   ]);
+
 };
