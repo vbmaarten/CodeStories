@@ -6,7 +6,7 @@
  * @scope
  * @restrict AE
  * @description
- * Diretive of the narrative
+ * Directive that displays the narrative object. Contains a list of items directives.
  * @param {object} data Narrative object.
  */
 angular.module('narrator')
