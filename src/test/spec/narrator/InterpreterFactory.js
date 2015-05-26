@@ -12,7 +12,6 @@ describe('Factory: Interpreter factory', function() {
   	sum += i;\
   }";
 
-  //var astNode = new ASTNode("/", null, {}, acorn.parse(script));
   var astNode = wrapAcornAsASTNode(acorn.parse(script), "/", new RootNode());
 
 
@@ -44,13 +43,13 @@ describe('Factory: Interpreter factory', function() {
   it("should be possible to step to the next narrative", function(){
     var node = astNode.tnode.body[1];
 
-    var codeNarrative = new CodeNarrative("codeNarrative", "/", [{node: "body/0", items: [new TextItem("textitem")]}]);
+    var codeNarrative = new CodeNarrative("codeNarrative", "/", [{node: "body/1", items: [new TextItem("textitem")]}]);
     console.log(codeNarrative);
     interpreterFactory.setupNarratedAST(astNode, codeNarrative);
 
-   // interpreterFactory.narrativeStep();
+    var step = interpreterFactory.narrativeStep();
 
-    //expect(interpreterFactory.interpreter.stateStack[0]).toEqual(node);
+    expect(step.node).toEqual(node.ASTNode);
   });
 
 
