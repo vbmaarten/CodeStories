@@ -33,6 +33,10 @@ angular.module('narrator')
 	 		this.interpreter.setAst(ASTNode.tnode);
 	 	};
 
+	 	factory.getCurrentScope = function(){
+
+	 	};
+
 	 	/**
          * @ngdoc method
          * @name debugStep
@@ -47,8 +51,6 @@ angular.module('narrator')
 	 		return this.interpreter.stateStack[0].node;
 	 	};
 
-	 	factory.evaluateVCode = function(vcode){
-	 	};
 
 	 	/**
          * @ngdoc method

@@ -38,7 +38,8 @@ module.exports = function(config) {
       'app/narrator/narrator.js',
       'app/projectLoader/projectLoader.js',
       'app/cast/cast.factory.js',
-      'app/narrator/interpreter/interpreter.factory.js',
+      'app/narrator/interpreter/interpreter.factory.js',      
+      'app/VCodeInterpreter/vcodeinterpreter.js',
       'app/{,*/}*.js',
       'test/mock/{,*/}*.js',
       'test/spec/{,*/}*.js'
@@ -53,6 +54,7 @@ module.exports = function(config) {
       'app/narrator/writer/writer.controller.js': 'coverage',
       'app/narrator/interpreter/interpreter.factory.js': 'coverage',
       'app/explorer/explorer.controller.js': 'coverage',
+      'app/VCodeInterpreter/vcodeinterpreter.factory.js': 'coverage',
     },
 
     // coverage reporter generates the coverage
