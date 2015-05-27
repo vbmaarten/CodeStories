@@ -22,7 +22,7 @@ angular.module('codeStoriesApp')
 
 	$scope.goToNarrator = function () {
 		$scope.message;
-		$state.go('narrating', {'project' : $scope.message});
+		$state.go('narrating.viewer', {'project' : $scope.message});
 	}
 
 }])

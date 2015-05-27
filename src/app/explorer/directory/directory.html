@@ -1,7 +1,7 @@
 <ul>
 	<li ng-repeat="(key, value) in data" ng-if="!value.isASTNode()">
 		<!--<a ng-href="{{castUrl}}{{key}}">{{key}}</a>-->
-		<a ui-sref="narrating.node({path: (castUrl + key)})" ng-class="value.isFile() ? 'file-reference' :'folder-reference'">{{key}}</a>
+		<a ui-sref="{path: (castUrl + key)}" ng-class="value.isFile() ? 'file-reference' :'folder-reference'">{{key}}</a>
 		<div directory data="value.children" cast-url="castUrl+key+'/'"></div>
 	</li>
 </ul>

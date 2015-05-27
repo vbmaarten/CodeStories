@@ -17,16 +17,6 @@
   return {
       /**
        * @ngdoc property
-       * @name writerMode
-       * @propertyOf narrator.factory:narratorFactory
-       * @description
-       * Stores the current mode of the app, false for viewer mode and true for 
-       * writer mode. (Will be replaced by $state in the future.)
-       */ 
-      writerMode: false,
-
-      /**
-       * @ngdoc property
        * @name narrativePlaying
        * @propertyOf narrator.factory:narratorFactory
        * @description
@@ -165,7 +155,7 @@
         if(this.lastCodeNarrativeNode != next.node.getPath()){
           this.narrativeLink = true;
           this.lastCodeNarrativeNode = next.node.getPath();
-          $state.go('narrating.node', {'path': next.node.getPath()});
+          $state.go('narrating.viewer.playing', {'path': next.node.getPath()});
         }
         this.lastCodeNarrativeNode = next.node.getPath();
       },
@@ -184,7 +174,7 @@
           this.storyboard.push({'name':this.queue[0].name, 'items':[]});
           this.narrativeLink = true;
           var path = this.queuePaths.shift();
-          $state.go('narrating.node', {'path': path});
+          $state.go('narrating.viewer.playing', {'path': path});
         }
       },
 
@@ -213,7 +203,7 @@
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
 
-        $state.go('narrating.node', {'path': linkItem.content.node});
+        $state.go('narrating.viewer.playing', {'path': linkItem.content.node});
       }
     }
   }]);

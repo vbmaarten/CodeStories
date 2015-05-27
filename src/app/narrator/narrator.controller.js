@@ -20,16 +20,7 @@ angular.module('narrator').controller('NarratorCtrl', [
     $scope.activeNode = CAST.selected || '/';
     $scope.narratives = CAST.getSelectedNarratives() || [];
 
-    console.log($scope.narratives);
-    
-    // Navigate to corresponding state
-    if (narratorFactory.writerMode) {
-      $state.go('narrating.node.writer');
-      $scope.state = 'Viewer';
-    } else {
-      $state.go('narrating.node.viewer');
-      $scope.state = 'Writer';
-    }
+    console.log($state.is('narrating.viewer.playing'));
     
     // If there was a narrative linked, continue that narrative
     if (narratorFactory.narrativeLink) {
