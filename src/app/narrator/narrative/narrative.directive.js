@@ -18,7 +18,6 @@ angular.module('narrator')
       	narrative : '=data',
       },
       templateUrl:'narrator/narrative/narrative.html',
-      controller: 'NarrativeCtrl'
     }
   });
 

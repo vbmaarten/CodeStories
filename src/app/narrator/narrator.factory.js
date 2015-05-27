@@ -17,16 +17,6 @@
   return {
       /**
        * @ngdoc property
-       * @name writerMode
-       * @propertyOf narrator.factory:narratorFactory
-       * @description
-       * Stores the current mode of the app, false for viewer mode and true for 
-       * writer mode. (Will be replaced by $state in the future.)
-       */ 
-      writerMode: false,
-
-      /**
-       * @ngdoc property
        * @name narrativePlaying
        * @propertyOf narrator.factory:narratorFactory
        * @description
@@ -135,27 +125,30 @@
       step: function(){
         var nextItem = this.getNextItem();
 
-        // If the narrative isnt done playing
-        if(nextItem){ 
-          // If a code narrative is playing
-          if( this.queue[0].isCodeNarrative() ){
-            this.codeNarrativeStep(nextItem);
-          }          
-          // If the next item is a link to another narrative
-          else if( nextItem.isLinkItem() ){
-            this.loadNarrative(nextItem);
-          }
-          // Push the next item of the narrative
+        if(!nextItem){
+          // If the narrative is done playing
+          this.popNarrative();
+          return;
+
+        }
+        if( this.queue[0].isCodeNarrative() ){
+          this.codeNarrativeStep(nextItem);
+        }  else { // If the next item is a link to another narrative
+          this.fsNarrativeStep(nextItem);
+        }
+
+      },
+
+      fsNarrativeStep: function(next){
+        if( next.isLinkItem() ){
+          this.loadNarrative(next);
+        }
+        // Push the next item of the narrative
           else { 
-            this.storyboard[this.storyboard.length-1].items.push(nextItem);
+            this.storyboard[this.storyboard.length-1].items.push(next);
             this.queueCounter[0]++;
           }
-        } 
 
-        // If the narrative is done playing
-        else {  
-          this.popNarrative();
-        }      
       },
 
       // Puts the next item of a code narrative on the storyboard
@@ -165,7 +158,7 @@
         if(this.lastCodeNarrativeNode != next.node.getPath()){
           this.narrativeLink = true;
           this.lastCodeNarrativeNode = next.node.getPath();
-          $state.go('narrating.node', {'path': next.node.getPath()});
+          $state.go('narrating.viewer.playing', {'path': next.node.getPath()});
         }
         this.lastCodeNarrativeNode = next.node.getPath();
       },
@@ -184,7 +177,7 @@
           this.storyboard.push({'name':this.queue[0].name, 'items':[]});
           this.narrativeLink = true;
           var path = this.queuePaths.shift();
-          $state.go('narrating.node', {'path': path});
+          $state.go('narrating.viewer.playing', {'path': path});
         }
       },
 
@@ -213,7 +206,7 @@
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
 
-        $state.go('narrating.node', {'path': linkItem.content.node});
+        $state.go('narrating.viewer.playing', {'path': linkItem.content.node});
       }
     }
   }]);

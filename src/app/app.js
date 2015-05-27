@@ -12,7 +12,6 @@ angular
   .module('codeStoriesApp', [
     'ngAnimate',
     'ngCookies',
-    'ngResource',
     'ngRoute',
     'ngSanitize',
     'ui.router',
@@ -21,8 +20,8 @@ angular
     'narrator',
     'explorer'
   ])
-  .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider', '$locationProvider',
-    function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider, $locationProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider',
+    function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
     
 
     (function() {
@@ -36,9 +35,6 @@ angular
         pattern: /[^/]*/
       });
     })();
-
-    $urlRouterProvider
-      .otherwise('/');
 
 
     var resolveCASTObj = {
@@ -73,10 +69,9 @@ angular
                 projectLoaderFactory.loadZip(data);
                 CAST.project = $stateParams.project;
                 setPath();
-                $http.get('/stories/' + $stateParams.project + '.json').success(function(data){
-                  CAST.appendNarrative(data);
-
-                })
+                // $http.get('/stories/' + $stateParams.project + '.json').success(function(data){
+                //   CAST.appendNarrative(data);
+                // })
               }).error(function () {
                 console.error('project not found');
               });
@@ -88,6 +83,9 @@ angular
       }]
     }
 
+
+    $urlRouterProvider
+      .otherwise('/');
 
     $stateProvider
       .state('home',{
@@ -101,32 +99,20 @@ angular
       })
       .state('narrating', {
         url: '/:project',
+        abstract: true,
         views: {
           'app': {
-            templateUrl: 'app.html'
+            templateUrl: 'app.html',
           },          
-          'projectLoader@narrating': {
-            templateUrl: '/projectLoader/projectLoader.html',
-            controller: 'ProjectLoaderCtrl' 
-          },
-          'explorer@narrating': {
-            templateUrl: '/explorer/explorer.html',
-            controller: 'ExplorerCtrl'
-          },
-          'narrator@narrating': {
-            templateUrl: '/narrator/narrator.html',
-            controller: 'NarratorCtrl' 
+          'navigation@narrating': {
+            templateUrl: '/navigation/navigation.html',
           }
         }
       })
-      .state('narrating.node', {
+      .state('narrating.viewer', {
         url: '/{path:.*}',
         resolve: resolveCASTObj,
         views: {
-          'projectLoader': {
-            templateUrl: '/projectLoader/projectLoader.html',
-            controller: 'ProjectLoaderCtrl' 
-          },
           'explorer': {
             templateUrl: '/explorer/explorer.html',
             controller: 'ExplorerCtrl'
@@ -134,9 +120,37 @@ angular
           'narrator': {
             templateUrl: '/narrator/narrator.html',
             controller: 'NarratorCtrl' 
+          },
+          'narratives@narrating.viewer': {
+            templateUrl: '/narrator/viewer/viewer.html',
+            controller: 'ViewerCtrl'
           }
         }
-      });
-
-  }]);
+      })
+      .state('narrating.viewer.playing', {
+        
+      })
+      .state('narrating.writer', {
+        url: '/{path:.*}',
+        resolve: resolveCASTObj,
+        views: {
+          'explorer': {
+            templateUrl: '/explorer/explorer.html',
+            controller: 'ExplorerCtrl'
+          },
+          'narrator': {
+            templateUrl: '/narrator/narrator.html',
+            controller: 'NarratorCtrl' 
+          },
+          'narratives@narrating.writer': {
+            templateUrl: '/narrator/writer/writer.html',
+            controller: 'WriterCtrl' 
+          }
+        }
+      })
+  }])
+  .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+  }]);;
 
