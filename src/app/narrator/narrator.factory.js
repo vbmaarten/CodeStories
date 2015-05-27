@@ -125,28 +125,31 @@
       step: function(){
         var nextItem = this.getNextItem();
 
-        // If the narrative isnt done playing
-        if(nextItem){ 
-          // If a code narrative is playing
-          if( this.queue[0].isCodeNarrative() ){
-            this.codeNarrativeStep(nextItem);
-          }          
-          // If the next item is a link to another narrative
-          else if( nextItem.isLinkItem() ){
-            this.loadNarrative(nextItem);
-          }
-          // Push the next item of the narrative
+        if(!nextItem){
+          // If the narrative is done playing
+          this.popNarrative();
+          return;
+
+        }
+        if( this.queue[0].isCodeNarrative() ){
+          this.codeNarrativeStep(nextItem);
+        }  else { // If the next item is a link to another narrative
+          this.fsNarrativeStep(nextItem);
+        }
+
+      },
+
+      fsNarrativeStep: function(next){
+        if( next.isLinkItem() ){
+          this.loadNarrative(next);
+        }
+        // Push the next item of the narrative
           else { 
-            this.storyboard[this.storyboard.length-1].items.push(nextItem);
+            this.storyboard[this.storyboard.length-1].items.push(next);
             this.queueCounter[0]++;
           }
-        } 
 
-        // If the narrative is done playing
-        else {  
-          this.popNarrative();
-        }      
-      },
+      }
 
       // Puts the next item of a code narrative on the storyboard
       codeNarrativeStep: function(next) {
