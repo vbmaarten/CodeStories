@@ -36,7 +36,6 @@ angular.module('narrator')
       $scope.selectedNarrative = narrative;
       $scope.playing = true;
       narratorFactory.selectNarrative(narrative);
-      console.log('playing ' + $scope.playing);
     };
 
     // Deselect the narrative being edited or viewed
