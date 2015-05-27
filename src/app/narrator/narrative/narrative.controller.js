@@ -10,7 +10,5 @@
 angular.module('narrator')
   .controller('NarrativeCtrl', ['$scope', 'narratorFactory', function ($scope, narratorFactory) {
 
-    $scope.edit = narratorFactory.writerMode;
-
 
   }]);

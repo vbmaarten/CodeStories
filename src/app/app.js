@@ -12,7 +12,6 @@ angular
   .module('codeStoriesApp', [
     'ngAnimate',
     'ngCookies',
-    'ngResource',
     'ngRoute',
     'ngSanitize',
     'ui.router',
@@ -73,10 +72,9 @@ angular
                 projectLoaderFactory.loadZip(data);
                 CAST.project = $stateParams.project;
                 setPath();
-                $http.get('/stories/' + $stateParams.project + '.json').success(function(data){
-                  CAST.appendNarrative(data);
-
-                })
+                // $http.get('/stories/' + $stateParams.project + '.json').success(function(data){
+                //   CAST.appendNarrative(data);
+                // })
               }).error(function () {
                 console.error('project not found');
               });
@@ -105,9 +103,8 @@ angular
           'app': {
             templateUrl: 'app.html'
           },          
-          'projectLoader@narrating': {
-            templateUrl: '/projectLoader/projectLoader.html',
-            controller: 'ProjectLoaderCtrl' 
+          'navigation@narrating': {
+            templateUrl: '/navigation/navigation.html',
           },
           'explorer@narrating': {
             templateUrl: '/explorer/explorer.html',
@@ -123,10 +120,6 @@ angular
         url: '/{path:.*}',
         resolve: resolveCASTObj,
         views: {
-          'projectLoader': {
-            templateUrl: '/projectLoader/projectLoader.html',
-            controller: 'ProjectLoaderCtrl' 
-          },
           'explorer': {
             templateUrl: '/explorer/explorer.html',
             controller: 'ExplorerCtrl'

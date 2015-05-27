@@ -1,0 +1,16 @@
+.navigation ul{
+	list-style: none;
+}
+
+.navigation u {
+	text-decoration: none;
+}
+
+.navigation li {
+	display: inline-block;
+}
+
+.navigation a {
+	text-decoration: none;
+	color:white;
+}
