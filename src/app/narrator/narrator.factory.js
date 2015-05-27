@@ -149,7 +149,7 @@
             this.queueCounter[0]++;
           }
 
-      }
+      },
 
       // Puts the next item of a code narrative on the storyboard
       codeNarrativeStep: function(next) {
