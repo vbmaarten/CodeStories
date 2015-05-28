@@ -59,7 +59,7 @@
                         "content":"Here we set the length"
                      },
                       {"type":"vcode",
-                        "content":"var barchart = new BarChart(); "}
+                        "content":"var barchart = new BarChart([]); \n display(barchart); "}
 
                     ]},
                 "body/0/body/body/1/body/body/1/body/body/0/test":{
@@ -69,7 +69,7 @@
                     "content":"Here it checks if it should swap these values"
                  },
                   {"type":"vcode",
-                    "content":"barchart.select([i,i+1]);"}
+                    "content":"barchart.highlight([i,i+1]);"}
                     ]
                 }
             }

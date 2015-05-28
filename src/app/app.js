@@ -18,7 +18,8 @@ angular
     'projectLoader',
     'cast',
     'narrator',
-    'explorer'
+    'explorer',
+    'VCodeInterpreter'
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider',
     function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
@@ -69,9 +70,9 @@ angular
                 projectLoaderFactory.loadZip(data);
                 CAST.project = $stateParams.project;
                 setPath();
-                // $http.get('/stories/' + $stateParams.project + '.json').success(function(data){
-                //   CAST.appendNarrative(data);
-                // })
+                 $http.get('/stories/' + $stateParams.project + '.json').success(function(data){
+                   CAST.appendNarrative(data);
+                 })
               }).error(function () {
                 console.error('project not found');
               });

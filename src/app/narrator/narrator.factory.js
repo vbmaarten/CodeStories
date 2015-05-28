@@ -12,8 +12,8 @@
  */
 
  angular.module('narrator')
- .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 
-  function ($state, $stateParams, CAST, interpreterFactory) {
+ .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 'vCodeInterpreterFactory' ,
+  function ($state, $stateParams, CAST, interpreterFactory,vCodeInterpreterFactory ) {
   return {
       /**
        * @ngdoc property
@@ -88,6 +88,7 @@
         if( narrative.isCodeNarrative() ){
           var CASTNode = CAST.getNode(narrative.CASTPath);
           interpreterFactory.setupNarratedAST(CASTNode,narrative);
+          vCodeInterpreterFactory.startSession();
         }
       },
 
@@ -153,7 +154,14 @@
 
       // Puts the next item of a code narrative on the storyboard
       codeNarrativeStep: function(next) {
+
+        if(next.item.isVCodeItem()){
+          var interpreterScope = interpreterFactory.getCurrentScope() ;
+          vCodeInterpreterFactory.runVCode( next.item , interpreterScope);
+
+        }
         this.storyboard[this.storyboard.length-1].items.push(next.item);
+
 
         if(this.lastCodeNarrativeNode != next.node.getPath()){
           this.narrativeLink = true;

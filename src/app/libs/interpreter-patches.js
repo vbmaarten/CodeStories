@@ -42,7 +42,7 @@ Interpreter.prototype.convertScope =  function(interpreter_scope){
 	var  scope;
 
 	if(interpreter_scope.parentScope){
-		scope = convertScope(interpreter_scope.parentScope);
+		scope = this.convertScope(interpreter_scope.parentScope);
 	} else{
 		return {};
 	}
@@ -53,11 +53,6 @@ Interpreter.prototype.convertScope =  function(interpreter_scope){
 	return scope;
 }
 
-Interpreter.prototype.EvaluateInScope =  function(code){
-
-	var scope = convertScope(iscope);
-    var vars = Object.keys(scope);
-    var  evalStr = '(function(scope){ '+code+' })(' +
-       JSON.stringify(scope) + ')';
-    eval(evalStr);
-  } 
+Interpreter.prototype.getCurrentScope = function(){
+	return this.convertScope( this.stateStack[0].scope );
+}
