@@ -3,19 +3,19 @@
 /**
  * @ngdoc controller
  * @name narrator.controller:WriterCtrl
- * @requires narrator.factory:narratorFactory
+ * @requires cast.factory:CAST
  * @description
  * Controller of the writer state of the narrator. Allows for adding and removing
  * narratives as well as selecting and deselecting narratives for editing. 
  */
 
 angular.module('narrator')
-  .controller('WriterCtrl', [ '$scope', '$state', 'CAST',	'narratorFactory', 
-    function ($scope, $state, CAST, narratorFactory) {
+  .controller('WriterCtrl', [ '$scope', '$state', 'CAST', 
+    function ($scope, $state, CAST) {
 
     // Add a narrative
     $scope.addNarrative = function(){
-      var newNarrative  ;
+      var newNarrative;
       if($scope.activeNode.isASTNode()){
         newNarrative = new CodeNarrative('New Narrative', CAST.selectedPath);
       } else {
@@ -39,7 +39,6 @@ angular.module('narrator')
 
     // Deselect the narrative being edited or viewed
     $scope.deselectNarrative = function(){
-      $scope.selected = false;
       $state.go('^.selecting');
     }
 

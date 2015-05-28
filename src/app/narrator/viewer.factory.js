@@ -2,24 +2,24 @@
 
 /**
  * @ngdoc service
- * @name narrator.factory:narratorFactory
+ * @name narrator.factory:viewerFactory
  * @requires cast.factory:CAST
  * @requires narrator.factory:interpreterFactory
  * @description
  *
- * Factory of the narrator, containers logic of the narrator like selecting, deselecting
+ * Factory of the viewer, containers logic of the viewer like selecting, deselecting
  * and stepping through a narrative.
  */
 
  angular.module('narrator')
- .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 
+ .factory('viewerFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 
   function ($state, $stateParams, CAST, interpreterFactory) {
   return {
 
        /**
        * @ngdoc property
        * @name storyboard
-       * @propertyOf narrator.factory:narratorFactory
+       * @propertyOf narrator.factory:viewerFactory
        * @description
        * Array that contains she currently displayed items of the playing narrative
        */
@@ -36,7 +36,7 @@
       /**
        * @ngdoc method
        * @name selectNarrative
-       * @methodOf narrator.factory:narratorFactory
+       * @methodOf narrator.factory:viewerFactory
        * @description
        * First deselects a narrative if any narrative is still playing. Then sets the
        * current state to playing and pushes the given narrative on the queue.
@@ -52,7 +52,7 @@
       /**
        * @ngdoc method
        * @name deselectNarrative
-       * @methodOf narrator.factory:narratorFactory
+       * @methodOf narrator.factory:viewerFactory
        * @description
        * Deselects the current playing narrative. This empties the queue and sets
        * the playing state to false.
@@ -80,16 +80,13 @@
       // },
 
       getNextItem: function(){
-        var nextItem;
+        var nextItem = false;
         if(this.queue[0].isCodeNarrative()){
-          var next = interpreterFactory.narrativeStep();
-          nextItem = next;
+          nextItem = interpreterFactory.narrativeStep();
         } 
         else {
           if(this.queue[0].items.length > this.queueCounter[0]){
             nextItem = this.queue[0].items[this.queueCounter[0]];
-          } else {
-            nextItem = false;
           }
         }
         return nextItem;
@@ -98,7 +95,7 @@
       /**
        * @ngdoc method
        * @name step
-       * @methodOf narrator.factory:narratorFactory
+       * @methodOf narrator.factory:viewerFactory
        * @description
        * Performs a narrative step. Adds an item to the storyboard if available.
        * Links to another narrative if an item is a link. If there is no more item
@@ -106,38 +103,30 @@
        * or halts playback.
        */ 
       step: function(){
-        console.log($state.current); 
-
-
         var nextItem = this.getNextItem();
 
         if(!nextItem){
-          // If the narrative is done playing
           this.popNarrative();
-          return;
-
         }
-        if( this.queue[0].isCodeNarrative() ){
-          this.codeNarrativeStep(nextItem);
-        }  else { // If the next item is a link to another narrative
-          this.fsNarrativeStep(nextItem);
+        else {
+          if( this.queue[0].isCodeNarrative() ){
+            this.codeNarrativeStep(nextItem);
+          } else {
+            this.fsNarrativeStep(nextItem);
+          }
         }
-
       },
 
       fsNarrativeStep: function(next){
-        if( next.isLinkItem() ){
+        this.queueCounter[0]++;
+        if( next.isLinkItem() ) {
           this.loadNarrative(next);
         }
-        // Push the next item of the narrative
-          else { 
-            this.storyboard[this.storyboard.length-1].items.push(next);
-            this.queueCounter[0]++;
-          }
-
+        else { 
+          this.storyboard[this.storyboard.length-1].items.push(next);
+        }
       },
 
-      // Puts the next item of a code narrative on the storyboard
       codeNarrativeStep: function(next) {
         this.storyboard[this.storyboard.length-1].items.push(next.item);
 
@@ -160,15 +149,11 @@
         // Else continue with the queued up narrative
         else{
           this.storyboard.push({'name':this.queue[0].name, 'items':[]});
-          var path = this.queuePaths.shift();
-          $state.go('narrating.viewing.playing', {'path': path});
+          $state.go('narrating.viewing.playing', {'path': this.queuePaths.shift()});
         }
       },
 
       loadNarrative: function (linkItem) {
-        // Set this value to true to let the controller know a narrative is playing
-        this.queueCounter[0]++;
-
         // Get the node of the narrative that is linked to and find the narrative
         var node = CAST.getNode(linkItem.content.node);
         var narratives = CAST.getNarratives(linkItem.content.node);
