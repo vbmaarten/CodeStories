@@ -27,7 +27,7 @@ angular.module('VCodeInterpreter')
         },
 
         runVCode: function(VCodeItem,interpreter_scope){
-            generateScope(VCode.content, VScope);
+            generateScope(VCodeItem.content, VScope);
 
 
             function display(DOMel){
@@ -38,7 +38,7 @@ angular.module('VCodeInterpreter')
             with(interpreter_scope){
                 with(VScope){
                     with(VObjectFactory){
-                        eval(VCode.content);
+                        eval(VCodeItem.content);
                     }
                 }
             }

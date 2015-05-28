@@ -54,5 +54,11 @@ Interpreter.prototype.convertScope =  function(interpreter_scope){
 }
 
 Interpreter.prototype.getCurrentScope = function(){
-	return this.convertScope( this.stateStack[0].scope );
+	var iscope , i = 0; 
+	do {
+		iscope = this.stateStack[i].scope;
+		i++
+	} while( !iscope)
+
+	return this.convertScope( iscope );
 }

@@ -155,12 +155,14 @@
       // Puts the next item of a code narrative on the storyboard
       codeNarrativeStep: function(next) {
 
+
+        this.storyboard[this.storyboard.length-1].items.push(next.item);
+
         if(next.item.isVCodeItem()){
           var interpreterScope = interpreterFactory.getCurrentScope() ;
           vCodeInterpreterFactory.runVCode( next.item , interpreterScope);
 
         }
-        this.storyboard[this.storyboard.length-1].items.push(next.item);
 
 
         if(this.lastCodeNarrativeNode != next.node.getPath()){
