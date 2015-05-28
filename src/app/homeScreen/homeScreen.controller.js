@@ -12,6 +12,7 @@ angular.module('codeStoriesApp')
 .controller('HomeScreenCtrl', ['$scope', '$state', 'projectLoaderFactory', 'CAST', function ($scope, $state, projectLoaderFactory, CAST) {
 	
 	$scope.message = "Upload a .zip file of your project";
+  $scope.loader = "github";
 
 	$scope.castReady = true;
 
@@ -21,9 +22,16 @@ angular.module('codeStoriesApp')
 	};
 
 	$scope.goToNarrator = function () {
-		$scope.message;
-		$state.go('narrating.viewer', {'project' : $scope.message});
-	}
+    var projectname;
+
+    if($scope.loader == "github"){
+      projectLoaderFactory.loadGitHub($scope.githubUser, $scope.githubRepo);
+      projectname = "github:"+$scope.githubUser + ':' + $scope.githubRepo;
+
+    }
+
+    $state.go('narrating.viewer', {'project' : projectname});
+	};
 
 }])
 .directive("fileread", [function () {
