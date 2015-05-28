@@ -38,8 +38,8 @@ angular
 
 
     var resolveCASTObj = {
-      resolveCAST : ['$stateParams', '$http', 'CAST', 'projectLoaderFactory', 
-        function($stateParams, $http, CAST, projectLoaderFactory){
+      resolveCAST : ['$state', '$stateParams', '$http', 'CAST', 'projectLoaderFactory', 
+        function($state, $stateParams, $http, CAST, projectLoaderFactory){
 
           var setPath = function () {
             if (CAST.selectedPath !== $stateParams.path) {
@@ -74,13 +74,15 @@ angular
                 // })
               }).error(function () {
                 console.error('project not found');
+                $state.go('home');
               });
             }
           }
           else {
             setPath();
           }
-      }]
+        }
+      ]
     }
 
 
@@ -109,9 +111,10 @@ angular
           }
         }
       })
-      .state('narrating.viewer', {
+      .state('narrating.viewing', {
         url: '/{path:.*}',
         resolve: resolveCASTObj,
+        abstract: true,
         views: {
           'explorer': {
             templateUrl: '/explorer/explorer.html',
@@ -121,18 +124,31 @@ angular
             templateUrl: '/narrator/narrator.html',
             controller: 'NarratorCtrl' 
           },
-          'narratives@narrating.viewer': {
+          'narratives@narrating.viewing': {
             templateUrl: '/narrator/viewer/viewer.html',
             controller: 'ViewerCtrl'
           }
         }
       })
-      .state('narrating.viewer.playing', {
-        
+      .state('narrating.viewing.playing', {
+        views: {
+          'viewer': {
+            templateUrl: '/narrator/viewer/viewer.play.html'
+          }
+        }
       })
-      .state('narrating.writer', {
+      .state('narrating.viewing.selecting', {
+        url:'',
+        views: {
+          'viewer': {
+            templateUrl: '/narrator/viewer/viewer.select.html'
+          }
+        }
+      })
+      .state('narrating.writing', {
         url: '/{path:.*}',
         resolve: resolveCASTObj,
+        abstract: true,
         views: {
           'explorer': {
             templateUrl: '/explorer/explorer.html',
@@ -142,9 +158,24 @@ angular
             templateUrl: '/narrator/narrator.html',
             controller: 'NarratorCtrl' 
           },
-          'narratives@narrating.writer': {
+          'narratives@narrating.writing': {
             templateUrl: '/narrator/writer/writer.html',
             controller: 'WriterCtrl' 
+          }
+        }
+      })
+      .state('narrating.writing.editing', {
+        views: {
+          'writer': {
+            templateUrl: '/narrator/writer/writer.edit.html'
+          }
+        }
+      })
+      .state('narrating.writing.selecting', {
+        url:'',
+        views: {
+          'writer': {
+            templateUrl: '/narrator/writer/writer.select.html'
           }
         }
       })

@@ -1,19 +1,2 @@
 
-
-<div class="narrative" ng-hide="selected" ng-repeat="narrative in narratives">
-	<h2 ng-click="selectNarrative(narrative)">
-		{{narrative.name}}
-		<div class="remove" ng-click="removeNarrative(narrative)"></div>
-	</h2>
-</div>
-
-<div class="button-wide add" ng-click="addNarrative()" ng-hide="selected"></div>	
-
-
-<narrative class="narrative" ng-show="selected" data="selectedNarrative">
-	<h2>
-		<input type="text" ng-model="selectedNarrative.name">
-		<div class="return" ng-click="deselectNarrative()"><</div>
-	</h2>
-</narrative>
-
+<div ui-view="writer"></div>

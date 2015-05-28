@@ -15,11 +15,7 @@ angular.module('narrator')
     return {
       transclude: true,
       restrict: 'AE',
-      scope : {
-        'item': '=',
-      },
       templateUrl:'narrator/narrative/item/item.html',
-      controller:'ItemCtrl'
     }
   })
   .directive('itemContent', [function() {
@@ -38,7 +34,6 @@ angular.module('narrator')
             };
 
         }
-
 
         return {
             restrict: 'AE',

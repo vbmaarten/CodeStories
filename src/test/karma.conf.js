@@ -50,7 +50,7 @@ module.exports = function(config) {
       'app/cast/cast.factory.js': 'coverage',
       'app/constructors/**.js': 'coverage',
       'app/projectLoader/projectLoader.factory.js': 'coverage',
-      'app/narrator/narrator.factory.js': 'coverage',
+      'app/narrator/viewer/viewer.factory.js': 'coverage',
       'app/narrator/writer/writer.controller.js': 'coverage',
       'app/narrator/interpreter/interpreter.factory.js': 'coverage',
       'app/explorer/explorer.controller.js': 'coverage',
