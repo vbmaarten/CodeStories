@@ -1,13 +1,13 @@
 <div ng-transclude></div>
 
-<div class="item button-wide add" ng-if="'narrating.writer' | isState" ng-click="narrative.addItem(null,0)"></div>
+<div class="item button-wide add" ng-if="'narrating.writing' | isState" ng-click="narrative.addItem(null,0)"></div>
 
 <div ng-repeat="item in narrative.items track by $index">
 <div class="item debug-controlls" ng-if="narrative.isCodeNarrative()">
 	<div ng-click='debugStep()'> '>' </div>
 </div>
 	<div item="item">
-		<div class="remove" ng-if="'narrating.writer' | isState" ng-click="narrative.removeItem(item)"></div>
+		<div class="remove" ng-if="'narrating.writing' | isState" ng-click="narrative.removeItem(item)"></div>
 	</div>
-	<div class="item button-wide add" ng-if="'narrating.writer' | isState" ng-click="narrative.addItem(null,item)"></div>
+	<div class="item button-wide add" ng-if="'narrating.writing' | isState" ng-click="narrative.addItem(null,item)"></div>
 </div>

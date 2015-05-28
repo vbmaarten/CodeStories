@@ -10,7 +10,8 @@
  */
 
 angular.module('narrator')
-  .controller('WriterCtrl', [ '$scope', 'CAST',	'narratorFactory', function ($scope, CAST, narratorFactory) {
+  .controller('WriterCtrl', [ '$scope', '$state', 'CAST',	'narratorFactory', 
+    function ($scope, $state, CAST, narratorFactory) {
 
     // Add a narrative
     $scope.addNarrative = function(){
@@ -32,17 +33,14 @@ angular.module('narrator')
 
    	// Select a narrative to edit or view
     $scope.selectNarrative = function(narrative){
-      $scope.selected = true;
-      $scope.selectedNarrative = narrative;
-      $scope.playing = true;
-      narratorFactory.selectNarrative(narrative);
+      $scope.selectNarrative = narrative;
+      $state.go('^.editing');
     };
 
     // Deselect the narrative being edited or viewed
     $scope.deselectNarrative = function(){
       $scope.selected = false;
-      $scope.playing = false;
-      narratorFactory.deselectNarrative();
+      $state.go('^.selecting');
     }
 
 

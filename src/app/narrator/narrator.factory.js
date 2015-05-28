@@ -64,6 +64,8 @@
         this.deselectNarrative();
         this.narrativePlaying = true;
         this.pushNarrative(narrative);
+        console.log('sibling')
+        $state.go('^.playing');
       },
 
       /**
@@ -79,6 +81,7 @@
         this.queue.length = 0;
         this.queueCounter.length = 0;
         this.storyboard.length = 0;
+        $state.go('narrating.viewing.selecting');
       },
 
       pushNarrative: function(narrative){
@@ -158,7 +161,7 @@
         if(this.lastCodeNarrativeNode != next.node.getPath()){
           this.narrativeLink = true;
           this.lastCodeNarrativeNode = next.node.getPath();
-          $state.go('narrating.viewer.playing', {'path': next.node.getPath()});
+          $state.go('narrating.viewing.playing', {'path': next.node.getPath()});
         }
         this.lastCodeNarrativeNode = next.node.getPath();
       },
@@ -177,7 +180,7 @@
           this.storyboard.push({'name':this.queue[0].name, 'items':[]});
           this.narrativeLink = true;
           var path = this.queuePaths.shift();
-          $state.go('narrating.viewer.playing', {'path': path});
+          $state.go('narrating.viewing.playing', {'path': path});
         }
       },
 
@@ -206,7 +209,7 @@
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
 
-        $state.go('narrating.viewer.playing', {'path': linkItem.content.node});
+        $state.go('narrating.viewing.playing', {'path': linkItem.content.node});
       }
     }
   }]);

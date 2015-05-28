@@ -32,6 +32,7 @@ angular.module('narrator')
     $scope.selected = true;
     $scope.selectedNarrative = narrative;
     $scope.playing = true;
+    console.log('select');
     narratorFactory.selectNarrative(narrative);
   };
 

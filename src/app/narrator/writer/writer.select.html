@@ -1,0 +1,8 @@
+<div class="narrative" ng-repeat="narrative in narratives">
+	<h2 ng-click="selectNarrative(narrative)">
+		{{narrative.name}}
+		<div class="remove" ng-click="removeNarrative(narrative)"></div>
+	</h2>
+</div>
+
+<div class="button-wide add" ng-click="addNarrative()"></div>	
