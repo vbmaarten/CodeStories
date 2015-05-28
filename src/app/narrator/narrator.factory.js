@@ -81,6 +81,7 @@
         this.queue.length = 0;
         this.queueCounter.length = 0;
         this.storyboard.length = 0;
+        //$state.go('narrating.viewing.selecting',{},{'reload':true});
         $state.go('narrating.viewing.selecting');
       },
 
@@ -126,6 +127,9 @@
        * or halts playback.
        */ 
       step: function(){
+        console.log($state.current); 
+
+
         var nextItem = this.getNextItem();
 
         if(!nextItem){
