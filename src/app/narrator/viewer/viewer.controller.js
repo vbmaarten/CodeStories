@@ -19,27 +19,16 @@ angular.module('narrator')
  		// Do one step in the narrative
  		narratorFactory.step();
  		// Check if the narrative is still playing after the last step
- 		$scope.playing = narratorFactory.narrativePlaying;
- 		
- 		if(!$scope.playing){
- 			$scope.deselectNarrative();
- 		}
 
  	}
 
 	// Select a narrative to edit or view
   $scope.selectNarrative = function(narrative){
-    $scope.selected = true;
-    $scope.selectedNarrative = narrative;
-    $scope.playing = true;
-    console.log('select');
     narratorFactory.selectNarrative(narrative);
   };
 
   // Deselect the narrative being edited or viewed
   $scope.deselectNarrative = function(){
-    $scope.selected = false;
-    $scope.playing = false;
     narratorFactory.deselectNarrative();
   }
 

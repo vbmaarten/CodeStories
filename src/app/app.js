@@ -38,8 +38,8 @@ angular
 
 
     var resolveCASTObj = {
-      resolveCAST : ['$stateParams', '$http', 'CAST', 'projectLoaderFactory', 
-        function($stateParams, $http, CAST, projectLoaderFactory){
+      resolveCAST : ['$state', '$stateParams', '$http', 'CAST', 'projectLoaderFactory', 
+        function($state, $stateParams, $http, CAST, projectLoaderFactory){
 
           var setPath = function () {
             if (CAST.selectedPath !== $stateParams.path) {
@@ -74,6 +74,7 @@ angular
                 // })
               }).error(function () {
                 console.error('project not found');
+                $state.go('home');
               });
             }
           }

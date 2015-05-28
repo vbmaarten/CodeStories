@@ -23,14 +23,5 @@ angular.module('narrator').controller('NarratorCtrl', [
     console.log($scope.narratives);
     console.log($state.current); 
        
-    // If there was a narrative linked, continue that narrative
-    if ($state.is('narrating.viewing.playing')) {
-      narratorFactory.narrativeLink = false;
-      $scope.playing = true;
-    } else {
-      $scope.selected = false;
-      $scope.selectedNarrative = {};
-      $scope.playing = false;
-    }
   }
 ]);

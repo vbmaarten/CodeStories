@@ -15,24 +15,7 @@
  .factory('narratorFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 
   function ($state, $stateParams, CAST, interpreterFactory) {
   return {
-      /**
-       * @ngdoc property
-       * @name narrativePlaying
-       * @propertyOf narrator.factory:narratorFactory
-       * @description
-       * Tells the view mode if there is a narrative playing
-       */ 
-      narrativePlaying: false,
 
-      /**
-       * @ngdoc property
-       * @name narrativeLink
-       * @propertyOf narrator.factory:narratorFactory
-       * @description
-       * Boolean that records when a narrative is being linked. 
-       * (Will be replaced by $state in the future.)
-       */
-       narrativeLink: false,
        /**
        * @ngdoc property
        * @name storyboard
@@ -62,9 +45,7 @@
        */     
       selectNarrative: function(narrative){
         this.deselectNarrative();
-        this.narrativePlaying = true;
         this.pushNarrative(narrative);
-        console.log('sibling')
         $state.go('^.playing');
       },
 
@@ -77,11 +58,9 @@
        * the playing state to false.
        */ 
       deselectNarrative: function(){
-        this.narrativePlaying = false;
         this.queue.length = 0;
         this.queueCounter.length = 0;
         this.storyboard.length = 0;
-        //$state.go('narrating.viewing.selecting',{},{'reload':true});
         $state.go('narrating.viewing.selecting');
       },
 
@@ -163,7 +142,6 @@
         this.storyboard[this.storyboard.length-1].items.push(next.item);
 
         if(this.lastCodeNarrativeNode != next.node.getPath()){
-          this.narrativeLink = true;
           this.lastCodeNarrativeNode = next.node.getPath();
           $state.go('narrating.viewing.playing', {'path': next.node.getPath()});
         }
@@ -182,7 +160,6 @@
         // Else continue with the queued up narrative
         else{
           this.storyboard.push({'name':this.queue[0].name, 'items':[]});
-          this.narrativeLink = true;
           var path = this.queuePaths.shift();
           $state.go('narrating.viewing.playing', {'path': path});
         }
@@ -190,7 +167,6 @@
 
       loadNarrative: function (linkItem) {
         // Set this value to true to let the controller know a narrative is playing
-        this.narrativeLink = true;
         this.queueCounter[0]++;
 
         // Get the node of the narrative that is linked to and find the narrative

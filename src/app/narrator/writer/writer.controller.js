@@ -33,7 +33,7 @@ angular.module('narrator')
 
    	// Select a narrative to edit or view
     $scope.selectNarrative = function(narrative){
-      $scope.selectNarrative = narrative;
+      $scope.selectedNarrative = narrative;
       $state.go('^.editing');
     };
 
