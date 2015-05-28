@@ -31,8 +31,8 @@ describe('Factory: Narrator', function() {
   var fileNode;
   var astNode;
 
-  beforeEach(inject(function(_CAST_, _narratorFactory_){
-    narrator = _narratorFactory_;
+  beforeEach(inject(function(_CAST_, _viewerFactory_){
+    narrator = _viewerFactory_;
     CAST = _CAST_;
     folderNode = CAST.cast.rootnode.children['folderNode'] = new FolderNode('folderNode', CAST.cast.rootnode, {});
     fileNode = folderNode.children['fileNode.js'] = new FileNode('fileNode.js', folderNode, { });

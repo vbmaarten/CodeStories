@@ -13,8 +13,9 @@ angular.module('codeStoriesApp')
 	
 	$scope.message = "Upload a .zip file of your project";
   $scope.loader = "github";
-
-	$scope.castReady = true;
+  $scope.githubUser = "";
+  $scope.githubRepo = "";
+  $scope.ziploaded = false;
 
 	$scope.loadZip = function(data){
 		$scope.castReady = false;
@@ -27,10 +28,11 @@ angular.module('codeStoriesApp')
     if($scope.loader == "github"){
       projectLoaderFactory.loadGitHub($scope.githubUser, $scope.githubRepo);
       projectname = "github:"+$scope.githubUser + ':' + $scope.githubRepo;
-
+    } else if($scope.loader == "file"){
+        projectname = $scope.message;
     }
 
-    $state.go('narrating.viewer', {'project' : projectname});
+    $state.go('narrating.viewing.selecting', {'project' : projectname});
 	};
 
 }])

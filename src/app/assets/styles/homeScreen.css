@@ -35,7 +35,6 @@ form .link a:hover {
 }
 
 .fileUpload input.upload {
-    position: absolute;
     top: 0;
     right: 0;
     margin: 0;

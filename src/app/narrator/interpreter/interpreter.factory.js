@@ -34,6 +34,7 @@ angular.module('narrator')
 	 	};
 
 	 	factory.getCurrentScope = function(){
+	 		return this.interpreter.getCurrentScope();
 
 	 	};
 

@@ -84,12 +84,11 @@
        * @param {String} data Raw data of the zip file
        */
       loadZip : function (data) {
-        this.loadGitHub("vbmaarten", "TestRepo");
         var contents = this.UnpackZip( new JSZip(data) );
 
         CAST.reset();
-        //CAST.cast.rootnode = contents.cast;
-        //CAST.appendNarrative(contents.narratives);
+        CAST.cast.rootnode = contents.cast;
+        CAST.appendNarrative(contents.narratives);
       },
 
       /**

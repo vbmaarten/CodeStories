@@ -27,6 +27,7 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-ui-ace/ui-ace.js',
+      'bower_components/d3/d3.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/libs/interpreter.js',
@@ -50,7 +51,7 @@ module.exports = function(config) {
       'app/cast/cast.factory.js': 'coverage',
       'app/constructors/**.js': 'coverage',
       'app/projectLoader/projectLoader.factory.js': 'coverage',
-      'app/narrator/narrator.factory.js': 'coverage',
+      'app/narrator/viewer/viewer.factory.js': 'coverage',
       'app/narrator/writer/writer.controller.js': 'coverage',
       'app/narrator/interpreter/interpreter.factory.js': 'coverage',
       'app/explorer/explorer.controller.js': 'coverage',
