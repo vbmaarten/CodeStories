@@ -1,3 +1,7 @@
-<div ng-hide="'narrating.writing.editing' | isState">{{item.content}}</div>
-<input type="text" ng-model="item.content" ng-show="'narrating.writing.editing' | isState" autofocus/>
-<div ng-transclude></div>
+<div ng-switch="item.type">
+	<div item-content ng-switch-when="text" type="text"></div>
+	<div item-content ng-switch-when="vcode" type="vcode"></div>
+	<div item-content ng-switch-when="video" type="video"></div>
+	<div item-content ng-switch-when="picture" type="picture"></div>
+</div>
+

@@ -15,30 +15,21 @@ angular.module('narrator')
     return {
       transclude: true,
       restrict: 'AE',
-      templateUrl:'narrator/narrative/item/item.html',
+      templateUrl: function (elem, attr) {
+        if(attr.edit){
+          console.log(attr);
+
+          return 'narrator/narrative/item/item.edit.html'
+        }
+        return 'narrator/narrative/item/item.html';
+      }
     }
   })
-  .directive('itemContent', [function() {
-
-        var getTemplate = function(contentType) {
-            var templateLoader,
-            baseUrl = '/narrator/narrative/item/',
-            templateMap = {
-                empty: 'empty.html',
-                link: 'link.html',
-                text: 'text.html',
-                image: 'image.html',
-                video: 'video.html',
-                link: 'link.html',
-                audio: 'audio.html',
-            };
-
-        }
-
-        return {
-            restrict: 'AE',
-            scope: {
-                type:'=itemType'
-            },
-        };
-    }]);
+  .directive('itemContent', function () {
+    return {
+      restrict: 'AE',
+      templateUrl: function (elem, attr) {
+        return 'narrator/narrative/item/' + attr.type + '.html';
+      }
+    }
+  });

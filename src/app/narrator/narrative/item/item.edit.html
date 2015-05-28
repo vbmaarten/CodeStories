@@ -1,0 +1,10 @@
+<div ng-switch="item.type">
+	<div item-content ng-switch-when="text" type="text.edit"></div>
+	<div item-content ng-switch-when="vcode" type="vcode.edit"></div>
+	<div item-content ng-switch-when="video" type="video.edit"></div>
+	<div item-content ng-switch-when="picture" type="picture.edit"></div>
+	<div item-content ng-switch-when="link" type="link.edit"></div>
+	<div item-content ng-switch-when="empty" type="empty.edit"></div>
+</div>
+
+<div ng-transclude></div>
