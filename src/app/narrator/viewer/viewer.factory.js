@@ -12,8 +12,8 @@
  */
 
  angular.module('narrator')
- .factory('viewerFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 
-  function ($state, $stateParams, CAST, interpreterFactory) {
+ .factory('viewerFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 'vCodeInterpreterFactory' ,
+  function ($state, $stateParams, CAST, interpreterFactory,vCodeInterpreterFactory) {
   return {
 
        /**
@@ -71,6 +71,7 @@
         if( narrative.isCodeNarrative() ){
           var CASTNode = CAST.getNode(narrative.CASTPath);
           interpreterFactory.setupNarratedAST(CASTNode,narrative);
+          vCodeInterpreterFactory.startSession();
         }
       },
 
@@ -128,7 +129,18 @@
       },
 
       codeNarrativeStep: function(next) {
+
+
+        if(next.item.isVCodeItem()){
+          var interpreterScope = interpreterFactory.getCurrentScope() ;
+          vCodeInterpreterFactory.runVCode( next.item , interpreterScope);
+
+        }
+
         this.storyboard[this.storyboard.length-1].items.push(next.item);
+
+
+
 
         if(this.lastCodeNarrativeNode != next.node.getPath()){
           this.lastCodeNarrativeNode = next.node.getPath();
