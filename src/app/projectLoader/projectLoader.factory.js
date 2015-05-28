@@ -26,6 +26,7 @@
       loadZip : function (data) {
         var contents = this.UnpackZip( new JSZip(data) );
 
+        CAST.reset();
         CAST.cast.rootnode = contents.cast;
         CAST.appendNarrative(contents.narratives);
       },

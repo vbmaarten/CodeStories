@@ -83,6 +83,19 @@ angular.module('cast')
        * Takes narrative json and appends it to their CASTNodes when loading a project
        * @param {array} narratives Array of narratives to append.
        */ 
+      reset: function(){
+        var EmptyCast = {
+          'rootnode': new RootNode('rootnode', {})
+        };
+
+        this.cast = EmptyCast
+        this.selected = EmptyCast.rootnode;
+        this.selectedPath = '/';
+        this.content = '';
+        this.project = '';
+        this.narratives = {};
+      },
+
       appendNarrative: function(narratives) {
         var i, newNarrative, name;
         for (var castPath in narratives) {
