@@ -1,16 +1,18 @@
 <link rel="stylesheet" href="assets/styles/homeScreen.css">
 <div class="wrapper">
 	<div class="container">
-		<h1>Welcome</h1>
 		
 		<form class="form">
-			<div class="fileUpload">
-				<span>{{message}}</span>
-				<input class="upload" type="file" ng-model="zipfile" on-read-file="loadZip($fileContent)" fileread="message"></input>
-			</div>
+			<div ng-switch="loader">
+			<githubloader ng-show='loader=="github"'></githubloader>
+			<fileloader ng-show='loader=="file"'></fileloader>
 			<!--<input type="text" placeholder="Username">-->
 			<!--<input type="password" placeholder="Password">-->
-			<button ng-click="goToNarrator()" ng-disabled="castReady">Narrate</button>
+			<div class="link">
+				<a ng-click="loader='file'" ng-show="loader=='github'">Or upload a zip file</a>
+				<a ng-click="loader='github'" ng-show="loader=='file'">Or use github</a>
+			</div>
+			</div>
 		</form>
 	</div>
 	

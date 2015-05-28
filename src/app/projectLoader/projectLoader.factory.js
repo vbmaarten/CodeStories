@@ -10,9 +10,69 @@
  */
 
  angular.module('projectLoader').factory('projectLoaderFactory', [
-  'CAST',
-  function (CAST) {
+  'CAST', '$http',
+  function (CAST, $http) {
     return {
+
+
+      loadGitHub: function (username, repository){
+        var ret = {
+            cast: undefined,
+            narratives: undefined
+          };
+
+        var $this = this;
+        $http.get('https://api.github.com/repos/'+username+'/'+repository+'/git/trees/HEAD?recursive=1')
+        .success(function(data, status, headers, config){
+          console.log(data);
+          
+
+          var root = new FolderNode('', null, {});
+          root.path = '';
+
+          //Loop through files that are packed in the zip
+          data.tree.forEach(function (element) {
+            var isDirectory = element.type == 'tree';
+            var isJS = false;
+            var isCodestoriesFile = false;
+
+            var path = element.path.split('/');
+
+            var last = path.pop();
+
+            if(!isDirectory){
+               var fileExtension = last.split('.').pop();
+              if (fileExtension === 'js') {
+                isJS = true;
+              } else if(fileExtension === 'codestories'){
+                isCodestoriesFile = true;
+              }
+            }
+
+            var newRoot = $this._walkTo(root, path);
+            
+            if (!newRoot.children[last]) {
+              if(isCodestoriesFile){   //Parse the narratives file
+                $http.get(element.url).success(function(data){
+                   ret.narratives = data;
+                })
+              } else if (isDirectory) {  //Create the new directory
+                newRoot.children[last] = new FolderNode(last, root, {});
+              } else {   //Create the new file
+                $http.get(element.url, {responseType: 'text'}).success(function(data){
+                  console.log("data");
+                  console.log(data);
+                   newRoot.children[last] = new FileNode(last, root, {}, atob(data.content));
+                })
+                
+              }
+            }
+          });
+          ret.cast = root;
+
+          CAST.cast.rootnode = ret.cast;
+        })
+      },
 
       /**
        * @ngdoc method

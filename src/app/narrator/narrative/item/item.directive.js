@@ -13,6 +13,11 @@
 angular.module('narrator')
   .directive('item', function () {
     return {
+      link: function(scope,elements,attrs){
+        if(scope.item.dom){
+          elements[0].appendChild(scope.item.dom)
+        }
+      },
       transclude: true,
       restrict: 'AE',
       templateUrl: function (elem, attr) {
