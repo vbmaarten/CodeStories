@@ -2,4 +2,4 @@
 	<h2>{{narrative.name}}</h2>
 </div>
 
-<div class="button-wide next" ng-click='next()'>Next</div>
+<div class="button-wide next" tabindex="0" ng-keypress="$event.charCode === 32 && next()" focus ng-click='next()'>Next</div>
