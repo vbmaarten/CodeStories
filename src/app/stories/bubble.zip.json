@@ -42,7 +42,7 @@
                     },
                     {
                     "type": "link",
-                    "content": {"id":"codetest2","node":"/bubblesort.js/Program"}
+                    "content": {"id":"codetest2","node":"/sort_algorithms/bubblesort.js/Program"}
                     }
                 ]
             }
