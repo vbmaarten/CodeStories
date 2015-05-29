@@ -8,8 +8,9 @@ angular.module("messaging").controller("MessagingCtrl", ['$scope', "messagingFac
 		// });
 
 		var updateMessages = function() {
+			$scope.$apply(function(){
 			$scope.messages = messagingFactory.messages;
-			$scope.$apply();
+		});
 		}
 
 		messagingFactory.registerObserverCallback(updateMessages);

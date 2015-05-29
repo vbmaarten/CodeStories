@@ -1,34 +1,45 @@
-angular.module("messaging").factory("messagingFactory", function($timeout){
-	var factory = {};
+angular.module("messaging")
+	.factory("messagingFactory", ['$timeout', function($timeout){
+		var factory = {};
 
+		var delay = 5000;
 
-	factory.messages = [
-		{type:'info', content:'This is an info message'}
-	];
+		factory.messages = [];
 
-	factory.callback;
+		factory.callback;
 
-	factory.error = function(content){
-		this.messages.unshift({type: 'error', content: content});
-		factory.callback();
-		$timeout(function(){this.close({type: 'error', content: content})}, 4000);
-	};
+		factory.error = function(content){
+			factory.messages.unshift({type: 'error', content: content});
+			factory.callback();
+			$timeout(function(){
+				factory.close({type: 'error', content: content});
+			}, delay);
+		};
 
-	factory.info = function(content){
-		this.messages.unshift({type: 'info', content: content});
-		factory.callback();
-		$timeout(function(){this.close({type: 'info', content: content})}, 4000);
-	};
+		factory.success = function(content){
+			factory.messages.unshift({type: 'success', content: content});
+			factory.callback();
+			$timeout(function(){
+				factory.close({type: 'success', content: content});
+			}, delay);
+		};
 
-	factory.close = function(message){
-		this.messages.splice(this.messages.indexOf(message), 1);
-		factory.callback();
-	};
+		factory.info = function(content){
+			factory.messages.unshift({type: 'info', content: content});
+			factory.callback();
+			$timeout(function(){
+				factory.close({type: 'info', content: content});
+			}, delay);
+		};
 
-	factory.registerObserverCallback = function(callback) {
-		factory.callback = callback;
-	}
+		factory.close = function(message){
+			factory.messages.splice(factory.messages.indexOf(message), 1);
+			factory.callback();
+		};
 
+		factory.registerObserverCallback = function(callback) {
+			factory.callback = callback;
+		}
 
-	return factory;
-})
+		return factory;
+	}]);
