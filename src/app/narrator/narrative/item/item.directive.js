@@ -18,16 +18,15 @@ angular.module('narrator')
           elements[0].appendChild(scope.item.dom)
         }
       },
+      restrict: 'AE',
+      templateUrl: 'narrator/narrative/item/item.html'
+    }
+  })
+  .directive('itemEdit', function () {
+    return {
       transclude: true,
       restrict: 'AE',
-      templateUrl: function (elem, attr) {
-        if(attr.edit){
-          console.log(attr);
-
-          return 'narrator/narrative/item/item.edit.html'
-        }
-        return 'narrator/narrative/item/item.html';
-      }
+      templateUrl: 'narrator/narrative/item/item.edit.html'
     }
   })
   .directive('itemContent', function () {

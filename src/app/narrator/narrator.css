@@ -109,7 +109,7 @@
 	content:'x';
 }
 
-div[item], .item{
+div[item], .item, div[item-edit]{
 	background-color:#FFFFFF;
 	padding:25px 15px;
 	width:100%;
@@ -117,10 +117,10 @@ div[item], .item{
 	position:relative;
 }
 
-div[item] input {
+div[item-edit] input {
 	font-size:1em;
 }
 
-div[item]:last-child, .item:last-child{
+div[item]:last-child, .item:last-child, div[item-edit]:last-child{
 	border:none;
 }

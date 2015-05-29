@@ -1,8 +1,6 @@
-<div ng-transclude></div>
 
-<div ng-repeat="item in narrative.items" ng-if="'narrating.viewing.playing' | isState">
-	<div item ></div>
-</div>
+<!--editing-->
+<div ng-transclude></div>
 
 <div class="item button-wide add" ng-click="narrative.addItem(null,0)" ng-if="'narrating.writing.editing' | isState"></div>
 
@@ -11,10 +9,15 @@
 		<div ng-click='debugStep()'> '>' </div>
 	</div>
 
-	<div item edit>
+	<div item-edit>
 		<div class="remove" ng-click="narrative.removeItem(item)"></div>
 	</div>
 
 	<div class="item button-wide add" ng-click="narrative.addItem(null,item)"></div>
+</div>
+
+<!--viewing-->
+<div ng-repeat="item in narrative.items" ng-if="'narrating.viewing.playing' | isState">
+	<div item ></div>
 </div>
 
