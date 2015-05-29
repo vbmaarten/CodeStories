@@ -13,6 +13,11 @@
 angular.module('narrator')
   .directive('vcodeItem', function () {
     return {
+      link: function(scope,elements,attrs){
+        if(scope.item.dom){
+          elements[0].querySelector('.vcode-visual').appendChild(scope.item.dom)
+        }
+      },
       restrict: 'AE',
       templateUrl: function (elem, attr) {
         return 'narrator/narrative/item/' + attr.type + '.html';
