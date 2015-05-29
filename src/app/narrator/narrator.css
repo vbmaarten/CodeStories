@@ -1,6 +1,7 @@
 
 .narrator {
 	padding:20px;
+	padding-bottom:100px;
 	background-color: #f0f0f0;
 	overflow-y: scroll; 
 }
