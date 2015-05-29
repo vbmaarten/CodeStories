@@ -22,6 +22,8 @@ angular.module('narrator')
         newNarrative = new FSNarrative('New Narrative', CAST.selectedPath);
       }
       $scope.narratives.push(newNarrative);
+      CAST.narratives[CAST.selectedPath] = CAST.narratives[CAST.selectedPath] || [];
+      CAST.narratives[CAST.selectedPath].push(newNarrative);
     };
 
     // Remove a narrative
