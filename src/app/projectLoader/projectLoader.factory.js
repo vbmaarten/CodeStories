@@ -12,14 +12,34 @@
  angular.module('projectLoader').factory('projectLoaderFactory', [
   'CAST', '$http',
   function (CAST, $http) {
+    var _incrementCounter = function(counter){
+      counter.value = counter.value ? counter.value + 1 : 1;
+    }
+
+    var _decrementCounter = function(counter, proceed){
+      counter.value -= 1;
+      if(counter.value == 0){
+        proceed();
+      }
+    }
+
     return {
 
+      gitHubLoadCounter: {value: undefined},  
 
-      loadGitHub: function (username, repository){
+      loadGitHub: function (username, repository, callback){
         var ret = {
             cast: undefined,
             narratives: undefined
           };
+
+        var proceed = function(){
+          CAST.reset();
+          CAST.cast.rootnode = ret.cast;
+          CAST.appendNarrative(ret.narratives);
+          CAST.project = "github:"+username + ':' + repository;
+          callback();
+        };
 
         var $this = this;
         $http.get('https://api.github.com/repos/'+username+'/'+repository+'/git/trees/HEAD?recursive=1')
@@ -53,24 +73,24 @@
             
             if (!newRoot.children[last]) {
               if(isCodestoriesFile){   //Parse the narratives file
+                _incrementCounter($this.gitHubLoadCounter);
                 $http.get(element.url).success(function(data){
                    ret.narratives = data;
+                   _decrementCounter($this.gitHubLoadCounter, proceed);
                 })
               } else if (isDirectory) {  //Create the new directory
                 newRoot.children[last] = new FolderNode(last, root, {});
               } else {   //Create the new file
+                _incrementCounter($this.gitHubLoadCounter);
                 $http.get(element.url, {responseType: 'text'}).success(function(data){
-                  console.log("data");
-                  console.log(data);
                    newRoot.children[last] = new FileNode(last, root, {}, atob(data.content));
+                   _decrementCounter($this.gitHubLoadCounter, proceed);
                 })
                 
               }
             }
           });
           ret.cast = root;
-
-          CAST.cast.rootnode = ret.cast;
         })
       },
 
@@ -89,6 +109,7 @@
         CAST.reset();
         CAST.cast.rootnode = contents.cast;
         CAST.appendNarrative(contents.narratives);
+        CAST.project = name;
       },
 
       /**
