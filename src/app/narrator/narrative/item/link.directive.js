@@ -17,8 +17,30 @@ angular.module('narrator')
       templateUrl: function (elem, attr) {
         return 'narrator/narrative/item/' + attr.type + '.html';
       },
-      controller : ['$scope', function($scope){
-        
+      controller : ['$scope', 'CAST', function($scope, CAST){
+        var nodes = CAST.narratives;
+        var narratives = {};
+
+        if($scope.item.content == "Empty") {
+          $scope.item.content = {};
+        }
+
+        $scope.link = $scope.item.content.node + " - " + $scope.item.content.id;
+
+        for( var i in nodes ) {
+          for (var j in nodes[i]) {
+            var narrative = nodes[i][j]
+            narratives[i +  " - " + narrative.name] = nodes[i][j];
+          }
+        }
+
+        $scope.narratives = narratives;
+
+        $scope.changeLink = function ( link ){
+          var narToLink = narratives[link];
+          $scope.item.content.id = narToLink.name;
+          $scope.item.content.node = narToLink.CASTPath;
+        }
       }]
     }
   });

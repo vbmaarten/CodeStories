@@ -20,4 +20,14 @@ a{
   text-decoration: none;
 }
 
+button {
+  outline: none;
+}
 
+.muted {
+  opacity:.5;
+}
+
+.center-text {
+  text-align: center;
+}
