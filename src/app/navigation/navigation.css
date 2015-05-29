@@ -8,9 +8,35 @@
 
 .navigation li {
 	display: inline-block;
+	height:100%;
 }
 
 .navigation a {
 	text-decoration: none;
 	color:white;
+	display:block;
+	float:left;
+	height: 100%;
+	text-align: center;
+	font-size:1.3em;
+	font-weight:200;
+	padding-top: .6em;
+	padding-left:25px;
+	padding-right:25px;
+}
+
+.navigation .mode {
+	float:right;
+	width:200px;
+	margin-right:150px;
+}
+
+.navigation .mode a {
+	width:50%;
+	opacity:.6;
+}
+
+.navigation .mode .active {
+	border-bottom:solid 3px white;
+	opacity:1;
 }

@@ -3,6 +3,12 @@
 	<li><a ui-sref="home">Home</a></li>
 	<li><a href="">Project</a></li>
 	<li><a href="">V-Object</a></li>
-	<li><a ng-show="'narrating.viewing' | includedByState" ui-sref="narrating.writing.selecting($stateParams)">Writer</a></li>
-	<li><a ng-show="'narrating.writing' | includedByState" ui-sref="narrating.viewing.selecting($stateParams)">Viewer</a></li>
+	<li class="mode">
+		<a ui-sref="narrating.writing.selecting($stateParams)" ui-sref-active="active">
+			<i class="fa fa-pencil fa-2"></i>
+		</a>
+		<a ui-sref="narrating.viewing.selecting($stateParams)" ui-sref-active="active">
+			<i class="fa fa-eye fa-2"></i>
+		</a>
+	</li>
 </u>
