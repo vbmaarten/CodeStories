@@ -14,7 +14,7 @@
                 },
                 {
                     "type": "link",
-                    "content": {"id":"code link","node":"/bubblesort.js"}
+                    "content": {"id":"code link","node":"/sort_algorithms/bubblesort.js"}
                 },
                 {
                     "type": "link",
@@ -27,7 +27,7 @@
             ]
         }
     ],
-    "/bubblesort.js" : [
+    "/sort_algorithms/bubblesort.js" : [
             {
                 "name": "code link",
                 "type": "FS",
@@ -47,7 +47,7 @@
                 ]
             }
         ],
-    "/bubblesort.js/Program":[
+    "/sort_algorithms/bubblesort.js/Program":[
         {
             "name":"codetest2",
             "type":"Code",
