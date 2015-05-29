@@ -42,7 +42,7 @@
                     },
                     {
                     "type": "link",
-                    "content": {"id":"codetest2","node":"/bubblesort.js/Program"}
+                    "content": {"id":"codetest2","node":"/sort_algorithms/bubblesort.js/Program"}
                     }
                 ]
             }
@@ -55,6 +55,7 @@
                 "body/0/body/body/0":{
                     "node":"body/0/body/body/0",
                      "items":[
+
                         {"type":"text",
                         "content":"Here we set the length"
                      },
@@ -79,7 +80,7 @@
                     "content":" These should be swapped . So lets swap"
                  },
                   {"type":"vcode",
-                    "content":"display(barchart.domEl); \n barchart.highlight([i,i+1],'blue'); \n barchart.update(values);  "}
+                    "content":" barchart.highlight([i,i+1],'blue'); \n barchart.update(values); display(barchart.domEl); "}
                     ]
                 }
             }

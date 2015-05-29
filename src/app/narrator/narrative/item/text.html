@@ -1,11 +1,1 @@
-<div > 
-			<div ng-click="writerMode && edit()" ng-hide='editorEnabled'>
-				{{ item.content || 'Empty' }}
-			</div>
-
-			<div ng-show="editorEnabled">
-				<a href="#" ng-click="save()">Save</a>
-				<textarea ng-model="editableContent" ng-show="editorEnabled"></textarea>
-				<a href="#" ng-click="cancel()">cancel</a>.
-			</div>
-</div>
+{{item.content}}

@@ -1,6 +1,7 @@
 
 .narrator {
 	padding:20px;
+	padding-bottom:100px;
 	background-color: #f0f0f0;
 	overflow-y: scroll; 
 }
@@ -10,6 +11,7 @@
 	outline: none;
 	border: none;
 	padding:0;
+	width:100%;
 }
 
 .narrator .remove {
@@ -108,7 +110,7 @@
 	content:'x';
 }
 
-div[item], .item{
+div[item], .item, div[item-edit]{
 	background-color:#FFFFFF;
 	padding:25px 15px;
 	width:100%;
@@ -116,10 +118,35 @@ div[item], .item{
 	position:relative;
 }
 
-div[item] input {
+div[item-edit] input {
 	font-size:1em;
 }
 
-div[item]:last-child, .item:last-child{
+div[item]:last-child, .item:last-child, div[item-edit]:last-child{
 	border:none;
 }
+
+.vcode-tabs{
+	width:100%;
+	height:2em;
+	background-color:#BC47C0;
+	float:left;
+	text-align:center;
+}
+
+.vcode-tabs li {
+	padding:3px;
+	padding-right:5px;
+	background-color:#AC37C0;
+	float:left;
+	list-style:none;
+}
+
+.vcode-tabs li:hover {
+	background-color:#BC37C0;
+}
+
+.vcode-tabs li:active {
+	background-color:#BC47C0;
+}
+

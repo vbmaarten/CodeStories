@@ -1,10 +1,14 @@
 'use strict';
 
-var Item = function (content) {
+var baseUrl = "narrator/narrative/item/";
+
+var Item = function (content, url) {
 	this.content = content;
+	this.type;
+	this.getTemplateUrl = function() {
+		return baseUrl + this.type;
+	};
 };
-
-
 
 Item.prototype = {
 	buildItem : function (item) {

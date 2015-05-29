@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name narrator.directive:item
+ * @name narrator.directive:pictureItem
  * @scope
  * @restrict AE
  * @description
@@ -11,21 +11,14 @@
  * @param {object} item Item object.
  */
 angular.module('narrator')
-  .directive('item', function () {
+  .directive('pictureItem', function () {
     return {
       restrict: 'AE',
-      templateUrl: 'narrator/narrative/item/item.html'
+      templateUrl: function (elem, attr) {
+        return 'narrator/narrative/item/' + attr.type + '.html';
+      },
+      controller : ['$scope', function($scope){
+        
+      }]
     }
-  })
-  .directive('itemEdit', function () {
-    return {
-      transclude: true,
-      restrict: 'AE',
-      templateUrl: 'narrator/narrative/item/item.edit.html'
-    }
-  })
-  
-
-
-
-
+  });
