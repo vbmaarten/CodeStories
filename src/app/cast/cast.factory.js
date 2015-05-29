@@ -145,6 +145,8 @@ angular.module('cast')
        * @returns {object} Corresponding node.
        * @param {string} path Path to node.
        */ 
+
+       //TODO: Error message when not found
       getNode: function(path) {
         return this.cast.rootnode.getNode(path);
       },
