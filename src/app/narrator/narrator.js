@@ -8,4 +8,6 @@
  * Narrator module. This module contains the narrator functionality i.e.
  * viewing and editing narratives. 
  */
-angular.module('narrator', []);
+angular.module('narrator', [
+		'luegg.directives'
+	]);
