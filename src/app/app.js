@@ -19,7 +19,8 @@ angular
     'cast',
     'narrator',
     'explorer',
-    'VCodeInterpreter'
+    'VCodeInterpreter',
+    'messaging'
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider',
     function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {

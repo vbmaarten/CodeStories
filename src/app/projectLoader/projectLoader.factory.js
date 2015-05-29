@@ -206,9 +206,9 @@
             if(isCodestoriesFile){   //Parse the narratives file
               ret.narratives = JSON.parse(zip.file(element).asText());
             } else if (isDirectory) {  //Create the new directory
-              newRoot.children[last] = new FolderNode(last, root, {});
+              newRoot.children[last] = new FolderNode(last, newRoot, {});
             } else {   //Create the new file
-              newRoot.children[last] = new FileNode(last, root, {}, zip.file(element).asText());
+              newRoot.children[last] = new FileNode(last, newRoot, {}, zip.file(element).asText());
             }
           }
         });
