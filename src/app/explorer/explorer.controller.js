@@ -22,39 +22,39 @@ angular.module('explorer')
     * @name getASTNodeByRange
     * @methodOf explorer.controller:ExplorerCtrl
     * @description
-    * Determines the ASTNode at a given position
+    * Determines the node at a given position
     *
     * @param {int} pos The position at which the closest AST Node has to be found
-	* @return {ASTNode} The ASTNode that corresponds to the given position in the code
+	* @return {ASTNode} The node that corresponds to the given position in the code
     */
 
     var getASTNodeByRange = function(pos){
-      var ASTNode = $scope.selected;
-      if(ASTNode.isFile())
+      var node = $scope.selected;
+      if(node.isFile())
       {
-        ASTNode = ASTNode.getChild('Program');
+        node = node.getChild('Program');
       }
       var hasBetterSelection = true;
-      while(!ASTNode.containsPosition(pos) && ASTNode.isASTNode()){
-        ASTNode = ASTNode.parent;
+      while(!node.containsPosition(pos) && node.isASTNode()){
+        node = node.parent;
       }
 
       while(hasBetterSelection){
         hasBetterSelection = false;
-        var child, children = ASTNode.getChildren();
+        var child, children = node.getChildren();
         for( child in children){
           if( children[child].containsPosition(pos) ){
             hasBetterSelection = true;
-            ASTNode = children[child];
+            node = children[child];
           }
         }
       }
-      if(ASTNode.tnode instanceof Array)
-        ASTNode = ASTNode.getParent()
+      if(node.tnode instanceof Array)
+        node = node.getParent()
 
-      console.log(ASTNode);
+      console.log(node);
       console.trace();
-      return ASTNode;
+      return node;
     }
 
 
