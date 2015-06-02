@@ -51,6 +51,9 @@ angular.module('explorer')
       }
       if(ASTNode.tnode instanceof Array)
         ASTNode = ASTNode.getParent()
+
+      console.log(ASTNode);
+      console.trace();
       return ASTNode;
     }
 
@@ -91,7 +94,7 @@ angular.module('explorer')
 	        range.end.row = $scope.selected.tnode.loc.end.line - 1;
 	        range.end.column = $scope.selected.tnode.loc.end.column;
           var newRange =  new aceRange(range.start.row, range.start.column, range.end.row, range.end.column);
-          var marker =  _session.addMarker(newRange,"ace_active_line","background");
+          var marker =  _session.addMarker(newRange,"higlight-ace","background");
     	}
 
 	  };

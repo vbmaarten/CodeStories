@@ -17,3 +17,8 @@
 .ace_editor { 
 	height: 100%; 
 }
+
+.higlight-ace{
+	background:'black';
+	color:'black';
+}
