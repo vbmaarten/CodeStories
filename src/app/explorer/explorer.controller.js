@@ -90,8 +90,9 @@ angular.module('explorer')
 	        range.start.column = $scope.selected.tnode.loc.start.column;
 	        range.end.row = $scope.selected.tnode.loc.end.line - 1;
 	        range.end.column = $scope.selected.tnode.loc.end.column;
-
-	        _editor.getSession().selection.setSelectionRange(range);
+          var newrange =  new Range(range.start.row, range.start.column, range.end.row, range.end.column);
+          var marker =  _session.addMarker(newrange,"ace_active_line","background");
+	        //_editor.getSession().selection.setSelectionRange(range);
     	}
 	    // Events
 	    //_editor.on("changeSession", function(){ ... });
