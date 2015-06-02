@@ -9,6 +9,7 @@
  * Provides functionality to the CAST Explorer
  */
 
+var aceRange = ace.define.modules['ace/range'].Range
 angular.module('explorer')
   .controller('ExplorerCtrl', ['$scope', 'CAST', '$state', function ($scope, CAST,$state) {
     $scope.directory = CAST.cast;
@@ -77,11 +78,10 @@ angular.module('explorer')
 		  var cursor = selection.getCursor();
 		  var pos = _session.getDocument().positionToIndex(cursor,0);
 		  var node =  getASTNodeByRange(pos);
-		  //$state.go('narrating.node', {'path': node.getPath()});
+		  $state.go('.' , {'path': node.getPath()});
 		}; 
 		_session.selection.on("changeCursor", selectNode);
 
-	    // Node selection
 	    if($scope.selected.isASTNode()){
 	        var range = {};
 	        range.start = {};
@@ -90,13 +90,9 @@ angular.module('explorer')
 	        range.start.column = $scope.selected.tnode.loc.start.column;
 	        range.end.row = $scope.selected.tnode.loc.end.line - 1;
 	        range.end.column = $scope.selected.tnode.loc.end.column;
-          var newrange =  new Range(range.start.row, range.start.column, range.end.row, range.end.column);
-          var marker =  _session.addMarker(newrange,"ace_active_line","background");
-	        //_editor.getSession().selection.setSelectionRange(range);
+          var newRange =  new aceRange(range.start.row, range.start.column, range.end.row, range.end.column);
+          var marker =  _session.addMarker(newRange,"ace_active_line","background");
     	}
-	    // Events
-	    //_editor.on("changeSession", function(){ ... });
-	    //_session.on("change", function(){ ... });
 
 	  };
   }]);
