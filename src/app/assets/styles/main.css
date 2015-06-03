@@ -33,6 +33,6 @@ button {
 }
 
 .selected {
-  background-color:purple;
+  background-color: #b0a727;
   position: absolute;
 }
