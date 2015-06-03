@@ -47,8 +47,6 @@ FSNarrative.prototype.removeItem = function(item){
 };
 
 FSNarrative.prototype.addItem = function (item, index) {
-	console.log(item);
-	console.log(index);
 	if(!item){
 		item = new EmptyItem();
 	}

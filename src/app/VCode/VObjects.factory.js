@@ -33,58 +33,6 @@ angular.module('VCodeInterpreter')
 });
 
 
-function Grid(data){
-	var domEl = document.createElement('div')
-	var svg = d3.select(domEl).append("svg");
-
-	var data;
-
-
-
-//Create the Scale we will use for the Axis
-
-
-
-	var grid;
-	
-
-	function update(newData) {
-
-		data = newData || data;
-		var height = 150 ||   parseInt(domEl.clientHeight) , width = 300 || parseInt(domEl.clientWidth) ;
-
-		 var axisScale = d3.scale.linear()
-		                          .domain([0, 100])
-		                          .range([0, width-10]);
-
-		//Create the Axis
-		var xAxis = d3.svg.axis()
-		                   .scale(axisScale);
-
-
-		//Create an SVG group Element for the Axis elements and call the xAxis function
-		var xAxisGroup = svg.append("g")
-		                              .call(xAxis);
-
-		 yScale.domain([0, d3.max(data) ]);
-	}
-	update(data);
-
-	function highlight(toHighlight,color){
-		console.log(toHighlight);
-	}
-
-	return {
-		domEl : domEl,
-		update : function(data){
-				update( data );
-			},
-		highlight: highlight
-
-		}
-		
-
-	}
 
 
 function BarChart(data){
@@ -110,7 +58,7 @@ function BarChart(data){
 
 		var barGroupEnter = barGroup.enter().append("g");
 
-		barGroupEnter.attr("transform", function(d,i) { console.log(arguments);  return "translate(" + (barWidth*i)+ ",0)"; });
+		barGroupEnter.attr("transform", function(d,i) {  return "translate(" + (barWidth*i)+ ",0)"; });
 
 
 		barGroupEnter.append("rect")
@@ -134,19 +82,12 @@ function BarChart(data){
 
 
 	function highlight(toHighlight,color){
-		console.log(toHighlight);
 		barGroup.select('rect').attr("fill",function(d,i) {return toHighlight.indexOf(i) > -1 ? color : "green" ;});
 	}
 
 	return {
 		domEl : domEl,
-		update : function(data){
-
-				//var svgDOM = svg[0][0].cloneNode();
-				//svg = d3.select(svgDOM)
-				update( data );
-				//return svgDOM;
-			},
+		update : update,
 		highlight: highlight
 
 		}

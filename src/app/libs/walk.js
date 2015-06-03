@@ -106,8 +106,6 @@
       var c = function(node, st, override) {
         var type = override || node.type;
         if (node.start > pos || node.end < pos) return;
-        console.log(node);
-        console.log(base[type]);
         base[type](node, st, c);
         if (test(type, node)) throw new Found(node, st);
       };
