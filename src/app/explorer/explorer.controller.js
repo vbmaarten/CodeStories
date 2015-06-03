@@ -9,6 +9,7 @@
  * Provides functionality to the CAST Explorer
  */
 
+var aceRange = ace.define.modules['ace/range'].Range
 angular.module('explorer')
   .controller('ExplorerCtrl', ['$scope', 'CAST', '$state', function ($scope, CAST,$state) {
     $scope.directory = CAST.cast;
@@ -21,13 +22,41 @@ angular.module('explorer')
     * @name getASTNodeByRange
     * @methodOf explorer.controller:ExplorerCtrl
     * @description
-    * Determines the ASTNode at a given position
+    * Determines the node at a given position
     *
     * @param {int} pos The position at which the closest AST Node has to be found
-	* @return {ASTNode} The ASTNode that corresponds to the given position in the code
+	* @return {ASTNode} The node that corresponds to the given position in the code
     */
 
-    
+
+    var getASTNodeByRange = function(pos){
+      var node = $scope.selected;
+      if(node.isFile())
+      {
+        node = node.getChild('Program');
+      }
+      var hasBetterSelection = true;
+      while(!node.containsPosition(pos) && node.isASTNode()){
+        node = node.parent;
+      }
+
+      while(hasBetterSelection){
+        hasBetterSelection = false;
+        var child, children = node.getChildren();
+        for( child in children){
+          if( children[child].containsPosition(pos) ){
+            hasBetterSelection = true;
+            node = children[child];
+          }
+        }
+      }
+      if(node.tnode instanceof Array)
+        node = node.getParent()
+
+      console.log(node);
+      console.trace();
+      return node;
+    }
 
 
     $scope.aceLoaded = function(_editor){
