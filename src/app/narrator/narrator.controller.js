@@ -17,7 +17,6 @@ angular.module('narrator').controller('NarratorCtrl', [
     // Get the current active node in the CAST and its narratives
     $scope.activeNode = CAST.selected || '/';
     $scope.narratives = CAST.getSelectedNarratives() || [];
-    $scope.relatedNarratives = CAST.getRelatedNarratives();
 
   }
 ]);
