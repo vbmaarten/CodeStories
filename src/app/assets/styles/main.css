@@ -31,3 +31,8 @@ button {
 .center-text {
   text-align: center;
 }
+
+.selected {
+  background-color: #b0a727;
+  position: absolute;
+}
