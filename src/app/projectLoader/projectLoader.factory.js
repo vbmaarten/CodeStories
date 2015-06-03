@@ -156,7 +156,7 @@
           
           var $this = this;
           narratives[path].forEach(function(narrative){
-            if(narrative.isFSNarrative()){  //Only supports filesystem narratives now
+            if(narrative.isFSNarrative()){ 
               codestories[path].push($this._generateFSNarrative(narrative));
             } else if (narrative.isCodeNarrative()){
               codestories[path].push($this._generateCodeNarrative(narrative));
