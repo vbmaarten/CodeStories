@@ -44,7 +44,6 @@
         var $this = this;
         $http.get('https://api.github.com/repos/'+username+'/'+repository+'/git/trees/HEAD?recursive=1')
         .success(function(data, status, headers, config){
-          console.log(data);
           
 
           var root = new FolderNode('', null, {});

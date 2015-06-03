@@ -72,13 +72,14 @@ angular.module('narrator')
 	 		
 	 		
 	 		do{
+	 			if(this.interpreter.stateStack.length === 0){
+	 				return {'node':processedNode.ASTNode,'item':false};
+	 			}
 	 			processedNode = this.interpreter.stateStack[0].node;
 	 			var oldStackSize = this.interpreter.stateStack.length;
 	 			step = this.interpreter.step()
 	 			var newStackSize = this.interpreter.stateStack.length;
-	 			if( !step ){
-	 				return {'node':processedNode.ASTNode,'item':false};
-	 			}
+	 			
 	 			//stop when the processedNode has a current narrative and the stack size has decreased (node has been poped)
 	 		} while(  ( oldStackSize < newStackSize ) || !(processedNode.codeNarrative && processedNode.codeNarrative[ currentNarrative ]) );
 	 		currentitemHooks = processedNode.codeNarrative[currentNarrative];

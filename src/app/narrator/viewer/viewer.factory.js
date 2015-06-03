@@ -75,23 +75,6 @@
         }
       },
 
-      // debugStep:function(){
-      //   var node = interpreterFactory.debugStep();
-      //   console.log(node);
-      // },
-
-      getNextItem: function(){
-        var nextItem = false;
-        if(this.queue[0].isCodeNarrative()){
-          nextItem = interpreterFactory.narrativeStep();
-        } 
-        else {
-          if(this.queue[0].items.length > this.queueCounter[0]){
-            nextItem = this.queue[0].items[this.queueCounter[0]];
-          }
-        }
-        return nextItem;
-      },
 
       /**
        * @ngdoc method
@@ -104,32 +87,43 @@
        * or halts playback.
        */ 
       step: function(){
-        var nextItem = this.getNextItem();
+        
 
-        if(!nextItem){
-          this.popNarrative();
+        var result;
+        if( this.queue[0].isCodeNarrative() ){
+            result = this.codeNarrativeStep();
+        } else {
+            result = this.fsNarrativeStep();
         }
-        else {
-          if( this.queue[0].isCodeNarrative() ){
-            this.codeNarrativeStep(nextItem);
-          } else {
-            this.fsNarrativeStep(nextItem);
-          }
+
+        if(!result){
+           this.popNarrative();
         }
       },
 
-      fsNarrativeStep: function(next){
+      fsNarrativeStep: function(){
+        if(this.queue[0].items.length > this.queueCounter[0]){
+            var nextItem = this.queue[0].items[this.queueCounter[0]];
+        } else {
+          return false;
+        }
+
         this.queueCounter[0]++;
-        if( next.isLinkItem() ) {
-          this.loadNarrative(next);
+        if( nextItem.isLinkItem() ) {
+          this.loadNarrative(nextItem);
         }
         else { 
-          this.storyboard[this.storyboard.length-1].items.push(next);
+          this.storyboard[this.storyboard.length-1].items.push(nextItem);
         }
+        return true;
       },
 
-      codeNarrativeStep: function(next) {
-        var item = next.item;
+      codeNarrativeStep: function() {
+        var codeStep = interpreterFactory.narrativeStep();
+        var item = codeStep.item;
+        if(!item){
+          return false;
+        }
 
         if(item.isVCodeItem()){
           item = new VCodeItem(item.content); 
@@ -142,11 +136,12 @@
 
 
 
-        if(this.lastCodeNarrativeNode != next.node.getPath()){
-          this.lastCodeNarrativeNode = next.node.getPath();
-          $state.go('narrating.viewing.playing', {'path': next.node.getPath()});
+        if(this.lastCodeNarrativeNode != codeStep.node.getPath()){
+          this.lastCodeNarrativeNode = codeStep.node.getPath();
+          $state.go('narrating.viewing.playing', {'path': codeStep.node.getPath()});
         }
-        this.lastCodeNarrativeNode = next.node.getPath();
+         this.lastCodeNarrativeNode = codeStep.node.getPath();
+         return true;
       },
 
       popNarrative: function() {
