@@ -116,6 +116,31 @@ angular.module('cast')
           }
         }
       },
+
+      //untested function to get list of related narratives at a node
+      getRelatedNarratives:function(node){
+        var result = {'super':[],'sub':[]};
+        var path = this.selected.getPath();
+
+        for(var n in this.narratives){
+          if(path !== n){
+            if(path.contains(n)){
+              result.super.push(n);
+            } else if (n.contains(path)){
+              result.sub.push(n)
+            }
+          }
+          
+
+        }
+
+        function longestString(a,b){
+          return a.length-b.length;
+        }
+        result.super.sort(longestString);
+        result.sub.sort(longestString);
+        return result;
+      },
         
 
       /**

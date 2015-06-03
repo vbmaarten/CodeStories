@@ -50,6 +50,9 @@ CASTNode.prototype = {
     },
     isRootNode: function(){
         return this instanceof RootNode
+    },
+    isJSFile:function(){
+        return this.name.substr(-3) === '.js';
     }
 };
 
@@ -68,6 +71,8 @@ var FileNode = function(name, parent, children, content) {
     this.content = content;
 };
 FileNode.prototype = Object.create(CASTNode.prototype);
+
+
 
 //return filenode child. only parseAs for the moment is 'program';
 FileNode.prototype.getChild = function(parseAs) {

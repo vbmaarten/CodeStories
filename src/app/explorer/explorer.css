@@ -1,11 +1,19 @@
+.show-files-btn {
+z-index:99;
+position:absolute;
+left:0px;
+
+}
+
 .explorer {
 	padding-left: 200px;
 	position: relative;
 }
 
 .directory-view {
+	float:left;
 	background-color: #f0f0f0;
-	width: 200px;
+	min-width:150px;
 	height: 100%;
 	position: absolute;
 	left: 0;
@@ -16,6 +24,7 @@
 
 .ace_editor { 
 	height: 100%; 
+	padding-left:150px;
 }
 
 .higlight-ace{

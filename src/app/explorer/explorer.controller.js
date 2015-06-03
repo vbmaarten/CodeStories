@@ -9,9 +9,9 @@
  * Provides functionality to the CAST Explorer
  */
 
-var aceRange = ace.define.modules['ace/range'].Range
 angular.module('explorer')
-  .controller('ExplorerCtrl', ['$scope', 'CAST', '$state', function ($scope, CAST,$state) {
+  .controller('ExplorerCtrl', ['$scope', 'CAST', '$state',
+    function ($scope, CAST, $state) {
     $scope.directory = CAST.cast;
     $scope.project = CAST.project;
     $scope.selected = CAST.selected;
@@ -70,57 +70,39 @@ angular.module('explorer')
 
 	    // Options
 	    _editor.setReadOnly(true);
-	    _session.setUndoManager(new ace.UndoManager());
-	    if($scope.selected)
-	    	if($scope.selected.name.split(".").pop() == "js"){
-	   	 		_session.setMode("ace/mode/javascript");
-	   		} else {
-	   		 _session.setMode("ace/mode/text");
-	   	}
-	    _editor.setTheme("ace/theme/crimson_editor");
 	    _editor.setValue($scope.content, -1);
 
 
       // Node selection
       if($scope.selected.isASTNode()){
-          var range = {};
-          range.start = {};
-          range.end = {};
-          range.start.row = $scope.selected.tnode.loc.start.line - 1;
-          range.start.column = $scope.selected.tnode.loc.start.column;
-          range.end.row = $scope.selected.tnode.loc.end.line - 1;
-          range.end.column = $scope.selected.tnode.loc.end.column;
-          console.log(range);
+        var range = {};
+        range.start = {};
+        range.end = {};
+        range.start.row = $scope.selected.tnode.loc.start.line - 1;
+        range.start.column = $scope.selected.tnode.loc.start.column;
+        range.end.row = $scope.selected.tnode.loc.end.line - 1;
+        range.end.column = $scope.selected.tnode.loc.end.column;
 
-          var newrange =  new Range(range.start.row, range.start.column, range.end.row, range.end.column);
-          
-          console.log(newrange);
-
-          var marker =  _session.addMarker(newrange,"selected","line", false);
-          //_editor.getSession().selection.setSelectionRange(range);
+        var newrange =  new Range(range.start.row, range.start.column, range.end.row, range.end.column);
+        var marker =  _session.addMarker(newrange,"selected","line", false);
+        _editor.centerSelection();
+        //_editor.getSession().selection.setSelectionRange(range);
       }
-      console.log('loaded');
 
 	    var selectNode = function(e,selection){
-        console.log('change selection');
-        var currentNode = $scope.selected;
-        while(!currentNode.parent.isFile()){
-          currentNode = currentNode.parent;
+        // if statement to handle bug in changeCursor event of ace editor
+        if(!$scope.editorLoaded){
+          console.log('change selection');
+    		  var cursor = selection.getCursor();
+    		  var pos = _session.getDocument().positionToIndex(cursor,0);
+          var node = getASTNodeByRange(pos);
+          $scope.editorLoaded = true;
+    		  $state.go('.', {'path': node.getPath()});
+        } else {
+          $scope.editorLoaded = false;
         }
-        var tree = currentNode.tnode;
-        console.log(tree);
-  		  var cursor = selection.getCursor();
-  		  var pos = _session.getDocument().positionToIndex(cursor,0);
-  		  var node =  acorn.walk.findNodeAround(tree, pos, function(a,b){return true;}).node;
-  		  $state.go('.', {'path': node.getPath()});
   		}; 
 
   		_session.selection.on("changeCursor", selectNode);
-
-  	    
-  	    // Events
-  	    //_editor.on("changeSession", function(){ ... });
-  	    //_session.on("change", function(){ ... });
-
   	};
   }]);

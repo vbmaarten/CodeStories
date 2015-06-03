@@ -1,4 +1,24 @@
 
 <div class="narratives" ui-view="narratives"></div>
+<div class='additional-info-panel' >
+	<div class="fa fa-connectdevelop" ng-init='showInfo = false' ng-click='showInfo = !showInfo'>Relations</div>
+	<div ng-if='showInfo'> 
+		<div class="fa fa-book related-narrativess" >Narratives
+			<div class='related-subcontainer' ng-repeat='path in relatedNarratives.super'>
+				<div class='related-super related ' ui-sref="{path: path}"> {{ path }}</div>
+			</div>
+
+			<div class='related-subcontainer' ng-repeat='path in relatedNarratives.sub'>
+				<div class='related-sub related ' ui-sref="{path: path}"> {{ path }} </div>
+			</div>
+		</div>
+
+		<div class="fa fa-phone related-calls" >Calls
+			None...
+
+		</div>
+
+
+ </div>
 
 
