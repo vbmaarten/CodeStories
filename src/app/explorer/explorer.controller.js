@@ -10,8 +10,8 @@
  */
 
 angular.module('explorer')
-  .controller('ExplorerCtrl', ['$scope', 'CAST', '$state',
-    function ($scope, CAST, $state) {
+  .controller('ExplorerCtrl', ['$scope', 'CAST', '$state', 'writerFactory',
+    function ($scope, CAST, $state, writerFactory) {
     $scope.directory = CAST.cast;
     $scope.project = CAST.project;
     $scope.selected = CAST.selected;
@@ -55,6 +55,17 @@ angular.module('explorer')
       return node;
     }
 
+    var getRange = function(node) {
+      var range = {};
+      range.start = {};
+      range.end = {};
+      range.start.row = node.tnode.loc.start.line - 1;
+      range.start.column = node.tnode.loc.start.column;
+      range.end.row = node.tnode.loc.end.line - 1;
+      range.end.column = node.tnode.loc.end.column;
+      return range;
+    }
+
 
     $scope.aceLoaded = function(_editor){
 	    // Editor part
@@ -71,16 +82,15 @@ angular.module('explorer')
 
       // Node selection
       if($scope.selected.isASTNode()){
-        var range = {};
-        range.start = {};
-        range.end = {};
-        range.start.row = $scope.selected.tnode.loc.start.line - 1;
-        range.start.column = $scope.selected.tnode.loc.start.column;
-        range.end.row = $scope.selected.tnode.loc.end.line - 1;
-        range.end.column = $scope.selected.tnode.loc.end.column;
-
+        var range = getRange($scope.selected);
         var newrange =  new Range(range.start.row, range.start.column, range.end.row, range.end.column);
-        var marker =  _session.addMarker(newrange,"selected","line", false);
+        var marker =  _session.addMarker(newrange,"selected-node","line", false);
+
+        if(writerFactory.selectedNarrative && $state.is('narrating.writing.editing')){
+          var rangeNarrative = getRange(CAST.getNode(writerFactory.selectedNarrative.CASTPath));
+          var newRangeNarrative =  new Range(rangeNarrative.start.row, rangeNarrative.start.column, rangeNarrative.end.row, rangeNarrative.end.column);
+          _session.addMarker(newRangeNarrative,"selected-narrative","line", false);
+        }
         _editor.scrollToRow(range.start.row);
         //_editor.getSession().selection.setSelectionRange(range);
       }

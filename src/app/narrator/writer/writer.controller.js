@@ -15,6 +15,8 @@ angular.module('narrator')
 
     if($state.is('narrating.writing.editing')){
       $scope.selectedNarrative = writerFactory.selectedNarrative;
+      if(!$scope.selectedNarrative.hasSubNode(CAST.selectedPath))
+        $state.go('narrating.writing.selecting');
     } else {
       writerFactory.selectedNarrative = undefined;
     }
@@ -22,11 +24,10 @@ angular.module('narrator')
     // Add a narrative
     $scope.addNarrative = function(){
       var newNarrative;
-      if($scope.activeNode.isASTNode()){
+      if($scope.activeNode.isASTNode())
         newNarrative = new CodeNarrative('New Narrative', CAST.selectedPath);
-      } else {
+      else
         newNarrative = new FSNarrative('New Narrative', CAST.selectedPath);
-      }
       CAST.narratives[CAST.selectedPath] = CAST.narratives[CAST.selectedPath] || [];
       CAST.narratives[CAST.selectedPath].push(newNarrative);
       $scope.narratives = CAST.getSelectedNarratives();
@@ -53,16 +54,14 @@ angular.module('narrator')
     $scope.addItem = function (item) {
       var sel = $scope.selectedNarrative;
       if(!item) item = 0;
-      if(sel.isCodeNarrative()) sel.addItem(CAST.selectedPath, null, item);
+      if(sel.isCodeNarrative()) sel.addItem(CAST.selectedPath.replace(sel.CASTPath, ""), null, item);
       else sel.addItem(null, item);
-      console.log(sel);
     };
 
     $scope.removeItem = function (item) {
       var sel = $scope.selectedNarrative;
       if(sel.isCodeNarrative()) sel.removeItem(CAST.selectedPath, item);
       else sel.removeItem(item);
-      console.log(sel);
     }
 
 }]);

@@ -13,6 +13,9 @@ Narrative.prototype = {
 	},
 	validItem : function () {
 		return false;
+	},
+	hasSubNode : function (path) {
+		return path.includes(this.CASTPath);
 	}
 };
 
