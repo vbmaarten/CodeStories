@@ -157,8 +157,10 @@
           var $this = this;
           narratives[path].forEach(function(narrative){
             if(narrative.isFSNarrative()){  //Only supports filesystem narratives now
-               codestories[path].push($this._generateFSNarrative(narrative));
-            } 
+              codestories[path].push($this._generateFSNarrative(narrative));
+            } else if (narrative.isCodeNarrative()){
+              codestories[path].push($this._generateCodeNarrative(narrative));
+            }
           });
         }
 
@@ -178,6 +180,25 @@
         }); 
 
         return narrative;
+      },
+
+      _generateCodeNarrative: function(codeNarrative){
+          var narrative = {};
+          narrative.name = codeNarrative.name;
+          narrative.type = 'Code';
+          narrative.itemHooks = {};
+
+          var $this = this;
+          for(var property in codeNarrative.itemHooks){
+            narrative.itemHooks[property] = {};
+            narrative.itemHooks[property]["node"] = property;
+            narrative.itemHooks[property].items = [];
+            codeNarrative.itemHooks[property].items.forEach(function(item){
+              narrative.itemHooks[property].items.push($this._generateItem(item));
+            });
+          }
+
+          return narrative;
       },
 
       _generateItem: function(itemObj){

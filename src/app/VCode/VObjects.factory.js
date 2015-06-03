@@ -27,7 +27,9 @@ angular.module('VCodeInterpreter')
 		},
 
 		
-		BarChart:BarChart
+		BarChart:BarChart,
+
+		VArray: VArray,
 	}
 
 });
@@ -86,12 +88,46 @@ function Grid(data){
 
 	}
 
+function VArray(data){
+	var domEl = document.createElement('div');
+	var svg = d3.select(domEl).append("svg");
+
+	function update(newData){
+		var boxSize = 20;
+
+		svg.selectAll("rect").data(newData).enter().append("svg:rect").
+		attr('width', boxSize).
+		attr('height', boxSize).
+		attr('stroke', 'black').
+		attr('fill','rgba(0,0,0,0)').
+		attr('x', function(d,i){return boxSize*i});
+
+		svg.selectAll("text").data(newData).enter().append("svg:text").
+		attr("x", function(d,i){return boxSize*i+5}).
+		attr('y', 15).
+		attr('fill', 'black')
+
+		svg.selectAll("text").data(newData).
+		text(function(d){return d});
+	}
+
+	update(data);
+
+	return {
+		domEl : domEl,
+		update : function(data){update(data)}
+	}
+}
+
 
 function BarChart(data){
 	var domEl = document.createElement('div')
 	var chart = d3.select(domEl).append("svg");
 
 	var data;
+	var height = 150 ||   parseInt(domEl.clientHeight) , width = 300 || parseInt(domEl.clientWidth) ;
+
+
 
 
 	var barChart;
