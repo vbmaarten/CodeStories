@@ -10,21 +10,7 @@
  * Factory of the viewer, containers logic of the viewer like selecting, deselecting
  * and stepping through a narrative.
  */
-
-function clone(obj) {
-    if(obj === null || typeof(obj) !== 'object')
-        return obj;
-
-    var temp = obj.constructor(); // changed
-
-    for(var key in obj) {
-        if(Object.prototype.hasOwnProperty.call(obj, key)) {
-            temp[key] = clone(obj[key]);
-        }
-    }
-    return temp;
-}
-
+ 
  angular.module('narrator')
  .factory('viewerFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 'vCodeInterpreterFactory' ,
   function ($state, $stateParams, CAST, interpreterFactory,vCodeInterpreterFactory) {
@@ -146,10 +132,9 @@ function clone(obj) {
         var item = next.item;
 
         if(item.isVCodeItem()){
-          item = new VCodeItem(item.content);
+          item = new VCodeItem(item.content); 
           var interpreterScope = interpreterFactory.getCurrentScope() ;
           vCodeInterpreterFactory.runVCode( item , interpreterScope);
-
         }
 
         this.storyboard[this.storyboard.length-1].items.push(item);
