@@ -1,4 +1,4 @@
-angular.module('VCodeInterpreter')
+    angular.module('VCodeInterpreter')
 .factory('vCodeInterpreterFactory', ['VObjectFactory', function(VObjectFactory) {
 
 
@@ -30,9 +30,28 @@ angular.module('VCodeInterpreter')
             generateScope(VCodeItem.content, VScope);
 
 
-            function display(DOMel){
-                VCodeItem.dom = DOMel
+            function detachOldDOMel(DOMel){
+                var oldVCodeItem = DOMel.VCodeItem;
+                DOMel.VCodeItem = undefined;
+                var clone = DOMel.cloneNode(true);
+                oldVCodeItem.dom = clone;
 
+                var parent = DOMel.parentNode;
+                DOMel.remove();
+                parent.appendChild(clone);
+            }
+
+            function attachDOMel(DOMel, VCodeItem){
+                VCodeItem.dom = DOMel;
+                DOMel.VCodeItem = VCodeItem;
+            }
+
+            function display(DOMel){
+                if(DOMel.parentNode){ //If DOMel is already attached
+                    detachOldDOMel(DOMel);
+                }
+
+                attachDOMel(DOMel, VCodeItem);         
             }
 
             with(interpreter_scope){

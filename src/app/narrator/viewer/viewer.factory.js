@@ -11,6 +11,20 @@
  * and stepping through a narrative.
  */
 
+function clone(obj) {
+    if(obj === null || typeof(obj) !== 'object')
+        return obj;
+
+    var temp = obj.constructor(); // changed
+
+    for(var key in obj) {
+        if(Object.prototype.hasOwnProperty.call(obj, key)) {
+            temp[key] = clone(obj[key]);
+        }
+    }
+    return temp;
+}
+
  angular.module('narrator')
  .factory('viewerFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 'vCodeInterpreterFactory' ,
   function ($state, $stateParams, CAST, interpreterFactory,vCodeInterpreterFactory) {
@@ -129,15 +143,16 @@
       },
 
       codeNarrativeStep: function(next) {
+        var item = next.item;
 
-
-        if(next.item.isVCodeItem()){
+        if(item.isVCodeItem()){
+          item = new VCodeItem(item.content);
           var interpreterScope = interpreterFactory.getCurrentScope() ;
-          vCodeInterpreterFactory.runVCode( next.item , interpreterScope);
+          vCodeInterpreterFactory.runVCode( item , interpreterScope);
 
         }
 
-        this.storyboard[this.storyboard.length-1].items.push(next.item);
+        this.storyboard[this.storyboard.length-1].items.push(item);
 
 
 

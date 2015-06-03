@@ -15,7 +15,7 @@ angular.module('narrator')
     return {
       link: function(scope,elements,attrs){
         if(scope.item.dom){
-          elements[0].querySelector('.vcode-visual').appendChild(scope.item.dom)
+          elements[0].querySelector('.vcode-visual').appendChild(scope.item.dom);
         }
       },
       restrict: 'AE',
