@@ -14,14 +14,14 @@ angular.module('narrator')
   .directive('item', function () {
     return {
       restrict: 'AE',
-      templateUrl: 'narrator/narrative/item/item.html'
+      templateUrl: 'narrator/item/item.html'
     }
   })
   .directive('itemEdit', function () {
     return {
       transclude: true,
       restrict: 'AE',
-      templateUrl: 'narrator/narrative/item/item.edit.html'
+      templateUrl: 'narrator/item/item.edit.html'
     }
   })
   

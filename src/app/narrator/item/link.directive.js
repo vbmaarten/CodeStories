@@ -15,7 +15,7 @@ angular.module('narrator')
     return {
       restrict: 'AE',
       templateUrl: function (elem, attr) {
-        return 'narrator/narrative/item/' + attr.type + '.html';
+        return 'narrator/item/' + attr.type + '.html';
       },
       controller : ['$scope', 'CAST', function($scope, CAST){
         var nodes = CAST.narratives;

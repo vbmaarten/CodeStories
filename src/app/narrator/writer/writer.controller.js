@@ -10,8 +10,14 @@
  */
 
 angular.module('narrator')
-  .controller('WriterCtrl', [ '$scope', '$state', 'CAST', 
-    function ($scope, $state, CAST) {
+  .controller('WriterCtrl', [ '$scope', '$state', 'CAST', 'writerFactory',
+    function ($scope, $state, CAST, writerFactory) {
+
+    if($state.is('narrating.writing.editing')){
+      $scope.selectedNarrative = writerFactory.selectedNarrative;
+    } else {
+      writerFactory.selectedNarrative = undefined;
+    }
 
     // Add a narrative
     $scope.addNarrative = function(){
@@ -21,9 +27,9 @@ angular.module('narrator')
       } else {
         newNarrative = new FSNarrative('New Narrative', CAST.selectedPath);
       }
-      $scope.narratives.push(newNarrative);
       CAST.narratives[CAST.selectedPath] = CAST.narratives[CAST.selectedPath] || [];
       CAST.narratives[CAST.selectedPath].push(newNarrative);
+      $scope.narratives = CAST.getSelectedNarratives();
     };
 
     // Remove a narrative
@@ -36,13 +42,27 @@ angular.module('narrator')
    	// Select a narrative to edit or view
     $scope.selectNarrative = function(narrative){
       $scope.selectedNarrative = narrative;
-      $state.go('^.editing');
+      writerFactory.selectNarrative(narrative);
     };
 
     // Deselect the narrative being edited or viewed
     $scope.deselectNarrative = function(){
-      $state.go('^.selecting');
-    }
+      writerFactory.deselectNarrative();
+    };
 
+    $scope.addItem = function (item) {
+      var sel = $scope.selectedNarrative;
+      if(!item) item = 0;
+      if(sel.isCodeNarrative()) sel.addItem(CAST.selectedPath, null, item);
+      else sel.addItem(null, item);
+      console.log(sel);
+    };
+
+    $scope.removeItem = function (item) {
+      var sel = $scope.selectedNarrative;
+      if(sel.isCodeNarrative()) sel.removeItem(CAST.selectedPath, item);
+      else sel.removeItem(item);
+      console.log(sel);
+    }
 
 }]);

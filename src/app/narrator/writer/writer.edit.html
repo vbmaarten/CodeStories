@@ -1,7 +1,23 @@
-<narrative class="narrative" data="selectedNarrative">
-	<h2>
-		<input type="text" ng-model="selectedNarrative.name">
-		<div class="return" ng-click="deselectNarrative()"><</div>
-	</h2>
-</narrative>
+<h2>
+	<input type="text" ng-model="selectedNarrative.name">
+	<div class="return" ng-click="deselectNarrative()"><</div>
+</h2>
 
+<div class="item button-wide add" ng-click="addItem()"></div>
+
+<div ng-repeat="item in selectedNarrative.items track by $index">
+	<div item-edit class="item">
+		<div class="remove" ng-click="removeItem(item)"></div>
+	</div>
+	<div class="item button-wide add" ng-click="addItem(item)"></div>
+</div>
+
+<div ng-repeat="node in selectedNarrative.itemHooks track by $index">
+	<p class="muted">{{node.node}}</p>
+	<div ng-repeat="item in node.items">
+		<div item-edit class="item">
+			<div class="remove" ng-click="removeItem(item)"></div>
+		</div>
+		<div class="item button-wide add" ng-click="addItem(item)"></div>
+	</div>
+</div>

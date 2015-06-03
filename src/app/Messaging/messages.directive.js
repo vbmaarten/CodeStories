@@ -2,7 +2,7 @@ angular.module("messaging")
 	.directive("messages", function(){
 		return {
 			restrict: 'E',
-			templateUrl: 'Messaging/messages.html',
+			templateUrl: 'messaging/messages.html',
 			controller: "MessagingCtrl",
 		}
 	});

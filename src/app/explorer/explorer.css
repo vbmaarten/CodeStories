@@ -31,3 +31,9 @@ left:0px;
 	background:'black';
 	color:'black';
 }
+
+.selected {
+  background-color:#9C27B0;
+  position: absolute;
+  opacity:.5;
+}

@@ -52,9 +52,6 @@ angular.module('explorer')
       }
       if(node.tnode instanceof Array)
         node = node.getParent()
-
-      console.log(node);
-      console.trace();
       return node;
     }
 
@@ -66,7 +63,6 @@ angular.module('explorer')
 
 	    _editor.$blockScrolling = Infinity;
       var Range = ace.require('ace/range').Range;
-
 
 	    // Options
 	    _editor.setReadOnly(true);
@@ -85,14 +81,13 @@ angular.module('explorer')
 
         var newrange =  new Range(range.start.row, range.start.column, range.end.row, range.end.column);
         var marker =  _session.addMarker(newrange,"selected","line", false);
-        _editor.centerSelection();
+        _editor.scrollToRow(range.start.row);
         //_editor.getSession().selection.setSelectionRange(range);
       }
 
 	    var selectNode = function(e,selection){
         // if statement to handle bug in changeCursor event of ace editor
         if(!$scope.editorLoaded){
-          console.log('change selection');
     		  var cursor = selection.getCursor();
     		  var pos = _session.getDocument().positionToIndex(cursor,0);
           var node = getASTNodeByRange(pos);

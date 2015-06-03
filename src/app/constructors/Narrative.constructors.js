@@ -44,6 +44,8 @@ FSNarrative.prototype.removeItem = function(item){
 };
 
 FSNarrative.prototype.addItem = function (item, index) {
+	console.log(item);
+	console.log(index);
 	if(!item){
 		item = new EmptyItem();
 	}
@@ -76,7 +78,7 @@ CodeNarrative
 // the goal is to append to the subnodes of the AST nodes the proper items under the proper name
 var CodeNarrative = function (name, CASTPath, itemHooks) {
 	Narrative.call(this,name, CASTPath);
-	this.itemHooks = itemHooks || [];
+	this.itemHooks = itemHooks || {};
 };
 
 

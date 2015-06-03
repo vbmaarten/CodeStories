@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name narrator.directive:videoItem
+ * @name narrator.directive:textItem
  * @scope
  * @restrict AE
  * @description
@@ -11,11 +11,11 @@
  * @param {object} item Item object.
  */
 angular.module('narrator')
-  .directive('videoItem', function () {
+  .directive('textItem', function () {
     return {
       restrict: 'AE',
       templateUrl: function (elem, attr) {
-        return 'narrator/narrative/item/' + attr.type + '.html';
+        return 'narrator/item/' + attr.type + '.html';
       },
       controller : ['$scope', function($scope){
         
