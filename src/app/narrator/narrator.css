@@ -110,21 +110,33 @@
 	content:'x';
 }
 
-div[item], .item, div[item-edit]{
+.item {
 	background-color:#FFFFFF;
 	padding:25px 15px;
 	width:100%;
 	border-bottom:1px solid #ddd;
 	position:relative;
+	transition:0.5s linear all;
 }
 
-div[item-edit] input {
+.item.ng-enter {
+	opacity:0;
+}
+
+.item.ng-enter-active {
+	opacity:1;
+}
+
+.item input {
 	font-size:1em;
 }
 
-div[item]:last-child, .item:last-child, div[item-edit]:last-child{
+.item:last-child {
 	border:none;
 }
+
+
+
 
 .vcode-tabs{
 	width:100%;

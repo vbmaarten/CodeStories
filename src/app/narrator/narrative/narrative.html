@@ -9,7 +9,7 @@
 		<div ng-click='debugStep()'> '>' </div>
 	</div>
 
-	<div item-edit>
+	<div item-edit class="item">
 		<div class="remove" ng-click="narrative.removeItem(item)"></div>
 	</div>
 
@@ -18,6 +18,6 @@
 
 <!--viewing-->
 <div ng-repeat="item in narrative.items track by $index" ng-if="'narrating.viewing.playing' | isState">
-	<div item ></div>
+	<div item class="item"></div>
 </div>
 
