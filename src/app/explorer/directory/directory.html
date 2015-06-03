@@ -1,3 +1,4 @@
+
 <ul>
 	<li ng-repeat="(key, value) in data" ng-if="!value.isASTNode()">
 		<a ui-sref=".selecting({path: (castUrl + key)})" ng-class="value.isFile() ? 'file-reference' :'folder-reference'">{{key}}</a>

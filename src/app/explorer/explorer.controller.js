@@ -70,14 +70,6 @@ angular.module('explorer')
 
 	    // Options
 	    _editor.setReadOnly(true);
-	    _session.setUndoManager(new ace.UndoManager());
-	    if($scope.selected)
-	    	if($scope.selected.name.split(".").pop() == "js"){
-	   	 		_session.setMode("ace/mode/javascript");
-	   		} else {
-	   		 _session.setMode("ace/mode/text");
-	   	}
-	    _editor.setTheme("ace/theme/crimson_editor");
 	    _editor.setValue($scope.content, -1);
 
 
