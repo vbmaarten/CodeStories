@@ -71,19 +71,7 @@ function VArray(data){
 function BarChart(data){
 	var domEl = document.createElement('div')
 	var chart = d3.select(domEl).append("svg");
-	var data;
-	var height = 150 ||   parseInt(domEl.clientHeight) , width = 300 || parseInt(domEl.clientWidth) ;
-
-
-
-
-	var barChart;
-	
-
-	
-
-	var height = 150 ||   parseInt(domEl.clientHeight) , width = 300 || parseInt(domEl.clientWidth) ;
-	
+	var height = 150 ,width = 300 
 	var barWidth = width / data.length;
 	var yScale = d3.scale.linear()
 		.range([height, 0]);
