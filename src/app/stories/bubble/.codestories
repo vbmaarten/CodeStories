@@ -51,7 +51,7 @@
         {
             "name":"codetest2",
             "type":"Code",
-            "itemHooks":{
+            "narrativeHooks":{
                 "body/0/body/body/0":{
                     "node":"body/0/body/body/0",
                      "items":[

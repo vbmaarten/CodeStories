@@ -204,15 +204,15 @@
           var narrative = {};
           narrative.name = codeNarrative.name;
           narrative.type = 'Code';
-          narrative.itemHooks = {};
+          narrative.narrativeHooks = {};
 
           var $this = this;
-          for(var property in codeNarrative.itemHooks){
-            narrative.itemHooks[property] = {};
-            narrative.itemHooks[property]["node"] = property;
-            narrative.itemHooks[property].items = [];
-            codeNarrative.itemHooks[property].items.forEach(function(item){
-              narrative.itemHooks[property].items.push($this._generateItem(item));
+          for(var property in codeNarrative.narrativeHooks){
+            narrative.narrativeHooks[property] = {};
+            narrative.narrativeHooks[property]["node"] = property;
+            narrative.narrativeHooks[property].items = [];
+            codeNarrative.narrativeHooks[property].items.forEach(function(item){
+              narrative.narrativeHooks[property].items.push($this._generateItem(item));
             });
           }
 

@@ -95,7 +95,7 @@ angular.module('explorer')
         if(writerFactory.selectedNarrative && $state.is('narrating.writing.editing')){
           var narrativeNode = CAST.getNode(writerFactory.selectedNarrative.CASTPath)
           mark(narrativeNode, "selected-narrative");
-          for(var hook in writerFactory.selectedNarrative.itemHooks ) {
+          for(var hook in writerFactory.selectedNarrative.narrativeHooks ) {
             mark(narrativeNode.getNode(hook), "selected-item-hook");
           }
         }

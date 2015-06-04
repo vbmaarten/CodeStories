@@ -130,7 +130,7 @@ ASTNode.prototype.containsPosition = function(pos){
 // Attach items to the interpreter ast nodes, under the attribute .codeNarrative[ narrative name ]
 ASTNode.prototype.attachItemHooks = function(codeNarrative){
 
-        var hooks = codeNarrative.itemHooks
+        var hooks = codeNarrative.narrativeHooks
         var node;
         for(var i in hooks){
             node = this.getNode(hooks[i].node);

@@ -82,9 +82,9 @@ CodeNarrative
 --------------------------------*/
 // items is an array that contains objects {'node' , 'items'}
 // the goal is to append to the subnodes of the AST nodes the proper items under the proper name
-var CodeNarrative = function (name, CASTPath, itemHooks) {
+var CodeNarrative = function (name, CASTPath, narrativeHooks) {
 	Narrative.call(this,name, CASTPath);
-	this.itemHooks = itemHooks || {};
+	this.narrativeHooks = narrativeHooks || {};
 };
 
 
@@ -98,7 +98,7 @@ CodeNarrative.prototype.validItem = function (item) {
 };
 
 CodeNarrative.prototype.removeItem = function(subnode,item){
-	var hook = this.itemHooks[subnode];
+	var hook = this.narrativeHooks[subnode];
 	var i = hook.items.indexOf(item);
 	hook.items.splice(i,1);
 };
@@ -109,8 +109,8 @@ CodeNarrative.prototype.addItem = function (subnode,item, index) {
 		subnode = '/'
 	}
 
-	this.itemHooks[subnode] = this.itemHooks[subnode] || {'node':subnode,'items':[]};
-	var hook = this.itemHooks[subnode];
+	this.narrativeHooks[subnode] = this.narrativeHooks[subnode] || {'node':subnode,'items':[]};
+	var hook = this.narrativeHooks[subnode];
 
 	if(!item){
 		item = new ItemFactory.EmptyItem();
