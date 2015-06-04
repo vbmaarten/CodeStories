@@ -3,7 +3,7 @@
 angular.module('narrator')
   .factory('ItemFactory', [ function () {
 
-var baseUrl = "narrator/narrative/item/";
+var baseUrl = "narrator/item/";
 
 var Item = function (content, url) {
 	this.content = content;
