@@ -74,15 +74,16 @@
               if(isCodestoriesFile){   //Parse the narratives file
                 _incrementCounter($this.gitHubLoadCounter);
                 $http.get(element.url).success(function(data){
-                   ret.narratives = data;
+                  console.log(data);
+                   ret.narratives = JSON.parse(atob(data.content));
                    _decrementCounter($this.gitHubLoadCounter, proceed);
                 })
               } else if (isDirectory) {  //Create the new directory
-                newRoot.children[last] = new FolderNode(last, root, {});
+                newRoot.children[last] = new FolderNode(last, newRoot, {});
               } else {   //Create the new file
                 _incrementCounter($this.gitHubLoadCounter);
                 $http.get(element.url, {responseType: 'text'}).success(function(data){
-                   newRoot.children[last] = new FileNode(last, root, {}, atob(data.content));
+                   newRoot.children[last] = new FileNode(last, newRoot, {}, atob(data.content));
                    _decrementCounter($this.gitHubLoadCounter, proceed);
                 })
                 
@@ -210,7 +211,7 @@
         item.type = itemObj.type;
         item.content = itemObj.content;
         return item;
-      },
+      },  
 
       UnpackZip : function (zip) {
         var ret = {
