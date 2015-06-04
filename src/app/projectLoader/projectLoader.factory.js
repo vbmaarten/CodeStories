@@ -10,8 +10,8 @@
  */
 
  angular.module('projectLoader').factory('projectLoaderFactory', [
-  'CAST', '$http', 'CASTNodeFactory' ,
-  function (CAST, $http,CASTNodeFactory) {
+  'CAST', '$http', 'CASTNodeFactory','messagingFactory',
+  function (CAST, $http, CASTNodeFactory, messagingFactory) {
     var _incrementCounter = function(counter){
       counter.value = counter.value ? counter.value + 1 : 1;
     }
@@ -25,7 +25,18 @@
 
     return {
 
-      gitHubLoadCounter: {value: undefined},  
+      gitHubLoadCounter: {value: undefined},
+
+      _githubRateLimitSufficient: function(amount, callback){
+        $http.get('https://api.github.com/rate_limit')
+        .success(function(data, status, headers, config){
+          if(data.rate.remaining >= amount){
+            callback();
+          } else {
+            messagingFactory.error(new Error("GitHub rate insufficient"));
+          }
+        });
+      },
 
       loadGitHub: function (username, repository, callback){
         var ret = {
@@ -42,56 +53,58 @@
         };
 
         var $this = this;
-        $http.get('https://api.github.com/repos/'+username+'/'+repository+'/git/trees/HEAD?recursive=1')
-        .success(function(data, status, headers, config){
-          
+        this._githubRateLimitSufficient(1,function(){
+          $http.get('https://api.github.com/repos/'+username+'/'+repository+'/git/trees/HEAD?recursive=1')
+          .success(function(data, status, headers, config){         
+            $this._githubRateLimitSufficient(data.tree.length, function(){
+              var root = new CASTNodeFactory.FolderNode('', null, {});
+              root.path = '';
 
-          var root = new CASTNodeFactory.FolderNode('', null, {});
-          root.path = '';
+              //Loop through files that are packed in the zip
+              data.tree.forEach(function (element) {
+                var isDirectory = element.type == 'tree';
+                var isJS = false;
+                var isCodestoriesFile = false;
 
-          //Loop through files that are packed in the zip
-          data.tree.forEach(function (element) {
-            var isDirectory = element.type == 'tree';
-            var isJS = false;
-            var isCodestoriesFile = false;
+                var path = element.path.split('/');
 
-            var path = element.path.split('/');
+                var last = path.pop();
 
-            var last = path.pop();
+                if(!isDirectory){
+                   var fileExtension = last.split('.').pop();
+                  if (fileExtension === 'js') {
+                    isJS = true;
+                  } else if(fileExtension === 'codestories'){
+                    isCodestoriesFile = true;
+                  }
+                }
 
-            if(!isDirectory){
-               var fileExtension = last.split('.').pop();
-              if (fileExtension === 'js') {
-                isJS = true;
-              } else if(fileExtension === 'codestories'){
-                isCodestoriesFile = true;
-              }
-            }
-
-            var newRoot = $this._walkTo(root, path);
-            
-            if (!newRoot.children[last]) {
-              if(isCodestoriesFile){   //Parse the narratives file
-                _incrementCounter($this.gitHubLoadCounter);
-                $http.get(element.url).success(function(data){
-                  console.log(data);
-                   ret.narratives = JSON.parse(atob(data.content));
-                   _decrementCounter($this.gitHubLoadCounter, proceed);
-                })
-              } else if (isDirectory) {  //Create the new directory
-                newRoot.children[last] = new CASTNodeFactory.FolderNode(last, newRoot, {});
-              } else {   //Create the new file
-                _incrementCounter($this.gitHubLoadCounter);
-                $http.get(element.url, {responseType: 'text'}).success(function(data){
-                   newRoot.children[last] = new CASTNodeFactory.FileNode(last, newRoot, {}, atob(data.content));
-                   _decrementCounter($this.gitHubLoadCounter, proceed);
-                })
+                var newRoot = $this._walkTo(root, path);
                 
-              }
-            }
+                if (!newRoot.children[last]) {
+                  if(isCodestoriesFile){   //Parse the narratives file
+                    _incrementCounter($this.gitHubLoadCounter);
+                    $http.get(element.url).success(function(data){
+                      console.log(data);
+                       ret.narratives = JSON.parse(atob(data.content));
+                       _decrementCounter($this.gitHubLoadCounter, proceed);
+                    })
+                  } else if (isDirectory) {  //Create the new directory
+                    newRoot.children[last] = new CASTNodeFactory.FolderNode(last, newRoot, {});
+                  } else {   //Create the new file
+                    _incrementCounter($this.gitHubLoadCounter);
+                    $http.get(element.url, {responseType: 'text'}).success(function(data){
+                       newRoot.children[last] = new CASTNodeFactory.FileNode(last, newRoot, {}, atob(data.content));
+                       _decrementCounter($this.gitHubLoadCounter, proceed);
+                    })
+                    
+                  }
+                }
+              });
+              ret.cast = root;
+            })
           });
-          ret.cast = root;
-        })
+        });
       },
 
       /**
