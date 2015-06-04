@@ -10,8 +10,8 @@
  */
 
 angular.module('explorer')
-  .controller('ExplorerCtrl', ['$scope', 'CAST', '$state', 'writerFactory',
-    function ($scope, CAST, $state, writerFactory) {
+  .controller('ExplorerCtrl', ['$scope', 'CAST', '$state', 'writerFactory', 'viewerFactory',
+    function ($scope, CAST, $state, writerFactory, viewerFactory) {
     $scope.directory = CAST.cast;
     $scope.project = CAST.project;
     $scope.selected = CAST.selected;
@@ -98,6 +98,10 @@ angular.module('explorer')
           for(var hook in writerFactory.selectedNarrative.narrativeHooks ) {
             mark(narrativeNode.getNode(hook), "selected-item-hook");
           }
+        }
+        if($state.is('narrating.viewing.playing') && viewerFactory.queue[0].isCodeNarrative()){
+          var narrativeNode = CAST.getNode(viewerFactory.queue[0].CASTPath);
+          mark(narrativeNode, "selected-narrative");
         }
       }
 
