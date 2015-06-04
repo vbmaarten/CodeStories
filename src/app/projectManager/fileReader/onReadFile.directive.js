@@ -1,12 +1,12 @@
 'use strict';
 /**
  * @ngdoc function
- * @name projectLoader.directive:onReadFile
+ * @name projectManager.directive:onReadFile
  * @description
  * # onReadFile
  * Directive of the project loader
  */
- angular.module('projectLoader')
+ angular.module('projectManager')
   .directive('onReadFile', function ($parse) {
   //from http://jsfiddle.net/alexsuch/6aG4x/
   return {

@@ -15,7 +15,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ui.router',
-    'projectLoader',
+    'projectManager',
     'cast',
     'narrator',
     'explorer',
@@ -41,8 +41,8 @@ angular
 
 
     var resolveCASTObj = {
-      resolveCAST : ['$state', '$stateParams', '$http', 'CAST', 'projectLoaderFactory', 
-        function($state, $stateParams, $http, CAST, projectLoaderFactory){
+      resolveCAST : ['$state', '$stateParams', '$http', 'CAST', 'projectManagerFactory', 
+        function($state, $stateParams, $http, CAST, projectManagerFactory){
 
           var setPath = function () {
             if (CAST.selectedPath !== $stateParams.path) {
@@ -65,7 +65,7 @@ angular
           if (CAST.project !== $stateParams.project) {
             if($stateParams.project.startsWith('github:')){
               var params = $stateParams.project.split(':');
-              projectLoaderFactory.loadGitHub(params[1],params[2],function(){
+              projectManagerFactory.loadGitHub(params[1],params[2],function(){
                 $state.go('narrating.viewing.selecting',{'project': $stateParams.project}, {reload:true});
               })
             }
@@ -75,7 +75,7 @@ angular
                 method: 'GET',
                 responseType: 'arraybuffer'
               }).success(function (data) {
-                projectLoaderFactory.loadZip(data);
+                projectManagerFactory.loadZip(data);
                 CAST.project = $stateParams.project;
                 setPath();
                 return $http.get('/stories/' + $stateParams.project + '.json').success(function(data){

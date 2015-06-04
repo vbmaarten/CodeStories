@@ -1,15 +1,15 @@
 'use strict';
 /**
  * @ngdoc service
- * @name projectLoader.factory:projectLoaderFactory
+ * @name projectManager.factory:projectManagerFactory
  * @description 
  * @requires cast.factory:CAST
  *
- * Factory of the projectLoader, contains logic for importing and exporting
+ * Factory of the projectManager, contains logic for importing and exporting
  * project files. 
  */
 
- angular.module('projectLoader').factory('projectLoaderFactory', [
+ angular.module('projectManager').factory('projectManagerFactory', [
   'CAST', '$http', 'CASTNodeFactory','messagingFactory',
   function (CAST, $http, CASTNodeFactory, messagingFactory) {
     var _incrementCounter = function(counter){
@@ -110,7 +110,7 @@
       /**
        * @ngdoc method
        * @name loadZip
-       * @methodOf projectLoader.factory:projectLoaderFactory
+       * @methodOf projectManager.factory:projectManagerFactory
        * @description
        * Loads a project from a zip file  
        *
@@ -128,7 +128,7 @@
       /**
        * @ngdoc method
        * @name packZip
-       * @methodOf projectLoader.factory:projectLoaderFactory
+       * @methodOf projectManager.factory:projectManagerFactory
        * @description
        * Generates a zip of the current project state and makes it downloadable in the browser.   
        *

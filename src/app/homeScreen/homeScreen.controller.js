@@ -2,14 +2,14 @@
 /**
  * @ngdoc controller
  * @name codeStoriesApp.controller:HomeScreenCtrl
- * @requires projectLoader.factory:projectLoaderFactory
+ * @requires projectManager.factory:projectManagerFactory
  * @requires cast.factory:CAST
  * @description
  * The home screen of the app. Starting page and allows for the user to upload a
  * compressed project to narrate using the app.
  */
 angular.module('codeStoriesApp')
-.controller('HomeScreenCtrl', ['$scope', '$state', 'projectLoaderFactory', 'CAST', function ($scope, $state, projectLoaderFactory, CAST) {
+.controller('HomeScreenCtrl', ['$scope', '$state', 'projectManagerFactory', 'CAST', function ($scope, $state, projectManagerFactory, CAST) {
 	
 	$scope.message = "Upload a .zip file of your project";
   $scope.loader = "github";
@@ -20,7 +20,7 @@ angular.module('codeStoriesApp')
 
 	$scope.loadZip = function(data){
 		$scope.castReady = false;
-		projectLoaderFactory.loadZip(data);
+		projectManagerFactory.loadZip(data);
 	};
 
 	$scope.goToNarrator = function () {
@@ -29,7 +29,7 @@ angular.module('codeStoriesApp')
     if($scope.loader == "github"){
       projectname = "github:"+$scope.githubUser + ':' + $scope.githubRepo;
       var proceed = function(){$state.go('narrating.viewing.selecting', {'project' : projectname})};
-      projectLoaderFactory.loadGitHub($scope.githubUser, $scope.githubRepo, proceed);
+      projectManagerFactory.loadGitHub($scope.githubUser, $scope.githubRepo, proceed);
       $scope.isLoading = true;
 
     } else if($scope.loader == "file"){
