@@ -25,7 +25,7 @@ angular.module('narrator')
           $scope.item.content = {};
         }
 
-        $scope.link = $scope.item.content.node + " - " + $scope.item.content.id;
+        $scope.link = $scope.item.content.path + " - " + $scope.item.content.id;
 
         for( var i in nodes ) {
           for (var j in nodes[i]) {
@@ -39,7 +39,7 @@ angular.module('narrator')
         $scope.changeLink = function ( link ){
           var narToLink = narratives[link];
           $scope.item.content.id = narToLink.name;
-          $scope.item.content.node = narToLink.CASTPath;
+          $scope.item.content.path = narToLink.CASTPath;
         }
       }]
     }

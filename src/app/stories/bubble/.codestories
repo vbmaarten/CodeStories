@@ -14,11 +14,11 @@
                 },
                 {
                     "type": "link",
-                    "content": {"id":"code link","node":"/sort_algorithms/bubblesort.js"}
+                    "content": {"id":"code link","path":"/sort_algorithms/bubblesort.js"}
                 },
                 {
                     "type": "link",
-                    "content": {"id":"bubble narrative","node":"/fibonacci.js"}
+                    "content": {"id":"bubble narrative","path":"/fibonacci.js"}
                 },
                 {
                     "type": "text",
@@ -42,7 +42,7 @@
                     },
                     {
                     "type": "link",
-                    "content": {"id":"codetest2","node":"/sort_algorithms/bubblesort.js/Program"}
+                    "content": {"id":"codetest2","path":"/sort_algorithms/bubblesort.js/Program"}
                     }
                 ]
             }
@@ -51,9 +51,9 @@
         {
             "name":"codetest2",
             "type":"Code",
-            "itemHooks":{
+            "narrativeHooks":{
                 "body/0/body/body/0":{
-                    "node":"body/0/body/body/0",
+                    "path":"body/0/body/body/0",
                      "items":[
 
                         {"type":"text",
@@ -64,7 +64,7 @@
 
                     ]},
                 "body/0/body/body/1/body/body/1/body/body/0/test":{
-                "node":"body/0/body/body/1/body/body/1/body/body/0/test",
+                "path":"body/0/body/body/1/body/body/1/body/body/0/test",
                  "items":[
                     {"type":"text",
                     "content":"Here it checks if it should swap these values"
@@ -74,7 +74,7 @@
                     ]
                 },
                 "b":{
-                "node":"body/0/body/body/1/body/body/1/body/body/0/consequent/body/3",
+                "path":"body/0/body/body/1/body/body/1/body/body/0/consequent/body/3",
                  "items":[
                     {"type":"text",
                     "content":" These should be swapped . So lets swap"

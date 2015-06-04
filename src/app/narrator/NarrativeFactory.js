@@ -80,11 +80,11 @@ FSNarrative.prototype.addItems = function (items) {
 /*--------------------------------
 CodeNarrative
 --------------------------------*/
-// items is an array that contains objects {'node' , 'items'}
-// the goal is to append to the subnodes of the AST nodes the proper items under the proper name
-var CodeNarrative = function (name, CASTPath, itemHooks) {
+// items is an array that contains objects {'path' , 'items'}
+// the goal is to append to the sub node of the AST nodes the proper items under the proper name
+var CodeNarrative = function (name, CASTPath, narrativeHooks) {
 	Narrative.call(this,name, CASTPath);
-	this.itemHooks = itemHooks || {};
+	this.narrativeHooks = narrativeHooks || {};
 };
 
 
@@ -97,20 +97,20 @@ CodeNarrative.prototype.validItem = function (item) {
 	return item instanceof ItemFactory.Item;
 };
 
-CodeNarrative.prototype.removeItem = function(subnode,item){
-	var hook = this.itemHooks[subnode];
+CodeNarrative.prototype.removeItem = function(subpath,item){
+	var hook = this.narrativeHooks[subpath];
 	var i = hook.items.indexOf(item);
 	hook.items.splice(i,1);
 };
 
-CodeNarrative.prototype.addItem = function (subnode,item, index) {
+CodeNarrative.prototype.addItem = function (subpath,item, index) {
 
-	if(!subnode){
-		subnode = '/'
+	if(!subpath){
+		subpath = '/'
 	}
 
-	this.itemHooks[subnode] = this.itemHooks[subnode] || {'node':subnode,'items':[]};
-	var hook = this.itemHooks[subnode];
+	this.narrativeHooks[subpath] = this.narrativeHooks[subpath] || {'path':subpath,'items':[]};
+	var hook = this.narrativeHooks[subpath];
 
 	if(!item){
 		item = new ItemFactory.EmptyItem();

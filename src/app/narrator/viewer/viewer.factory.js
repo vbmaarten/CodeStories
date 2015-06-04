@@ -70,11 +70,25 @@
         this.storyboard.push({'name':this.queue[0].name, 'items':[]});
         if( narrative.isCodeNarrative() ){
           var CASTNode = CAST.getNode(narrative.CASTPath);
+          interpreterFactory.reset();
           interpreterFactory.setupNarratedAST(CASTNode,narrative);
           vCodeInterpreterFactory.startSession();
         }
       },
 
+      interpreterScope : {},
+
+      debugStep: function(){
+        var step = interpreterFactory.debugStep();
+        
+        if(step.item){
+          this.codeNarrativeStep(step);
+        } else {
+          this.interpreterScope = step.scope;
+          $state.go('narrating.viewing.playing', {'path': step.node.getPath()});
+
+        }
+      },
 
       /**
        * @ngdoc method
@@ -118,8 +132,8 @@
         return true;
       },
 
-      codeNarrativeStep: function() {
-        var codeStep = interpreterFactory.narrativeStep();
+      codeNarrativeStep: function(step) {
+        var codeStep = step || interpreterFactory.narrativeStep();
         var item = codeStep.item;
         if(!item){
           return false;
@@ -127,10 +141,9 @@
 
         if(item.isVCodeItem()){
           item = item.clone();
-          var interpreterScope = interpreterFactory.getCurrentScope() ;
-          vCodeInterpreterFactory.runVCode( item , interpreterScope);
+          vCodeInterpreterFactory.runVCode( item , codeStep.scope);
         }
-
+        this.interpreterScope = codeStep.scope
         this.storyboard[this.storyboard.length-1].items.push(item);
 
 
@@ -162,8 +175,8 @@
 
       loadNarrative: function (linkItem) {
         // Get the node of the narrative that is linked to and find the narrative
-        var node = CAST.getNode(linkItem.content.node);
-        var narratives = CAST.getNarratives(linkItem.content.node);
+        var node = CAST.getNode(linkItem.content.path);
+        var narratives = CAST.getNarratives(linkItem.content.path);
         var linked;
 
         for (var index in narratives) {
@@ -174,14 +187,14 @@
 
         if(linked === undefined){
           linked = node.isASTNode() ? 
-          new CodeNarrative('A new narrative appears',linkItem.content.node ) : new FSNarrative('A new narrative appears',linkItem.content.node);
+          new CodeNarrative('A new narrative appears',linkItem.content.path ) : new FSNarrative('A new narrative appears',linkItem.content.path);
         } 
         this.queuePaths.unshift($stateParams.path);
 
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
 
-        $state.go('narrating.viewing.playing', {'path': linkItem.content.node});
+        $state.go('narrating.viewing.playing', {'path': linkItem.content.path});
       }
     }
   }]);

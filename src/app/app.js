@@ -122,7 +122,7 @@ angular
         }
       })
       .state('narrating.viewing', {
-        url: '/{path:.*}',
+        url: '{path:.*}',
         resolve: resolveCASTObj,
         abstract: true,
         views: {
@@ -156,7 +156,7 @@ angular
         }
       })
       .state('narrating.writing', {
-        url: '/{path:.*}',
+        url: '{path:.*}',
         resolve: resolveCASTObj,
         abstract: true,
         views: {

@@ -5,6 +5,6 @@
 
 <div class="wrapper">
   <main class="explorer" ui-view="explorer"></main>
-  <aside class="narrator" ui-view="narrator" scroll-glue></aside>
+  <aside class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></aside>
   <messages></messages>
 </div>

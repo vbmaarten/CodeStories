@@ -9,6 +9,6 @@
 
 <div ng-show="item.dom">
 	<div class='vcode-visual' ng-show="tab ===1"></div>
-	<div ui-ace="{theme: crimson_editor, readOnly: true}" ng-model="item.content" ng-show="tab ===2"></div>
+	<div ui-ace="{mode: 'javascript', theme: crimson_editor}" ng-model="item.content" ng-show="tab ===2" readonly></div>
 </div>
 <code class="text" ng-show="item.dom == undefined">{{item.content}}</div>

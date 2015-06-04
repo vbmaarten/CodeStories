@@ -4,6 +4,9 @@ Interpreter.prototype.setAst = function(ast){
 	this.stateStack = [{node: this.ast, scope: scope, thisExpression: scope}];
 };
 
+Interpreter.prototype.getCurrentNode = function(){
+	return (this.stateStack[0]) ? this.stateStack[0].node : undefined;
+}
 
 
 function _convertArray(object){

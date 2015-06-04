@@ -1,4 +1,21 @@
+.interpreterScope{
+	position:absolute;
+	margin-left:auto;
+	margin-right:auto;
 
+	max-height:6em;
+	overflow: scroll;
+
+
+}
+
+.interpreterScope tr .even{
+	background:pink;
+}
+
+.interpreterScope tr .odd{
+	background:purple;
+}
 
 .narrator {
 	padding:20px;
@@ -78,6 +95,15 @@
 	bottom:0;
 	width:460px;
 	background-color: #9C27B0;
+	color: #FFFFFF;
+}
+
+.narrator .button-wide.debugStep {
+	position: fixed;
+	bottom:0;
+	width:200px;
+	background-color: red;
+	right:0px;
 	color: #FFFFFF;
 }
 

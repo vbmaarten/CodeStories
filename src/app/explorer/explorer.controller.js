@@ -79,20 +79,26 @@ angular.module('explorer')
 	    _editor.setReadOnly(true);
 	    _editor.setValue($scope.content, -1);
 
-
-      // Node selection
-      if($scope.selected.isASTNode()){
-        var range = getRange($scope.selected);
+      //mark a node with a classname marker
+      var mark = function(node, marker){
+        var range = getRange(node);
         var newrange =  new Range(range.start.row, range.start.column, range.end.row, range.end.column);
-        var marker =  _session.addMarker(newrange,"selected-node","line", false);
+        _session.addMarker(newrange, marker,"line", false);
+      }
 
+      // Marking nodes of interrest
+      if($scope.selected.isASTNode()){
+
+        mark($scope.selected, "selected-node");
+        _editor.scrollToRow($scope.selected.tnode.loc.start.line-1);
+        
         if(writerFactory.selectedNarrative && $state.is('narrating.writing.editing')){
-          var rangeNarrative = getRange(CAST.getNode(writerFactory.selectedNarrative.CASTPath));
-          var newRangeNarrative =  new Range(rangeNarrative.start.row, rangeNarrative.start.column, rangeNarrative.end.row, rangeNarrative.end.column);
-          _session.addMarker(newRangeNarrative,"selected-narrative","line", false);
+          var narrativeNode = CAST.getNode(writerFactory.selectedNarrative.CASTPath)
+          mark(narrativeNode, "selected-narrative");
+          for(var hook in writerFactory.selectedNarrative.narrativeHooks ) {
+            mark(narrativeNode.getNode(hook), "selected-item-hook");
+          }
         }
-        _editor.scrollToRow(range.start.row);
-        //_editor.getSession().selection.setSelectionRange(range);
       }
 
 	    var selectNode = function(e,selection){

@@ -8,13 +8,21 @@
  */ 
 angular.module('narrator')
   .factory('interpreterFactory', function () {
-    var factory = {};
 
-    factory.interpreter = new Interpreter("");
-
+    	var interpreter;
 		var currentNarrative;
-		var currentitemHooks;
+		var currentnarrativeHooks;
 	 	var i = 0;
+
+
+    	function resetInterpreter(){
+    		interpreter = new Interpreter("");
+			currentNarrative = '';
+			currentnarrativeHooks = '';
+	 		i = 0;
+    	}
+
+    	resetInterpreter();
 	 	/**
          * @ngdoc method
          * @name setupNarratedASt
@@ -25,16 +33,16 @@ angular.module('narrator')
          * @param {ASTNode} ASTNode the ast node to which the narrative must be loaded
          * @param {CodeNarrative} codeNarrative The code narrative that has to be loaded with the ASTNode
          */
-	 	factory.setupNarratedAST = function(ASTNode,codeNarrative){
+	 	function setupNarratedAST(ASTNode,codeNarrative){
 	 		ASTNode.attachItemHooks(codeNarrative);
 
 	 		currentNarrative = codeNarrative.name;
 	 		i=0;
-	 		this.interpreter.setAst(ASTNode.tnode);
+	 		interpreter.setAst(ASTNode.tnode);
 	 	};
 
-	 	factory.getCurrentScope = function(){
-	 		return this.interpreter.getCurrentScope();
+	 	function getCurrentScope(){
+	 		return interpreter.getCurrentScope();
 
 	 	};
 
@@ -47,9 +55,16 @@ angular.module('narrator')
          *
          * @return {tnode} The current node after the step is made
          */
-	 	factory.debugStep = function(){
-	 		this.interpreter.step();
-	 		return this.interpreter.stateStack[0].node;
+	 	function debugStep (){
+	 		var currentNode = interpreter.getCurrentNode();
+	 		if(currentNode.codeNarrative && currentNode.codeNarrative[ currentNarrative ]){
+	 			var step = narrativeStep();
+	 			step.scope = getCurrentScope()
+	 			return step
+	 		}
+
+	 		interpreter.step();
+	 		return {'node':interpreter.getCurrentNode().ASTNode,'item':false,'scope': getCurrentScope()}; 
 	 	};
 
 
@@ -63,29 +78,37 @@ angular.module('narrator')
          * @return { node: tnode item: Item } The node the interpreter stepped to, with it's item.
          */
 	 	var processedNode;
-	 	factory.narrativeStep = function(){ 		
-	 		if(currentitemHooks && currentitemHooks[i+1]){
+	 	function narrativeStep(){ 		
+	 		if(currentnarrativeHooks && currentnarrativeHooks[i+1]){
 	 			i++;
-	 			return {'node':processedNode.ASTNode,'item':currentitemHooks[i]};
+	 			return {'node':processedNode.ASTNode,'item':currentnarrativeHooks[i],'scope':getCurrentScope()};
 	 		}
 	 		var step = true;
 	 		
 	 		
 	 		do{
-	 			if(this.interpreter.stateStack.length === 0){
+	 			if(interpreter.stateStack.length === 0){
 	 				return {'node':processedNode.ASTNode,'item':false};
 	 			}
-	 			processedNode = this.interpreter.stateStack[0].node;
-	 			var oldStackSize = this.interpreter.stateStack.length;
-	 			step = this.interpreter.step()
-	 			var newStackSize = this.interpreter.stateStack.length;
+	 			processedNode = interpreter.getCurrentNode()
+	 			var oldStackSize = interpreter.stateStack.length;
+	 			step = interpreter.step()
+	 			var newStackSize = interpreter.stateStack.length;
 	 			
 	 			//stop when the processedNode has a current narrative and the stack size has decreased (node has been poped)
 	 		} while(  ( oldStackSize < newStackSize ) || !(processedNode.codeNarrative && processedNode.codeNarrative[ currentNarrative ]) );
-	 		currentitemHooks = processedNode.codeNarrative[currentNarrative];
+	 		currentnarrativeHooks = processedNode.codeNarrative[currentNarrative];
 	 		i=0;
-	 		return {'node':processedNode.ASTNode,'item':currentitemHooks[i]};
+	 		return {'node':processedNode.ASTNode,'item':currentnarrativeHooks[i],'scope':getCurrentScope()};
 	 	};
 
-    return factory;        
+    return {
+    	reset:resetInterpreter,
+    	setupNarratedAST:setupNarratedAST,
+    	narrativeStep:narrativeStep,
+    	debugStep : debugStep,
+    	getCurrentScope : getCurrentScope
+
+
+    };        
   });
