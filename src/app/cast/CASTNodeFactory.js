@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cast')
-  .factory('CASTNodeFactory', [ 'ItemFactory' , function (ItemFactory) {
+  .factory('CASTNodeFactory', [ 'ItemFactory' ,'messagingFactory' , function (ItemFactory,messagingFactory) {
 
 
 var CASTNode = function(name, parent, children) {
@@ -88,10 +88,15 @@ FileNode.prototype.getChild = function(parseAs) {
     if (!children[parseAs]) {
         if (parseAs === 'Program') {
             if (this.name.substr(-3) === ".js") { //If it is a js file, add it's AST to the cast
-                var AST = acorn.parse(this.content, {
-                    locations: true
-                });
-                this.children.Program = wrapAcornAsASTNode(AST, 'Program',this);
+                try { 
+                    var AST = acorn.parse(this.content, {
+                        locations: true
+                    });
+                     this.children.Program = wrapAcornAsASTNode(AST, 'Program',this);
+                } catch(error){
+                    messagingFactory.error(error);
+                }
+               
             }
 
         }
