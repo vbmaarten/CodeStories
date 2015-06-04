@@ -70,6 +70,7 @@
         this.storyboard.push({'name':this.queue[0].name, 'items':[]});
         if( narrative.isCodeNarrative() ){
           var CASTNode = CAST.getNode(narrative.CASTPath);
+          interpreterFactory.reset();
           interpreterFactory.setupNarratedAST(CASTNode,narrative);
           vCodeInterpreterFactory.startSession();
         }
