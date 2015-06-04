@@ -1,6 +1,6 @@
 'use strict';
 
-var baseUrl = "narrator/narrative/item/";
+var baseUrl = "narrator/item/";
 
 var Item = function (content, url) {
 	this.content = content;
