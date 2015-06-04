@@ -134,6 +134,11 @@
         saveAs(zip.generate({type: 'blob'}), 'project.zip');
       },
 
+      saveCodeStories: function(){
+        var codestories = this._generateCodeStories(CAST.narratives);
+        saveAs(new Blob([JSON.stringify(codestories, null, '\t')]), ".codestories");
+      },
+
       _packCastZip: function(root, zip){
         if(root.children){
           for(var _child in root.children){
