@@ -156,7 +156,7 @@ angular
         }
       })
       .state('narrating.writing', {
-        url: '/{path:.*}',
+        url: '{path:.*}',
         resolve: resolveCASTObj,
         abstract: true,
         views: {

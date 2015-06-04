@@ -13,19 +13,18 @@ angular.module('narrator')
   .controller('WriterCtrl', [ 
     '$scope', 
     '$state',
-    '$location',
     '$anchorScroll',
     'CAST', 
     'writerFactory', 
     'NarrativeFactory',
-    function ($scope, $state, $location, $anchorScroll, CAST, writerFactory,NarrativeFactory) {
+    function ($scope, $state, $anchorScroll, CAST, writerFactory,NarrativeFactory) {
 
     if($state.is('narrating.writing.editing')){
       $scope.selectedNarrative = writerFactory.selectedNarrative;
       if(!$scope.selectedNarrative.hasSubNode(CAST.selectedPath))
         $state.go('narrating.writing.selecting');
       console.log(CAST.selectedPath.replace($scope.selectedNarrative.CASTPath, ''));
-      $anchorScroll(CAST.selectedPath.replace($scope.selectedNarrative.CASTPath), '');
+      //$anchorScroll(CAST.selectedPath.replace($scope.selectedNarrative.CASTPath), '');
     } else {
       writerFactory.selectedNarrative = undefined;
     }
