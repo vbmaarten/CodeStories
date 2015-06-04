@@ -74,15 +74,16 @@
               if(isCodestoriesFile){   //Parse the narratives file
                 _incrementCounter($this.gitHubLoadCounter);
                 $http.get(element.url).success(function(data){
-                   ret.narratives = data;
+                  console.log(data);
+                   ret.narratives = JSON.parse(atob(data.content));
                    _decrementCounter($this.gitHubLoadCounter, proceed);
                 })
               } else if (isDirectory) {  //Create the new directory
-                newRoot.children[last] = new CASTNodeFactory.FolderNode(last, root, {});
+                newRoot.children[last] = new CASTNodeFactory.FolderNode(last, newRoot, {});
               } else {   //Create the new file
                 _incrementCounter($this.gitHubLoadCounter);
                 $http.get(element.url, {responseType: 'text'}).success(function(data){
-                   newRoot.children[last] = new CASTNodeFactory.FileNode(last, root, {}, atob(data.content));
+                   newRoot.children[last] = new CASTNodeFactory.FileNode(last, newRoot, {}, atob(data.content));
                    _decrementCounter($this.gitHubLoadCounter, proceed);
                 })
                 
@@ -132,6 +133,11 @@
         zip.file('.codestories', JSON.stringify(codestories,null,'  '));
 
         saveAs(zip.generate({type: 'blob'}), 'project.zip');
+      },
+
+      saveCodeStories: function(){
+        var codestories = this._generateCodeStories(CAST.narratives);
+        saveAs(new Blob([JSON.stringify(codestories, null, '\t')]), ".codestories");
       },
 
       _packCastZip: function(root, zip){
@@ -205,7 +211,7 @@
         item.type = itemObj.type;
         item.content = itemObj.content;
         return item;
-      },
+      },  
 
       UnpackZip : function (zip) {
         var ret = {
