@@ -32,17 +32,28 @@ form .link a:hover {
     position: relative;
     overflow: hidden;
     margin: 10px;
+    padding: 0px;
+}
+
+.fileUpload .upload-message {
+  display: block;
+  position: absolute;
+  align-content: center;
+  padding-top:10px;
+  left: 0px;
+  right: 0px;
 }
 
 .fileUpload input.upload {
     top: 0;
     right: 0;
     margin: 0;
-    padding: 0;
+    padding: 10px;
     font-size: 20px;
     cursor: pointer;
     opacity: 0;
     filter: alpha(opacity=0);
+    z-index:2;
 }
 
 
@@ -384,4 +395,10 @@ form button:disabled{
     -webkit-transform: rotate(450deg);
             transform: rotate(450deg);
   }
+}
+
+form div .fileUpload {
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
 }
