@@ -1,0 +1,21 @@
+.item-type-choice{
+	display:block;
+	text-align:center;
+	list-style: outside none none;
+	background:;
+	
+}
+
+.item-type-choice li{
+	padding:2px;
+	border:3px;
+	border-color: pink;
+	border-style:solid;
+	background:#b0a727;
+
+}
+
+.item-type-choice li:hover{
+	border-color: #b0a727;
+	background:#9C27B0;
+}

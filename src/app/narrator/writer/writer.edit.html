@@ -13,7 +13,7 @@
 </div>
 
 <div ng-repeat="node in selectedNarrative.itemHooks track by $index">
-	<p class="muted">{{node.node}}</p>
+	<p class="muted narrative-hook">{{node.node}}</p>
 	<div ng-repeat="item in node.items">
 		<div item-edit class="item">
 			<div class="remove" ng-click="removeItem(item)"></div>

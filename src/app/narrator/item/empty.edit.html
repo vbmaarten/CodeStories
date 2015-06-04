@@ -1,3 +1,4 @@
-<select ng-model="type" ng-change="changeToType(type)">
-	<option ng-repeat="t in types">{{t}}</option>
-</select>
+<ul class='item-type-choice'> 
+	<li ng-click='changeToType(t)' ng-repeat="t in types">{{t}} </li>
+<ul >
+

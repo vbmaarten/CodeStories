@@ -137,7 +137,11 @@
 }
 
 
-
+.narrative-hook{
+	background-color: pink ;
+	box-shadow: 10px 2px 5px #888888;
+	text-align:center;
+}
 
 .vcode-tabs{
 	width:100%;
