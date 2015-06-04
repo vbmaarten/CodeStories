@@ -133,7 +133,7 @@ ASTNode.prototype.attachItemHooks = function(codeNarrative){
         var hooks = codeNarrative.narrativeHooks
         var node;
         for(var i in hooks){
-            node = this.getNode(hooks[i].node);
+            node = this.getNode(hooks[i].path);
             node.tnode.codeNarrative = node.tnode.codeNarrative || {};
             node.tnode.codeNarrative[codeNarrative.name] = [];
             for(var j in hooks[i].items){

@@ -13,6 +13,11 @@ angular.module('narrator')
   .controller('ViewerCtrl', [ '$scope', 'viewerFactory',	function ($scope, viewerFactory) {
 
  	$scope.storyboard = viewerFactory.storyboard;
+ 	$scope.interpreterScope = viewerFactory.interpreterScope;
+
+ 	$scope.debugStep = function(){
+ 		viewerFactory.debugStep();
+ 	}
 
  	$scope.next =function (){
 

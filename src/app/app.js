@@ -20,6 +20,7 @@ angular
     'narrator',
     'explorer',
     'VCodeInterpreter',
+    'VObjectEditor',
     'messaging',
     'navigation' 
   ])

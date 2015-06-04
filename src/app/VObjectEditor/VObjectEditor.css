@@ -1,0 +1,65 @@
+#VObjectEditorWrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	background-color: rgba(0,0,0,0.4);
+}
+
+#VObjectEditorWrapper #content {
+	margin-top: 7%;
+	margin-left: 15%;
+	width: 70%;
+	height: 70%;
+	background-color: white;
+}
+
+#VObjectEditorWrapper #content #editor{
+	padding: 2%;
+}
+
+#VObjectEditorWrapper #content #editor{
+	height: 100%;
+	width: 100%;
+}
+
+#VObjectEditorWrapper #content #editor select{
+	width: 20%;
+	background-color: white;
+	font-size: 1.5em;
+	text-align: center;
+	border: 1px solid #ccc;
+}
+
+#VObjectEditorWrapper #content #header {
+	width: 100%;
+	background-color: purple;
+	padding: 0.01%;
+}
+
+#VObjectEditorWrapper #content #header h1 {
+	width: 100%;	
+	text-align: center;
+	color: white;
+}	
+
+
+#VObjectEditorWrapper #content #editor .ace_editor {
+	height: 80%;
+	width: 100%;
+}
+
+#VObjectEditorWrapper #content #editor button {
+	padding:8px 16px;
+    display:inline-block;
+    text-decoration:none;
+    border-radius:3px;
+    border:0;
+    margin:0;
+}
+
+#VObjectEditorWrapper #content #editor button:hover {
+	background:lightslategrey;
+}

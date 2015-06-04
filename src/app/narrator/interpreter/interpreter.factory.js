@@ -11,14 +11,14 @@ angular.module('narrator')
 
     	var interpreter;
 		var currentNarrative;
-		var currentitemHooks;
+		var currentnarrativeHooks;
 	 	var i = 0;
 
 
     	function resetInterpreter(){
     		interpreter = new Interpreter("");
 			currentNarrative = '';
-			currentitemHooks = '';
+			currentnarrativeHooks = '';
 	 		i = 0;
     	}
 
@@ -56,8 +56,15 @@ angular.module('narrator')
          * @return {tnode} The current node after the step is made
          */
 	 	function debugStep (){
+	 		var currentNode = interpreter.getCurrentNode();
+	 		if(currentNode.codeNarrative && currentNode.codeNarrative[ currentNarrative ]){
+	 			var step = narrativeStep();
+	 			step.scope = getCurrentScope()
+	 			return step
+	 		}
+
 	 		interpreter.step();
-	 		return interpreter.stateStack[0].node;
+	 		return {'node':interpreter.getCurrentNode().ASTNode,'item':false,'scope': getCurrentScope()}; 
 	 	};
 
 
@@ -72,9 +79,9 @@ angular.module('narrator')
          */
 	 	var processedNode;
 	 	function narrativeStep(){ 		
-	 		if(currentitemHooks && currentitemHooks[i+1]){
+	 		if(currentnarrativeHooks && currentnarrativeHooks[i+1]){
 	 			i++;
-	 			return {'node':processedNode.ASTNode,'item':currentitemHooks[i]};
+	 			return {'node':processedNode.ASTNode,'item':currentnarrativeHooks[i],'scope':getCurrentScope()};
 	 		}
 	 		var step = true;
 	 		
@@ -83,16 +90,16 @@ angular.module('narrator')
 	 			if(interpreter.stateStack.length === 0){
 	 				return {'node':processedNode.ASTNode,'item':false};
 	 			}
-	 			processedNode = interpreter.stateStack[0].node;
+	 			processedNode = interpreter.getCurrentNode()
 	 			var oldStackSize = interpreter.stateStack.length;
 	 			step = interpreter.step()
 	 			var newStackSize = interpreter.stateStack.length;
 	 			
 	 			//stop when the processedNode has a current narrative and the stack size has decreased (node has been poped)
 	 		} while(  ( oldStackSize < newStackSize ) || !(processedNode.codeNarrative && processedNode.codeNarrative[ currentNarrative ]) );
-	 		currentitemHooks = processedNode.codeNarrative[currentNarrative];
+	 		currentnarrativeHooks = processedNode.codeNarrative[currentNarrative];
 	 		i=0;
-	 		return {'node':processedNode.ASTNode,'item':currentitemHooks[i]};
+	 		return {'node':processedNode.ASTNode,'item':currentnarrativeHooks[i],'scope':getCurrentScope()};
 	 	};
 
     return {
