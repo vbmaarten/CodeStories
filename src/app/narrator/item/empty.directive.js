@@ -11,7 +11,7 @@
  * @param {object} item Item object.
  */
 angular.module('narrator')
-  .directive('emptyItem', function () {
+  .directive('emptyItem', ['ItemFactory' , function (ItemFactory) {
     return {
       restrict: 'AE',
       templateUrl: function (elem, attr) {
@@ -31,27 +31,27 @@ angular.module('narrator')
 
           switch(changeToType) {
             case 'Text':
-              $scope.item.__proto__ = Object.create(TextItem.prototype);
+              $scope.item.__proto__ = Object.create(ItemFactory.TextItem.prototype);
               $scope.item.type = 'text';
               break;
             case 'Visualizations':
-              $scope.item.__proto__ = Object.create(VCodeItem.prototype);
+              $scope.item.__proto__ = Object.create(ItemFactory.VCodeItem.prototype);
               $scope.item.type = 'vcode';
               break;
             case 'Video':
-              $scope.item.__proto__ = Object.create(VideoItem.prototype);
+              $scope.item.__proto__ = Object.create(ItemFactory.VideoItem.prototype);
               $scope.item.type = 'video';
               break;
             case 'Image':
-              $scope.item.__proto__ = Object.create(PictureItem.prototype);
+              $scope.item.__proto__ = Object.create(ItemFactory.PictureItem.prototype);
               $scope.item.type = 'picture';
               break;
             case 'Narrative':
-              $scope.item.__proto__ = Object.create(LinkItem.prototype);
+              $scope.item.__proto__ = Object.create(ItemFactory.LinkItem.prototype);
               $scope.item.type = 'link';
               break;
           }
         };
       }]
     }
-  });
+  }]);

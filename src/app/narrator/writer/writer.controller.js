@@ -10,8 +10,8 @@
  */
 
 angular.module('narrator')
-  .controller('WriterCtrl', [ '$scope', '$state', 'CAST', 'writerFactory',
-    function ($scope, $state, CAST, writerFactory) {
+  .controller('WriterCtrl', [ '$scope', '$state', 'CAST', 'writerFactory', 'NarrativeFactory',
+    function ($scope, $state, CAST, writerFactory,NarrativeFactory) {
 
     if($state.is('narrating.writing.editing')){
       $scope.selectedNarrative = writerFactory.selectedNarrative;
@@ -25,9 +25,9 @@ angular.module('narrator')
     $scope.addNarrative = function(){
       var newNarrative;
       if($scope.activeNode.isASTNode())
-        newNarrative = new CodeNarrative('New Narrative', CAST.selectedPath);
+        newNarrative = new NarrativeFactory.CodeNarrative('New Narrative', CAST.selectedPath);
       else
-        newNarrative = new FSNarrative('New Narrative', CAST.selectedPath);
+        newNarrative = new NarrativeFactory.FSNarrative('New Narrative', CAST.selectedPath);
       CAST.narratives[CAST.selectedPath] = CAST.narratives[CAST.selectedPath] || [];
       CAST.narratives[CAST.selectedPath].push(newNarrative);
       $scope.narratives = CAST.getSelectedNarratives();

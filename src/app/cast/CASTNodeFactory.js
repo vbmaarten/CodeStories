@@ -1,5 +1,9 @@
 'use strict';
 
+angular.module('cast')
+  .factory('CASTNodeFactory', [ 'ItemFactory' , function (ItemFactory) {
+
+
 var CASTNode = function(name, parent, children) {
     this.name = name;
     this.parent = parent;
@@ -8,6 +12,7 @@ var CASTNode = function(name, parent, children) {
     this.path = null;
 };
 CASTNode.prototype = {
+
     getPath: function() {
         if (this.path === null) {
             this.path = this.getParent().getPath() + '/' + this.name;
@@ -53,6 +58,9 @@ CASTNode.prototype = {
     },
     isJSFile:function(){
         return this.name.substr(-3) === '.js';
+    },
+    isCASTNode:function(){
+        return true;
     }
 };
 
@@ -79,7 +87,7 @@ FileNode.prototype.getChild = function(parseAs) {
     var children = this.getChildren();
     if (!children[parseAs]) {
         if (parseAs === 'Program') {
-            if (this.name.substr(-3) === ".js") { //If it is a json file, add it's AST to the cast
+            if (this.name.substr(-3) === ".js") { //If it is a js file, add it's AST to the cast
                 var AST = acorn.parse(this.content, {
                     locations: true
                 });
@@ -124,7 +132,7 @@ ASTNode.prototype.attachItemHooks = function(codeNarrative){
             node.tnode.codeNarrative = node.tnode.codeNarrative || {};
             node.tnode.codeNarrative[codeNarrative.name] = [];
             for(var j in hooks[i].items){
-                var item = Item.prototype.buildItem(hooks[i].items[j]);
+                var item = ItemFactory.Item.prototype.buildItem(hooks[i].items[j]);
                 node.tnode.codeNarrative[codeNarrative.name].push( item );
             }
         }
@@ -157,3 +165,12 @@ function wrapAcornAsASTNode(tnode,name,parent){
     return newASTNode;
 
 }
+
+    return {
+        RootNode:RootNode,
+        FileNode:FileNode,
+        FolderNode:FolderNode,
+        ASTNode,ASTNode
+    }
+
+}]);

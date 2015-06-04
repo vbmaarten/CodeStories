@@ -126,7 +126,7 @@
         }
 
         if(item.isVCodeItem()){
-          item = new VCodeItem(item.content); 
+          item = item.clone();
           var interpreterScope = interpreterFactory.getCurrentScope() ;
           vCodeInterpreterFactory.runVCode( item , interpreterScope);
         }

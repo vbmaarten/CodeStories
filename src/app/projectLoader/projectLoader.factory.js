@@ -10,8 +10,8 @@
  */
 
  angular.module('projectLoader').factory('projectLoaderFactory', [
-  'CAST', '$http',
-  function (CAST, $http) {
+  'CAST', '$http', 'CASTNodeFactory' ,
+  function (CAST, $http,CASTNodeFactory) {
     var _incrementCounter = function(counter){
       counter.value = counter.value ? counter.value + 1 : 1;
     }
@@ -46,7 +46,7 @@
         .success(function(data, status, headers, config){
           
 
-          var root = new FolderNode('', null, {});
+          var root = new CASTNodeFactory.FolderNode('', null, {});
           root.path = '';
 
           //Loop through files that are packed in the zip
@@ -78,11 +78,11 @@
                    _decrementCounter($this.gitHubLoadCounter, proceed);
                 })
               } else if (isDirectory) {  //Create the new directory
-                newRoot.children[last] = new FolderNode(last, root, {});
+                newRoot.children[last] = new CASTNodeFactory.FolderNode(last, root, {});
               } else {   //Create the new file
                 _incrementCounter($this.gitHubLoadCounter);
                 $http.get(element.url, {responseType: 'text'}).success(function(data){
-                   newRoot.children[last] = new FileNode(last, root, {}, atob(data.content));
+                   newRoot.children[last] = new CASTNodeFactory.FileNode(last, root, {}, atob(data.content));
                    _decrementCounter($this.gitHubLoadCounter, proceed);
                 })
                 
@@ -213,7 +213,7 @@
           narratives: undefined
         };
 
-        var root = new FolderNode('', null, {});
+        var root = new CASTNodeFactory.FolderNode('', null, {});
         root.path = '';
 
         var $this = this;
@@ -247,9 +247,9 @@
             if(isCodestoriesFile){   //Parse the narratives file
               ret.narratives = JSON.parse(zip.file(element).asText());
             } else if (isDirectory) {  //Create the new directory
-              newRoot.children[last] = new FolderNode(last, newRoot, {});
+              newRoot.children[last] = new CASTNodeFactory.FolderNode(last, newRoot, {});
             } else {   //Create the new file
-              newRoot.children[last] = new FileNode(last, newRoot, {}, zip.file(element).asText());
+              newRoot.children[last] = new CASTNodeFactory.FileNode(last, newRoot, {}, zip.file(element).asText());
             }
           }
         });
@@ -265,7 +265,7 @@
           if (higherRoot.children[element]) {       //If the folder is already defined, step into it
             higherRoot = higherRoot.children[element];
           } else {                                  //Otherwise, create the folder node. 
-            higherRoot.children[element] = new FolderNode(element, higherRoot, {});  
+            higherRoot.children[element] = new CASTNodeFactory.FolderNode(element, higherRoot, {});  
             higherRoot = higherRoot.children[element];
           }
         });

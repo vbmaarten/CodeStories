@@ -1,0 +1,90 @@
+{
+    "/readme.md": [
+        {
+            "name": " hello world narrative",
+            "type": "FS",
+            "items": [
+                {
+                    "type": "text",
+                    "content": "Hello World!"
+                },
+                {
+                    "type": "text",
+                    "content": "Thisisastoryallabouthow...."
+                },
+                {
+                    "type": "link",
+                    "content": {"id":"code link","node":"/sort_algorithms/bubblesort.js"}
+                },
+                {
+                    "type": "link",
+                    "content": {"id":"bubble narrative","node":"/fibonacci.js"}
+                },
+                {
+                    "type": "text",
+                    "content": " FIN "
+                }
+            ]
+        }
+    ],
+    "/sort_algorithms/bubblesort.js" : [
+            {
+                "name": "code link",
+                "type": "FS",
+                "items": [
+                    {
+                        "type": "text",
+                        "content": "A bubble sort program"
+                    },
+                    {
+                        "type": "text",
+                        "content": "Lets see it in action "
+                    },
+                    {
+                    "type": "link",
+                    "content": {"id":"codetest2","node":"/sort_algorithms/bubblesort.js/Program"}
+                    }
+                ]
+            }
+        ],
+    "/sort_algorithms/bubblesort.js/Program":[
+        {
+            "name":"codetest2",
+            "type":"Code",
+            "itemHooks":{
+                "body/0/body/body/0":{
+                    "node":"body/0/body/body/0",
+                     "items":[
+
+                        {"type":"text",
+                        "content":"Here we set the length"
+                     },
+                      {"type":"vcode",
+                        "content":"var barchart = new BarChart(values); \n display(barchart.domEl); "}
+
+                    ]},
+                "body/0/body/body/1/body/body/1/body/body/0/test":{
+                "node":"body/0/body/body/1/body/body/1/body/body/0/test",
+                 "items":[
+                    {"type":"text",
+                    "content":"Here it checks if it should swap these values"
+                 },
+                  {"type":"vcode",
+                    "content":"barchart.highlight([i,i+1],'grey');"}
+                    ]
+                },
+                "b":{
+                "node":"body/0/body/body/1/body/body/1/body/body/0/consequent/body/3",
+                 "items":[
+                    {"type":"text",
+                    "content":" These should be swapped . So lets swap"
+                 },
+                  {"type":"vcode",
+                    "content":" barchart.highlight([i,i+1],'blue'); \n barchart.update(values); display(barchart.domEl); "}
+                    ]
+                }
+            }
+        }
+    ]
+}
+
