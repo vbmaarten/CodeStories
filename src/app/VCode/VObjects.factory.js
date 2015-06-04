@@ -1,40 +1,39 @@
 angular.module('VCodeInterpreter')
 .factory('VObjectFactory', function() {
-
-
 	var height = 150 , width = 300 ;
-
+	var VObjects = {};
+	VObjects.VArray = VArray;
+	VObjects.BarChart = BarChart;
 
 	return {
 		DomEl :function(){
 			return document.createElement('div');
-		},
+		},	
 
-		Canvas : function(){
-			var dom = document.createElement('div')
-			var canvas = document.createElement('canvas');
-			dom.width = width;
-			dom.height = height;
-			dom.appendChild(canvas);
-			canvas.width = width;
-			canvas.height = height;
-			return {
-				domEl: dom,
-				canvas: canvas,
-				ctx: canvas.getContext('2d'),
-				center:{'x':width/2,'y':height/2}
-			}
+		setVObject: function(name, func){
+			this.VObjects[name] = eval("("+func+")");
 		},
-
 		
-		BarChart:BarChart,
-
-		VArray: VArray,
+		VObjects: VObjects
 	}
 
 });
 
-
+function Canvas(){
+	var dom = document.createElement('div')
+	var canvas = document.createElement('canvas');
+	dom.width = width;
+	dom.height = height;
+	dom.appendChild(canvas);
+	canvas.width = width;
+	canvas.height = height;
+	return {
+		domEl: dom,
+		canvas: canvas,
+		ctx: canvas.getContext('2d'),
+		center:{'x':width/2,'y':height/2}
+	}
+}
 
 function VArray(data){
 	var domEl = document.createElement('div');
@@ -54,7 +53,6 @@ function VArray(data){
 		attr("x", function(d,i){return boxSize*i+5}).
 		attr('y', 15).
 		attr('fill', 'black')
-
 		svg.selectAll("text").data(newData).
 		text(function(d){return d});
 	}
@@ -66,8 +64,6 @@ function VArray(data){
 		update : function(data){update(data)}
 	}
 }
-
-
 function BarChart(data){
 	var domEl = document.createElement('div')
 	var chart = d3.select(domEl).append("svg");

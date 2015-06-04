@@ -12,6 +12,8 @@ angular.module('navigation').controller('navigationCtrl', [
   '$scope',
   'projectManagerFactory',
   function ($scope, projectManagerFactory) {
+    $scope.showVObjectEditor = false;
+
   	$scope.saveCodeStories = function(){
   		projectManagerFactory.saveCodeStories();
   	}
