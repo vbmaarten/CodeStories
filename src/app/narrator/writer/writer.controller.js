@@ -60,7 +60,7 @@ angular.module('narrator')
 
     $scope.removeItem = function (item) {
       var sel = $scope.selectedNarrative;
-      if(sel.isCodeNarrative()) sel.removeItem(CAST.selectedPath, item);
+      if(sel.isCodeNarrative()) sel.removeItem(CAST.selectedPath.replace(sel.CASTPath, ""), item);
       else sel.removeItem(item);
     }
 
