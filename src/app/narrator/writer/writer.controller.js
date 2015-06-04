@@ -10,13 +10,22 @@
  */
 
 angular.module('narrator')
-  .controller('WriterCtrl', [ '$scope', '$state', 'CAST', 'writerFactory',
-    function ($scope, $state, CAST, writerFactory) {
+  .controller('WriterCtrl', [ 
+    '$scope', 
+    '$state',
+    '$location',
+    '$anchorScroll',
+    'CAST', 
+    'writerFactory', 
+    'NarrativeFactory',
+    function ($scope, $state, $location, $anchorScroll, CAST, writerFactory,NarrativeFactory) {
 
     if($state.is('narrating.writing.editing')){
       $scope.selectedNarrative = writerFactory.selectedNarrative;
       if(!$scope.selectedNarrative.hasSubNode(CAST.selectedPath))
         $state.go('narrating.writing.selecting');
+      console.log(CAST.selectedPath.replace($scope.selectedNarrative.CASTPath, ''));
+      $anchorScroll(CAST.selectedPath.replace($scope.selectedNarrative.CASTPath), '');
     } else {
       writerFactory.selectedNarrative = undefined;
     }
@@ -25,9 +34,9 @@ angular.module('narrator')
     $scope.addNarrative = function(){
       var newNarrative;
       if($scope.activeNode.isASTNode())
-        newNarrative = new CodeNarrative('New Narrative', CAST.selectedPath);
+        newNarrative = new NarrativeFactory.CodeNarrative('New Narrative', CAST.selectedPath);
       else
-        newNarrative = new FSNarrative('New Narrative', CAST.selectedPath);
+        newNarrative = new NarrativeFactory.FSNarrative('New Narrative', CAST.selectedPath);
       CAST.narratives[CAST.selectedPath] = CAST.narratives[CAST.selectedPath] || [];
       CAST.narratives[CAST.selectedPath].push(newNarrative);
       $scope.narratives = CAST.getSelectedNarratives();
@@ -62,6 +71,11 @@ angular.module('narrator')
       var sel = $scope.selectedNarrative;
       if(sel.isCodeNarrative()) sel.removeItem(CAST.selectedPath.replace(sel.CASTPath, ""), item);
       else sel.removeItem(item);
+    }
+
+    $scope.goToItemHook = function (hook) {
+      console.log((writerFactory.selectedNarrative.CASTPath + hook))
+      $state.go('narrating.writing.editing', {path: (writerFactory.selectedNarrative.CASTPath + hook)});
     }
 
 }]);

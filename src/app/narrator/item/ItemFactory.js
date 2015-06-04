@@ -1,5 +1,8 @@
 'use strict';
 
+angular.module('narrator')
+  .factory('ItemFactory', [ function () {
+
 var baseUrl = "narrator/item/";
 
 var Item = function (content, url) {
@@ -82,6 +85,9 @@ var VCodeItem = function (content) {
 };
 VCodeItem.prototype = Object.create(Item.prototype);
 VCodeItem.prototype.type = "vcode";
+VCodeItem.prototype.clone = function(){
+	return new VCodeItem(this.content);
+}
 
 var LinkItem = function (content) {
 
@@ -96,3 +102,15 @@ var EmptyItem = function () {
 };
 EmptyItem.prototype = Object.create(Item.prototype);
 EmptyItem.prototype.type = "empty";
+
+	return { 
+		baseTemplateUrl: baseUrl,
+		Item: Item,
+		TextItem:TextItem,
+		VideoItem:VideoItem,
+		PictureItem:PictureItem,
+		VCodeItem:VCodeItem,
+		LinkItem:LinkItem,
+		EmptyItem:EmptyItem
+		}
+}]);

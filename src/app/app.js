@@ -20,7 +20,8 @@ angular
     'narrator',
     'explorer',
     'VCodeInterpreter',
-    'messaging'
+    'messaging',
+    'navigation' 
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider',
     function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
@@ -66,7 +67,6 @@ angular
               var params = $stateParams.project.split(':');
               projectLoaderFactory.loadGitHub(params[1],params[2],function(){
                 $state.go('narrating.viewing.selecting',{'project': $stateParams.project}, {reload:true});
-                messagingFactory.info('Project ' + $stateParams.project + ' loaded!');
               })
             }
             else if ($stateParams.project.endsWith('.zip')) {
@@ -117,11 +117,12 @@ angular
           },          
           'navigation@narrating': {
             templateUrl: '/navigation/navigation.html',
+            controller: 'navigationCtrl'
           }
         }
       })
       .state('narrating.viewing', {
-        url: '/{path:.*}',
+        url: '{path:.*}',
         resolve: resolveCASTObj,
         abstract: true,
         views: {

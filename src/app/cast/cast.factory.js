@@ -14,10 +14,10 @@
 
 
 angular.module('cast')
-  .factory('CAST', function() {
+  .factory('CAST', ['CASTNodeFactory','NarrativeFactory' , function(CASTNodeFactory,NarrativeFactory) {
 
     var EmptyCast = {
-        'rootnode': new RootNode('rootnode', {})
+        'rootnode': new CASTNodeFactory.RootNode('rootnode', {})
     };
 
     return {
@@ -85,7 +85,7 @@ angular.module('cast')
        */ 
       reset: function(){
         var EmptyCast = {
-          'rootnode': new RootNode('rootnode', {})
+          'rootnode': new CASTNodeFactory.RootNode('rootnode', {})
         };
 
         this.cast = EmptyCast
@@ -107,9 +107,9 @@ angular.module('cast')
             //hack: ASTNodes are only loaded once the filenode.getChild('program') has been called. 
             //  check if the path contains '/program' to determine if its an ast node
             if ( castPath.toLowerCase().indexOf('.js/program') > 0) {
-              newNarrative = new CodeNarrative(name, castPath, narrative[i].itemHooks);
+              newNarrative = new NarrativeFactory.CodeNarrative(name, castPath, narrative[i].itemHooks);
             } else {
-              newNarrative = new FSNarrative(name, castPath, narrative[i].items);
+              newNarrative = new NarrativeFactory.FSNarrative(name, castPath, narrative[i].items);
             }
 
             this.narratives[castPath].push(newNarrative );
@@ -155,7 +155,7 @@ angular.module('cast')
         if (typeof node === 'string'){
           this.selected = this.getNode(node);
         }
-        if ( node instanceof CASTNode){
+        if ( node.isCASTNode ){
           this.selected = node;
         }
          this.selectedPath = this.selected.getPath();
@@ -216,4 +216,4 @@ angular.module('cast')
           return this.narratives[path];
       }
     };
-  });
+  }]);

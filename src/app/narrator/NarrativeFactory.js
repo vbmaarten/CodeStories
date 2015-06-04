@@ -1,4 +1,9 @@
 'use strict';
+
+
+angular.module('narrator')
+  .factory('NarrativeFactory', [ 'ItemFactory' ,function (ItemFactory) {
+
 var Narrative = function (name, CASTPath) {
 	this.name = name;
 	this.CASTPath = CASTPath;
@@ -35,7 +40,7 @@ var FSNarrative = function (name, CASTPath, items) {
 FSNarrative.prototype = Object.create(Narrative.prototype);
 
 FSNarrative.prototype.validItem = function (item) {
-	return item instanceof Item;
+	return item instanceof ItemFactory.Item;
 };
 
 FSNarrative.prototype.removeItem = function(item){
@@ -48,7 +53,7 @@ FSNarrative.prototype.removeItem = function(item){
 
 FSNarrative.prototype.addItem = function (item, index) {
 	if(!item){
-		item = new EmptyItem();
+		item = new ItemFactory.EmptyItem();
 	}
 	if (!this.validItem(item)) {
 		throw new TypeError("Trying to add a bad item to narrative",item , this) ;
@@ -57,7 +62,7 @@ FSNarrative.prototype.addItem = function (item, index) {
 		index = this.items.length;
 	}
 
-	if(index instanceof Item){
+	if(index instanceof ItemFactory.Item){
 		index = this.items.indexOf(index) +1;
 	}
 
@@ -66,7 +71,7 @@ FSNarrative.prototype.addItem = function (item, index) {
 
 FSNarrative.prototype.addItems = function (items) {
 	for (var i in items) {
-		var item = (items[i] instanceof Item) ? items[i] : Item.prototype.buildItem(items[i]);
+		var item = (items[i] instanceof ItemFactory.Item) ? items[i] : ItemFactory.Item.prototype.buildItem(items[i]);
 		this.addItem( item );
 	}
 };
@@ -89,7 +94,7 @@ CodeNarrative.prototype.validItem = function (item) {
 	if (item.isLinkItem()) {
 		return false;
 	}
-	return item instanceof Item;
+	return item instanceof ItemFactory.Item;
 };
 
 CodeNarrative.prototype.removeItem = function(subnode,item){
@@ -108,7 +113,7 @@ CodeNarrative.prototype.addItem = function (subnode,item, index) {
 	var hook = this.itemHooks[subnode];
 
 	if(!item){
-		item = new EmptyItem();
+		item = new ItemFactory.EmptyItem();
 	}
 	if (!this.validItem(item)) {
 		throw new TypeError("Trying to add a bad item to narrative",item , this) ;
@@ -117,9 +122,16 @@ CodeNarrative.prototype.addItem = function (subnode,item, index) {
 		index = hook.items.length;
 	}
 
-	if(index instanceof Item){
+	if(index instanceof ItemFactory.Item){
 		index = hook.items.indexOf(index) +1;
 	}
 
 	hook.items.splice(index, 0, item);
 }
+
+	return {
+		FSNarrative:FSNarrative,
+		CodeNarrative:CodeNarrative
+	}
+
+}])
