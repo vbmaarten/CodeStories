@@ -86,6 +86,7 @@
                     _incrementCounter($this.gitHubLoadCounter);
                     $http.get(element.url).success(function(data){
                       console.log(data);
+                      console.log(atob(data.content));
                        ret.narratives = JSON.parse(atob(data.content));
                        _decrementCounter($this.gitHubLoadCounter, proceed);
                     })
