@@ -16,14 +16,14 @@
                     "type": "link",
                     "content": {
                         "id": "code link",
-                        "node": "/sort_algorithms/bubblesort.js"
+                        "path": "/sort_algorithms/bubblesort.js"
                     }
                 },
                 {
                     "type": "link",
                     "content": {
                         "id": "bubble narrative",
-                        "node": "/fibonacci.js"
+                        "path": "/fibonacci.js"
                     }
                 },
                 {
@@ -50,7 +50,7 @@
                     "type": "link",
                     "content": {
                         "id": "codetest2",
-                        "node": "/sort_algorithms/bubblesort.js/Program"
+                        "path": "/sort_algorithms/bubblesort.js/Program"
                     }
                 }
             ]
@@ -62,7 +62,7 @@
             "type": "Code",
             "narrativeHooks": {
                 "body/0/body/body/0": {
-                    "node": "body/0/body/body/0",
+                    "path": "body/0/body/body/0",
                     "items": [
                         {
                             "type": "text",
@@ -75,7 +75,7 @@
                     ]
                 },
                 "body/0/body/body/1/body/body/1/body/body/0/test": {
-                    "node": "body/0/body/body/1/body/body/1/body/body/0/test",
+                    "path": "body/0/body/body/1/body/body/1/body/body/0/test",
                     "items": [
                         {
                             "type": "text",
@@ -88,7 +88,7 @@
                     ]
                 },
                 "b": {
-                    "node": "b",
+                    "path": "b",
                     "items": [
                         {
                             "type": "text",
