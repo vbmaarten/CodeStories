@@ -1,3 +1,7 @@
+
+
+
+
 <div class="narrative" ng-repeat="narrative in storyboard">
 	<h2>{{narrative.name}}</h2>
 	<div ng-repeat="item in narrative.items track by $index">
@@ -7,3 +11,11 @@
 
 
 <div class="button-wide next" tabindex="0" ng-keypress="$event.charCode === 32 && next()" focus ng-click='next()'>Next</div>
+<div ng-if='activeNode.isASTNode()' class="button-wide debugStep" tabindex="0" ng-keypress="$event.charCode === 78 && debugStep()" focus ng-click='debugStep()'>Step</div>
+<table class='interpreterScope' ng-if='activeNode.isASTNode()'> 
+<tbody>
+<tr ng-repeat="( variable , value ) in interpreterScope | orderBy:'variable'"  ng-class-even="'even'" ng-class-odd="'odd'" > 
+	<td >{{ variable }} </td> <td> {{ value }} </td>
+</tr> 
+</tbody>
+</table>

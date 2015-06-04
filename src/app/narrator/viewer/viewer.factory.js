@@ -76,6 +76,19 @@
         }
       },
 
+      interpreterScope : {},
+
+      debugStep: function(){
+        var step = interpreterFactory.debugStep();
+        
+        if(step.item){
+          this.codeNarrativeStep(step);
+        } else {
+          this.interpreterScope = step.scope;
+          $state.go('narrating.viewing.playing', {'path': step.node.getPath()});
+
+        }
+      },
 
       /**
        * @ngdoc method
@@ -119,8 +132,8 @@
         return true;
       },
 
-      codeNarrativeStep: function() {
-        var codeStep = interpreterFactory.narrativeStep();
+      codeNarrativeStep: function(step) {
+        var codeStep = step || interpreterFactory.narrativeStep();
         var item = codeStep.item;
         if(!item){
           return false;
@@ -128,10 +141,9 @@
 
         if(item.isVCodeItem()){
           item = item.clone();
-          var interpreterScope = interpreterFactory.getCurrentScope() ;
-          vCodeInterpreterFactory.runVCode( item , interpreterScope);
+          vCodeInterpreterFactory.runVCode( item , codeStep.scope);
         }
-
+        this.interpreterScope = codeStep.scope
         this.storyboard[this.storyboard.length-1].items.push(item);
 
 
