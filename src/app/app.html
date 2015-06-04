@@ -4,10 +4,20 @@
 <nav class="navigation" ui-view="navigation"></nav>
 
 <div class="wrapper">
+<div class='show-files-btn' ng-class="(displayFilesFolders) ? 'fa fa-folder-open' : 'fa fa-folder'" ng-init='displayFilesFolders = true' ng-click='displayFilesFolders = !displayFilesFolders'></div>
   <table class="outer-table-wrapper" cellpadding="0" cellspacing="0">
   <tbody>
   <tr>
-  	<td class="explorer" ui-view="explorer"></td>
+	<td ng-if='displayFilesFolders' class="directories" ui-view='directories' >
+
+
+		<div directory data="directory.rootnode.children" cast-url="'/'"></div>
+	</td>
+	<td class='code' ui-view='code'>
+		<div  class='ace-container' ui-ace="{ theme: crimson_editor, onLoad: aceLoaded , mode :(selected.isJSFile() || selected.tnode ? 'javascript' : 'text')}" readonly>
+		</div>
+	</td>
+
 	  <td class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></td>
   </tr>
 </tbody>
