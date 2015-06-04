@@ -8,7 +8,14 @@ angular.module("messaging")
 
 		factory.callback;
 
+
+
 		factory.error = function(content){
+			if(content instanceof Error){
+				console.error(content)
+				content = content.message + "\n" +content.fileName;
+
+			}
 			factory.messages.unshift({type: 'error', content: content});
 			factory.callback();
 			$timeout(function(){
