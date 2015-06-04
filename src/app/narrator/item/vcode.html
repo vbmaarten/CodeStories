@@ -5,9 +5,10 @@
 	<li ng-class='{activetab: tab ===2 }' ng-click='tab=2'>
 		Code
 	</li>
-</ul><br><br> <br><br>
+</ul>
+
 <div ng-show="item.dom">
 	<div class='vcode-visual' ng-show="tab ===1"></div>
-	<div ng-show="tab ===2"><pre>{{item.content}}</pre></div>
+	<div ui-ace="{theme: crimson_editor, readOnly: true}" ng-model="item.content" ng-show="tab ===2"></div>
 </div>
-<code ng-show="item.dom == undefined">{{item.content}}</div>
+<code class="text" ng-show="item.dom == undefined">{{item.content}}</div>

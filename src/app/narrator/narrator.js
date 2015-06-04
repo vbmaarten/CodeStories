@@ -9,5 +9,6 @@
  * viewing and editing narratives. 
  */
 angular.module('narrator', [
-		'luegg.directives'
+		'luegg.directives',
+		'ui.ace'
 	]);
