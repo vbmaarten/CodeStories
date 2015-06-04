@@ -10,10 +10,10 @@
  */
 angular.module('navigation').controller('navigationCtrl', [
   '$scope',
-  'projectLoaderFactory',
-  function ($scope, projectLoaderFactory) {
+  'projectManagerFactory',
+  function ($scope, projectManagerFactory) {
   	$scope.saveCodeStories = function(){
-  		projectLoaderFactory.saveCodeStories();
+  		projectManagerFactory.saveCodeStories();
   	}
   }
 ]);
