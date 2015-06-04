@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.width-height-max{
+  width:100%;
+  height:100%;
+}
 .navigation {
   position: absolute;
   width: 100%;
@@ -18,11 +22,19 @@
   height: 100%;
   position: relative;
   padding-right:500px;
+  width:100%;
+}
+
+.outer-table-wrapper{
+  width:100%;
+  height:100%;
+  vertical-align: top;
 }
 
 .explorer {
   height: 100%;
   width: 100%;
+  vertical-align: top;
 }
 
 .narrator {
