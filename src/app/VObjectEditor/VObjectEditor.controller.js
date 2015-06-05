@@ -9,11 +9,13 @@
  * compressed project to narrate using the app.
  */
 angular.module('VObjectEditor')
-.controller('VObjectEditorCtrl', ['$scope', 'VObjectFactory', function ($scope, VObjectFactory) {
+.controller('VObjectEditorCtrl', ['$scope', 'VObjectFactory', 'ItemFactory', 'vCodeInterpreterFactory',
+ function ($scope, VObjectFactory, ItemFactory, vCodeInterpreterFactory) {
 	$scope.VObjects = VObjectFactory.VObjects;
 	$scope.selectedVObject = undefined;
 	$scope.VObjectContent = "";
 	$scope.VObjectName = "";
+	$scope.VCode = "";
 
 	var emptyVObject = function (data){
 		var domEl = document.createElement('div');
@@ -38,6 +40,24 @@ angular.module('VObjectEditor')
 		$scope.selectedVObject = name;
 		$scope.VObjectContent = $scope.VObjects[name].toString();
 		$scope.VObjectName = name;
+		$scope.VCode  = "var "+name.toLowerCase()+"Object = new "+name+"([]);\n";
+		$scope.VCode += "display("+name.toLowerCase()+"Object.domEl);";
+	}
+
+	$scope.test = function(){
+		$scope.saveObject();
+		var VItem = new ItemFactory.VCodeItem($scope.VCode);
+		vCodeInterpreterFactory.startSession();
+		vCodeInterpreterFactory.runVCode(VItem,{});
+
+		var VElement = document.getElementById('VisualElement');
+
+		if(VElement.children.length > 0){
+			VElement.children[0].remove();
+		}
+
+		document.getElementById('VisualElement').appendChild(VItem.dom);
+
 	}
 
 	$scope.updateVObject = function(){

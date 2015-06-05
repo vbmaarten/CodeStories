@@ -49,7 +49,7 @@ var bubblesort_str = ' function sort(values) {' +
 
 
 	it(' should get the subnodes by their path ', function() {  
-		expect( root.isCASTNodeFactory.RootNode() ).toEqual(true);
+		expect( root.isRootNode() ).toEqual(true);
 		expect( root.getNode('/afolder').isFolder() ).toEqual(true);
 		expect( root.getNode('/afolder/afile.js').isFile() ).toEqual(true);
 		expect( root.getNode('/afolder/afile.js/Program').isASTNode() ).toEqual(true);

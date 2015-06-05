@@ -11,12 +11,17 @@ describe('Factory: Interpreter factory', function() {
   	sum += i;\
   }";
 
-  var astNode = wrapAcornAsASTNode(acorn.parse(script), "/", new CASTNodeFactory.RootNode());
+  var NarrativeFactory;
+  var CASTNodeFactory;
 
 
-  beforeEach(inject(function (_interpreterFactory_){
-    interpreterFactory = _interpreterFactory_;
+    beforeEach(inject(function (_interpreterFactory_,_NarrativeFactory_,_CASTNodeFactory_){
+      interpreterFactory = _interpreterFactory_;
+   NarrativeFactory = _NarrativeFactory_
+   CASTNodeFactory = _CASTNodeFactory_;
   }));
+
+  var astNode = new CASTNodeFactory.FileNode("/" , new CASTNodeFactory.RootNode() , {} , script).getChild('Program');
 
   // ---- Tests -----
   it("should exist", function(){

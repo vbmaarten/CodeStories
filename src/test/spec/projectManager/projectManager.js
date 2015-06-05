@@ -7,10 +7,13 @@ describe('Factory: projectManagerFactory', function () {   // L
   beforeEach(module("codeStoriesApp")); 
 
   var CASTNodeFactory;
-
-  beforeEach(inject(function (_projectManagerFactory_,_CASTNodeFactory_){
+  var ItemFactory;
+  var NarrativeFactory;
+  beforeEach(inject(function (_projectManagerFactory_,_CASTNodeFactory_,_ItemFactory_,_NarrativeFactory_){
     projectManagerFactory = _projectManagerFactory_;
     CASTNodeFactory = _CASTNodeFactory_;
+    ItemFactory = _ItemFactory_;
+    NarrativeFactory = _NarrativeFactory_;
   }));
 
 
@@ -20,7 +23,7 @@ describe('Factory: projectManagerFactory', function () {   // L
   });
 
   it('generates proper NarrativeFactory.FSNarrative objects', function(){
-    var item1 = new TextItem('textitem');
+    var item1 = new ItemFactory.TextItem('textitem');
 
     var fsNarrative = new NarrativeFactory.FSNarrative('first_narrative', '/file1.js', [item1]);
 
@@ -35,12 +38,12 @@ describe('Factory: projectManagerFactory', function () {   // L
   });
 
   it('generates proper text items', function(){
-    var item = new TextItem("textitem");
+    var item = new ItemFactory.TextItem("textitem");
     expect( projectManagerFactory._generateItem(item) ).toEqual({type: 'text', content: 'textitem'});
   });
 
   it('generates proper link items', function(){    
-    var item = new LinkItem({id: 'narrativeId', node: '/file.js'});
+    var item = new ItemFactory.LinkItem({id: 'narrativeId', node: '/file.js'});
     expect( projectManagerFactory._generateItem(item) ).toEqual({type: 'link', content: {id: 'narrativeId', node: '/file.js'}});
   });
 
@@ -55,8 +58,8 @@ describe('Factory: projectManagerFactory', function () {   // L
     var file1 = narratives["/file1.js"] = [];
     var file2 = narratives["/file2.js"] = [];
 
-    var item1 = new LinkItem({id: "second_narrative", node: "/file2.js"});
-    var item2 = new TextItem("textitem");
+    var item1 = new ItemFactory.LinkItem({id: "second_narrative", node: "/file2.js"});
+    var item2 = new ItemFactory.TextItem("textitem");
 
     file1.push(new NarrativeFactory.FSNarrative("first_narrative", "/file1.js", [item1]));    
     file2.push(new NarrativeFactory.FSNarrative("second_narrative", "/file2.js", [item2]));
