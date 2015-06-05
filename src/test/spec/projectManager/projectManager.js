@@ -1,13 +1,13 @@
 'use strict';
 
-describe('Factory: projectLoaderFactory', function () {   // Load your module.
-  var projectLoaderFactory;
+describe('Factory: projectManagerFactory', function () {   // Load your module.
+  var projectManagerFactory;
 
   beforeEach(module("cast")); 
-  beforeEach(module("projectLoader"));
+  beforeEach(module("projectManager"));
 
-  beforeEach(inject(function (_projectLoaderFactory_){
-    projectLoaderFactory = _projectLoaderFactory_;
+  beforeEach(inject(function (_projectManagerFactory_){
+    projectManagerFactory = _projectManagerFactory_;
   }));
 
 
@@ -16,12 +16,12 @@ describe('Factory: projectLoaderFactory', function () {   // Load your module.
     expect(true).toBe(true);
   });
 
-  it('generates proper FSNarrative objects', function(){
+  it('generates proper NarrativeFactory.FSNarrative objects', function(){
     var item1 = new TextItem('textitem');
 
-    var fsNarrative = new FSNarrative('first_narrative', '/file1.js', [item1]);
+    var fsNarrative = new NarrativeFactory.FSNarrative('first_narrative', '/file1.js', [item1]);
 
-    var generated = projectLoaderFactory._generateFSNarrative(fsNarrative);
+    var generated = projectManagerFactory._generateFSNarrative(fsNarrative);
     var expected = {name: 'first_narrative',
                     type: 'FS',
                     items: []};
@@ -33,18 +33,18 @@ describe('Factory: projectLoaderFactory', function () {   // Load your module.
 
   it('generates proper text items', function(){
     var item = new TextItem("textitem");
-    expect( projectLoaderFactory._generateItem(item) ).toEqual({type: 'text', content: 'textitem'});
+    expect( projectManagerFactory._generateItem(item) ).toEqual({type: 'text', content: 'textitem'});
   });
 
   it('generates proper link items', function(){    
     var item = new LinkItem({id: 'narrativeId', node: '/file.js'});
-    expect( projectLoaderFactory._generateItem(item) ).toEqual({type: 'link', content: {id: 'narrativeId', node: '/file.js'}});
+    expect( projectManagerFactory._generateItem(item) ).toEqual({type: 'link', content: {id: 'narrativeId', node: '/file.js'}});
   });
 
   it('generates subdirectories while walking up to them', function(){
-    var root = new FolderNode('', null, {});
-    projectLoaderFactory._walkTo(root, ['test', 'test']);
-    projectLoaderFactory._walkTo(root, ['test', 'test']);
+    var root = new CASTNodeFactory.FolderNode('', null, {});
+    projectManagerFactory._walkTo(root, ['test', 'test']);
+    projectManagerFactory._walkTo(root, ['test', 'test']);
   });
 
   it('generates a proper codestories object', function(){
@@ -55,10 +55,10 @@ describe('Factory: projectLoaderFactory', function () {   // Load your module.
     var item1 = new LinkItem({id: "second_narrative", node: "/file2.js"});
     var item2 = new TextItem("textitem");
 
-    file1.push(new FSNarrative("first_narrative", "/file1.js", [item1]));    
-    file2.push(new FSNarrative("second_narrative", "/file2.js", [item2]));
+    file1.push(new NarrativeFactory.FSNarrative("first_narrative", "/file1.js", [item1]));    
+    file2.push(new NarrativeFactory.FSNarrative("second_narrative", "/file2.js", [item2]));
 
-    var codestories = projectLoaderFactory._generateCodeStories(narratives);
+    var codestories = projectManagerFactory._generateCodeStories(narratives);
     var expected_codestories = {
       "/file1.js": [{
         "name": "first_narrative",
@@ -87,7 +87,7 @@ describe('Factory: projectLoaderFactory', function () {   // Load your module.
     zip.folder('test').file('test.js', '');
     zip.file('.codestories', '{"/test/test.js": []}');
 
-    var unpacked = projectLoaderFactory.UnpackZip(zip);
+    var unpacked = projectManagerFactory.UnpackZip(zip);
     var expectedCast = {};
     var expectedNarratives = {}
 
@@ -101,12 +101,12 @@ describe('Factory: projectLoaderFactory', function () {   // Load your module.
 
   it('should transform a cast to a zip', function(){
     var zip = new JSZip();
-    var root = new FolderNode('/', null, {});
+    var root = new CASTNodeFactory.FolderNode('/', null, {});
 
-    root.children['folder'] = new FolderNode('folder', root, {})
-    root.children['folder'].children['file.js'] = new FileNode('file.js', root.children['folder'], {}, "content")
+    root.children['folder'] = new CASTNodeFactory.FolderNode('folder', root, {})
+    root.children['folder'].children['file.js'] = new CASTNodeFactory.FileNode('file.js', root.children['folder'], {}, "content")
 
-    projectLoaderFactory._packCastZip(root, zip);
+    projectManagerFactory._packCastZip(root, zip);
 
     expect(zip.files['folder/']).toBeDefined();
     expect(zip.files['folder/file.js']).toBeDefined();

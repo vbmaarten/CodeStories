@@ -5,6 +5,14 @@ describe ( 'Item constructors', function ( ) {
 
 //todo propper vcode parsing 
 
+  beforeEach(module('cast'));
+
+  var CASTNodeFactory;
+
+  beforeEach(inject(function (_CASTNodeFactory_){
+    CASTNodeFactory = _CASTNodeFactory_;
+  }));
+
 var root
 var folder
 var file;
@@ -32,16 +40,16 @@ var bubblesort_str = ' function sort(values) {' +
 
 	beforeEach(function() {
 
-		root = new RootNode();
-		folder = new FolderNode('afolder',root);
-		file = new FileNode('afile.js',folder,{},bubblesort_str);
+		root = new CASTNodeFactory.RootNode();
+		folder = new CASTNodeFactory.FolderNode('afolder',root);
+		file = new CASTNodeFactory.FileNode('afile.js',folder,{},bubblesort_str);
 		root.children['afolder'] = folder;
 		folder.children['afile.js'] = file;
 	});
 
 
 	it(' should get the subnodes by their path ', function() {  
-		expect( root.isRootNode() ).toEqual(true);
+		expect( root.isCASTNodeFactory.RootNode() ).toEqual(true);
 		expect( root.getNode('/afolder').isFolder() ).toEqual(true);
 		expect( root.getNode('/afolder/afile.js').isFile() ).toEqual(true);
 		expect( root.getNode('/afolder/afile.js/Program').isASTNode() ).toEqual(true);

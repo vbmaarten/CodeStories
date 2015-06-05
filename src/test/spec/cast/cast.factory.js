@@ -6,24 +6,26 @@ describe('Factory: CAST', function () {
   // load the controller's module
   beforeEach(module('cast'));
 
+  var CASTNodeFactory;
   var CAST;
   var folderNode;
   var fileNode;
   var astNode;
 
-  beforeEach(inject(function (_CAST_){
+  beforeEach(inject(function (_CAST_,_CASTNodeFactory_){
     CAST = _CAST_;
+    CASTNodeFactory = _CASTNodeFactory_;
   }));
 
   it('should start of with an empty cast', function () {
-    expect(CAST.cast).toEqual({'rootnode': new RootNode('rootnode', {})});
+    expect(CAST.cast).toEqual({'rootnode': new CASTNodeFactory.RootNode('rootnode', {})});
   });
 
   describe('node lookup', function () {
 
     beforeEach(function () {
-      folderNode = CAST.cast.rootnode.children['folderNode'] = new FolderNode('folderNode', CAST.cast.rootnode, {});
-      fileNode = folderNode.children['fileNode'] = new FileNode('fileNode', folderNode, { });
+      folderNode = CAST.cast.rootnode.children['folderNode'] = new CASTNodeFactory.FolderNode('folderNode', CAST.cast.rootnode, {});
+      fileNode = folderNode.children['fileNode'] = new CASTNodeFactory.FileNode('fileNode', folderNode, { });
     });
 
     it('should return the root node on an empty path', function () {
@@ -57,9 +59,9 @@ describe('Factory: CAST', function () {
 
 
     beforeEach(function () {
-      folderNode = CAST.cast.rootnode.children['folderNode'] = new FolderNode('folderNode', CAST.cast.rootnode, {});
-      fileNode = folderNode.children['fileNode.js'] = new FileNode('fileNode.js', folderNode, { });
-      astNode = fileNode.children['program'] = new ASTNode('program', fileNode, {}, null);
+      folderNode = CAST.cast.rootnode.children['folderNode'] = new CASTNodeFactory.FolderNode('folderNode', CAST.cast.rootnode, {});
+      fileNode = folderNode.children['fileNode.js'] = new CASTNodeFactory.FileNode('fileNode.js', folderNode, { });
+      astNode = fileNode.children['program'] = new CASTNodeFactory.ASTNode('program', fileNode, {}, null);
     });
 
 

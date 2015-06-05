@@ -33,15 +33,18 @@ module.exports = function(config) {
       // endbower
       'app/libs/interpreter.js',
       'app/libs/**.js',
-      'app/constructors/**.js',
       'app/app.js',
       'app/cast/cast.js',
       'app/explorer/explorer.js',
       'app/narrator/narrator.js',
-      'app/projectLoader/projectLoader.js',
+      'app/projectManager/projectManager.js',
       'app/cast/cast.factory.js',
       'app/narrator/interpreter/interpreter.factory.js',      
-      'app/VCodeInterpreter/vcodeinterpreter.js',
+      'app/narrator/item/ItemFactory.js',
+      'app/VCode/vcodeinterpreter.js',
+      'app/VObjectEditor/VObjectEditor.js',
+      'app/messaging/messaging.js',
+      'app/navigation/navigation.js',
       'app/{,*/}*.js',
       'test/mock/{,*/}*.js',
       'test/spec/{,*/}*.js'
@@ -49,14 +52,16 @@ module.exports = function(config) {
 
 
     preprocessors : {
+      'app/narrator/item/ItemFactory.js': 'coverage',
       'app/cast/cast.factory.js': 'coverage',
-      'app/constructors/**.js': 'coverage',
-      'app/projectLoader/projectLoader.factory.js': 'coverage',
+      'app/cast/CASTNodeFactory.js': 'coverage',
+      'app/narrator/NarrativeFactory.js': 'coverage',
+      'app/projectManager/projectManager.factory.js': 'coverage',
       'app/narrator/viewer/viewer.factory.js': 'coverage',
       'app/narrator/writer/writer.controller.js': 'coverage',
       'app/narrator/interpreter/interpreter.factory.js': 'coverage',
       'app/explorer/explorer.controller.js': 'coverage',
-      'app/VCodeInterpreter/vcodeinterpreter.factory.js': 'coverage',
+      'app/VCode/vcodeinterpreter.factory.js': 'coverage',
     },
 
     // coverage reporter generates the coverage

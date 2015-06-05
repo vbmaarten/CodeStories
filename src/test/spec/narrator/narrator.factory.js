@@ -34,9 +34,9 @@ describe('Factory: Narrator', function() {
   beforeEach(inject(function(_CAST_, _viewerFactory_){
     narrator = _viewerFactory_;
     CAST = _CAST_;
-    folderNode = CAST.cast.rootnode.children['folderNode'] = new FolderNode('folderNode', CAST.cast.rootnode, {});
-    fileNode = folderNode.children['fileNode.js'] = new FileNode('fileNode.js', folderNode, { });
-    astNode = fileNode.children['program'] = new ASTNode('program', fileNode, {}, null);
+    folderNode = CAST.cast.rootnode.children['folderNode'] = new CASTNodeFactory.FolderNode('folderNode', CAST.cast.rootnode, {});
+    fileNode = folderNode.children['fileNode.js'] = new CASTNodeFactory.FileNode('fileNode.js', folderNode, { });
+    astNode = fileNode.children['program'] = new CASTNodeFactory.ASTNode('program', fileNode, {}, null);
 
     CAST.appendNarrative(narrativesMock);
   }));
