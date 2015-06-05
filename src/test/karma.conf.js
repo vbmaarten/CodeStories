@@ -34,13 +34,19 @@ module.exports = function(config) {
       'app/libs/interpreter.js',
       'app/libs/**.js',
       'app/app.js',
+
       'app/cast/cast.js',
       'app/explorer/explorer.js',
       'app/narrator/narrator.js',
-      'app/projectManager/projectManager.js',
-      'app/cast/cast.factory.js',
-      'app/narrator/interpreter/interpreter.factory.js',      
+      
       'app/narrator/item/ItemFactory.js',
+      'app/narrator/NarrativeFactory.js',
+      'app/cast/CASTNodeFactory.js',
+      
+      'app/cast/cast.factory.js',
+      'app/projectManager/projectManager.js',
+      'app/narrator/interpreter/interpreter.factory.js',      
+      
       'app/VCode/vcodeinterpreter.js',
       'app/VObjectEditor/VObjectEditor.js',
       'app/messaging/messaging.js',
