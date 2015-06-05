@@ -13,7 +13,7 @@
     var VScope = {};
 
     return {
-        startSession: function(VObjects) {
+        startSession: function() {
             VScope = {}; 
         },
 
