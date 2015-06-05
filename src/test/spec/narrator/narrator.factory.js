@@ -9,7 +9,7 @@ describe('Factory: Narrator', function() {
           this.narrative = narrative;
         },
         narrativeStep : function() {
-          return this.narrative.itemHooks['Body/0FunctionDeclaration/Block/Body/0VariableDeclaration'];
+          return this.narrative.narrativeHooks['Body/0FunctionDeclaration/Block/Body/0VariableDeclaration'];
         }
     });
   }));
@@ -28,8 +28,10 @@ describe('Factory: Narrator', function() {
   var folderNode;
   var fileNode;
   var astNode;
+  var CASTNodeFactory
 
-  beforeEach(inject(function(_CAST_, _viewerFactory_){
+  beforeEach(inject(function(_CAST_,_CASTNodeFactory_, _viewerFactory_){
+    CASTNodeFactory = _CASTNodeFactory_;
     narrator = _viewerFactory_;
     CAST = _CAST_;
     folderNode = CAST.cast.rootnode.children['folderNode'] = new CASTNodeFactory.FolderNode('folderNode', CAST.cast.rootnode, {});
@@ -78,19 +80,6 @@ describe('Factory: Narrator', function() {
 
   });
 
-  it('should return the next item that should be shown to the user and false if there is no next item', function() {
-    narrator.selectNarrative(CAST.getNarrative('/folderNode', 0));
-    expect(narrator.getNextItem()).toBe(CAST.getNarrative('/folderNode',0).items[0]);
-
-    narrator.queueCounter[0] = 4;
-
-    expect(narrator.getNextItem()).toBe(false);
-
-    narrator.selectNarrative(CAST.getNarrative('/folderNode/fileNode.js/program',0));
-
-    // expect(narrator.getNextItem()).toBe(CAST.getNarrative('/folderNode/fileNode.js/program',0).itemHooks[0])
-
-  });
 
   it('should be possible to pop an item from the narrative queue', inject(function($state){
     narrator.selectNarrative(CAST.getNarrative('/folderNode', 0));
@@ -121,7 +110,7 @@ describe('Factory: Narrator', function() {
 
     narrator.loadNarrative({
       "type": "link",
-      "content": {"id":"hello world narrative 2","node":"/folderNode/fileNode.js"}
+      "content": {"id":"hello world narrative 2","path":"/folderNode/fileNode.js"}
     });
 
     expect(narrator.narrativeLink).toBe(true);

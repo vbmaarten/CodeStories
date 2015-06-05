@@ -30,7 +30,7 @@ var narrativesMock = {
     {
       "name": "hello world narrative 3",
       "type": "Code",
-      "itemHooks":{
+      "narrativeHooks":{
         "Body/0FunctionDeclaration/Block/Body/0VariableDeclaration":{
           "node":"Body/0FunctionDeclaration/Block/Body/0VariableDeclaration",
           "items":[

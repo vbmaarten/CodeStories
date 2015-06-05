@@ -88,15 +88,15 @@ var CodeN;
 
 
 
-		expect( CodeN.itemHooks['/'].items[0] ).toEqual(textitem);
+		expect( CodeN.narrativeHooks['/'].items[0] ).toEqual(textitem);
 
 		CodeN.addItem( );//add empty item at the end of '/'
 
-		expect( CodeN.itemHooks['/'].items[1].isEmptyItem() ).toEqual(true);
+		expect( CodeN.narrativeHooks['/'].items[1].isEmptyItem() ).toEqual(true);
 
 		CodeN.addItem( '/0VariableDeclaration' , textitem );
 
-		expect( CodeN.itemHooks['/0VariableDeclaration'].items[0] ).toEqual(textitem);
+		expect( CodeN.narrativeHooks['/0VariableDeclaration'].items[0] ).toEqual(textitem);
 
 		expect( function(){ 
 				CodeN.addItem('/',linkitem);
@@ -113,11 +113,11 @@ var CodeN;
 
 
 
-		expect( CodeN.itemHooks['/test'].items.length ).toEqual(1);
+		expect( CodeN.narrativeHooks['/test'].items.length ).toEqual(1);
 
 		CodeN.removeItem( '/test' , textitem );//add empty item at the end of '/'
 
-		expect( CodeN.itemHooks['/test'].items.length ).toEqual(0);
+		expect( CodeN.narrativeHooks['/test'].items.length ).toEqual(0);
 
 	 });
 

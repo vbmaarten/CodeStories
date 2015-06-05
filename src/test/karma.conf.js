@@ -38,20 +38,20 @@ module.exports = function(config) {
       'app/cast/cast.js',
       'app/explorer/explorer.js',
       'app/narrator/narrator.js',
-      
+
       'app/narrator/item/ItemFactory.js',
       'app/narrator/NarrativeFactory.js',
       'app/cast/CASTNodeFactory.js',
       
       'app/cast/cast.factory.js',
       'app/projectManager/projectManager.js',
-      'app/narrator/interpreter/interpreter.factory.js',      
-      
+      'app/narrator/{,*/}*.js',
       'app/VCode/vcodeinterpreter.js',
       'app/VObjectEditor/VObjectEditor.js',
       'app/messaging/messaging.js',
       'app/navigation/navigation.js',
       'app/{,*/}*.js',
+
       'test/mock/{,*/}*.js',
       'test/spec/{,*/}*.js'
     ],

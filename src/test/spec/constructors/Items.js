@@ -84,7 +84,7 @@ it(' should not throw an error when a bad type is used ', function() {
 	baditemObj.type = 'nothing'
 
 	expect( function(){ 
-		Item.prototype.buildItem(baditemObj); 
+		ItemFactory.Item.prototype.buildItem(baditemObj); 
 		}).toThrow(new TypeError("Unknown item type"));
 
 });
