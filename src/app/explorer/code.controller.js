@@ -92,7 +92,8 @@ angular.module('explorer')
           var narrativeNode = CAST.getNode(writerFactory.selectedNarrative.CASTPath)
           mark(narrativeNode, "selected-narrative");
           for(var hook in writerFactory.selectedNarrative.narrativeHooks ) {
-            mark(narrativeNode.getNode(hook), "selected-item-hook");
+            var hookPath = writerFactory.selectedNarrative.narrativeHooks[hook].path;
+            mark(narrativeNode.getNode(hookPath), "selected-item-hook");
           }
         }
         if($state.is('narrating.viewing.playing') && viewerFactory.queue[0].isCodeNarrative()){
