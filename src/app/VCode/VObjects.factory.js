@@ -1,9 +1,19 @@
 angular.module('VCodeInterpreter')
 .factory('VObjectFactory', function() {
-	var height = 150 , width = 300 ;
 	var VObjects = {};
 	VObjects.VArray = VArray;
 	VObjects.BarChart = BarChart;
+
+	var height = 150 , width = 300 ;
+
+	function setSizeInfo( name ){
+		VObjects[name].prototype.width = width;
+		VObjects[name].prototype.height = height;
+	}
+
+	for(var vobj in VObjects){
+		setSizeInfo(vobj);
+	}
 
 	return {
 		DomEl :function(){
@@ -12,6 +22,7 @@ angular.module('VCodeInterpreter')
 
 		setVObject: function(name, func){
 			this.VObjects[name] = eval("("+func+")");
+			setSizeInfo(name);
 		},
 		
 		VObjects: VObjects
@@ -67,7 +78,7 @@ function VArray(data){
 function BarChart(data){
 	var domEl = document.createElement('div')
 	var chart = d3.select(domEl).append("svg");
-	var height = 150 ,width = 300 
+	var height = this.height ,width = this.width 
 	var barWidth = width / data.length;
 	var yScale = d3.scale.linear()
 		.range([height, 0]);
