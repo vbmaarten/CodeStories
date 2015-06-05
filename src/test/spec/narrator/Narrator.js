@@ -1,7 +1,7 @@
 'use strict';
 
 describe('NarratorCtrl', function() {
-  beforeEach(module('narrator'));
+  beforeEach(module('codeStoriesApp'));
 
   var $controller;
 

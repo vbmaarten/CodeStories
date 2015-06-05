@@ -1,13 +1,16 @@
 'use strict';
 
-describe('Factory: projectManagerFactory', function () {   // Load your module.
+describe('Factory: projectManagerFactory', function () {   // L
+
   var projectManagerFactory;
 
-  beforeEach(module("cast")); 
-  beforeEach(module("projectManager"));
+  beforeEach(module("codeStoriesApp")); 
 
-  beforeEach(inject(function (_projectManagerFactory_){
+  var CASTNodeFactory;
+
+  beforeEach(inject(function (_projectManagerFactory_,_CASTNodeFactory_){
     projectManagerFactory = _projectManagerFactory_;
+    CASTNodeFactory = _CASTNodeFactory_;
   }));
 
 

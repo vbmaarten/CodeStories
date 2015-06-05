@@ -4,7 +4,7 @@ describe ( 'Item constructors', function ( ) {
 
 
   // load the controller's module
-  beforeEach(module('narrator'));
+  beforeEach(module('codeStoriesApp'));
 
   var ItemFactory;
 

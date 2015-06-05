@@ -2,8 +2,6 @@
 
 describe('Factory: Narrator', function() {
   beforeEach(module('codeStoriesApp'));
-  beforeEach(module('cast'));
-  beforeEach(module('narrator'));
 
   beforeEach(module(function ($provide) {
     $provide.value('interpreterFactory', {

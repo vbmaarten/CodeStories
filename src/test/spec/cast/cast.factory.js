@@ -4,7 +4,7 @@ describe('Factory: CAST', function () {
 
 
   // load the controller's module
-  beforeEach(module('cast'));
+  beforeEach(module('codeStoriesApp'));
 
   var CASTNodeFactory;
   var CAST;

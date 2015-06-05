@@ -3,12 +3,13 @@
 describe ( 'Narratives', function ( ) {
 
 
-  beforeEach(module('narrator'));
+  beforeEach(module('codeStoriesApp'));
 
-  var CASTNodeFactory;
-
-  beforeEach(inject(function (_NarrativeFactory_){
+  var NarrativeFactory;
+  var ItemFactory
+  beforeEach(inject(function (_NarrativeFactory_,_ItemFactory_){
    NarrativeFactory = _NarrativeFactory_
+   ItemFactory = _ItemFactory_;
   }));
 
 
@@ -39,8 +40,8 @@ var CodeN;
 
 
 	 beforeEach(function() {
-	 	textitem = Item.prototype.buildItem(textitemObj);
-		linkitem = Item.prototype.buildItem(linkitemObj);
+	 	textitem = ItemFactory.Item.prototype.buildItem(textitemObj);
+		linkitem = ItemFactory.Item.prototype.buildItem(linkitemObj);
 		FSN = new NarrativeFactory.FSNarrative('test narrative','/');
 		CodeN = new NarrativeFactory.CodeNarrative('test code narrative','/');
 

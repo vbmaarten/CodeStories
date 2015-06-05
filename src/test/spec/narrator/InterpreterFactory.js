@@ -3,7 +3,6 @@
 describe('Factory: Interpreter factory', function() {
   // ---- Initialization ----
   beforeEach(module('codeStoriesApp'));
-  beforeEach(module("narrator"));
 
   var interpreterFactory;
   var script = "var sum = 0;\
