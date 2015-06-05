@@ -2,8 +2,8 @@
 
 /**
  * @ngdoc overview
- * @name cast
+ * @name VObjectEditor
  * @description
- * VCodeInterpreter module.
+ * VObjectEditor module.
  */
 angular.module('VObjectEditor',[]);

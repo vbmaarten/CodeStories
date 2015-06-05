@@ -1,15 +1,16 @@
-<div id="VObjectEditorWrapper">
-	<div id = "content" ng-click="">
-		<div id="header"><h1>VObject Editor</h1></div>
-		<div id="close"></div>
-		<div id="editor">
-			<select ng-model="selectedVObject" ng-change="updateVObject()">
-				<option ng-repeat="(name, object) in VObjects">{{name}}</option>
-				<option>New Object</option>
-			</select><br />
-
+<div class="VObjectEditorWrapper">
+	<div class="content">
+		<div class="header"><h1>V-Object Editor</h1></div>
+		<div class="close"></div>
+		<div class="editor">
+			<div class="controls">
+				<select ng-model="selectedVObject" ng-change="updateVObject()">
+					<option ng-repeat="(name, object) in VObjects">{{name}}</option>
+					<option>New Object</option>
+				</select>
+				<button ng-click="saveObject(); showVObjectEditor = false">Save</button>
+			</div>
 			<div ng-model="VObjectContent" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div>
-			<button ng-click="saveObject(); showVObjectEditor = false">Save</button>
 		</div>
 	</div>
 </div>

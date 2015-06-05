@@ -46,6 +46,9 @@
 	z-index:2;
 }
 
+.narrator .remove:before {
+	content:'x';
+}
 
 .narrator h2 {
 	width:100%;
@@ -90,21 +93,30 @@
 	background-color:#bbbbbb;
 }
 
-.narrator .button-wide.next {
+.narrator .control-buttons {
 	position: fixed;
-	bottom:0;
+	bottom:20px;	
 	width:460px;
-	background-color: #9C27B0;
-	color: #FFFFFF;
+	z-index:100;
 }
 
-.narrator .button-wide.debugStep {
-	position: fixed;
-	bottom:0;
-	width:200px;
-	background-color: red;
-	right:0px;
+.narrator .control-buttons .control-button {
+	background-color: #9C27B0;
 	color: #FFFFFF;
+	text-align: center;
+	padding: 5px;
+}
+
+.narrator .control-buttons .control-button:focus {
+	outline:none;
+}
+
+.narrator .control-buttons .control-button.next {
+}
+
+.narrator .control-buttons .control-button.debugStep {
+	width:100px;
+
 }
 
 .narrator .button-wide.add {
@@ -129,12 +141,18 @@
 	width:100%;
 	position:relative;
 	margin-bottom:30px;
+}
+
+.narrative > * {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
+.narrative > * {
+	border-bottom: 1px solid #DDD;
+}
 
-.narrative .remove:before {
-	content:'x';
+.narrative > *:first-child, .narrative > *:last-child {
+	border:none;
 }
 
 .item {
