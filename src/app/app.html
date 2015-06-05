@@ -8,22 +8,10 @@
 
 <div class="wrapper">
 
-	<main class="explorer" ui-view="explorer" ng-class="{collapsed:collapsed}">
-		
-		<div ng-click='collapsed = !collapsed' class="show-files-btn">
-			<div class='fa-lg' ng-class="(collapsed) ? 'fa fa-chevron-right' : 'fa  fa-chevron-left'"></div>
-		</div>
-
-		<div ui-view="directories" class="directory-view" ng-hide="collapsed">
-			<div  directory data="directory.rootnode.children" cast-url="'/'"></div>
-		</div>
-
-		<div ui-view="code" class='ace-container' ui-ace="{ theme: crimson_editor, onLoad: aceLoaded , mode :(selected.isJSFile() || selected.tnode ? 'javascript' : 'text')}" readonly></div>
-
-	</main>
+	<main class="explorer" ui-view="explorer" ng-class="{collapsed:collapsed}"></main>
 
 	<div class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></div>
-		<messages></messages>
-	</div>
 
 </div>
+<messages></messages>
+

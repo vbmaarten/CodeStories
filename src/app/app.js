@@ -115,11 +115,15 @@ angular
         views: {
           'app': {
             templateUrl: 'app.html',
-          },          
+          },
           'navigation@narrating': {
             templateUrl: '/navigation/navigation.html',
             controller: 'navigationCtrl'
-          }
+          },
+          'explorer@narrating':{
+            templateUrl:'/explorer/explorer.html'
+          },
+
         }
       })
       .state('narrating.viewing', {
@@ -127,11 +131,11 @@ angular
         resolve: resolveCASTObj,
         abstract: true,
         views: {
-          'directories': {
-            controller: 'DirectoriesCtrl'
-          },
           'code': {
             controller: 'CodeCtrl'
+          },
+          'directories':{
+            controller: 'DirectoriesCtrl'
           },
           'narrator': {
             templateUrl: '/narrator/narrator.html',
@@ -163,11 +167,11 @@ angular
         resolve: resolveCASTObj,
         abstract: true,
         views: {
-          'directories': {
-            controller: 'DirectoriesCtrl'
-          },
           'code': {
             controller: 'CodeCtrl'
+          },
+          'directories': {
+            controller: 'DirectoriesCtrl'
           },
           'narrator': {
             templateUrl: '/narrator/narrator.html',

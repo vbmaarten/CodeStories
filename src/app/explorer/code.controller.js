@@ -25,8 +25,6 @@ angular.module('explorer')
     * @param {int} pos The position at which the closest AST Node has to be found
 	* @return {ASTNode} The node that corresponds to the given position in the code
     */
-
-
     var getASTNodeByRange = function(pos){
       var node = $scope.selected;
       if(node.isFile())
