@@ -3,7 +3,15 @@
 describe ( 'Item constructors', function ( ) {
 
 
-//todo propper vcode parsing 
+  // load the controller's module
+  beforeEach(module('narrator'));
+
+  var ItemFactory;
+
+  beforeEach(inject(function (_ItemFactory_){
+    ItemFactory = _ItemFactory_;
+  }));
+
 
 var textitemObj = {
 	'type':'text',
@@ -27,7 +35,7 @@ var vcodeitemObj = {
 var linkitemObj = {
 	'type':'link',
 	'content': {
-		'node':'/',
+		'path':'/',
 		'id':'testnarrative'
 	}
 }
@@ -39,17 +47,17 @@ var vcodeitem;
 var linkitem;
 
 	beforeEach(function() {
-		textitem = Item.prototype.buildItem(textitemObj);
-		videoitem = Item.prototype.buildItem(videoitemObj);
-		pictureitem = Item.prototype.buildItem(pictureitemObj);
-		vcodeitem = Item.prototype.buildItem(vcodeitemObj);
-		linkitem = Item.prototype.buildItem(linkitemObj);
+		textitem = ItemFactory.Item.prototype.buildItem(textitemObj);
+		videoitem = ItemFactory.Item.prototype.buildItem(videoitemObj);
+		pictureitem = ItemFactory.Item.prototype.buildItem(pictureitemObj);
+		vcodeitem = ItemFactory.Item.prototype.buildItem(vcodeitemObj);
+		linkitem = ItemFactory.Item.prototype.buildItem(linkitemObj);
 	});
 
 
 	it('should be a link item ', function() {  
 
-		expect( linkitem instanceof Item ).toEqual(true);
+		expect( linkitem instanceof ItemFactory.Item ).toEqual(true);
 		expect( linkitem.isLinkItem() ).toEqual(true);
 		expect( linkitem.content ).toEqual(linkitemObj.content);
 		expect( linkitem.isVideoItem() ).toEqual(false);

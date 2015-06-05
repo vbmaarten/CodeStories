@@ -3,6 +3,15 @@
 describe ( 'Narratives', function ( ) {
 
 
+  beforeEach(module('narrator'));
+
+  var CASTNodeFactory;
+
+  beforeEach(inject(function (_NarrativeFactory_){
+   NarrativeFactory = _NarrativeFactory_
+  }));
+
+
 var textitemObj = {
 	'type':'text',
 	'content': "text"
@@ -32,13 +41,13 @@ var CodeN;
 	 beforeEach(function() {
 	 	textitem = Item.prototype.buildItem(textitemObj);
 		linkitem = Item.prototype.buildItem(linkitemObj);
-		FSN = new FSNarrative('test narrative','/');
-		CodeN = new CodeNarrative('test code narrative','/');
+		FSN = new NarrativeFactory.FSNarrative('test narrative','/');
+		CodeN = new NarrativeFactory.CodeNarrative('test code narrative','/');
 
      });
 
 
-	it(' should tests FSNarrative add items', function() {  
+	it(' should tests NarrativeFactory.FSNarrative add items', function() {  
 		expect( FSN.isFSNarrative() ).toEqual(true);
 		expect( FSN.isCodeNarrative() ).toEqual(false);
 
@@ -70,7 +79,7 @@ var CodeN;
 
 	});
 
-	it(' should tests CodeNarrative add items', function() {  
+	it(' should tests NarrativeFactory.CodeNarrative add items', function() {  
 		expect( CodeN.isFSNarrative() ).toEqual(false);
 		expect( CodeN.isCodeNarrative() ).toEqual(true);
 
@@ -95,7 +104,7 @@ var CodeN;
 
 	 });
 
-	it(' should tests CodeNarrative remove items', function() {  
+	it(' should tests NarrativeFactory.CodeNarrative remove items', function() {  
 		expect( CodeN.isFSNarrative() ).toEqual(false);
 		expect( CodeN.isCodeNarrative() ).toEqual(true);
 
