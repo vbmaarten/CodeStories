@@ -6,15 +6,19 @@
 <div class="wrapper">
 
 
+  <main class="explorer" ui-view="explorer">
+
 <div class='show-files-btn' ng-class="(displayFilesFolders) ? 'fa fa-folder-open' : 'fa fa-folder'" ng-init='displayFilesFolders = true' ng-click='displayFilesFolders = !displayFilesFolders'></div>
-<div ui-view="directories" ng-if='displayFilesFolders' class="directories">
+<div ui-view="directories" ng-if='displayFilesFolders' class="directory-view">
 
 	<div  directory data="directory.rootnode.children" cast-url="'/'"></div>
 </div>
-<div ui-view="code" class='code' ui-ace="{ theme: crimson_editor, onLoad: aceLoaded , mode :(selected.isJSFile() || selected.tnode ? 'javascript' : 'text')}" readonly></div>
+<div ui-view="code" class='ace-container' ui-ace="{ theme: crimson_editor, onLoad: aceLoaded , mode :(selected.isJSFile() || selected.tnode ? 'javascript' : 'text')}" readonly></div>
+
+</main>
 
 
-<div class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></div>
 
+  <aside class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></aside>
+  <messages></messages>
 </div>
-  <messages></messages>									

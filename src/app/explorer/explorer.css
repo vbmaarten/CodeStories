@@ -9,7 +9,17 @@
 	position: relative;
 }
 
-
+.directory-view {
+	float:left;
+	background-color: #f0f0f0;
+	min-width:200px;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding:20px;
+	overflow-y:scroll;
+}
 
 .ace_editor { 
 	height: 100%; 
