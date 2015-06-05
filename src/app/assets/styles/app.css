@@ -16,17 +16,31 @@
 
 .wrapper {
   height: 100%;
+  width:100%;
   position: relative;
-  padding-right:500px;
+  display:table;
+
 }
 
-.explorer {
+
+
+.directories {
+    background-color: #f0f0f0;
+  min-width:200px;
   height: 100%;
-  width: 100%;
+  padding:20px;
+  display:table-cell;
+  height: 100%;
+  width: 200px;
+}
+
+.code {
+  display:table-cell;
+  height: 100%;
 }
 
 .narrator {
-  position:absolute;
+  display:table-cell;
   top:0;
   right:0;
   height: 100%;
