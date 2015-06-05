@@ -21,9 +21,8 @@
 		<div ui-view="code" class='ace-container' ui-ace="{ theme: crimson_editor, onLoad: aceLoaded , mode :(selected.isJSFile() || selected.tnode ? 'javascript' : 'text')}" readonly></div>
 
 	</main>
+</div>
 
-
-
-	<aside class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></aside>
+<div class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></div>
 	<messages></messages>
 </div>

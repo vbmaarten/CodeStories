@@ -1,10 +1,10 @@
-.directory-view ul{
+.directories ul{
 	list-style: none;
 	padding-left: 10px;
 	margin:0;
 }
 
-.directory-view li {
+.directories li {
 	margin: 7px 0;
 }
 
