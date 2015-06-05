@@ -199,6 +199,5 @@ angular
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     $rootScope.editorLoaded = false;
-    $rootScope.collapse = false;
   }]);;
 

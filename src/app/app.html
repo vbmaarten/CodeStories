@@ -1,25 +1,29 @@
 <link rel="stylesheet" href="assets/styles/app.css">
 
 
-<nav class="navigation" ui-view="navigation"></nav>
+<nav class="navigation" ui-view="navigation">
+	
+
+</nav>
 
 <div class="wrapper">
 
+	<main class="explorer" ui-view="explorer" ng-class="{collapsed:collapsed}">
+		
+		<div ng-click='collapsed = !collapsed' class="show-files-btn">
+			<div class='fa-lg' ng-class="(collapsed) ? 'fa fa-chevron-right' : 'fa  fa-chevron-left'"></div>
+		</div>
 
-<main class="explorer" ui-view="explorer">
+		<div ui-view="directories" class="directory-view" ng-hide="collapsed">
+			<div  directory data="directory.rootnode.children" cast-url="'/'"></div>
+		</div>
 
-	<div class='show-files-btn' ng-class="(displayFilesFolders) ? 'fa fa-folder-open' : 'fa fa-folder'" ng-init='displayFilesFolders = true' ng-click='displayFilesFolders = !displayFilesFolders'></div>
-	
-	<div ui-view="directories" ng-if='displayFilesFolders' class="directory-view">
-		<div  directory data="directory.rootnode.children" cast-url="'/'"></div>
-	</div>
+		<div ui-view="code" class='ace-container' ui-ace="{ theme: crimson_editor, onLoad: aceLoaded , mode :(selected.isJSFile() || selected.tnode ? 'javascript' : 'text')}" readonly></div>
 
-	<div ui-view="code" class='ace-container' ui-ace="{ theme: crimson_editor, onLoad: aceLoaded , mode :(selected.isJSFile() || selected.tnode ? 'javascript' : 'text')}" readonly></div>
-
-</main>
+	</main>
 
 
 
-<aside class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></aside>
-<messages></messages>
+	<aside class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></aside>
+	<messages></messages>
 </div>
