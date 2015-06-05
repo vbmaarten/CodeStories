@@ -127,9 +127,11 @@ angular
         resolve: resolveCASTObj,
         abstract: true,
         views: {
-          'explorer': {
-            templateUrl: '/explorer/explorer.html',
-            controller: 'ExplorerCtrl'
+          'directories': {
+            controller: 'DirectoriesCtrl'
+          },
+          'code': {
+            controller: 'CodeCtrl'
           },
           'narrator': {
             templateUrl: '/narrator/narrator.html',
@@ -161,9 +163,11 @@ angular
         resolve: resolveCASTObj,
         abstract: true,
         views: {
-          'explorer': {
-            templateUrl: '/explorer/explorer.html',
-            controller: 'ExplorerCtrl'
+          'directories': {
+            controller: 'DirectoriesCtrl'
+          },
+          'code': {
+            controller: 'CodeCtrl'
           },
           'narrator': {
             templateUrl: '/narrator/narrator.html',

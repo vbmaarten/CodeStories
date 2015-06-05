@@ -1,6 +1,0 @@
-<div class='show-files-btn' ng-class="(displayFilesFolders) ? 'fa fa-folder-open' : 'fa fa-folder'" ng-init='displayFilesFolders = true' ng-click='displayFilesFolders = !displayFilesFolders'></div>
-<div ng-if='displayFilesFolders' class="directory-view">
-
-	<div  directory data="directory.rootnode.children" cast-url="'/'"></div>
-</div>
-<div class='ace-container' ui-ace="{ theme: crimson_editor, onLoad: aceLoaded , mode :(selected.isJSFile() || selected.tnode ? 'javascript' : 'text')}" readonly ></div>

@@ -10,10 +10,8 @@
  */
 
 angular.module('explorer')
-  .controller('ExplorerCtrl', ['$scope', 'CAST', '$state', 'writerFactory', 'viewerFactory',
+  .controller('CodeCtrl', ['$scope', 'CAST', '$state', 'writerFactory', 'viewerFactory',
     function ($scope, CAST, $state, writerFactory, viewerFactory) {
-    $scope.directory = CAST.cast;
-    $scope.project = CAST.project;
     $scope.selected = CAST.selected;
     $scope.content = CAST.content;
 
