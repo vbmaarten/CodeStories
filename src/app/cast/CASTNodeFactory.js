@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cast')
-  .factory('CASTNodeFactory', [ 'ItemFactory' ,'messagingFactory' , function (ItemFactory,messagingFactory) {
+  .factory('CASTNodeFactory', [ 'ItemFactory' ,'notificationsFactory' , function (ItemFactory,notificationsFactory) {
 
 
 var CASTNode = function(name, parent, children) {
@@ -94,7 +94,7 @@ FileNode.prototype.getChild = function(parseAs) {
                     });
                      this.children.Program = wrapAcornAsASTNode(AST, 'Program',this);
                 } catch(error){
-                    messagingFactory.error(error);
+                    notificationsFactory.error(error);
                 }
                
             }

@@ -48,7 +48,7 @@ module.exports = function(config) {
       'app/narrator/{,*/}*.js',
       'app/VCode/vcodeinterpreter.js',
       'app/VObjectEditor/VObjectEditor.js',
-      'app/messaging/messaging.js',
+      'app/notifications/notifications.js',
       'app/navigation/navigation.js',
       'app/{,*/}*.js',
 
@@ -68,7 +68,7 @@ module.exports = function(config) {
       'app/narrator/interpreter/interpreter.factory.js': 'coverage',
       'app/explorer/explorer.controller.js': 'coverage',
       'app/VCode/vcodeinterpreter.factory.js': 'coverage',
-      'app/messaging/messaging.factory.js': 'coverage',
+      'app/notifications/notifications.factory.js': 'coverage',
       'app/VObjectEditor/VObjectEditor.controller.js': 'coverage'
     },
 

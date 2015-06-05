@@ -23,7 +23,7 @@
 }
 
 
-.message{
+.notification{
 	position: relative;
 	width: 300px;
 	margin: 20px;
@@ -40,11 +40,11 @@
 	color:white;
 }
 
-.message #content{
+.notification #content{
 	padding:15px;
 }
 
-.message #close{
+.notification #close{
 	position: absolute;
 	right: 10px;
 	top: 5px;
@@ -63,7 +63,7 @@
 	background-color: rgba(171,71,188,.8);
 }
 
-#messages {
+#notifications {
 	z-index:100;
 	position: fixed;
 	bottom: 0;

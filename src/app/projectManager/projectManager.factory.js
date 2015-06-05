@@ -10,8 +10,8 @@
  */
 
  angular.module('projectManager').factory('projectManagerFactory', [
-  'CAST', '$http', 'CASTNodeFactory','messagingFactory',
-  function (CAST, $http, CASTNodeFactory, messagingFactory) {
+  'CAST', '$http', 'CASTNodeFactory','notificationsFactory',
+  function (CAST, $http, CASTNodeFactory, notificationsFactory) {
     var _incrementCounter = function(counter){
       counter.value = counter.value ? counter.value + 1 : 1;
     }
@@ -33,7 +33,7 @@
           if(data.rate.remaining >= amount){
             callback();
           } else {
-            messagingFactory.error(new Error("GitHub rate insufficient"));
+            notificationsFactory.error(new Error("GitHub rate insufficient"));
           }
         });
       },

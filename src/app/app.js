@@ -21,7 +21,7 @@ angular
     'explorer',
     'VCodeInterpreter',
     'VObjectEditor',
-    'messaging',
+    'notifications',
     'navigation' 
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$urlMatcherFactoryProvider',

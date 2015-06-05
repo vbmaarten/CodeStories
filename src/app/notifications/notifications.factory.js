@@ -1,10 +1,10 @@
-angular.module("messaging")
-	.factory("messagingFactory", ['$timeout', function($timeout){
+angular.module("notifications")
+	.factory("notificationsFactory", ['$timeout', function($timeout){
 		var factory = {};
 
 		var delay = 5000;
 
-		factory.messages = [];
+		factory.notifications = [];
 
 		factory.callback;
 
@@ -13,10 +13,10 @@ angular.module("messaging")
 		factory.error = function(content){
 			if(content instanceof Error){
 				console.error(content)
-				content = content.message + "\n" +content.fileName;
+				content = content.notification + "\n" +content.fileName;
 
 			}
-			factory.messages.unshift({type: 'error', content: content});
+			factory.notifications.unshift({type: 'error', content: content});
 			factory.callback();
 			$timeout(function(){
 				factory.close({type: 'error', content: content});
@@ -24,7 +24,7 @@ angular.module("messaging")
 		};
 
 		factory.success = function(content){
-			factory.messages.unshift({type: 'success', content: content});
+			factory.notifications.unshift({type: 'success', content: content});
 			factory.callback();
 			$timeout(function(){
 				factory.close({type: 'success', content: content});
@@ -32,15 +32,15 @@ angular.module("messaging")
 		};
 
 		factory.info = function(content){
-			factory.messages.unshift({type: 'info', content: content});
+			factory.notifications.unshift({type: 'info', content: content});
 			factory.callback();
 			$timeout(function(){
 				factory.close({type: 'info', content: content});
 			}, delay);
 		};
 
-		factory.close = function(message){
-			factory.messages.splice(factory.messages.indexOf(message), 1);
+		factory.close = function(notification){
+			factory.notifications.splice(factory.notifications.indexOf(notification), 1);
 			factory.callback();
 		};
 
