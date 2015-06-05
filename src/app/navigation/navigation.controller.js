@@ -17,5 +17,8 @@ angular.module('navigation').controller('navigationCtrl', [
   	$scope.saveCodeStories = function(){
   		projectManagerFactory.saveCodeStories();
   	}
+  	$scope.saveZip = function(){
+  		projectManagerFactory.packZip();
+  	}
   }
 ]);

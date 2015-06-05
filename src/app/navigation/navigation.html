@@ -3,7 +3,13 @@
 	<li><a ui-sref="home">Home</a></li>
 	<li><a href="">Project</a></li>
 	<li><a href="" ng-click="showVObjectEditor = true">V-Object</a></li>
-	<li><a href="" ng-click="saveCodeStories()">Export CodeStories</a></li>
+	<li><a href="" ng-init='showExport = false' ng-click='showExport = !showExport' >Export</a>
+		<ul class="export-choice" ng-if="showExport" ng-mouseleave="showExport=false">
+			<li><a ng-click="saveCodeStories()"> .codestories</a></li>
+			<li><a ng-click="saveZip()"> Zip </a></li>
+		</ul>
+
+	</li>
 	<li class="mode">
 		<a ui-sref="narrating.writing.selecting($stateParams)" ui-sref-active="active">
 			<i class="fa fa-pencil fa-2"></i>

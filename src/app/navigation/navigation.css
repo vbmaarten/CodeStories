@@ -1,3 +1,4 @@
+
 .navigation ul{
 	list-style: none;
 }
@@ -9,6 +10,7 @@
 .navigation li {
 	display: inline-block;
 	height:100%;
+	position:relative;
 }
 
 .navigation a {
@@ -39,4 +41,31 @@
 .navigation .mode .active {
 	border-bottom:solid 3px white;
 	opacity:1;
+}
+
+.export-choice{
+	top:2em;
+	position:absolute;
+	z-index:4;
+	width:20em;
+	height:4em;
+	border:2px solid;
+	border-color:pink;
+	background:#9C27B0;
+	padding-left:0px;
+	left:-80%;
+	border-radius:2px;
+}
+.export-choice li{
+	height:100%;
+	text-align:center;
+	width:50%;
+	padding:10px;
+	
+	display:list-item;
+	float:left;
+	font-size:11px;
+}
+.export-choice li:hover{
+	background:pink;
 }
