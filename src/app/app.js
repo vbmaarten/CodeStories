@@ -79,9 +79,6 @@ angular
                 projectManagerFactory.loadZip(data);
                 CAST.project = $stateParams.project;
                 setPath();
-                return $http.get('/stories/' + $stateParams.project + '.json').success(function(data){
-                  CAST.appendNarrative(data);
-                })
               }).error(function () {
                 console.error('project not found');
                 $state.go('home');
