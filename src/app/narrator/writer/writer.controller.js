@@ -66,10 +66,11 @@ angular.module('narrator')
       else sel.addItem(null, item);
     };
 
-    $scope.removeItem = function (item) {
+    $scope.removeItem = function (item,subpath) {
       var sel = $scope.selectedNarrative;
-      if(sel.isCodeNarrative()) sel.removeItem(CAST.selectedPath.replace(sel.CASTPath, ""), item);
-      else sel.removeItem(item);
+      if(sel.isCodeNarrative()){
+       sel.removeItem(item,subpath);
+     } else sel.removeItem(item);
     }
 
     $scope.goToItemHook = function (hook) {

@@ -5,7 +5,7 @@ describe ( 'Item constructors', function ( ) {
 
 //todo propper vcode parsing 
 
-  beforeEach(module('cast'));
+  beforeEach(module('codeStoriesApp'));
 
   var CASTNodeFactory;
 

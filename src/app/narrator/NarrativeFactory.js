@@ -97,10 +97,19 @@ CodeNarrative.prototype.validItem = function (item) {
 	return item instanceof ItemFactory.Item;
 };
 
-CodeNarrative.prototype.removeItem = function(subpath,item){
-	var hook = this.narrativeHooks[subpath];
+CodeNarrative.prototype.removeItem = function(item,subpath){
+	var index;
+	for(index in this.narrativeHooks){
+		if(this.narrativeHooks[index].path === subpath){
+			break;
+		}
+	}
+	var hook = this.narrativeHooks[index];
 	var i = hook.items.indexOf(item);
 	hook.items.splice(i,1);
+	if(hook.length === 0){
+		this.narrativeHooks[index] = undefined;
+	}
 };
 
 CodeNarrative.prototype.addItem = function (subpath,item, index) {

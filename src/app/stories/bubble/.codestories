@@ -52,8 +52,8 @@
             "name":"codetest2",
             "type":"Code",
             "narrativeHooks":{
-                "body/0/body/body/0":{
-                    "path":"body/0/body/body/0",
+                "0":{
+                    "path":"/body/0/body/body/0",
                      "items":[
 
                         {"type":"text",
@@ -63,8 +63,8 @@
                         "content":"var barchart = new BarChart(values); \n display(barchart.domEl); "}
 
                     ]},
-                "body/0/body/body/1/body/body/1/body/body/0/test":{
-                "path":"body/0/body/body/1/body/body/1/body/body/0/test",
+                "/bst":{
+                "path":"/body/0/body/body/1/body/body/1/body/body/0/test",
                  "items":[
                     {"type":"text",
                     "content":"Here it checks if it should swap these values"
@@ -73,8 +73,8 @@
                     "content":"barchart.highlight([i,i+1],'grey');"}
                     ]
                 },
-                "b":{
-                "path":"body/0/body/body/1/body/body/1/body/body/0/consequent/body/3",
+                "/b":{
+                "path":"/body/0/body/body/1/body/body/1/body/body/0/consequent/body/3",
                  "items":[
                     {"type":"text",
                     "content":" These should be swapped . So lets swap"
