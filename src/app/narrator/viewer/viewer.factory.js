@@ -132,6 +132,8 @@
         return true;
       },
 
+
+
       codeNarrativeStep: function(step) {
         var codeStep = step || interpreterFactory.narrativeStep();
         var item = codeStep.item;
@@ -143,6 +145,18 @@
           item = item.clone();
           vCodeInterpreterFactory.runVCode( item , codeStep.scope);
         }
+
+        //move this to vCode Interpreter
+        var doubleBrakRegex = /\[\[\s?(\w*)\s?\]\]/ // regex to match [[ someword ]]
+        if(item.isTextItem()){
+          var matched = doubleBrakRegex.exec(item.content);
+          while( matched ){
+            var value = codeStep.scope[matched[1]];
+            item.content = item.content.split(matched[0]).join(value);
+            matched = doubleBrakRegex.exec(item.content);
+          }
+        }
+
         this.interpreterScope = codeStep.scope
         this.storyboard[this.storyboard.length-1].items.push(item);
 

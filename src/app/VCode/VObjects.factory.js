@@ -3,6 +3,7 @@ angular.module('VCodeInterpreter')
 	var VObjects = {};
 	VObjects.VArray = VArray;
 	VObjects.BarChart = BarChart;
+	VObjects.List = List;
 
 	var height = 150 , width = 300 ;
 
@@ -46,7 +47,39 @@ function Canvas(){
 	}
 }
 
-function VArray(data){
+function List(data){
+
+	var domEl = document.createElement('div');
+	var svg = d3.select(domEl).append("svg");
+
+	function update(newData){
+		var boxWidth = 100;
+		var boxHeight = 25;
+		svg.selectAll("rect").data(newData).enter().append("svg:rect").
+		attr('width', boxWidth).
+		attr('height', boxHeight).
+		attr('stroke', 'black').
+		attr('fill','rgba(0,0,0,0)').
+		attr('y', function(d,i){return boxHeight*i});
+
+		svg.selectAll("text").data(newData).enter().append("svg:text").
+		attr("y", function(d,i){return boxHeight*i+15}).
+		attr('x', 15).
+		attr('fill', 'black')
+		svg.selectAll("text").data(newData).
+		text(function(d){return d});
+	}
+
+	update(data);
+
+	return {
+		domEl : domEl,
+		update : update
+	}
+}
+
+function VArray(data,vertical){
+
 	var domEl = document.createElement('div');
 	var svg = d3.select(domEl).append("svg");
 

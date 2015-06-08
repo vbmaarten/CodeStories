@@ -210,7 +210,7 @@
           var $this = this;
           for(var property in codeNarrative.narrativeHooks){
             narrative.narrativeHooks[property] = {};
-            narrative.narrativeHooks[property]["node"] = property;
+            narrative.narrativeHooks[property]["path"] = property;
             narrative.narrativeHooks[property].items = [];
             codeNarrative.narrativeHooks[property].items.forEach(function(item){
               narrative.narrativeHooks[property].items.push($this._generateItem(item));
