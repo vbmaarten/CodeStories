@@ -17,16 +17,18 @@ angular.module('projectManager').factory('projectManagerFactory', [
     var _incrementCounter = function (counter) {
       counter.value = counter.value ? counter.value + 1 : 1;
     };
+
     var _decrementCounter = function (counter, proceed) {
       counter.value -= 1;
       if (counter.value === 0) {
         proceed();
       }
     };
+
     return {
       gitHubLoadCounter: { value: undefined },
       _githubRateLimitSufficient: function (amount, callback) {
-        $http.get('https://api.github.com/rate_limit').success(function (data, status, headers, config) {
+        $http.get('https://api.github.com/rate_limit').success(function (data) {
           if (data.rate.remaining >= amount) {
             callback();
           } else {
@@ -34,12 +36,15 @@ angular.module('projectManager').factory('projectManagerFactory', [
           }
         });
       },
+
       _processGithubElement: function (element, root, ret, proceed) {
         var isDirectory = element.type === 'tree';
         var isJS = false;
         var isCodestoriesFile = false;
         var path = element.path.split('/');
+
         var last = path.pop();
+
         if (!isDirectory) {
           var fileExtension = last.split('.').pop();
           if (fileExtension === 'js') {
@@ -48,6 +53,7 @@ angular.module('projectManager').factory('projectManagerFactory', [
             isCodestoriesFile = true;
           }
         }
+
         var newRoot = this._walkTo(root, path);
         var $this = this;
         if (!newRoot.children[last]) {
@@ -71,6 +77,7 @@ angular.module('projectManager').factory('projectManagerFactory', [
           }
         }
       },
+
       _loadGitHub: function (data, ret, proceed) {
         var root = new CASTNodeFactory.FolderNode('', null, {});
         root.path = '';
@@ -80,11 +87,24 @@ angular.module('projectManager').factory('projectManagerFactory', [
         });
         ret.cast = root;
       },
+
+      /**
+       * @ngdoc method
+       * @name loadGitHub
+       * @methodOf projectManager.factory:projectManagerFactory
+       * @description
+       * Loads a github Project   
+       *
+       * @param {String} username username of the repository owner
+       * @param {String} repository the repository to load
+       * @param {String} callback callback to run after project is loaded
+       */
       loadGitHub: function (username, repository, callback) {
         var ret = {
           cast: undefined,
           narratives: undefined
         };
+
         var proceed = function () {
           CAST.reset();
           CAST.cast.rootnode = ret.cast;
@@ -92,15 +112,17 @@ angular.module('projectManager').factory('projectManagerFactory', [
           CAST.project = 'github:' + username + ':' + repository;
           callback();
         };
+
         var $this = this;
         this._githubRateLimitSufficient(1, function () {
-          $http.get('https://api.github.com/repos/' + username + '/' + repository + '/git/trees/HEAD?recursive=1').success(function (data, status, headers, config) {
+          $http.get('https://api.github.com/repos/' + username + '/' + repository + '/git/trees/HEAD?recursive=1').success(function (data) {
             $this._githubRateLimitSufficient(data.tree.length, function () {
               $this._loadGitHub(data, ret, proceed, $this);
             });
           });
         });
       },
+
       /**
        * @ngdoc method
        * @name loadZip
@@ -117,6 +139,7 @@ angular.module('projectManager').factory('projectManagerFactory', [
         CAST.appendNarrative(contents.narratives);
         CAST.project = name;
       },
+
       /**
        * @ngdoc method
        * @name packZip
@@ -135,10 +158,19 @@ angular.module('projectManager').factory('projectManagerFactory', [
         zip.file('.codestories', JSON.stringify(codestories, null, '  '));
         saveAs(zip.generate({ type: 'blob' }), 'project.zip');
       },
+
+      /**
+       * @ngdoc method
+       * @name saveCodeStories
+       * @methodOf projectManager.factory:projectManagerFactory
+       * @description
+       * Generates a downloadable .codestories file 
+       */
       saveCodeStories: function () {
         var codestories = this._generateCodeStories(CAST.narratives);
         saveAs(new Blob([JSON.stringify(codestories, null, '\t')]), '.codestories');
       },
+
       _packCastZip: function (root, zip) {
         if (root.children) {
           for (var _child in root.children) {
@@ -151,6 +183,7 @@ angular.module('projectManager').factory('projectManagerFactory', [
           }
         }
       },
+
       _generateCodeStories: function (narratives) {
         var codestories = {};
         for (var path in narratives) {
@@ -166,6 +199,7 @@ angular.module('projectManager').factory('projectManagerFactory', [
         }
         return codestories;
       },
+
       _generateFSNarrative: function (fsNarrative) {
         var narrative = {};
         narrative.name = fsNarrative.name;
@@ -178,6 +212,7 @@ angular.module('projectManager').factory('projectManagerFactory', [
         });
         return narrative;
       },
+
       _generateCodeNarrative: function (codeNarrative) {
         var narrative = {};
         narrative.name = codeNarrative.name;
@@ -194,20 +229,33 @@ angular.module('projectManager').factory('projectManagerFactory', [
         }
         return narrative;
       },
+
       _generateItem: function (itemObj) {
         var item = {};
         item.type = itemObj.type;
         item.content = itemObj.content;
         return item;
       },
+
+      /**
+       * @ngdoc method
+       * @name UnpackZip
+       * @methodOf projectManager.factory:projectManagerFactory
+       * @description
+       * Unpacks a zip to generate the appropriate cast and narratives
+       *
+       * @param {Object} a JSZip object containing a project
+       */
       UnpackZip: function (zip) {
         var ret = {
           cast: undefined,
           narratives: undefined
         };
+
         var root = new CASTNodeFactory.FolderNode('', null, {});
         root.path = '';
         ret.cast = root;
+
         //Loop through files that are packed in the zip
         var fsPath, fsNode, path, name, isJS, parentFolder,$this = this;;
         for (fsPath in zip.files) {
@@ -221,8 +269,10 @@ angular.module('projectManager').factory('projectManagerFactory', [
             parentFolder.children[name] = new CASTNodeFactory.FileNode(name, parentFolder, {}, fsNode.asText());
           }
         }
+
         return ret;
       },
+
       _walkTo: function (root, path) {
         var higherRoot = root;
         path.forEach(function (element) {
