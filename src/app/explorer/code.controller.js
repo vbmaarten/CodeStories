@@ -1,9 +1,11 @@
 'use strict';
 /**
- * @ngdoc function
- * @name explorer.controller:ExplorerCtrl
+ * @ngdoc controller
+ * @name explorer.controller:CodeCtrl
  * @description
  * @requires cast.factory:CAST 
+ * @requires narrator.factory:writerFactory 
+ * @requires narrator.factory:viewerFactory 
  * 
  * Provides functionality to the CAST Explorer
  */
@@ -19,12 +21,12 @@ angular.module('explorer').controller('CodeCtrl', [
     /**
     * @ngdoc method
     * @name getASTNodeByRange
-    * @methodOf explorer.controller:ExplorerCtrl
+    * @methodOf explorer.controller:CodeCtrl
     * @description
     * Determines the node at a given position
     *
     * @param {int} pos The position at which the closest AST Node has to be found
-	* @return {ASTNode} The node that corresponds to the given position in the code
+	  * @return {ASTNode} The node that corresponds to the given position in the code
     */
     var getASTNodeByRange = function (pos) {
       var node = $scope.selected;

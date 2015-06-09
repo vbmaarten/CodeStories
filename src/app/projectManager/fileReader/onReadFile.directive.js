@@ -1,9 +1,10 @@
 'use strict';
 /**
- * @ngdoc function
+ * @ngdoc directive
  * @name projectManager.directive:onReadFile
+* @scope
+ * @restrict A
  * @description
- * # onReadFile
  * Directive of the project loader
  */
  angular.module('projectManager')

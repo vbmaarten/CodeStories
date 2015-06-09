@@ -1,12 +1,10 @@
 'use strict';
 /**
  * @ngdoc controller
- * @name narrator.controller:NarratorCtrl
- * @requires cast.factory:CAST
+ * @name navigation.controller:navigationCtrl
+ * @requires projectManager.factory:projectManagerFactory
  * @description
- * Controls the current state of the narrator; viewing or editing. As well as
- * obtaining the currently selected node and narrative. Also checks if there was
- * a narrative playing (Will be replaced by $state in the future).
+ * Controls for the user to switch states and other functionality like saving.
  */
 angular.module('navigation').controller('navigationCtrl', [
   '$scope',
