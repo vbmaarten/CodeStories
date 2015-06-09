@@ -4,7 +4,7 @@ describe('Factory: VCodeInterpreter factory', function() {
   // ---- Initialization ----
   beforeEach(module('codeStoriesApp'));
 
-  var vCodeInterpreterFactory, interpreterFactory;
+  var vCodeInterpreterFactory, interpreterFactory, ItemFactory;
 
   beforeEach(inject(function (_vCodeInterpreterFactory_,_interpreterFactory_,_NarrativeFactory_, _CASTNodeFactory_,_ItemFactory_){
       vCodeInterpreterFactory = _vCodeInterpreterFactory_;
@@ -12,7 +12,7 @@ describe('Factory: VCodeInterpreter factory', function() {
 
       var NarrativeFactory = _NarrativeFactory_;
       var CASTNodeFactory = _CASTNodeFactory_;
-      var ItemFactory = _ItemFactory_;
+      ItemFactory = _ItemFactory_;
 
       var aFileNode = new CASTNodeFactory.FileNode("test.js" , new CASTNodeFactory.RootNode() , {} , test_script1 );
       var astNode = aFileNode.getChild('Program');
@@ -42,7 +42,7 @@ describe('Factory: VCodeInterpreter factory', function() {
     
   });
 
-    it("should be possible to process a vCode Item" , function(){
+  it("should be possible to process a vCode Item" , function(){
        vCodeInterpreterFactory.newSession();
 
        var step = interpreterFactory.narrativeStep();
@@ -51,19 +51,27 @@ describe('Factory: VCodeInterpreter factory', function() {
        expect(step.item.dom).toBeDefined();
 
        vCodeInterpreterFactory.runVCode(step.item, step.scope);
-       expect(step.item.dom).toBeDefined();
-
-     
-    
+       expect(step.item.dom).toBeDefined();  
   });
 
-    it("should be possible to process a special text Item" , function(){
+  it("should be possible to process a special text Item" , function(){
        console.log(todo);
     
   });
 
+  it('should detach bound dom elements', function(){
+    vCodeInterpreterFactory.newSession();
 
-
+    var step = interpreterFactory.narrativeStep();
+    var parent = document.createElement(parent);
+    var element = document.createElement("test");
+    parent.appendChild(element);
+    step.item.dom = element;
+    step.item.dom.VCodeItem = step.item;
+    vCodeInterpreterFactory.detachOldDOMel(step.item.dom);
+    expect(step.item.dom.VCodeItem).not.toBeDefined();
+    expect(step.item.dom).not.toBe(element);
+  });
 
 
 });

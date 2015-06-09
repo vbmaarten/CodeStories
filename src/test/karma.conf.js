@@ -70,7 +70,6 @@ module.exports = function(config) {
       'app/explorer/explorer.controller.js': 'coverage',
       'app/VCode/vcodeinterpreter.factory.js': 'coverage',
       'app/notifications/notifications.factory.js': 'coverage',
-      'app/VObjectEditor/VObjectEditor.controller.js': 'coverage'
     },
 
     // coverage reporter generates the coverage

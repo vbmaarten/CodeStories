@@ -19,32 +19,36 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
       acorn.walk.simple(ast, { VariableDeclaration: saveVariable });
       return scope;
     };
+
     var VScope = {};
     return {
+      detachOldDOMel: function(DOMel) {
+        var oldVCodeItem = DOMel.VCodeItem;
+        DOMel.VCodeItem = undefined;
+        var clone = DOMel.cloneNode(true);
+        oldVCodeItem.dom = clone;
+        var parent = DOMel.parentNode;
+        DOMel.remove();
+        parent.appendChild(clone);
+      },
+
+      attachDOMel: function(DOMel, VCodeItem) {
+        VCodeItem.dom = DOMel;
+        DOMel.VCodeItem = VCodeItem;
+      },
+
       newSession: function () {
         VScope = {};
       },
       runVCode: function (VCodeItem, interpreterScope) {
         generateScope(VCodeItem.content, VScope);
-        function detachOldDOMel(DOMel) {
-          var oldVCodeItem = DOMel.VCodeItem;
-          DOMel.VCodeItem = undefined;
-          var clone = DOMel.cloneNode(true);
-          oldVCodeItem.dom = clone;
-          var parent = DOMel.parentNode;
-          DOMel.remove();
-          parent.appendChild(clone);
-        }
-        function attachDOMel(DOMel, VCodeItem) {
-          VCodeItem.dom = DOMel;
-          DOMel.VCodeItem = VCodeItem;
-        }
+        var $this = this;
         function display(DOMel) {
           if (DOMel.parentNode) {
             //If DOMel is already attached
-            detachOldDOMel(DOMel);
+            $this.detachOldDOMel(DOMel);
           }
-          attachDOMel(DOMel, VCodeItem);
+          $this.attachDOMel(DOMel, VCodeItem);
         }
         with (interpreterScope) {
           with (VScope) {
