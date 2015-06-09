@@ -1,3 +1,14 @@
+'use strict';
+
+/**
+ * @ngdoc service
+ * @name VCodeInterpreter.factory:vCodeInterpreterFactory
+ * @requires VCodeInterpreter.factory:VObjectFactory
+ * @description
+ *
+ * Interpreter for the VCode
+ */
+
 angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
   'VObjectFactory',
   function (VObjectFactory) {

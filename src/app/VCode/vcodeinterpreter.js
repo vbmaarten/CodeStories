@@ -1,7 +1,7 @@
 'use strict';
 /**
  * @ngdoc overview
- * @name cast
+ * @name VCodeInterpreter
  * @description
  * VCodeInterpreter module.
  */

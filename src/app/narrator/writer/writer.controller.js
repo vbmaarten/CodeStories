@@ -3,6 +3,7 @@
  * @ngdoc controller
  * @name narrator.controller:WriterCtrl
  * @requires cast.factory:CAST
+ * @requires narrator.writerFactory
  * @description
  * Controller of the writer state of the narrator. Allows for adding and removing
  * narratives as well as selecting and deselecting narratives for editing. 
