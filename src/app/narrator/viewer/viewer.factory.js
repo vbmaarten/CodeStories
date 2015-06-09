@@ -7,41 +7,15 @@
  * @description
  *
  * Factory of the viewer, containers logic of the viewer like selecting, deselecting
- * and stepping through a narrative.
+ * and stepping through a n``arrative.
  */
 angular.module('narrator').factory('viewerFactory', [
   '$state',
   '$stateParams',
   'CAST',
   'interpreterFactory',
-  'vCodeInterpreterFactory',
-  function ($state, $stateParams, CAST, interpreterFactory, vCodeInterpreterFactory) {
-    /**
-        * @ngdoc method
-        * @name processItem
-        * @methodOf narrator.factory:viewerFactory
-        * @description
-        * Runs VCode items in the VCode interpreter and replaces [[ variable_name ]] with the variable_name.toString from the interpreter scope
-        */
-    function processCodeStep(step) {
-      var item = step.item;
-      if (item.isVCodeItem()) {
-        step.item = item.clone();
-        vCodeInterpreterFactory.runVCode(step.item, step.scope);
-      }
-      // Match text from a text time to be replaced by values of the current state of execution
-      if (item.isTextItem()) {
-        var doubleBrakRegex = /\[\[\s?(\w*)\s?\]\]/;
-        // regex to match [[ someword ]]
-        var matched = doubleBrakRegex.exec(item.content);
-        while (matched) {
-          var value = step.scope[matched[1]];
-          item.content = item.content.split(matched[0]).join(value);
-          matched = doubleBrakRegex.exec(item.content);
-        }
-      }
-      return step;
-    }
+  function ($state, $stateParams, CAST, interpreterFactory) {
+
     return {
       /**
        * @ngdoc property
@@ -110,7 +84,6 @@ angular.module('narrator').factory('viewerFactory', [
           var CASTNode = CAST.getNode(narrative.CASTPath);
           interpreterFactory.reset();
           interpreterFactory.setupNarratedAST(CASTNode, narrative);
-          vCodeInterpreterFactory.newSession();
         }
       },
       /**
@@ -194,7 +167,6 @@ angular.module('narrator').factory('viewerFactory', [
         if (!codeStep.item){
           return false;
         }
-        codeStep = processCodeStep(codeStep);
         var item = codeStep.item;
         // Push the narrative on the storyboard
         this.interpreterScope = codeStep.scope;

@@ -75,7 +75,7 @@ angular.module('codeStoriesApp', [
             if ($stateParams.project.startsWith('github:')) {
               var params = $stateParams.project.split(':');
               projectManagerFactory.loadGitHub(params[1], params[2], function () {
-                notificationsFactory.success('Project loaded!');
+                notificationsFactory.success('Git project loaded!');
                 $state.go('narrating.viewing.selecting', { 'project': $stateParams.project }, { reload: true });
               });
             } else if ($stateParams.project.endsWith('.zip')) {
@@ -86,6 +86,7 @@ angular.module('codeStoriesApp', [
               }).success(function (data) {
                 projectManagerFactory.loadZip(data);
                 CAST.project = $stateParams.project;
+                notificationsFactory.success('Zip project loaded!');
                 setPath();
               }).error(function () {
                 console.error('project not found');

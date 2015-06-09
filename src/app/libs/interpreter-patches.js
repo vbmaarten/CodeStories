@@ -49,7 +49,14 @@ Interpreter.prototype.convertScope =  function(interpreter_scope){
 	if(interpreter_scope.parentScope){
 		scope = this.convertScope(interpreter_scope.parentScope);
 	} else{
-		return {};
+		// global js scope. filter out the default variables
+		scope = {};
+		for( property in interpreter_scope.properties){
+			if( !this.defaultGlobalScopeVariables[ property ] ){
+				scope[property] = _convertProperty( interpreter_scope.properties[property] )
+			}
+		}
+		return scope;
 	}
 	for(property in interpreter_scope.properties){
 		scope[property] = _convertProperty(interpreter_scope.properties[property]);
@@ -69,4 +76,33 @@ Interpreter.prototype.getCurrentScope = function(){
 	} while( !iscope)
 
 	return this.convertScope( iscope );
+}
+
+Interpreter.prototype.defaultGlobalScopeVariables ={
+	Infinity: true,
+	Array: true,
+	Boolean: true,
+	Date: true,
+	Function: true,
+	JSON: true,
+	Math: true,
+	NaN: true,
+	Number: true,
+	Object: true,
+	RegExp: true,
+	String: true,
+	decodeURI: true,
+	decodeURIComponent: true,
+	encodeURI: true,
+	encodeURIComponent: true,
+	escape: true,
+	eval: true,
+	isFinite: true,
+	isNaN: true,
+	parseFloat: true,
+	parseInt: true,
+	self: true,
+	undefined: true,
+	unescape: true,
+	window: true
 }

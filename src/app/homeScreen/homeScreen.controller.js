@@ -29,6 +29,7 @@ angular.module('codeStoriesApp').controller('HomeScreenCtrl', [
       if ($scope.loader === 'github') {
         projectname = 'github:' + $scope.githubUser + ':' + $scope.githubRepo;
         var proceed = function () {
+          notificationsFactory.success('Git project loaded!');
           $state.go('narrating.viewing.selecting', { 'project': projectname });
         };
         projectManagerFactory.loadGitHub($scope.githubUser, $scope.githubRepo, proceed);
@@ -36,6 +37,7 @@ angular.module('codeStoriesApp').controller('HomeScreenCtrl', [
       } else if ($scope.loader === 'file') {
         projectname = $scope.message;
         CAST.project = projectname;
+        notificationsFactory.success('Zit project loaded!');
         $state.go('narrating.viewing.selecting', { 'project': projectname });
       }
     };
