@@ -63,6 +63,9 @@ angular.module('narrator').factory('ItemFactory', [function () {
     };
     TextItem.prototype = Object.create(Item.prototype);
     TextItem.prototype.type = 'text';
+    TextItem.prototype.clone = function () {
+      return new TextItem(this.content);
+    };
     var VideoItem = function (content) {
       Item.call(this, content);
     };

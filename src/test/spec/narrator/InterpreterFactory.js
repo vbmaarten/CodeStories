@@ -64,5 +64,20 @@ describe('Factory: Interpreter factory', function() {
     
   });
 
+    it("should be possible to inject the value of a variable in the scope in a text item with [[ variable_name ]] ", function(){
+    var node = astNode.tnode.body[1];
+    var codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/test.js", [{path: "/body/1/body/body/0/expression", 
+        items: [
+          new ItemFactory.TextItem("sum = [[ sum ]] and i = [[ i ]] ")
+        ]}]);
+    interpreterFactory.setupNarratedAST(astNode, codeNarrative);
+
+    var step = interpreterFactory.narrativeStep();
+    expect(step.item.content).toEqual("sum = 0 and i = 0 ");
+    step = interpreterFactory.narrativeStep();
+    expect(step.item.content).toEqual("sum = 1 and i = 1 ");
+   
+  });
+
 
 });

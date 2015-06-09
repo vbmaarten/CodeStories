@@ -54,10 +54,6 @@ describe('Factory: VCodeInterpreter factory', function() {
        expect(step.item.dom).toBeDefined();  
   });
 
-  it("should be possible to process a special text Item" , function(){
-       console.log(todo);
-    
-  });
 
   it('should detach bound dom elements', function(){
     vCodeInterpreterFactory.newSession();
