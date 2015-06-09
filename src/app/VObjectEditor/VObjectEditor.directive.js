@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('VObjectEditor').directive('vobjecteditor', function () {
   return {
     templateUrl: 'VObjectEditor/VObjectEditor.html',

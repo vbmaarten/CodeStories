@@ -121,9 +121,9 @@ angular.module('cast').factory('CASTNodeFactory', [
         }
       }
     };
-    function wrapAcornAsASTNode(tnode, name, parent) {
+    function wrapAcornAsASTNode(tnode, astNodeName, parent) {
       var children = {};
-      var newASTNode = new ASTNode(name, parent, children, tnode);
+      var newASTNode = new ASTNode(astNodeName, parent, children, tnode);
       tnode.ASTNode = newASTNode;
       for (var index in tnode) {
         var subNode = tnode[index];

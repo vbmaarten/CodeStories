@@ -18,7 +18,6 @@ angular.module('narrator').controller('WriterCtrl', [
       $scope.selectedNarrative = writerFactory.selectedNarrative;
       if (!$scope.selectedNarrative.hasSubNode(CAST.selectedPath))
         $state.go('narrating.writing.selecting');
-      console.log(CAST.selectedPath.replace($scope.selectedNarrative.CASTPath, ''));  //$anchorScroll(CAST.selectedPath.replace($scope.selectedNarrative.CASTPath), '');
     } else {
       writerFactory.selectedNarrative = undefined;
     }
@@ -44,19 +43,23 @@ angular.module('narrator').controller('WriterCtrl', [
     };
     $scope.addItem = function (item) {
       var sel = $scope.selectedNarrative;
-      if (!item)
+      if (!item){
         item = 0;
-      if (sel.isCodeNarrative())
+      }
+      if (sel.isCodeNarrative()){
         sel.addItem(CAST.selectedPath.replace(sel.CASTPath, ''), null, item);
-      else
+      }
+      else{
         sel.addItem(null, item);
+      }
     };
     $scope.removeItem = function (item, subpath) {
       var sel = $scope.selectedNarrative;
       if (sel.isCodeNarrative()) {
         sel.removeItem(item, subpath);
-      } else
+      } else{
         sel.removeItem(item);
+      }
     };
     $scope.goToItemHook = function (hook) {
       console.log(writerFactory.selectedNarrative.CASTPath + hook);

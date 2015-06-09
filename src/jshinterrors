@@ -27,7 +27,6 @@ app/VCode/vcodeinterpreter.factory.js
   line 35   col 18   'display' is defined but never used.
 
 app/VObjectEditor/VObjectEditor.controller.js
-  line 37   col 18   Expected '===' and instead saw '=='.
   line 24   col 17   'd3' is not defined.
   line 38   col 16   'prompt' is not defined.
   line 24   col 11   'svg' is defined but never used.
@@ -43,7 +42,6 @@ app/cast/CASTNodeFactory.js
   line 95   col 0    Identifier 't_node_constructor' is not in camel case.
   line 96   col 0    Identifier 't_node_constructor' is not in camel case.
   line 130  col 0    Identifier 't_node_constructor' is not in camel case.
-  line 33   col 36   Expected '===' and instead saw '=='.
   line 131  col 20   'name' is already defined.
   line 85   col 25   'acorn' is not defined.
   line 95   col 30   'acorn' is not defined.
@@ -61,12 +59,7 @@ app/homeScreen/githubloader.directive.js
   line 8    col 6    Missing semicolon.
 
 app/homeScreen/homeScreen.controller.js
-  line 29   col 27   Expected '===' and instead saw '=='.
-  line 36   col 34   Expected '===' and instead saw '=='.
   line 46   col 39   'attributes' is defined but never used.
-
-app/narrator/NarrativeFactory.js
-  line 20   col 46   Expected '!==' and instead saw '!='.
 
 app/narrator/interpreter/interpreter.factory.js
   line 77   col 34   Missing semicolon.
@@ -84,9 +77,6 @@ app/narrator/item/empty.directive.js
   line 46   col 36   The '__proto__' property is deprecated.
   line 50   col 36   The '__proto__' property is deprecated.
   line 56   col 6    Missing semicolon.
-
-app/narrator/item/link.directive.js
-  line 24   col 35   Expected '===' and instead saw '=='.
 
 app/narrator/item/picture.directive.js
   line 23   col 6    Missing semicolon.
@@ -111,13 +101,10 @@ app/narrator/viewer/viewer.controller.js
   line 38   col 4    Missing semicolon.
 
 app/narrator/viewer/viewer.factory.js
-  line 129  col 33   Expected '===' and instead saw '=='.
   line 177  col 13   'nextItem' used out of scope.
   line 178  col 30   'nextItem' used out of scope.
   line 180  col 66   'nextItem' used out of scope.
   line 194  col 11   Expected '{' and instead saw 'return'.
-  line 201  col 42   Expected '!==' and instead saw '!='.
-  line 221  col 40   Expected '===' and instead saw '=='.
   line 226  col 43   'CodeNarrative' is not defined.
   line 226  col 113  'FSNarrative' is not defined.
   line 172  col 15   'nextItem' is defined but never used.
@@ -140,20 +127,12 @@ app/navigation/navigation.controller.js
   line 22   col 6    Missing semicolon.
 
 app/notifications/notification/notification.directive.js
-  line 1    col 31   Strings must use singlequote.
-  line 1    col 57   Strings must use singlequote.
-  line 2    col 3    Missing "use strict" statement.
-  line 5    col 4    Missing semicolon.
-
-app/notifications/notifications.controller.js
-  line 5    col 5    Missing "use strict" statement.
-
-app/notifications/notifications.directive.js
-  line 2    col 3    Missing "use strict" statement.
+  line 3    col 31   Strings must use singlequote.
+  line 3    col 57   Strings must use singlequote.
+  line 7    col 4    Missing semicolon.
 
 app/notifications/notifications.factory.js
-  line 4    col 5    Missing "use strict" statement.
-  line 7    col 13   Expected an assignment or function call and instead saw an expression.
+  line 9    col 13   Expected an assignment or function call and instead saw an expression.
 
 app/projectManager/projectManager.controller.js
   line 39   col 6    Missing semicolon.
@@ -161,11 +140,9 @@ app/projectManager/projectManager.controller.js
 
 app/projectManager/projectManager.factory.js
   line 17   col 6    Missing semicolon.
-  line 21   col 26   Expected '===' and instead saw '=='.
   line 24   col 6    Missing semicolon.
   line 36   col 76   Strings must use singlequote.
   line 38   col 11   Missing semicolon.
-  line 42   col 42   Expected '===' and instead saw '=='.
   line 68   col 15   Missing semicolon.
   line 76   col 15   Missing semicolon.
   line 102  col 35   Strings must use singlequote.
@@ -193,16 +170,11 @@ app/stories/bubble/graham_scan.js
   line 8    col 3    Missing "use strict" statement.
   line 15   col 5    Missing "use strict" statement.
   line 19   col 5    Missing "use strict" statement.
-  line 22   col 18   Expected '===' and instead saw '=='.
-  line 22   col 33   Expected '===' and instead saw '=='.
   line 39   col 5    Missing "use strict" statement.
-  line 42   col 63   Expected '===' and instead saw '=='.
   line 51   col 5    Missing "use strict" statement.
   line 65   col 5    Missing "use strict" statement.
   line 70   col 14   Confusing use of '!'.
   line 78   col 5    Missing "use strict" statement.
-  line 100  col 27   Expected '===' and instead saw '=='.
-  line 101  col 28   Expected '===' and instead saw '=='.
   line 115  col 5    Missing "use strict" statement.
   line 113  col 37   'define' is not defined.
   line 114  col 3    'define' is not defined.
@@ -210,8 +182,7 @@ app/stories/bubble/graham_scan.js
 app/stories/bubble/sort_algorithms/bubblesort.js
   line 2    col 3    Missing "use strict" statement.
   line 14   col 9    'swapped' used out of scope.
-  line 14   col 19   Expected '===' and instead saw '=='.
-  line 14   col 25   Missing semicolon.
+  line 14   col 26   Missing semicolon.
   line 15   col 2    Unnecessary semicolon.
 
 app/stories/topdownparse/parse.js
@@ -249,15 +220,16 @@ app/stories/topdownparse/parse.js
 app/stories/topdownparse/tokens.js
   line 19   col 3    Missing "use strict" statement.
 
-  ✖  20 errors
-  ⚠  159 warnings
+  ✖  16 errors
+  ⚠  142 warnings
 
 [33mWarning: Task "jshint:all" failed. Use --force to continue.[39m
 
 [31mAborted due to warnings.[39m
 
 
-Execution Time (2015-06-09 11:25:28 UTC)
-jshint:all  1s  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 99%
+Execution Time (2015-06-09 11:31:42 UTC)
+loading tasks   12ms  ▇ 1%
+jshint:all     990ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 99%
 Total 1s
 

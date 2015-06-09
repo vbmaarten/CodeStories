@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('notifications').factory('notificationsFactory', [
   '$timeout',
   function ($timeout) {
