@@ -18,7 +18,7 @@
 
     var _decrementCounter = function(counter, proceed){
       counter.value -= 1;
-      if(counter.value == 0){
+      if(counter.value === 0){
         proceed();
       }
     }
@@ -39,7 +39,7 @@
       },  
 
       _processGithubElement: function(element, root, ret, proceed){
-        var isDirectory = element.type == 'tree';
+        var isDirectory = element.type === 'tree';
         var isJS = false;
         var isCodestoriesFile = false;
 

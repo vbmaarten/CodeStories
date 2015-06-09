@@ -126,7 +126,7 @@ angular.module('narrator').factory('viewerFactory', [
         this.queue.shift();
         this.queueCounter.shift();
         // If there are no more items left in the queue stop playing
-        if (this.queue.length == 0) {
+        if (this.queue.length === 0) {
           this.deselectNarrative();
         }  // Else continue with the queued up narrative
         else {
@@ -198,7 +198,7 @@ angular.module('narrator').factory('viewerFactory', [
         this.interpreterScope = codeStep.scope;
         this.storyboard[this.storyboard.length - 1].items.push(item);
         // Goes to next node
-        if (this.lastCodeNarrativeNode != codeStep.node.getPath()) {
+        if (this.lastCodeNarrativeNode !== codeStep.node.getPath()) {
           this.lastCodeNarrativeNode = codeStep.node.getPath();
           $state.go('narrating.viewing.playing', { 'path': codeStep.node.getPath() });
         }
@@ -218,7 +218,7 @@ angular.module('narrator').factory('viewerFactory', [
         var narratives = CAST.getNarratives(linkItem.content.path);
         var linked;
         for (var index in narratives) {
-          if (narratives[index].name == linkItem.content.id) {
+          if (narratives[index].name === linkItem.content.id) {
             linked = narratives[index];
           }
         }

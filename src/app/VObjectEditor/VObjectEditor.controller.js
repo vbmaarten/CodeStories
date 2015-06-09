@@ -34,7 +34,7 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
       };
     };
     $scope.selectVObject = function (name) {
-      if (name == 'New Object') {
+      if (name === 'New Object') {
         name = prompt('Name');
         $scope.VObjects[name] = emptyVObject;
       }

@@ -26,14 +26,14 @@ angular.module('codeStoriesApp').controller('HomeScreenCtrl', [
     };
     $scope.goToNarrator = function () {
       var projectname;
-      if ($scope.loader == 'github') {
+      if ($scope.loader === 'github') {
         projectname = 'github:' + $scope.githubUser + ':' + $scope.githubRepo;
         var proceed = function () {
           $state.go('narrating.viewing.selecting', { 'project': projectname });
         };
         projectManagerFactory.loadGitHub($scope.githubUser, $scope.githubRepo, proceed);
         $scope.isLoading = true;
-      } else if ($scope.loader == 'file') {
+      } else if ($scope.loader === 'file') {
         projectname = $scope.message;
         CAST.project = projectname;
         $state.go('narrating.viewing.selecting', { 'project': projectname });

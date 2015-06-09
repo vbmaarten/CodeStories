@@ -21,7 +21,7 @@ angular.module('narrator').directive('linkItem', function () {
       function ($scope, CAST) {
         var nodes = CAST.narratives;
         var narratives = {};
-        if ($scope.item.content == 'Empty') {
+        if ($scope.item.content === 'Empty') {
           $scope.item.content = {};
         }
         $scope.link = $scope.item.content.path + ' - ' + $scope.item.content.id;

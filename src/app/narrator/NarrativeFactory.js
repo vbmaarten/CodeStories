@@ -17,7 +17,7 @@ angular.module('narrator').factory('NarrativeFactory', [
         return false;
       },
       hasSubNode: function (path) {
-        return path.indexOf(this.CASTPath) != -1;
+        return path.indexOf(this.CASTPath) !== -1;
       }
     };
     /*--------------------------------

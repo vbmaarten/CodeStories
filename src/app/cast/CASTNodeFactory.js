@@ -30,7 +30,7 @@ angular.module('cast').factory('CASTNodeFactory', [
         do {
           directChild = path.shift();
         } while (directChild === '' || directChild === '.');
-        if (!path || path.length == 0) {
+        if (!path || path.length === 0) {
           return this.getChild(directChild) || this;
         }
         return this.getChild(directChild).getNode(path);
