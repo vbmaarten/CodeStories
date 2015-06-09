@@ -5,12 +5,13 @@ Interpreter.prototype.setAst = function(ast){
 };
 
 Interpreter.prototype.getCurrentNode = function(){
-	return (this.stateStack[0]) ? this.stateStack[0].node : undefined;
+	return (this.stateStack && this.stateStack[0]) ? this.stateStack[0].node : undefined;
 }
 
 
 function _convertArray(object){
-	result = []
+	var property,result = [];
+	
 	for(property in object.properties){
 		result[property] = _convertProperty(object.properties[property]);
 	}
@@ -18,6 +19,7 @@ function _convertArray(object){
 }
 
 function _convertObject(object){
+	var result;
 	if(object.length){
 		return _convertArray(object);
 	} else{
@@ -42,7 +44,7 @@ function _convertProperty(property){
 	}
 }
 Interpreter.prototype.convertScope =  function(interpreter_scope){
-	var  scope;
+	var  scope , val , property;
 
 	if(interpreter_scope.parentScope){
 		scope = this.convertScope(interpreter_scope.parentScope);

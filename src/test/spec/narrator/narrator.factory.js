@@ -1,21 +1,28 @@
 'use strict';
 
-describe('Factory: Narrator', function() {
+describe('Factory: Viewer', function() {
   beforeEach(module('codeStoriesApp'));
 
   beforeEach(module(function ($provide) {
     $provide.value('interpreterFactory', {
-        setupNarratedAST : function (CASTNode, narrative) {
-          this.narrative = narrative;
-        },
-        narrativeStep : function() {
-          return this.narrative.narrativeHooks['Body/0FunctionDeclaration/Block/Body/0VariableDeclaration'];
-        }
+      debugStep: {},
+      narrativeStep: {},
+      setupNarratedAST : function (CASTNode, narrative) {
+        this.narrative = narrative;
+      },
+      narrativeStep : function() {
+        return this.narrativeStep;
+      },
+      reset : function() {},
+      debugStep: function(){
+        return this.debugStep;
+      },
     });
   }));
 
   beforeEach(module(function ($provide) {
     $provide.value('$state', {
+      state: undefined,
       go : function (state, params) {
         this.state = state;
         this.params = params;
@@ -42,13 +49,12 @@ describe('Factory: Narrator', function() {
   }));
 
 
-  it('should start out with a default narrator object', function() {
-    expect(narrator.narrativePlaying).toBe( false );
+  it('should start out with a default viewer state', function() {
     expect(narrator.queue.length).toBe( 0 );
     expect(narrator.queueCounter.length).toBe( 0 );
     expect(narrator.queuePaths.length).toBe( 0 );
     expect(narrator.storyboard.length).toBe( 0 );
-    expect(narrator.narrativeLink).toEqual( false );
+    expect(narrator.lastCodeNarrativeNode).toBe( "" );
   });
 
   it('should be able to push a narrative on the narrative queue', function(){
@@ -62,23 +68,20 @@ describe('Factory: Narrator', function() {
     expect(narrator.queue.length).toBe( 2 );
   });
 
-  it('should be able to select a narrative for playing', function() {
-    expect(narrator.narrativePlaying).toBe( false );
+  it('should be able to select a narrative for playing', inject(function($state) {
     narrator.selectNarrative(CAST.getNarrative('/folderNode', 0));
-    expect(narrator.narrativePlaying).toBe( true );
+    expect($state.state).toBe( 'narrating.viewing.playing' );
+  }));
 
-  });
-
-  it('should be able to deselect a narrative', function() {
+  it('should be able to deselect a narrative', inject(function($state) {
     narrator.selectNarrative(CAST.getNarrative('/folderNode', 0));
-    expect(narrator.narrativePlaying).toBe( true );
     expect(narrator.queue.length).toBe( 1 );
+    expect($state.state).toBe( 'narrating.viewing.playing' );
 
     narrator.deselectNarrative();
-    expect(narrator.narrativePlaying).toBe( false );
     expect(narrator.queue.length).toBe( 0 );
-
-  });
+    expect($state.state).toBe( 'narrating.viewing.selecting' );
+  }));
 
 
   it('should be possible to pop an item from the narrative queue', inject(function($state){
@@ -113,10 +116,33 @@ describe('Factory: Narrator', function() {
       "content": {"id":"hello world narrative 2","path":"/folderNode/fileNode.js"}
     });
 
-    expect(narrator.narrativeLink).toBe(true);
     expect($state.params.path).toBe("/folderNode/fileNode.js");
   }));
 
+  it('should perform a code narrative step, where it adds an item from a code narrative to the storyboard', inject(function(interpreterFactory, $state){
+    expect(narrator.codeNarrativeStep()).toBe( false );
+
+    narrator.pushNarrative(CAST.getNarrative('/folderNode/fileNode.js/program', 0));
+    interpreterFactory.narrativeStep.item = interpreterFactory.narrative.narrativeHooks['/Body/0FunctionDeclaration/Block/Body/0VariableDeclaration'].items[0];
+    interpreterFactory.narrativeStep.item.isVCodeItem = function(){return false};
+    interpreterFactory.narrativeStep.item.isTextItem = function(){return false};
+    interpreterFactory.narrativeStep.node = {getPath:function(){return '/folderNode/fileNode.js/program'}}
+
+    expect(narrator.codeNarrativeStep()).toBe( true );
+    expect(narrator.storyboard[0].items.length).toBe( 1 );
+    expect($state.params['path']).toBe('/folderNode/fileNode.js/program');
+  }));
+
+  it('should perform a debugstep where it only advances one step in the interpreter', inject(function(interpreterFactory, $state){
+    interpreterFactory.debugStep.node = {getPath:function(){return '/folderNode/fileNode.js/program'}}
+
+    narrator.debugStep()
+
+    expect($state.params['path']).toBe('/folderNode/fileNode.js/program');
+
+  }));
+
 });
+
 
 

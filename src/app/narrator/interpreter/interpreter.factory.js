@@ -34,7 +34,7 @@ angular.module('narrator')
          * @param {CodeNarrative} codeNarrative The code narrative that has to be loaded with the ASTNode
          */
 	 	function setupNarratedAST(ASTNode,codeNarrative){
-	 		ASTNode.attachItemHooks(codeNarrative);
+	 		ASTNode.attachNarrativeHooks(codeNarrative);
 
 	 		currentNarrative = codeNarrative.name;
 	 		i=0;
@@ -64,7 +64,13 @@ angular.module('narrator')
 	 		}
 
 	 		interpreter.step();
-	 		return {'node':interpreter.getCurrentNode().ASTNode,'item':false,'scope': getCurrentScope()}; 
+	 		var tnode = interpreter.getCurrentNode();
+
+	 		if(!tnode){
+	 			return {'node':false,'item':false,'scope':{}}
+	 		}
+
+	 		return {'node':tnode.ASTNode,'item':false,'scope': getCurrentScope()}; 
 	 	};
 
 

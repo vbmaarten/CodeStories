@@ -1,0 +1,23 @@
+{
+	"/parse.js/Program": [
+		{
+			"name": "Top Down Operator Precendence parser",
+			"type": "Code",
+			"narrativeHooks": {
+				"/body/3/declarations/0/init/body/body/71/argument/body/body/1/expression": {
+					"path": "/body/3/declarations/0/init/body/body/71/argument/body/body/1/expression",
+					"items": [
+						{
+							"type": "text",
+							"content": "And the tokens are:::"
+						},
+						{
+							"type": "vcode",
+							"content": "\tvar domEl = document.createElement('div');\n\tvar svg = d3.select(domEl).append(\"svg\");\n\n\tfunction update(newData){\n\t\tvar boxWidth = 100;\n\t\tvar boxHeight = 25;\n\t\tsvg.selectAll(\"rect\").data(newData).enter().append(\"svg:rect\").\n\t\tattr('width', boxWidth).\n\t\tattr('height', boxHeight).\n\t\tattr('stroke', 'black').\n\t\tattr('fill',function(d){\n\t\t    if(d.type === 'name')\n\t\t        return 'blue';\n\t\t    return 'pink';\n\t\t}).\n\t\tattr('y', function(d,i){return boxHeight*i});\n\n\t\tsvg.selectAll(\"text\").data(newData).enter().append(\"svg:text\").\n\t\tattr(\"y\", function(d,i){return boxHeight*i+15}).\n\t\tattr('x', 15).\n\t\tattr('fill', 'black')\n\t\tsvg.selectAll(\"text\").data(newData).\n\t\ttext(function(d){return d.value});\n\t}\n\n\tupdate(tokens);\n\ndisplay(domEl);"
+						}
+					]
+				}
+			}
+		}
+	]
+}
