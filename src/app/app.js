@@ -53,7 +53,8 @@ angular.module('codeStoriesApp', [
         '$http',
         'CAST',
         'projectManagerFactory',
-        function ($state, $stateParams, $http, CAST, projectManagerFactory) {
+        'notificationsFactory',
+        function ($state, $stateParams, $http, CAST, projectManagerFactory,notificationsFactory) {
           var setPath = function () {
             if (CAST.selectedPath !== $stateParams.path) {
               CAST.setSelected($stateParams.path);
@@ -74,6 +75,7 @@ angular.module('codeStoriesApp', [
             if ($stateParams.project.startsWith('github:')) {
               var params = $stateParams.project.split(':');
               projectManagerFactory.loadGitHub(params[1], params[2], function () {
+                notificationsFactory.success('Project loaded!');
                 $state.go('narrating.viewing.selecting', { 'project': $stateParams.project }, { reload: true });
               });
             } else if ($stateParams.project.endsWith('.zip')) {
