@@ -1,7 +1,6 @@
-angular.module('VObjectEditor')
-  .directive('vobjecteditor', function(){
-  	return {
-  		templateUrl: 'VObjectEditor/VObjectEditor.html',
-  		controller: 'VObjectEditorCtrl'
-  	};
-  });
+angular.module('VObjectEditor').directive('vobjecteditor', function () {
+  return {
+    templateUrl: 'VObjectEditor/VObjectEditor.html',
+    controller: 'VObjectEditorCtrl'
+  };
+});

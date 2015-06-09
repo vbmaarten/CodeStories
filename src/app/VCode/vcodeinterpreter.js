@@ -1,9 +1,8 @@
 'use strict';
-
 /**
  * @ngdoc overview
  * @name cast
  * @description
  * VCodeInterpreter module.
  */
-angular.module('VCodeInterpreter',[]);
+angular.module('VCodeInterpreter', []);

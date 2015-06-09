@@ -1,9 +1,8 @@
 'use strict';
-
 /**
  * @ngdoc overview
  * @name VObjectEditor
  * @description
  * VObjectEditor module.
  */
-angular.module('VObjectEditor',[]);
+angular.module('VObjectEditor', []);
