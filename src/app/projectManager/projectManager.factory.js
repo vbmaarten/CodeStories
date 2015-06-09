@@ -35,7 +35,58 @@
           } else {
             notificationsFactory.error(new Error("GitHub rate insufficient"));
           }
+        })
+      },  
+
+      _processGithubElement: function(element, root, ret, proceed){
+        var isDirectory = element.type == 'tree';
+        var isJS = false;
+        var isCodestoriesFile = false;
+
+        var path = element.path.split('/');
+
+        var last = path.pop();
+
+        if(!isDirectory){
+          var fileExtension = last.split('.').pop();
+          if (fileExtension === 'js') {
+            isJS = true;
+          } else if(fileExtension === 'codestories'){
+            isCodestoriesFile = true;
+          }
+        }
+
+        var newRoot = this._walkTo(root, path);
+        var $this = this;
+        
+        if (!newRoot.children[last]) {
+          if(isCodestoriesFile){   //Parse the narratives file
+            _incrementCounter($this.gitHubLoadCounter);
+            $http.get(element.url).success(function(data){
+               ret.narratives = JSON.parse(atob(data.content));
+               _decrementCounter($this.gitHubLoadCounter, proceed);
+            })
+          } else if (isDirectory) {  //Create the new directory
+            newRoot.children[last] = new CASTNodeFactory.FolderNode(last, newRoot, {});
+          } else {   //Create the new file
+            _incrementCounter(this.gitHubLoadCounter);
+            $http.get(element.url, {responseType: 'text'}).success(function(data){
+               newRoot.children[last] = new CASTNodeFactory.FileNode(last, newRoot, {}, atob(data.content));
+               _decrementCounter($this.gitHubLoadCounter, proceed);
+            })              
+          }
+        }
+      },
+
+      _loadGitHub: function(data, ret, proceed){
+        var root = new CASTNodeFactory.FolderNode('', null, {});
+        root.path = '';
+
+        var $this = this; 
+        data.tree.forEach(function (element) {
+          $this._processGithubElement(element, root, ret, proceed);
         });
+        ret.cast = root;
       },
 
       loadGitHub: function (username, repository, callback){
@@ -57,52 +108,7 @@
           $http.get('https://api.github.com/repos/'+username+'/'+repository+'/git/trees/HEAD?recursive=1')
           .success(function(data, status, headers, config){         
             $this._githubRateLimitSufficient(data.tree.length, function(){
-              var root = new CASTNodeFactory.FolderNode('', null, {});
-              root.path = '';
-
-              //Loop through files that are packed in the zip
-              data.tree.forEach(function (element) {
-                var isDirectory = element.type == 'tree';
-                var isJS = false;
-                var isCodestoriesFile = false;
-
-                var path = element.path.split('/');
-
-                var last = path.pop();
-
-                if(!isDirectory){
-                   var fileExtension = last.split('.').pop();
-                  if (fileExtension === 'js') {
-                    isJS = true;
-                  } else if(fileExtension === 'codestories'){
-                    isCodestoriesFile = true;
-                  }
-                }
-
-                var newRoot = $this._walkTo(root, path);
-                
-                if (!newRoot.children[last]) {
-                  if(isCodestoriesFile){   //Parse the narratives file
-                    _incrementCounter($this.gitHubLoadCounter);
-                    $http.get(element.url).success(function(data){
-                      console.log(data);
-                      console.log(atob(data.content));
-                       ret.narratives = JSON.parse(atob(data.content));
-                       _decrementCounter($this.gitHubLoadCounter, proceed);
-                    })
-                  } else if (isDirectory) {  //Create the new directory
-                    newRoot.children[last] = new CASTNodeFactory.FolderNode(last, newRoot, {});
-                  } else {   //Create the new file
-                    _incrementCounter($this.gitHubLoadCounter);
-                    $http.get(element.url, {responseType: 'text'}).success(function(data){
-                       newRoot.children[last] = new CASTNodeFactory.FileNode(last, newRoot, {}, atob(data.content));
-                       _decrementCounter($this.gitHubLoadCounter, proceed);
-                    })
-                    
-                  }
-                }
-              });
-              ret.cast = root;
+              $this._loadGitHub(data, ret, proceed, $this);
             })
           });
         });
