@@ -247,6 +247,9 @@
           this.codeNarrativeStep(step);
         } else {
           this.interpreterScope = step.scope;
+          if(!step.node){
+            this.popNarrative();
+          }
           $state.go('narrating.viewing.playing', {'path': step.node.getPath()});
         }
       },

@@ -128,7 +128,7 @@ ASTNode.prototype.containsPosition = function(pos){
 }
 
 // Attach items to the interpreter ast nodes, under the attribute .codeNarrative[ narrative name ]
-ASTNode.prototype.attachItemHooks = function(codeNarrative){
+ASTNode.prototype.attachNarrativeHooks = function(codeNarrative){
 
         var hooks = codeNarrative.narrativeHooks
         var node;

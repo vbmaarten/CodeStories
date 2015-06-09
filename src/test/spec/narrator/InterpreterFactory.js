@@ -5,54 +5,62 @@ describe('Factory: Interpreter factory', function() {
   beforeEach(module('codeStoriesApp'));
 
   var interpreterFactory;
-  var script = "var sum = 0;\
-\
-  for(var i = 0; i < 10; i++){\
-  	sum += i;\
-  }";
-
   var NarrativeFactory;
   var CASTNodeFactory;
+  var ItemFactory;
+  var astNode ;
+  var codeNarrative;
 
-
-    beforeEach(inject(function (_interpreterFactory_,_NarrativeFactory_,_CASTNodeFactory_){
+  beforeEach(inject(function (_interpreterFactory_,_NarrativeFactory_, _CASTNodeFactory_,_ItemFactory_){
       interpreterFactory = _interpreterFactory_;
-   NarrativeFactory = _NarrativeFactory_
-   CASTNodeFactory = _CASTNodeFactory_;
+      NarrativeFactory = _NarrativeFactory_;
+      CASTNodeFactory = _CASTNodeFactory_;
+      ItemFactory = _ItemFactory_;
+      var aFileNode = new CASTNodeFactory.FileNode("test.js" , new CASTNodeFactory.RootNode() , {} , test_script1 );
+      astNode = aFileNode.getChild('Program');
+      codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/test.js", [])
+
   }));
 
-  var astNode = new CASTNodeFactory.FileNode("/" , new CASTNodeFactory.RootNode() , {} , script).getChild('Program');
+  
 
   // ---- Tests -----
   it("should exist", function(){
   	expect(interpreterFactory).toBeDefined();
   });
 
-  it("should be possible to give it a self-compiled AST", function(){
-    var codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/", [])
-    interpreterFactory.setupNarratedAST(astNode, codeNarrative);
 
-    expect(interpreterFactory.interpreter.ast.body[0].type).toEqual("VariableDeclaration");
+  it("should be possible to setup the interpreter with an ASTNode and do a debug step and then reset", function(){
+    
+    interpreterFactory.setupNarratedAST(astNode, codeNarrative);
+    var step = interpreterFactory.debugStep();
+
+    expect( step.node.tnode.type ).toEqual("VariableDeclaration");
+
+    interpreterFactory.reset();
+
+    var step = interpreterFactory.debugStep();
+    expect(step.node ).toEqual( false );
   });
 
-  it("should be possible to step through it like a debugger", function(){
-    var codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/", [])
-    interpreterFactory.setupNarratedAST(astNode, codeNarrative);
 
-    expect(interpreterFactory.interpreter.stateStack[0].node.type).toEqual("Program");
-    interpreterFactory.debugStep();    
-    expect(interpreterFactory.interpreter.stateStack[0].node.type).toEqual("VariableDeclaration");
-  });
-
-  it("should be possible to step to the next narrative", function(){
+  it("should be possible to step to the next narrative and a debug step should not step off a narrative node", function(){
     var node = astNode.tnode.body[1];
-
-    var codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/", [{node: "body/1", items: [new TextItem("textitem")]}]);
+    var codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/test.js", [{path: "body/1", 
+        items: [
+          new ItemFactory.TextItem("textitem"),
+          new ItemFactory.TextItem("textitem"),
+          new ItemFactory.TextItem("textitem")
+        ]}]);
     interpreterFactory.setupNarratedAST(astNode, codeNarrative);
 
     var step = interpreterFactory.narrativeStep();
-
     expect(step.node).toEqual(node.ASTNode);
+    step = interpreterFactory.narrativeStep();
+    expect(step.node).toEqual(node.ASTNode);
+    step = interpreterFactory.debugStep();
+    expect(step.node).toEqual(node.ASTNode);
+    
   });
 
 

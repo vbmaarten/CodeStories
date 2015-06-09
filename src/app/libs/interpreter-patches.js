@@ -5,7 +5,7 @@ Interpreter.prototype.setAst = function(ast){
 };
 
 Interpreter.prototype.getCurrentNode = function(){
-	return (this.stateStack[0]) ? this.stateStack[0].node : undefined;
+	return (this.stateStack && this.stateStack[0]) ? this.stateStack[0].node : undefined;
 }
 
 
