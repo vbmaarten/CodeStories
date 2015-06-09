@@ -12,19 +12,7 @@ angular.module('notifications').factory('notificationsFactory', [
   function ($timeout) {
     var factory = {};
     var delay = 5000;
-    var notify = function (type, content) {
-      factory.notifications.unshift({
-        type: type,
-        content: content
-      });
-      factory.callback();
-      $timeout(function () {
-        factory.close({
-          type: type,
-          content: content
-        });
-      }, delay);
-    }
+    
     /**
      * @ngdoc property
      * @name notifications
@@ -41,6 +29,20 @@ angular.module('notifications').factory('notificationsFactory', [
      * Function that contains the callback that needs to be called when the notifications array changes
      */
     factory.callback;
+    
+    var notify = function (type, content) {
+      factory.notifications.unshift({
+        type: type,
+        content: content
+      });
+      factory.callback();
+      $timeout(function () {
+        factory.close({
+          type: type,
+          content: content
+        });
+      }, delay);
+    }
     /**
      * @ngdoc method
      * @name error
