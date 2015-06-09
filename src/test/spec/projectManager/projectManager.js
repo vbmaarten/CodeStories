@@ -2,6 +2,10 @@
 
 describe('Factory: projectManagerFactory', function () { 
   var projectManagerFactory;
+  var CASTNodeFactory;
+  var ItemFactory;
+  var NarrativeFactory;
+  var CAST;
 
   var github = {
     limit: 60,
@@ -50,11 +54,69 @@ describe('Factory: projectManagerFactory', function () {
     "encoding": "base64"
   }  
 
+  var codeNarrative = {
+   "name": "codetest2",
+   "CASTPath": "/sort_algorithms/bubblesort.js/Program",
+   "narrativeHooks": {
+    "body/0/body/body/0": {
+     "path": "body/0/body/body/0",
+     "items": [
+      {
+       "type": "text",
+       "content": "Here we set the length"
+      },
+      {
+       "type": "vcode",
+       "content": "var barchart = new BarChart(values); \n display(barchart.domEl); "
+      }
+     ]
+    },
+    "body/0/body/body/1/body/body/1/body/body/0/test": {
+     "path": "body/0/body/body/1/body/body/1/body/body/0/test",
+     "items": [
+      {
+       "type": "text",
+       "content": "Here it checks if it should swap these values"
+      },
+      {
+       "type": "vcode",
+       "content": "barchart.highlight([i,i+1],'grey');"
+      }
+     ]
+    },
+    "b": {
+     "path": "body/0/body/body/1/body/body/1/body/body/0/consequent/body/3",
+     "items": [
+      {
+       "type": "text",
+       "content": " These should be swapped . So lets swap"
+      },
+      {
+       "type": "vcode",
+       "content": " barchart.highlight([i,i+1],'blue'); \n barchart.update(values); display(barchart.domEl); "
+      }
+     ]
+    }
+   }
+  }
+
   beforeEach(module('notifications'));
 
   beforeEach(module(function ($provide) {
     $provide.value('notificationsFactory', {
         error: function(notification){}
+    });
+  }));
+
+
+  beforeEach(module('cast'));
+
+  beforeEach(module(function ($provide) {
+    $provide.value('CAST', {
+        cast: {},
+        project: undefined,
+        reset: function(){},
+        appendNarrative: function(){}  
     });
   }));
 
@@ -116,14 +178,12 @@ describe('Factory: projectManagerFactory', function () {
 
   beforeEach(module("codeStoriesApp")); 
 
-  var CASTNodeFactory;
-  var ItemFactory;
-  var NarrativeFactory;
-  beforeEach(inject(function (_projectManagerFactory_,_CASTNodeFactory_,_ItemFactory_,_NarrativeFactory_){
+  beforeEach(inject(function (_projectManagerFactory_,_CASTNodeFactory_,_ItemFactory_,_NarrativeFactory_,_CAST_){
     projectManagerFactory = _projectManagerFactory_;
     CASTNodeFactory = _CASTNodeFactory_;
     ItemFactory = _ItemFactory_;
     NarrativeFactory = _NarrativeFactory_;
+    CAST = _CAST_;
   }));
 
 
@@ -287,4 +347,40 @@ describe('Factory: projectManagerFactory', function () {
     expect(projectManagerFactory._loadGitHub).toHaveBeenCalled();
   });
 
+  it('should be able to load and process zip files', function(){
+    var root = new CASTNodeFactory.FolderNode('/', null, {});
+    var narratives = {};
+    spyOn(projectManagerFactory, 'UnpackZip').and.returnValue({
+      cast: root,
+      narratives: {}
+    }); 
+
+    spyOn(CAST, 'reset');
+    spyOn(CAST, 'appendNarrative');
+
+    projectManagerFactory.loadZip("");
+    expect(CAST.reset).toHaveBeenCalled();
+    expect(CAST.appendNarrative).toHaveBeenCalled();
+  });
+
+  it('should pack zips', function(){
+    CAST.cast.rootnode = new CASTNodeFactory.FolderNode('/', null, {});
+    spyOn(projectManagerFactory, '_packCastZip');
+    spyOn(projectManagerFactory, '_generateCodeStories');
+
+    saveAs = function(){};
+
+    projectManagerFactory.packZip();
+    expect(projectManagerFactory._packCastZip).toHaveBeenCalled();
+    expect(projectManagerFactory._generateCodeStories).toHaveBeenCalled();
+  });
+
+  it('should generate proper codeNarratives', function(){
+    var narrative = projectManagerFactory._generateCodeNarrative(codeNarrative);
+    expect(narrative.name).toEqual(codeNarrative.name);
+    expect(narrative.type).toEqual("Code");
+    expect(narrative.narrativeHooks["body/0/body/body/0"]).toBeDefined();
+    expect(narrative.narrativeHooks["body/0/body/body/1/body/body/1/body/body/0/test"]).toBeDefined();
+    expect(narrative.narrativeHooks["b"]).toBeDefined();
+  });
 });

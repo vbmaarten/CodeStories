@@ -151,7 +151,6 @@
         //pack narratives
         var codestories = this._generateCodeStories(CAST.narratives);      
         zip.file('.codestories', JSON.stringify(codestories,null,'  '));
-
         saveAs(zip.generate({type: 'blob'}), 'project.zip');
       },
 
