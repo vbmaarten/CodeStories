@@ -56,23 +56,17 @@ angular.module('narrator')
          * @return {tnode} The current node after the step is made
          */
 	 	function debugStep (){
-	 		var currentNode = interpreter.getCurrentNode();
-	 		if(currentNode.codeNarrative && currentNode.codeNarrative[ currentNarrative ]){
-	 			var step = narrativeStep();
-	 			step.scope = getCurrentScope()
-	 			return step
-	 		}
-
-	 		interpreter.step();
-	 		var tnode = interpreter.getCurrentNode();
-
-	 		if(!tnode){
-	 			return {'node':false,'item':false,'scope':{}}
-	 		}
-
-	 		return {'node':tnode.ASTNode,'item':false,'scope': getCurrentScope()}; 
+	 		return narrativeStep( true );
 	 	};
 
+
+	 	function checkCurrentHookForItems(){
+	 		if(currentnarrativeHooks && currentnarrativeHooks[i+1]){
+	 			i++;
+	 			return {'node':processedNode.ASTNode,'item':currentnarrativeHooks[i],'scope':getCurrentScope()};
+	 		}
+	 		return false;
+	 	}
 
 	 	/**
          * @ngdoc method
@@ -84,28 +78,35 @@ angular.module('narrator')
          * @return { node: tnode item: Item } The node the interpreter stepped to, with it's item.
          */
 	 	var processedNode;
-	 	function narrativeStep(){ 		
-	 		if(currentnarrativeHooks && currentnarrativeHooks[i+1]){
-	 			i++;
-	 			return {'node':processedNode.ASTNode,'item':currentnarrativeHooks[i],'scope':getCurrentScope()};
-	 		}
+	 	function narrativeStep( debugStep ){ 		
+	 		var currentStep = checkCurrentHookForItems();
 	 		var step = true;
-	 		
+	 		var item = false ;
+	 		if(currentStep){
+	 			return currentStep;
+	 		}
 	 		
 	 		do{
 	 			if(interpreter.stateStack.length === 0){
-	 				return {'node':processedNode.ASTNode,'item':false};
+	 				return {'node':processedNode.ASTNode,'item':item};
 	 			}
 	 			processedNode = interpreter.getCurrentNode()
 	 			var oldStackSize = interpreter.stateStack.length;
 	 			step = interpreter.step()
 	 			var newStackSize = interpreter.stateStack.length;
+
+	 			if(debugStep){
+	 				break;
+	 			}
 	 			
 	 			//stop when the processedNode has a current narrative and the stack size has decreased (node has been poped)
-	 		} while(  ( oldStackSize < newStackSize ) || !(processedNode.codeNarrative && processedNode.codeNarrative[ currentNarrative ]) );
-	 		currentnarrativeHooks = processedNode.codeNarrative[currentNarrative];
+	 		} while(  ( oldStackSize < newStackSize ) || !(processedNode.codeNarrative && processedNode.codeNarrative[ currentNarrative ]));
+	 		currentnarrativeHooks = processedNode.codeNarrative ? processedNode.codeNarrative[currentNarrative] : undefined;
 	 		i=0;
-	 		return {'node':processedNode.ASTNode,'item':currentnarrativeHooks[i],'scope':getCurrentScope()};
+	 		if(currentnarrativeHooks && currentnarrativeHooks[i])
+	 			item = currentnarrativeHooks[i]
+
+	 		return {'node':processedNode.ASTNode,'item':item,'scope':getCurrentScope()};
 	 	};
 
     return {

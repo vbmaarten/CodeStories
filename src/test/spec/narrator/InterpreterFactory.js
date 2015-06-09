@@ -33,6 +33,7 @@ describe('Factory: Interpreter factory', function() {
   it("should be possible to setup the interpreter with an ASTNode and do a debug step and then reset", function(){
     
     interpreterFactory.setupNarratedAST(astNode, codeNarrative);
+    interpreterFactory.debugStep();
     var step = interpreterFactory.debugStep();
 
     expect( step.node.tnode.type ).toEqual("VariableDeclaration");
@@ -40,13 +41,13 @@ describe('Factory: Interpreter factory', function() {
     interpreterFactory.reset();
 
     var step = interpreterFactory.debugStep();
-    expect(step.node ).toEqual( false );
+    expect(step.node ).toEqual( undefined );
   });
 
 
   it("should be possible to step to the next narrative and a debug step should not step off a narrative node", function(){
     var node = astNode.tnode.body[1];
-    var codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/test.js", [{path: "body/1", 
+    var codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/test.js", [{path: "/body/1", 
         items: [
           new ItemFactory.TextItem("textitem"),
           new ItemFactory.TextItem("textitem"),
