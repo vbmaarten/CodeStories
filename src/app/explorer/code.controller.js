@@ -45,8 +45,9 @@ angular.module('explorer').controller('CodeCtrl', [
           }
         }
       }
-      if (node.tnode instanceof Array)
+      if (node.tnode instanceof Array){
         node = node.getParent();
+      }
       return node;
     };
     var getRange = function (node) {
@@ -75,11 +76,13 @@ angular.module('explorer').controller('CodeCtrl', [
         _session.addMarker(newrange, marker, 'line', false);
       };
       // Marking nodes of interrest
+
+      var narrativeNode
       if ($scope.selected.isASTNode()) {
         mark($scope.selected, 'selected-node');
         _editor.scrollToRow($scope.selected.tnode.loc.start.line - 1);
         if (writerFactory.selectedNarrative && $state.is('narrating.writing.editing')) {
-          var narrativeNode = CAST.getNode(writerFactory.selectedNarrative.CASTPath);
+          narrativeNode = CAST.getNode(writerFactory.selectedNarrative.CASTPath);
           mark(narrativeNode, 'selected-narrative');
           for (var hook in writerFactory.selectedNarrative.narrativeHooks) {
             var hookPath = writerFactory.selectedNarrative.narrativeHooks[hook].path;
@@ -87,7 +90,7 @@ angular.module('explorer').controller('CodeCtrl', [
           }
         }
         if ($state.is('narrating.viewing.playing') && viewerFactory.queue[0].isCodeNarrative()) {
-          var narrativeNode = CAST.getNode(viewerFactory.queue[0].CASTPath);
+          narrativeNode = CAST.getNode(viewerFactory.queue[0].CASTPath);
           mark(narrativeNode, 'selected-narrative');
         }
       }

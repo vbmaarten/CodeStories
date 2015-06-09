@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('notifications').directive('notifications', function () {
   return {
     restrict: 'E',

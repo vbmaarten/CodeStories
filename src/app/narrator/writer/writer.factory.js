@@ -43,7 +43,7 @@ angular.module('narrator')
         */ 
       deselectNarrative: function(){
         if(this.selectedNarrative) {
-          var path = this.selectedNarrative.CASTPath
+          var path = this.selectedNarrative.CASTPath;
           this.selectedNarrative = undefined;
           $state.go('narrating.writing.selecting', {path: path});
         }
@@ -60,13 +60,15 @@ angular.module('narrator')
         */ 
       addNarrative : function (node) {
         var newNarrative;
-        if(node.isASTNode())
+        if(node.isASTNode()){
           newNarrative = new NarrativeFactory.CodeNarrative('New Narrative', CAST.selectedPath);
-        else
+        }
+        else{
           newNarrative = new NarrativeFactory.FSNarrative('New Narrative', CAST.selectedPath);
+        }
         CAST.narratives[node.getPath()] = CAST.narratives[node.getPath()] || [];
         CAST.narratives[node.getPath()].push(newNarrative);
-      },
+      }
     }
   }]);
 

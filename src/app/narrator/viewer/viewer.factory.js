@@ -168,8 +168,9 @@ angular.module('narrator').factory('viewerFactory', [
         * or halts playback.
         */
       fsNarrativeStep: function () {
+        var nextItem
         if (this.queue[0].items.length > this.queueCounter[0]) {
-          var nextItem = this.queue[0].items[this.queueCounter[0]];
+          nextItem = this.queue[0].items[this.queueCounter[0]];
         } else {
           return false;
         }
@@ -190,8 +191,9 @@ angular.module('narrator').factory('viewerFactory', [
         */
       codeNarrativeStep: function (step) {
         var codeStep = step || interpreterFactory.narrativeStep();
-        if (!codeStep.item)
+        if (!codeStep.item){
           return false;
+        }
         codeStep = processCodeStep(codeStep);
         var item = codeStep.item;
         // Push the narrative on the storyboard
@@ -221,9 +223,6 @@ angular.module('narrator').factory('viewerFactory', [
           if (narratives[index].name === linkItem.content.id) {
             linked = narratives[index];
           }
-        }
-        if (linked === undefined) {
-          linked = node.isASTNode() ? new CodeNarrative('A new narrative appears', linkItem.content.path) : new FSNarrative('A new narrative appears', linkItem.content.path);
         }
         this.queuePaths.unshift($stateParams.path);
         // Push the narrative on the stack and navigate to the node

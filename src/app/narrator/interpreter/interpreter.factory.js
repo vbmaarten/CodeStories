@@ -74,7 +74,7 @@ angular.module('narrator').factory('interpreterFactory', function () {
     var currentStep = checkCurrentHookForItems();
     var step = true;
     var item = false;
-    var oldStackSize,newStackSize
+    var oldStackSize,newStackSize;
     if (currentStep) {
       return currentStep;
     }
@@ -96,8 +96,9 @@ angular.module('narrator').factory('interpreterFactory', function () {
     } while (oldStackSize < newStackSize || !(processedNode.codeNarrative && processedNode.codeNarrative[currentNarrative]));
     currentnarrativeHooks = processedNode.codeNarrative ? processedNode.codeNarrative[currentNarrative] : undefined;
     i = 0;
-    if (currentnarrativeHooks && currentnarrativeHooks[i])
+    if (currentnarrativeHooks && currentnarrativeHooks[i]){
       item = currentnarrativeHooks[i];
+    }
     return {
       'node': processedNode.ASTNode,
       'item': item,

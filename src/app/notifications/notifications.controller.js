@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('notifications').controller('NotificationsCtrl', [
   '$scope',
   'notificationsFactory',
