@@ -6,16 +6,20 @@ describe('Factory: VCodeInterpreter factory', function() {
 
   var vCodeInterpreterFactory, interpreterFactory;
 
-  beforeEach(inject(function (vCodeInterpreterFactory,_interpreterFactory_){
+  beforeEach(inject(function (_vCodeInterpreterFactory_,_interpreterFactory_,_NarrativeFactory_, _CASTNodeFactory_,_ItemFactory_){
       vCodeInterpreterFactory = _vCodeInterpreterFactory_;
       interpreterFactory = _interpreterFactory_;
+
+      var NarrativeFactory = _NarrativeFactory_;
+      var CASTNodeFactory = _CASTNodeFactory_;
+      var ItemFactory = _ItemFactory_;
 
       var aFileNode = new CASTNodeFactory.FileNode("test.js" , new CASTNodeFactory.RootNode() , {} , test_script1 );
       var astNode = aFileNode.getChild('Program');
 
       var codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/test.js", [{path: "body/1", 
         items: [
-          new ItemFactory.VCodeItem("var x = new VObject.List")
+          new ItemFactory.VCodeItem("var listObject = new List([]); display(listObject.domEl);")
          ]}]);
 
       interpreterFactory.setupNarratedAST(astNode, codeNarrative);
@@ -33,7 +37,8 @@ describe('Factory: VCodeInterpreter factory', function() {
 
   it("should be able to start and reset a session", function(){
     vCodeInterpreterFactory.startSession();
-    vCodeInterpreterFactory.resetSession();
+
+     vCodeInterpreterFactory.resetSession();
     
   });
 
@@ -43,10 +48,12 @@ describe('Factory: VCodeInterpreter factory', function() {
        var step = interpreterFactory.narrativeStep();
        vCodeInterpreterFactory.runVCode(step.item, step.scope);
 
-       expect(step.item.domEl).toBeDefined();
+       expect(step.item.dom).toBeDefined();
 
        vCodeInterpreterFactory.runVCode(step.item, step.scope);
-       expect(step.item.domEl).toBeDefined();
+       expect(step.item.dom).toBeDefined();
+
+     
     
   });
 
