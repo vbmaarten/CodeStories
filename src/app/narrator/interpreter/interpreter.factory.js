@@ -22,21 +22,26 @@ angular.module('narrator').factory('interpreterFactory', [
         */
     function processCodeStep(step) {
       var item = step.item;
-      if (item.isVCodeItem()) {
-        step.item = item.clone();
-        vCodeInterpreterFactory.runVCode(step.item, step.scope);
-      }
-      // Match text from a text time to be replaced by values of the current state of execution
-      if (item.isTextItem()) {
+      if(!item){
+
+      } else if (item.isVCodeItem()) {
+        item = item.clone();
+        vCodeInterpreterFactory.runVCode(item, step.scope);
+      } else if (item.isTextItem()) { // Match text from a text time to be replaced by values of the current state of execution
+        item = item.clone();
         var doubleBrakRegex = /\[\[\s?(\w*)\s?\]\]/;
         // regex to match [[ someword ]]
         var matched = doubleBrakRegex.exec(item.content);
         while (matched) {
           var value = step.scope[matched[1]];
+          if(value === undefined){
+            value = "undefined";
+          }
           item.content = item.content.split(matched[0]).join(value);
           matched = doubleBrakRegex.exec(item.content);
         }
       }
+      step.item = item;
       return step;
     }
     function resetInterpreter() {

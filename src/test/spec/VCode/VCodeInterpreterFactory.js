@@ -57,11 +57,6 @@ describe('Factory: VCodeInterpreter factory', function() {
     
   });
 
-    it("should be possible to process a special text Item" , function(){
-       console.log(todo);
-    
-  });
-
 
 
 
