@@ -1,12 +1,12 @@
 'use strict';
 /**
  * @ngdoc controller
- * @name codeStoriesApp.controller:HomeScreenCtrl
- * @requires projectManager.factory:projectManagerFactory
- * @requires cast.factory:CAST
+ * @name VObjectEditor.controller:VObjectEditorCtrl
+ * @requires VObjectEditor.factory:VObjectFactory
+ * @requires narrator.factory:ItemFactory
+ * @requires VCodeInterpreter.factory:vCodeInterpreterFactory
  * @description
- * The home screen of the app. Starting page and allows for the user to upload a
- * compressed project to narrate using the app.
+ * Editor for virtual objects
  */
 angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
   '$scope',

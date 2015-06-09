@@ -1,5 +1,11 @@
 'use strict';
-
+/**
+ * @ngdoc service
+ * @name VCodeInterpreter.factory:VObjectFactory
+ * @description
+ *
+ * factory for the Vobjects
+ */
 
 function Canvas() {
   var dom = document.createElement('div');

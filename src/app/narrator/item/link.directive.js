@@ -13,7 +13,7 @@ angular.module('narrator').directive('linkItem', function () {
   return {
     restrict: 'AE',
     templateUrl: function (elem, attr) {
-      return 'narrator/item/' + attr.type + '.html';
+      return 'narrator/item/link.edit.html';
     },
     controller: [
       '$scope',
