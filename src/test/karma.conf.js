@@ -65,6 +65,7 @@ module.exports = function(config) {
       'app/projectManager/projectManager.factory.js': 'coverage',
       'app/narrator/viewer/viewer.factory.js': 'coverage',
       'app/narrator/writer/writer.factory.js': 'coverage',
+      'app/narrator/writer/writer.controller.js': 'coverage',
       'app/narrator/interpreter/interpreter.factory.js': 'coverage',
       'app/explorer/explorer.controller.js': 'coverage',
       'app/VCode/vcodeinterpreter.factory.js': 'coverage',
