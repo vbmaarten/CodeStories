@@ -11,6 +11,6 @@ function sort(values) {
       }
     }
   }
-  while(swapped == true)
+  while(swapped === true)
 };
 sort([7, 4, 5, 2, 9, 1]);

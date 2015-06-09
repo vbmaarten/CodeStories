@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc function
  * @name explorer.controller:ExplorerCtrl
@@ -8,13 +7,15 @@
  * 
  * Provides functionality to the CAST Explorer
  */
-
-angular.module('explorer')
-  .controller('CodeCtrl', ['$scope', 'CAST', '$state', 'writerFactory', 'viewerFactory',
-    function ($scope, CAST, $state, writerFactory, viewerFactory) {
+angular.module('explorer').controller('CodeCtrl', [
+  '$scope',
+  'CAST',
+  '$state',
+  'writerFactory',
+  'viewerFactory',
+  function ($scope, CAST, $state, writerFactory, viewerFactory) {
     $scope.selected = CAST.selected;
     $scope.content = CAST.content;
-
     /**
     * @ngdoc method
     * @name getASTNodeByRange
@@ -25,33 +26,30 @@ angular.module('explorer')
     * @param {int} pos The position at which the closest AST Node has to be found
 	* @return {ASTNode} The node that corresponds to the given position in the code
     */
-    var getASTNodeByRange = function(pos){
+    var getASTNodeByRange = function (pos) {
       var node = $scope.selected;
-      if(node.isFile())
-      {
+      if (node.isFile()) {
         node = node.getChild('Program');
       }
       var hasBetterSelection = true;
-      while(!node.containsPosition(pos) && node.isASTNode()){
+      while (!node.containsPosition(pos) && node.isASTNode()) {
         node = node.parent;
       }
-
-      while(hasBetterSelection){
+      while (hasBetterSelection) {
         hasBetterSelection = false;
         var child, children = node.getChildren();
-        for( child in children){
-          if( children[child].containsPosition(pos) ){
+        for (child in children) {
+          if (children[child].containsPosition(pos)) {
             hasBetterSelection = true;
             node = children[child];
           }
         }
       }
-      if(node.tnode instanceof Array)
-        node = node.getParent()
+      if (node.tnode instanceof Array)
+        node = node.getParent();
       return node;
-    }
-
-    var getRange = function(node) {
+    };
+    var getRange = function (node) {
       var range = {};
       range.start = {};
       range.end = {};
@@ -60,61 +58,52 @@ angular.module('explorer')
       range.end.row = node.tnode.loc.end.line - 1;
       range.end.column = node.tnode.loc.end.column;
       return range;
-    }
-
-
-    $scope.aceLoaded = function(_editor){
-	    // Editor part
-	    var _session = _editor.getSession();
-	    var _renderer = _editor.renderer;
-
-	    _editor.$blockScrolling = Infinity;
+    };
+    $scope.aceLoaded = function (_editor) {
+      // Editor part
+      var _session = _editor.getSession();
+      var _renderer = _editor.renderer;
+      _editor.$blockScrolling = Infinity;
       var Range = ace.require('ace/range').Range;
-
-	    // Options
-	    _editor.setReadOnly(true);
-	    _editor.setValue($scope.content, -1);
-
+      // Options
+      _editor.setReadOnly(true);
+      _editor.setValue($scope.content, -1);
       //mark a node with a classname marker
-      var mark = function(node, marker){
+      var mark = function (node, marker) {
         var range = getRange(node);
-        var newrange =  new Range(range.start.row, range.start.column, range.end.row, range.end.column);
-        _session.addMarker(newrange, marker,"line", false);
-      }
-
+        var newrange = new Range(range.start.row, range.start.column, range.end.row, range.end.column);
+        _session.addMarker(newrange, marker, 'line', false);
+      };
       // Marking nodes of interrest
-      if($scope.selected.isASTNode()){
-
-        mark($scope.selected, "selected-node");
-        _editor.scrollToRow($scope.selected.tnode.loc.start.line-1);
-        
-        if(writerFactory.selectedNarrative && $state.is('narrating.writing.editing')){
-          var narrativeNode = CAST.getNode(writerFactory.selectedNarrative.CASTPath)
-          mark(narrativeNode, "selected-narrative");
-          for(var hook in writerFactory.selectedNarrative.narrativeHooks ) {
+      if ($scope.selected.isASTNode()) {
+        mark($scope.selected, 'selected-node');
+        _editor.scrollToRow($scope.selected.tnode.loc.start.line - 1);
+        if (writerFactory.selectedNarrative && $state.is('narrating.writing.editing')) {
+          var narrativeNode = CAST.getNode(writerFactory.selectedNarrative.CASTPath);
+          mark(narrativeNode, 'selected-narrative');
+          for (var hook in writerFactory.selectedNarrative.narrativeHooks) {
             var hookPath = writerFactory.selectedNarrative.narrativeHooks[hook].path;
-            mark(narrativeNode.getNode(hookPath), "selected-item-hook");
+            mark(narrativeNode.getNode(hookPath), 'selected-item-hook');
           }
         }
-        if($state.is('narrating.viewing.playing') && viewerFactory.queue[0].isCodeNarrative()){
+        if ($state.is('narrating.viewing.playing') && viewerFactory.queue[0].isCodeNarrative()) {
           var narrativeNode = CAST.getNode(viewerFactory.queue[0].CASTPath);
-          mark(narrativeNode, "selected-narrative");
+          mark(narrativeNode, 'selected-narrative');
         }
       }
-
-	    var selectNode = function(e,selection){
+      var selectNode = function (e, selection) {
         // if statement to handle bug in changeCursor event of ace editor
-        if(!$scope.editorLoaded){
-    		  var cursor = selection.getCursor();
-    		  var pos = _session.getDocument().positionToIndex(cursor,0);
+        if (!$scope.editorLoaded) {
+          var cursor = selection.getCursor();
+          var pos = _session.getDocument().positionToIndex(cursor, 0);
           var node = getASTNodeByRange(pos);
           $scope.editorLoaded = true;
-    		  $state.go('.', {'path': node.getPath()});
+          $state.go('.', { 'path': node.getPath() });
         } else {
           $scope.editorLoaded = false;
         }
-  		}; 
-
-  		_session.selection.on("changeCursor", selectNode);
-  	};
-  }]);
+      };
+      _session.selection.on('changeCursor', selectNode);
+    };
+  }
+]);

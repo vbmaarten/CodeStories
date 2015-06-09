@@ -1,482 +1,263 @@
 [4mRunning "jshint:all" (jshint) task[24m
 
 app/VCode/VObjects.factory.js
-  line 3    col 3   Missing "use strict" statement.
-  line 25   col 37  Strings must use singlequote.
-  line 25   col 46  Strings must use singlequote.
-  line 25   col 29  eval can be harmful.
-  line 30   col 4   Missing semicolon.
-  line 35   col 3   Missing "use strict" statement.
-  line 35   col 42  Missing semicolon.
-  line 47   col 4   Missing semicolon.
-  line 50   col 14  'List' was used before it was defined.
-  line 52   col 3   Missing "use strict" statement.
-  line 53   col 42  Strings must use singlequote.
-  line 58   col 25  Strings must use singlequote.
-  line 58   col 66  Strings must use singlequote.
-  line 63   col 47  Missing semicolon.
-  line 65   col 25  Strings must use singlequote.
-  line 65   col 66  Strings must use singlequote.
-  line 66   col 13  Strings must use singlequote.
-  line 66   col 50  Missing semicolon.
-  line 68   col 26  Missing semicolon.
-  line 69   col 25  Strings must use singlequote.
-  line 70   col 30  Missing semicolon.
-  line 78   col 4   Missing semicolon.
-  line 81   col 16  'VArray' was used before it was defined.
-  line 83   col 3   Missing "use strict" statement.
-  line 84   col 42  Strings must use singlequote.
-  line 89   col 25  Strings must use singlequote.
-  line 89   col 66  Strings must use singlequote.
-  line 94   col 45  Missing semicolon.
-  line 96   col 25  Strings must use singlequote.
-  line 96   col 66  Strings must use singlequote.
-  line 97   col 13  Strings must use singlequote.
-  line 97   col 47  Missing semicolon.
-  line 99   col 26  Missing semicolon.
-  line 100  col 25  Strings must use singlequote.
-  line 101  col 30  Missing semicolon.
-  line 108  col 41  Missing semicolon.
-  line 109  col 4   Missing semicolon.
-  line 111  col 18  'BarChart' was used before it was defined.
-  line 112  col 3   Missing "use strict" statement.
-  line 112  col 44  Missing semicolon.
-  line 113  col 44  Strings must use singlequote.
-  line 114  col 47  Missing semicolon.
-  line 122  col 35  Strings must use singlequote.
-  line 126  col 52  Strings must use singlequote.
-  line 128  col 35  Strings must use singlequote.
-  line 128  col 73  Strings must use singlequote.
-  line 128  col 95  Strings must use singlequote.
-  line 131  col 32  Strings must use singlequote.
-  line 132  col 25  Strings must use singlequote.
-  line 133  col 14  Strings must use singlequote.
-  line 133  col 14  Too many errors. (78% scanned).
+  line 133  col 29   eval can be harmful.
+  line 7    col 15   'width' is not defined.
+  line 8    col 16   'height' is not defined.
+  line 10   col 18   'width' is not defined.
+  line 11   col 19   'height' is not defined.
+  line 17   col 12   'width' is not defined.
+  line 18   col 12   'height' is not defined.
+  line 24   col 13   'd3' is not defined.
+  line 46   col 13   'd3' is not defined.
+  line 69   col 15   'd3' is not defined.
+  line 72   col 16   'd3' is not defined.
+  line 78   col 5    'd3' is not defined.
+  line 4    col 10   'Canvas' is defined but never used.
+  line 44   col 23   'vertical' is defined but never used.
 
 app/VCode/vcodeinterpreter.factory.js
-  line 24   col 0   Identifier 'interpreter_scope' is not in camel case.
-  line 52   col 0   Identifier 'interpreter_scope' is not in camel case.
-  line 3    col 5   Missing "use strict" statement.
-  line 6    col 94  Missing semicolon.
-  line 11   col 10  Missing semicolon.
-  line 52   col 13  Don't use 'with'.
-  line 53   col 17  Don't use 'with'.
-  line 54   col 21  Don't use 'with'.
-  line 55   col 25  eval can be harmful.
-  line 64   col 6   Missing semicolon.
-  line 4    col 23  'acorn' is not defined.
-  line 8    col 13  'acorn' is not defined.
-  line 44   col 22  'display' is defined but never used.
+  line 4    col 5    Missing "use strict" statement.
+  line 42   col 9    Don't use 'with'.
+  line 43   col 11   Don't use 'with'.
+  line 44   col 13   Don't use 'with'.
+  line 45   col 15   eval can be harmful.
+  line 5    col 17   'acorn' is not defined.
+  line 9    col 7    'acorn' is not defined.
+  line 35   col 18   'display' is defined but never used.
 
 app/VObjectEditor/VObjectEditor.controller.js
-  line 16   col 29  Strings must use singlequote.
-  line 17   col 26  Strings must use singlequote.
-  line 18   col 20  Strings must use singlequote.
-  line 22   col 44  Strings must use singlequote.
-  line 31   col 43  Missing semicolon.
-  line 32   col 6   Missing semicolon.
-  line 33   col 4   Missing semicolon.
-  line 36   col 28  Strings must use singlequote.
-  line 36   col 15  Expected '===' and instead saw '=='.
-  line 37   col 27  Strings must use singlequote.
-  line 43   col 27  Strings must use singlequote.
-  line 43   col 62  Strings must use singlequote.
-  line 43   col 77  Strings must use singlequote.
-  line 44   col 31  Strings must use singlequote.
-  line 44   col 67  Strings must use singlequote.
-  line 45   col 4   Missing semicolon.
-  line 61   col 4   Missing semicolon.
-  line 65   col 4   Missing semicolon.
-  line 69   col 4   Missing semicolon.
-  line 22   col 15  'd3' is not defined.
-  line 37   col 14  'prompt' is not defined.
-  line 22   col 9   'svg' is defined but never used.
-  line 24   col 21  'newData' is defined but never used.
+  line 37   col 18   Expected '===' and instead saw '=='.
+  line 24   col 17   'd3' is not defined.
+  line 38   col 16   'prompt' is not defined.
+  line 24   col 11   'svg' is defined but never used.
+  line 25   col 23   'newData' is defined but never used.
 
 app/VObjectEditor/VObjectEditor.directive.js
-  line 3    col 5   Missing "use strict" statement.
+  line 2    col 3    Missing "use strict" statement.
 
 app/app.js
-  line 61   col 50  Strings must use singlequote.
-  line 64   col 12  Missing semicolon.
-  line 71   col 17  Missing semicolon.
-  line 93   col 6   Missing semicolon.
-  line 197  col 9   Missing semicolon.
-  line 203  col 7   Unnecessary semicolon.
-  line 32   col 16  'valToString' is defined but never used.
+  line 30   col 16   'valToString' is defined but never used.
 
 app/cast/CASTNodeFactory.js
-  line 109  col 0   Identifier 't_node_constructor' is not in camel case.
-  line 110  col 0   Identifier 't_node_constructor' is not in camel case.
-  line 156  col 0   Identifier 't_node_constructor' is not in camel case.
-  line 20   col 25  Missing semicolon.
-  line 35   col 36  Expected '===' and instead saw '=='.
-  line 48   col 42  Missing semicolon.
-  line 51   col 40  Missing semicolon.
-  line 54   col 39  Missing semicolon.
-  line 57   col 40  Missing semicolon.
-  line 90   col 47  Strings must use singlequote.
-  line 106  col 2   Missing semicolon.
-  line 112  col 3   Missing semicolon.
-  line 126  col 52  Missing semicolon.
-  line 128  col 2   Missing semicolon.
-  line 133  col 49  Missing semicolon.
-  line 144  col 2   Missing semicolon.
-  line 150  col 22  Missing semicolon.
-  line 157  col 22  'name' is already defined.
-  line 165  col 85  Missing semicolon.
-  line 178  col 17  Duplicate key 'ASTNode'.
-  line 179  col 6   Missing semicolon.
-  line 92   col 31  'acorn' is not defined.
-  line 109  col 26  'acorn' is not defined.
+  line 95   col 0    Identifier 't_node_constructor' is not in camel case.
+  line 96   col 0    Identifier 't_node_constructor' is not in camel case.
+  line 130  col 0    Identifier 't_node_constructor' is not in camel case.
+  line 33   col 36   Expected '===' and instead saw '=='.
+  line 131  col 20   'name' is already defined.
+  line 85   col 25   'acorn' is not defined.
+  line 95   col 30   'acorn' is not defined.
 
 app/cast/cast.factory.js
-  line 91   col 30  Missing semicolon.
-  line 130  col 33  Missing semicolon.
-  line 121  col 37  'node' is defined but never used.
+  line 103  col 39   'node' is defined but never used.
 
 app/explorer/code.controller.js
-  line 50   col 9   Expected '{' and instead saw 'node'.
-  line 50   col 32  Missing semicolon.
-  line 52   col 6   Missing semicolon.
-  line 63   col 6   Missing semicolon.
-  line 82   col 51  Strings must use singlequote.
-  line 83   col 8   Missing semicolon.
-  line 88   col 46  Strings must use singlequote.
-  line 92   col 85  Missing semicolon.
-  line 93   col 51  Strings must use singlequote.
-  line 96   col 71  Strings must use singlequote.
-  line 100  col 29  'narrativeNode' is already defined.
-  line 101  col 51  Strings must use singlequote.
-  line 118  col 43  Strings must use singlequote.
-  line 72   col 19  'ace' is not defined.
-  line 69   col 11  '_renderer' is defined but never used.
-
-app/explorer/directory/directory.directive.js
-  line 28   col 6   Missing semicolon.
-
-app/explorer/directory/recursionHelper.js
-  line 3    col 3   Missing "use strict" statement.
-
-app/homeScreen/fileupload.directive.js
-  line 3    col 5   Missing "use strict" statement.
+  line 49   col 9    Expected '{' and instead saw 'node'.
+  line 90   col 29   'narrativeNode' is already defined.
+  line 67   col 19   'ace' is not defined.
+  line 65   col 11   '_renderer' is defined but never used.
 
 app/homeScreen/githubloader.directive.js
-  line 3    col 5   Missing "use strict" statement.
-  line 6    col 6   Missing semicolon.
+  line 8    col 6    Missing semicolon.
 
 app/homeScreen/homeScreen.controller.js
-  line 14   col 56  Strings must use singlequote.
-  line 15   col 27  Strings must use singlequote.
-  line 16   col 25  Strings must use singlequote.
-  line 17   col 25  Strings must use singlequote.
-  line 29   col 33  Strings must use singlequote.
-  line 29   col 24  Expected '===' and instead saw '=='.
-  line 30   col 30  Strings must use singlequote.
-  line 31   col 99  Missing semicolon.
-  line 35   col 38  Strings must use singlequote.
-  line 35   col 31  Expected '===' and instead saw '=='.
-  line 44   col 22  Strings must use singlequote.
-  line 47   col 20  Strings must use singlequote.
-  line 50   col 28  Strings must use singlequote.
-  line 58   col 4   Missing semicolon.
-  line 49   col 37  'attributes' is defined but never used.
+  line 29   col 27   Expected '===' and instead saw '=='.
+  line 36   col 34   Expected '===' and instead saw '=='.
+  line 46   col 39   'attributes' is defined but never used.
 
 app/narrator/NarrativeFactory.js
-  line 17   col 39  Missing semicolon.
-  line 23   col 42  Expected '!==' and instead saw '!='.
-  line 59   col 64  Strings must use singlequote.
-  line 118  col 18  Missing semicolon.
-  line 128  col 64  Strings must use singlequote.
-  line 139  col 2   Missing semicolon.
-  line 144  col 4   Missing semicolon.
-  line 146  col 4   Missing semicolon.
+  line 20   col 46   Expected '!==' and instead saw '!='.
 
 app/narrator/interpreter/interpreter.factory.js
-  line 19   col 41  Strings must use singlequote.
-  line 42   col 7   Unnecessary semicolon.
-  line 47   col 7   Unnecessary semicolon.
-  line 60   col 7   Unnecessary semicolon.
-  line 93   col 54  Missing semicolon.
-  line 95   col 35  Missing semicolon.
-  line 103  col 20  'oldStackSize' used out of scope.
-  line 103  col 35  'newStackSize' used out of scope.
-  line 107  col 10  Expected '{' and instead saw 'item'.
-  line 107  col 41  Missing semicolon.
-  line 110  col 7   Unnecessary semicolon.
-  line 19   col 27  'Interpreter' is not defined.
-  line 94   col 14  'oldStackSize' is defined but never used.
-  line 96   col 14  'newStackSize' is defined but never used.
+  line 77   col 34   Missing semicolon.
+  line 100  col 7    Expected '{' and instead saw 'item'.
+  line 15   col 23   'Interpreter' is not defined.
 
 app/narrator/item/ItemFactory.js
-  line 6    col 31  Strings must use singlequote.
-  line 10   col 8   Expected an assignment or function call and instead saw an expression.
-  line 19   col 42  Strings must use singlequote.
-  line 19   col 43  Missing semicolon.
-  line 26   col 18  Strings must use singlequote.
-  line 28   col 18  Strings must use singlequote.
-  line 30   col 19  Strings must use singlequote.
-  line 32   col 19  Strings must use singlequote.
-  line 34   col 21  Strings must use singlequote.
-  line 37   col 46  Strings must use singlequote.
-  line 60   col 2   Missing semicolon.
-  line 69   col 33  Strings must use singlequote.
-  line 75   col 35  Strings must use singlequote.
-  line 81   col 39  Strings must use singlequote.
-  line 87   col 35  Strings must use singlequote.
-  line 90   col 2   Missing semicolon.
-  line 97   col 33  Strings must use singlequote.
-  line 101  col 26  Strings must use singlequote.
-  line 104  col 35  Strings must use singlequote.
-  line 115  col 6   Missing semicolon.
-  line 8    col 31  'url' is defined but never used.
+  line 6    col 12   Expected an assignment or function call and instead saw an expression.
+  line 4    col 35   'url' is defined but never used.
 
 app/narrator/item/empty.directive.js
-  line 34   col 36  The '__proto__' property is deprecated.
-  line 38   col 36  The '__proto__' property is deprecated.
-  line 42   col 36  The '__proto__' property is deprecated.
-  line 46   col 36  The '__proto__' property is deprecated.
-  line 50   col 36  The '__proto__' property is deprecated.
-  line 56   col 6   Missing semicolon.
-
-app/narrator/item/item.directive.js
-  line 18   col 6   Missing semicolon.
-  line 25   col 6   Missing semicolon.
-  line 26   col 5   Missing semicolon.
+  line 34   col 36   The '__proto__' property is deprecated.
+  line 38   col 36   The '__proto__' property is deprecated.
+  line 42   col 36   The '__proto__' property is deprecated.
+  line 46   col 36   The '__proto__' property is deprecated.
+  line 50   col 36   The '__proto__' property is deprecated.
+  line 56   col 6    Missing semicolon.
 
 app/narrator/item/link.directive.js
-  line 24   col 42  Strings must use singlequote.
-  line 24   col 34  Expected '===' and instead saw '=='.
-  line 28   col 55  Strings must use singlequote.
-  line 32   col 40  Missing semicolon.
-  line 33   col 34  Strings must use singlequote.
-  line 43   col 10  Missing semicolon.
-  line 45   col 6   Missing semicolon.
+  line 24   col 35   Expected '===' and instead saw '=='.
 
 app/narrator/item/picture.directive.js
-  line 23   col 6   Missing semicolon.
-  line 20   col 40  '$scope' is defined but never used.
+  line 23   col 6    Missing semicolon.
+  line 20   col 40   '$scope' is defined but never used.
 
 app/narrator/item/text.directive.js
-  line 23   col 6   Missing semicolon.
-  line 20   col 40  '$scope' is defined but never used.
+  line 23   col 6    Missing semicolon.
+  line 20   col 40   '$scope' is defined but never used.
 
 app/narrator/item/vcode.directive.js
-  line 28   col 6   Missing semicolon.
-  line 16   col 37  'attrs' is defined but never used.
-  line 25   col 40  '$scope' is defined but never used.
+  line 28   col 6    Missing semicolon.
+  line 16   col 37   'attrs' is defined but never used.
+  line 25   col 40   '$scope' is defined but never used.
 
 app/narrator/item/video.directive.js
-  line 23   col 6   Missing semicolon.
-  line 20   col 40  '$scope' is defined but never used.
+  line 23   col 6    Missing semicolon.
+  line 20   col 40   '$scope' is defined but never used.
 
 app/narrator/viewer/viewer.controller.js
-  line 20   col 5   Missing semicolon.
-  line 28   col 5   Missing semicolon.
-  line 38   col 4   Missing semicolon.
+  line 20   col 5    Missing semicolon.
+  line 28   col 5    Missing semicolon.
+  line 38   col 4    Missing semicolon.
 
 app/narrator/viewer/viewer.factory.js
-  line 26   col 29  Missing semicolon.
-  line 35   col 54  Missing semicolon.
-  line 64   col 32  Strings must use singlequote.
-  line 134  col 32  Expected '===' and instead saw '=='.
-  line 184  col 13  'nextItem' used out of scope.
-  line 185  col 30  'nextItem' used out of scope.
-  line 188  col 64  'nextItem' used out of scope.
-  line 207  col 28  Expected '{' and instead saw 'return'.
-  line 215  col 47  Missing semicolon.
-  line 219  col 41  Expected '!==' and instead saw '!='.
-  line 241  col 40  Expected '===' and instead saw '=='.
-  line 279  col 6   Missing semicolon.
-  line 248  col 15  'CodeNarrative' is not defined.
-  line 248  col 85  'FSNarrative' is not defined.
-  line 178  col 17  'nextItem' is defined but never used.
+  line 129  col 33   Expected '===' and instead saw '=='.
+  line 177  col 13   'nextItem' used out of scope.
+  line 178  col 30   'nextItem' used out of scope.
+  line 180  col 66   'nextItem' used out of scope.
+  line 194  col 11   Expected '{' and instead saw 'return'.
+  line 201  col 42   Expected '!==' and instead saw '!='.
+  line 221  col 40   Expected '===' and instead saw '=='.
+  line 226  col 43   'CodeNarrative' is not defined.
+  line 226  col 113  'FSNarrative' is not defined.
+  line 172  col 15   'nextItem' is defined but never used.
 
 app/narrator/writer/writer.controller.js
-  line 25   col 9   Expected '{' and instead saw '$state'.
-  line 36   col 9   Expected '{' and instead saw 'newNarrative'.
-  line 38   col 9   Expected '{' and instead saw 'newNarrative'.
-  line 64   col 17  Expected '{' and instead saw 'item'.
-  line 65   col 33  Expected '{' and instead saw 'sel'.
-  line 65   col 87  Strings must use singlequote.
-  line 66   col 12  Expected '{' and instead saw 'sel'.
-  line 73   col 13  Expected '{' and instead saw 'sel'.
-  line 74   col 6   Missing semicolon.
-  line 77   col 69  Missing semicolon.
-  line 79   col 6   Missing semicolon.
+  line 20   col 9    Expected '{' and instead saw '$state'.
+  line 48   col 9    Expected '{' and instead saw 'item'.
+  line 50   col 9    Expected '{' and instead saw 'sel'.
+  line 52   col 9    Expected '{' and instead saw 'sel'.
+  line 59   col 9    Expected '{' and instead saw 'sel'.
 
 app/narrator/writer/writer.factory.js
-  line 46   col 53  Missing semicolon.
-  line 52   col 6   Missing semicolon.
-  line 16   col 35  'CAST' is defined but never used.
-  line 16   col 21  '$stateParams' is defined but never used.
+  line 46   col 53   Missing semicolon.
+  line 64   col 11   Expected '{' and instead saw 'newNarrative'.
+  line 66   col 11   Expected '{' and instead saw 'newNarrative'.
+  line 70   col 6    Missing semicolon.
 
 app/navigation/navigation.controller.js
-  line 19   col 6   Missing semicolon.
-  line 22   col 6   Missing semicolon.
+  line 19   col 6    Missing semicolon.
+  line 22   col 6    Missing semicolon.
 
 app/notifications/notification/notification.directive.js
-  line 1    col 31  Strings must use singlequote.
-  line 1    col 57  Strings must use singlequote.
-  line 2    col 3   Missing "use strict" statement.
-  line 5    col 4   Missing semicolon.
+  line 1    col 31   Strings must use singlequote.
+  line 1    col 57   Strings must use singlequote.
+  line 2    col 3    Missing "use strict" statement.
+  line 5    col 4    Missing semicolon.
 
 app/notifications/notifications.controller.js
-  line 1    col 31  Strings must use singlequote.
-  line 1    col 63  Strings must use singlequote.
-  line 1    col 98  Strings must use singlequote.
-  line 3    col 5   Missing "use strict" statement.
-  line 14   col 6   Missing semicolon.
-  line 21   col 6   Missing semicolon.
+  line 5    col 5    Missing "use strict" statement.
 
 app/notifications/notifications.directive.js
-  line 1    col 31  Strings must use singlequote.
-  line 2    col 29  Strings must use singlequote.
-  line 3    col 5   Missing "use strict" statement.
-  line 6    col 38  Strings must use singlequote.
-  line 7    col 6   Missing semicolon.
+  line 2    col 3    Missing "use strict" statement.
 
 app/notifications/notifications.factory.js
-  line 1    col 31  Strings must use singlequote.
-  line 2    col 34  Strings must use singlequote.
-  line 3    col 5   Missing "use strict" statement.
-  line 9    col 13  Expected an assignment or function call and instead saw an expression.
-  line 15   col 31  Missing semicolon.
-  line 16   col 46  Strings must use singlequote.
-  line 49   col 6   Missing semicolon.
+  line 4    col 5    Missing "use strict" statement.
+  line 7    col 13   Expected an assignment or function call and instead saw an expression.
 
 app/projectManager/projectManager.controller.js
-  line 39   col 6   Missing semicolon.
-  line 37   col 31  'data' is defined but never used.
+  line 39   col 6    Missing semicolon.
+  line 37   col 31   'data' is defined but never used.
 
 app/projectManager/projectManager.factory.js
-  line 17   col 6   Missing semicolon.
-  line 21   col 26  Expected '===' and instead saw '=='.
-  line 24   col 6   Missing semicolon.
-  line 36   col 76  Strings must use singlequote.
-  line 38   col 11  Missing semicolon.
-  line 42   col 42  Expected '===' and instead saw '=='.
-  line 68   col 15  Missing semicolon.
-  line 76   col 15  Missing semicolon.
-  line 102  col 35  Strings must use singlequote.
-  line 112  col 15  Missing semicolon.
-  line 160  col 83  Strings must use singlequote.
-  line 189  col 12  Don't make functions within a loop.
-  line 219  col 54  Strings must use singlequote.
-  line 219  col 47  ['path'] is better written in dot notation.
-  line 223  col 14  Don't make functions within a loop.
-  line 127  col 44  'JSZip' is not defined.
-  line 144  col 23  'JSZip' is not defined.
-  line 155  col 9   'saveAs' is not defined.
-  line 160  col 9   'saveAs' is not defined.
-  line 32   col 50  'config' is defined but never used.
-  line 32   col 41  'headers' is defined but never used.
-  line 32   col 33  'status' is defined but never used.
-  line 109  col 52  'config' is defined but never used.
-  line 109  col 43  'headers' is defined but never used.
-  line 109  col 35  'status' is defined but never used.
+  line 17   col 6    Missing semicolon.
+  line 21   col 26   Expected '===' and instead saw '=='.
+  line 24   col 6    Missing semicolon.
+  line 36   col 76   Strings must use singlequote.
+  line 38   col 11   Missing semicolon.
+  line 42   col 42   Expected '===' and instead saw '=='.
+  line 68   col 15   Missing semicolon.
+  line 76   col 15   Missing semicolon.
+  line 102  col 35   Strings must use singlequote.
+  line 112  col 15   Missing semicolon.
+  line 160  col 83   Strings must use singlequote.
+  line 189  col 12   Don't make functions within a loop.
+  line 219  col 54   Strings must use singlequote.
+  line 219  col 47   ['path'] is better written in dot notation.
+  line 223  col 14   Don't make functions within a loop.
+  line 127  col 44   'JSZip' is not defined.
+  line 144  col 23   'JSZip' is not defined.
+  line 155  col 9    'saveAs' is not defined.
+  line 160  col 9    'saveAs' is not defined.
+  line 32   col 50   'config' is defined but never used.
+  line 32   col 41   'headers' is defined but never used.
+  line 32   col 33   'status' is defined but never used.
+  line 109  col 52   'config' is defined but never used.
+  line 109  col 43   'headers' is defined but never used.
+  line 109  col 35   'status' is defined but never used.
 
 app/stories/bubble/fibonacci.js
-  line 3    col 3   Missing "use strict" statement.
+  line 3    col 3    Missing "use strict" statement.
 
 app/stories/bubble/graham_scan.js
-  line 8    col 5   Missing "use strict" statement.
-  line 18   col 9   Missing "use strict" statement.
-  line 23   col 9   Missing "use strict" statement.
-  line 27   col 22  Expected '===' and instead saw '=='.
-  line 27   col 37  Expected '===' and instead saw '=='.
-  line 48   col 9   Missing "use strict" statement.
-  line 53   col 68  Expected '===' and instead saw '=='.
-  line 64   col 9   Missing "use strict" statement.
-  line 82   col 9   Missing "use strict" statement.
-  line 90   col 20  Confusing use of '!'.
-  line 104  col 9   Missing "use strict" statement.
-  line 139  col 33  Expected '===' and instead saw '=='.
-  line 140  col 36  Expected '===' and instead saw '=='.
-  line 156  col 9   Missing "use strict" statement.
-  line 154  col 37  'define' is not defined.
-  line 155  col 5   'define' is not defined.
+  line 8    col 3    Missing "use strict" statement.
+  line 15   col 5    Missing "use strict" statement.
+  line 19   col 5    Missing "use strict" statement.
+  line 22   col 18   Expected '===' and instead saw '=='.
+  line 22   col 33   Expected '===' and instead saw '=='.
+  line 39   col 5    Missing "use strict" statement.
+  line 42   col 63   Expected '===' and instead saw '=='.
+  line 51   col 5    Missing "use strict" statement.
+  line 65   col 5    Missing "use strict" statement.
+  line 70   col 14   Confusing use of '!'.
+  line 78   col 5    Missing "use strict" statement.
+  line 100  col 27   Expected '===' and instead saw '=='.
+  line 101  col 28   Expected '===' and instead saw '=='.
+  line 115  col 5    Missing "use strict" statement.
+  line 113  col 37   'define' is not defined.
+  line 114  col 3    'define' is not defined.
 
 app/stories/bubble/sort_algorithms/bubblesort.js
-  line 2    col 3   Missing "use strict" statement.
-  line 14   col 9   'swapped' used out of scope.
-  line 14   col 19  Expected '===' and instead saw '=='.
-  line 14   col 25  Missing semicolon.
-  line 15   col 2   Unnecessary semicolon.
+  line 2    col 3    Missing "use strict" statement.
+  line 14   col 9    'swapped' used out of scope.
+  line 14   col 19   Expected '===' and instead saw '=='.
+  line 14   col 25   Missing semicolon.
+  line 15   col 2    Unnecessary semicolon.
 
 app/stories/topdownparse/parse.js
-  line 25   col 9   Missing "use strict" statement.
-  line 34   col 5   Missing "use strict" statement.
-  line 34   col 16  'source' is already defined.
-  line 34   col 24  Missing semicolon.
-  line 149  col 61  Strings must use singlequote.
-  line 163  col 55  Strings must use singlequote.
-  line 173  col 55  Strings must use singlequote.
-  line 186  col 47  Strings must use singlequote.
-  line 187  col 55  Strings must use singlequote.
-  line 201  col 72  Strings must use singlequote.
-  line 222  col 76  Strings must use singlequote.
-  line 226  col 76  Strings must use singlequote.
-  line 276  col 2   Unnecessary semicolon.
-  line 287  col 0   Identifier 'make_parse' is not in camel case.
-  line 288  col 5   Missing "use strict" statement.
-  line 289  col 0   Identifier 'symbol_table' is not in camel case.
-  line 292  col 0   Identifier 'token_nr' is not in camel case.
-  line 298  col 0   Identifier 'original_scope' is not in camel case.
-  line 301  col 38  Strings must use singlequote.
-  line 302  col 57  Strings must use singlequote.
-  line 302  col 78  Strings must use singlequote.
-  line 322  col 0   Identifier 'symbol_table' is not in camel case.
-  line 323  col 0   Identifier 'symbol_table' is not in camel case.
-  line 323  col 84  Strings must use singlequote.
-  line 331  col 35  Strings must use singlequote.
-  line 339  col 39  Strings must use singlequote.
-  line 340  col 47  Strings must use singlequote.
-  line 348  col 0   Identifier 'new_scope' is not in camel case.
-  line 350  col 0   Identifier 'original_scope' is not in camel case.
-  line 359  col 37  Strings must use singlequote.
-  line 359  col 49  Strings must use singlequote.
-  line 361  col 0   Identifier 'token_nr' is not in camel case.
-  line 362  col 0   Identifier 'symbol_table' is not in camel case.
-  line 362  col 41  Strings must use singlequote.
-  line 365  col 0   Identifier 'token_nr' is not in camel case.
-  line 366  col 0   Identifier 'token_nr' is not in camel case.
-  line 369  col 25  Strings must use singlequote.
-  line 371  col 36  Strings must use singlequote.
-  line 372  col 0   Identifier 'symbol_table' is not in camel case.
-  line 374  col 44  Strings must use singlequote.
-  line 376  col 34  Strings must use singlequote.
-  line 376  col 53  Strings must use singlequote.
-  line 377  col 0   Identifier 'symbol_table' is not in camel case.
-  line 377  col 41  Strings must use singlequote.
-  line 378  col 26  Strings must use singlequote.
-  line 380  col 40  Strings must use singlequote.
-  line 412  col 42  Strings must use singlequote.
-  line 413  col 48  Strings must use singlequote.
-  line 415  col 20  Strings must use singlequote.
-  line 422  col 33  Strings must use singlequote.
-  line 422  col 33  Too many errors. (51% scanned).
+  line 20   col 5    Missing "use strict" statement.
+  line 27   col 3    Missing "use strict" statement.
+  line 27   col 14   'source' is already defined.
+  line 234  col 0    Identifier 'make_parse' is not in camel case.
+  line 235  col 3    Missing "use strict" statement.
+  line 236  col 0    Identifier 'symbol_table' is not in camel case.
+  line 239  col 0    Identifier 'token_nr' is not in camel case.
+  line 243  col 0    Identifier 'original_scope' is not in camel case.
+  line 267  col 0    Identifier 'symbol_table' is not in camel case.
+  line 268  col 0    Identifier 'symbol_table' is not in camel case.
+  line 292  col 0    Identifier 'new_scope' is not in camel case.
+  line 294  col 0    Identifier 'original_scope' is not in camel case.
+  line 304  col 0    Identifier 'token_nr' is not in camel case.
+  line 305  col 0    Identifier 'symbol_table' is not in camel case.
+  line 308  col 0    Identifier 'token_nr' is not in camel case.
+  line 309  col 0    Identifier 'token_nr' is not in camel case.
+  line 315  col 0    Identifier 'symbol_table' is not in camel case.
+  line 320  col 0    Identifier 'symbol_table' is not in camel case.
+  line 376  col 0    Identifier 'original_symbol' is not in camel case.
+  line 385  col 0    Identifier 'symbol_table' is not in camel case.
+  line 392  col 0    Identifier 'original_symbol' is not in camel case.
+  line 395  col 0    Identifier 'symbol_table' is not in camel case.
+  line 403  col 0    Identifier 'symbol_table' is not in camel case.
+  line 557  col 0    Identifier 'new_scope' is not in camel case.
+  line 628  col 0    Identifier 'new_scope' is not in camel case.
+  line 703  col 0    Identifier 'token_nr' is not in camel case.
+  line 704  col 0    Identifier 'new_scope' is not in camel case.
+  line 713  col 0    Identifier 'make_parse' is not in camel case.
+  line 714  col 5    'tree' is defined but never used.
+  line 380  col 20   'left' is defined but never used.
 
 app/stories/topdownparse/tokens.js
-  line 26   col 5   Missing "use strict" statement.
-  line 140  col 61  Strings must use singlequote.
-  line 154  col 55  Strings must use singlequote.
-  line 164  col 55  Strings must use singlequote.
-  line 177  col 47  Strings must use singlequote.
-  line 178  col 55  Strings must use singlequote.
-  line 192  col 72  Strings must use singlequote.
-  line 213  col 76  Strings must use singlequote.
-  line 217  col 76  Strings must use singlequote.
+  line 19   col 3    Missing "use strict" statement.
 
-  ✖  30 errors
-  ⚠  360 warnings
+  ✖  20 errors
+  ⚠  159 warnings
 
 [33mWarning: Task "jshint:all" failed. Use --force to continue.[39m
 
 [31mAborted due to warnings.[39m
 
 
-Execution Time (2015-06-09 11:12:42 UTC)
-jshint:all   938ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 99%
-Total 946ms
+Execution Time (2015-06-09 11:25:28 UTC)
+jshint:all  1s  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 99%
+Total 1s
 

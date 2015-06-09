@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc directive
  * @name narrator.directive:item
@@ -10,22 +9,15 @@
  * is passed along in the item object.
  * @param {object} item Item object.
  */
-angular.module('narrator')
-  .directive('item', function () {
-    return {
-      restrict: 'AE',
-      templateUrl: 'narrator/item/item.html'
-    }
-  })
-  .directive('itemEdit', function () {
-    return {
-      transclude: true,
-      restrict: 'AE',
-      templateUrl: 'narrator/item/item.edit.html'
-    }
-  })
-  
-
-
-
-
+angular.module('narrator').directive('item', function () {
+  return {
+    restrict: 'AE',
+    templateUrl: 'narrator/item/item.html'
+  };
+}).directive('itemEdit', function () {
+  return {
+    transclude: true,
+    restrict: 'AE',
+    templateUrl: 'narrator/item/item.edit.html'
+  };
+});

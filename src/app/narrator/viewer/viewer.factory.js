@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc service
  * @name narrator.factory:viewerFactory
@@ -10,50 +9,48 @@
  * Factory of the viewer, containers logic of the viewer like selecting, deselecting
  * and stepping through a narrative.
  */
- 
- angular.module('narrator')
- .factory('viewerFactory',['$state', '$stateParams', 'CAST','interpreterFactory', 'vCodeInterpreterFactory' ,
+angular.module('narrator').factory('viewerFactory', [
+  '$state',
+  '$stateParams',
+  'CAST',
+  'interpreterFactory',
+  'vCodeInterpreterFactory',
   function ($state, $stateParams, CAST, interpreterFactory, vCodeInterpreterFactory) {
-
-      /**
+    /**
         * @ngdoc method
         * @name processItem
         * @methodOf narrator.factory:viewerFactory
         * @description
         * Runs VCode items in the VCode interpreter and replaces [[ variable_name ]] with the variable_name.toString from the interpreter scope
         */
-    function processCodeStep(step){
-        var item = step.item
-        if(item.isVCodeItem()){
-          step.item = item.clone();
-          vCodeInterpreterFactory.runVCode( step.item , step.scope);
-        }
-
-        // Match text from a text time to be replaced by values of the current state of execution
-        
-        if(item.isTextItem()){
-          var doubleBrakRegex = /\[\[\s?(\w*)\s?\]\]/ // regex to match [[ someword ]]
-          var matched = doubleBrakRegex.exec(item.content);
-          while( matched ){
-            var value = step.scope[matched[1]];
-            item.content = item.content.split(matched[0]).join(value);
-            matched = doubleBrakRegex.exec(item.content);
-          }
-        }
-        return step;
-
+    function processCodeStep(step) {
+      var item = step.item;
+      if (item.isVCodeItem()) {
+        step.item = item.clone();
+        vCodeInterpreterFactory.runVCode(step.item, step.scope);
       }
-
-  return {
-
-       /**
+      // Match text from a text time to be replaced by values of the current state of execution
+      if (item.isTextItem()) {
+        var doubleBrakRegex = /\[\[\s?(\w*)\s?\]\]/;
+        // regex to match [[ someword ]]
+        var matched = doubleBrakRegex.exec(item.content);
+        while (matched) {
+          var value = step.scope[matched[1]];
+          item.content = item.content.split(matched[0]).join(value);
+          matched = doubleBrakRegex.exec(item.content);
+        }
+      }
+      return step;
+    }
+    return {
+      /**
        * @ngdoc property
        * @name storyboard
        * @propertyOf narrator.factory:viewerFactory
        * @description
        * Array that contains she currently displayed items of the playing narrative
        */
-      storyboard: [], 
+      storyboard: [],
       // Stores the narratives that are currently playing
       queue: [],
       // Stores state of the narrative thats currently playing
@@ -61,10 +58,9 @@
       // Stores the paths to the queued up nodes
       queuePaths: [],
       // The current node of a code narrative. (Will be replaced by $state in the future.)
-      lastCodeNarrativeNode: "",
+      lastCodeNarrativeNode: '',
       // Scope of the code that is playing at this current moment.
-      interpreterScope : {},
-
+      interpreterScope: {},
       /**
        * @ngdoc method
        * @name selectNarrative
@@ -74,13 +70,12 @@
        * current state to playing and pushes the given narrative on the queue.
        *
        * @param {object} narrative a narrative object to play.
-       */     
-      selectNarrative: function(narrative){
+       */
+      selectNarrative: function (narrative) {
         this.deselectNarrative();
         this.pushNarrative(narrative);
         $state.go('narrating.viewing.playing');
       },
-
       /**
        * @ngdoc method
        * @name deselectNarrative
@@ -88,14 +83,13 @@
        * @description
        * Deselects the current playing narrative. This empties the queue and sets
        * the playing state to false.
-       */ 
-      deselectNarrative: function(){
+       */
+      deselectNarrative: function () {
         this.queue.length = 0;
         this.queueCounter.length = 0;
         this.storyboard.length = 0;
         $state.go('narrating.viewing.selecting');
       },
-
       /**
         * @ngdoc method
         * @name pushNarrative
@@ -105,18 +99,20 @@
         * narrative will now be played until a new narrative is pushed.
         * @param {object} narrative a narrative object to push on the stack.
         */
-      pushNarrative: function(narrative){
+      pushNarrative: function (narrative) {
         this.queue.unshift(narrative);
         this.queueCounter.unshift(0);
-        this.storyboard.push({'name':this.queue[0].name, 'items':[]});
-        if( narrative.isCodeNarrative() ){
+        this.storyboard.push({
+          'name': this.queue[0].name,
+          'items': []
+        });
+        if (narrative.isCodeNarrative()) {
           var CASTNode = CAST.getNode(narrative.CASTPath);
           interpreterFactory.reset();
-          interpreterFactory.setupNarratedAST(CASTNode,narrative);
+          interpreterFactory.setupNarratedAST(CASTNode, narrative);
           vCodeInterpreterFactory.startSession();
         }
       },
-
       /**
         * @ngdoc method
         * @name popNarrative
@@ -125,22 +121,22 @@
         * Pops a narrative from the queue. When there are still narratives on the queue
         * play the next narrative. If the queue is empty then stop playing.
         */
-      popNarrative: function() {
+      popNarrative: function () {
         // Remove the first item from the queue
         this.queue.shift();
         this.queueCounter.shift();
-
         // If there are no more items left in the queue stop playing
-        if(this.queue.length == 0){
+        if (this.queue.length === 0) {
           this.deselectNarrative();
-        }
-        // Else continue with the queued up narrative
-        else{
-          this.storyboard.push({'name':this.queue[0].name, 'items':[]});
-          $state.go('narrating.viewing.playing', {'path': this.queuePaths.shift()});
+        }  // Else continue with the queued up narrative
+        else {
+          this.storyboard.push({
+            'name': this.queue[0].name,
+            'items': []
+          });
+          $state.go('narrating.viewing.playing', { 'path': this.queuePaths.shift() });
         }
       },
-
       /**
         * @ngdoc method
         * @name step
@@ -149,19 +145,17 @@
         * Determines which narrative step should be taken depending on the narrative that is
         * playing. Pops a narrative when the next step is the last of the narrative.
         */
-      step: function(){
+      step: function () {
         var result;
-        if( this.queue[0].isCodeNarrative() ){
-            result = this.codeNarrativeStep();
+        if (this.queue[0].isCodeNarrative()) {
+          result = this.codeNarrativeStep();
         } else {
-            result = this.fsNarrativeStep();
+          result = this.fsNarrativeStep();
         }
-        if(!result){
-           this.popNarrative();
+        if (!result) {
+          this.popNarrative();
         }
       },
-
-
       /**
         * @ngdoc method
         * @name fsNarrativeStep
@@ -173,27 +167,20 @@
         * then it pops the narrative of the queue and continues with the next narrative
         * or halts playback.
         */
-      fsNarrativeStep: function(){
-        if(this.queue[0].items.length > this.queueCounter[0]){
-            var nextItem = this.queue[0].items[this.queueCounter[0]];
+      fsNarrativeStep: function () {
+        if (this.queue[0].items.length > this.queueCounter[0]) {
+          var nextItem = this.queue[0].items[this.queueCounter[0]];
         } else {
           return false;
         }
-
         this.queueCounter[0]++;
-        if( nextItem.isLinkItem() ) {
+        if (nextItem.isLinkItem()) {
           this.loadNarrative(nextItem);
-        }
-        else { 
-          this.storyboard[this.storyboard.length-1].items.push(nextItem);
+        } else {
+          this.storyboard[this.storyboard.length - 1].items.push(nextItem);
         }
         return true;
       },
-
-
-
-
-
       /**
         * @ngdoc method
         * @name codeNarrativeStep
@@ -201,29 +188,23 @@
         * @description
         * processes a single code narrative step and generates the propper items. Can be called by debug step. 
         */
-      codeNarrativeStep: function(step) {
+      codeNarrativeStep: function (step) {
         var codeStep = step || interpreterFactory.narrativeStep();
-       
-        if(!codeStep.item) return false;
-
-
+        if (!codeStep.item)
+          return false;
         codeStep = processCodeStep(codeStep);
-
         var item = codeStep.item;
-
         // Push the narrative on the storyboard
-        this.interpreterScope = codeStep.scope
-        this.storyboard[this.storyboard.length-1].items.push(item);
-
+        this.interpreterScope = codeStep.scope;
+        this.storyboard[this.storyboard.length - 1].items.push(item);
         // Goes to next node
-        if(this.lastCodeNarrativeNode != codeStep.node.getPath()){
+        if (this.lastCodeNarrativeNode !== codeStep.node.getPath()) {
           this.lastCodeNarrativeNode = codeStep.node.getPath();
-          $state.go('narrating.viewing.playing', {'path': codeStep.node.getPath()});
+          $state.go('narrating.viewing.playing', { 'path': codeStep.node.getPath() });
         }
         this.lastCodeNarrativeNode = codeStep.node.getPath();
         return true;
       },
-      
       /**
         * @ngdoc method
         * @name loadNarrative
@@ -236,25 +217,19 @@
         var node = CAST.getNode(linkItem.content.path);
         var narratives = CAST.getNarratives(linkItem.content.path);
         var linked;
-
         for (var index in narratives) {
-          if (narratives[index].name == linkItem.content.id){
+          if (narratives[index].name === linkItem.content.id) {
             linked = narratives[index];
           }
         }
-
-        if(linked === undefined){
-          linked = node.isASTNode() ? 
-          new CodeNarrative('A new narrative appears',linkItem.content.path ) : new FSNarrative('A new narrative appears',linkItem.content.path);
-        } 
+        if (linked === undefined) {
+          linked = node.isASTNode() ? new CodeNarrative('A new narrative appears', linkItem.content.path) : new FSNarrative('A new narrative appears', linkItem.content.path);
+        }
         this.queuePaths.unshift($stateParams.path);
-
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
-
-        $state.go('narrating.viewing.playing', {'path': linkItem.content.path});
+        $state.go('narrating.viewing.playing', { 'path': linkItem.content.path });
       },
-
       /**
         * @ngdoc method
         * @name debugStep
@@ -263,21 +238,18 @@
         * Steps through code rather than narrative. If the next item is also an item in a narrative then
         * play back that item.
         */
-      debugStep: function(){
+      debugStep: function () {
         var step = interpreterFactory.debugStep();
-        
-        if(step.item){
+        if (step.item) {
           this.codeNarrativeStep(step);
         } else {
           this.interpreterScope = step.scope;
-          if(!step.node){
+          if (!step.node) {
             this.popNarrative();
           }
-          $state.go('narrating.viewing.playing', {'path': step.node.getPath()});
+          $state.go('narrating.viewing.playing', { 'path': step.node.getPath() });
         }
-      },
-    }
-  }]);
-
-
-
+      }
+    };
+  }
+]);
