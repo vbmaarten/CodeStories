@@ -1,6 +1,4 @@
 'use strict';
-
-
 /**
  * @ngdoc overview
  * @name navigation

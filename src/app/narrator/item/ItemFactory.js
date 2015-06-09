@@ -1,4 +1,11 @@
 'use strict';
+/**
+ * @ngdoc service
+ * @name narrator.factory:ItemFactory
+ * @description
+ * 
+ * Provides Item object creators
+ */
 angular.module('narrator').factory('ItemFactory', [function () {
     var baseUrl = 'narrator/item/';
     var Item = function (content, url) {

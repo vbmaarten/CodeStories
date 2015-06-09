@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @ngdoc function
- * @name explorer.controller:ExplorerCtrl
+ * @ngdoc controller
+ * @name explorer.controller:DirectoriesCtrl
  * @description
  * @requires cast.factory:CAST 
  * 

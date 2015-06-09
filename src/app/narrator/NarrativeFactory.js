@@ -1,4 +1,11 @@
 'use strict';
+/**
+ * @ngdoc service
+ * @name narrator.factory:NarrativeFactory
+ * @description
+ * 
+ * Provides Narrative object creators
+ */
 angular.module('narrator').factory('NarrativeFactory', [
   'ItemFactory',
   function (ItemFactory) {

@@ -1,7 +1,7 @@
 'use strict';
 /**
  * @ngdoc directive
- * @name notifications.directive:notifications
+ * @name notifications.directive:notification
  * @scope
  * @restrict E
  * @description

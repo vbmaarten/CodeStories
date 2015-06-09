@@ -1,6 +1,12 @@
 'use strict';
 
-
+/**
+ * @ngdoc service
+ * @name cast.factory:CASTNodeFactory
+ * @description
+ * 
+ * Provides CAST object creators
+ */
 
 angular.module('cast').factory('CASTNodeFactory', [
   'ItemFactory',
