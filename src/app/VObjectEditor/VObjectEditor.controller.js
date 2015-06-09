@@ -47,7 +47,7 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
     $scope.test = function () {
       $scope.saveObject();
       var VItem = new ItemFactory.VCodeItem($scope.VCode);
-      vCodeInterpreterFactory.startSession();
+      vCodeInterpreterFactory.newSession();
       vCodeInterpreterFactory.runVCode(VItem, {});
       var VElement = document.getElementById('VisualElement');
       if (VElement.children.length > 0) {

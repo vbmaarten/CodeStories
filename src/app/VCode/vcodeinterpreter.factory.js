@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * @ngdoc service
@@ -22,10 +21,7 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
     };
     var VScope = {};
     return {
-      startSession: function () {
-        VScope = {};
-      },
-      resetSession: function () {
+      newSession: function () {
         VScope = {};
       },
       runVCode: function (VCodeItem, interpreterScope) {

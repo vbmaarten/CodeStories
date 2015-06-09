@@ -36,14 +36,14 @@ describe('Factory: VCodeInterpreter factory', function() {
 
 
   it("should be able to start and reset a session", function(){
-    vCodeInterpreterFactory.startSession();
+    vCodeInterpreterFactory.newSession();
 
-     vCodeInterpreterFactory.resetSession();
+     vCodeInterpreterFactory.newSession();
     
   });
 
     it("should be possible to process a vCode Item" , function(){
-       vCodeInterpreterFactory.startSession();
+       vCodeInterpreterFactory.newSession();
 
        var step = interpreterFactory.narrativeStep();
        vCodeInterpreterFactory.runVCode(step.item, step.scope);
