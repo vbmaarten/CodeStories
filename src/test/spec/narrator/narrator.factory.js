@@ -11,47 +11,52 @@ describe('Module: Narrator', function(){
       go : function (state, params) {
         this.state = state;
         this.params = params;
+      },
+      is :function(state) {
+        return this.state == state;
       }
     });
   }));
 
+  beforeEach(module(function ($provide) {
+    $provide.value('interpreterFactory', {
+      debugStep: {},
+      narrativeStep: {},
+      setupNarratedAST : function (CASTNode, narrative) {
+        this.narrative = narrative;
+      },
+      narrativeStep : function() {
+        return this.narrativeStep;
+      },
+      reset : function() {},
+      debugStep: function(){
+        return this.debugStep;
+      },
+    });
+  }));
+
+  var CAST,
+      folderNode,
+      fileNode,
+      astNode,
+      CASTNodeFactory;
+
+  beforeEach(inject(function (_CAST_, _CASTNodeFactory_){
+    CASTNodeFactory = _CASTNodeFactory_;
+    CAST = _CAST_;
+    folderNode = CAST.cast.rootnode.children['folderNode'] = new CASTNodeFactory.FolderNode('folderNode', CAST.cast.rootnode, {});
+    fileNode = folderNode.children['fileNode.js'] = new CASTNodeFactory.FileNode('fileNode.js', folderNode, { });
+    astNode = fileNode.children['program'] = new CASTNodeFactory.ASTNode('program', fileNode, {}, null);
+
+    CAST.appendNarrative(narrativesMock);
+  }));
+
   describe('Factory: Viewer', function() {
 
-    beforeEach(module(function ($provide) {
-      $provide.value('interpreterFactory', {
-        debugStep: {},
-        narrativeStep: {},
-        setupNarratedAST : function (CASTNode, narrative) {
-          this.narrative = narrative;
-        },
-        narrativeStep : function() {
-          return this.narrativeStep;
-        },
-        reset : function() {},
-        debugStep: function(){
-          return this.debugStep;
-        },
-      });
-    }));
-
-    
-
     var narrator;
-    var CAST;
-    var folderNode;
-    var fileNode;
-    var astNode;
-    var CASTNodeFactory
 
-    beforeEach(inject(function(_CAST_,_CASTNodeFactory_, _viewerFactory_){
-      CASTNodeFactory = _CASTNodeFactory_;
+    beforeEach(inject(function (_viewerFactory_){
       narrator = _viewerFactory_;
-      CAST = _CAST_;
-      folderNode = CAST.cast.rootnode.children['folderNode'] = new CASTNodeFactory.FolderNode('folderNode', CAST.cast.rootnode, {});
-      fileNode = folderNode.children['fileNode.js'] = new CASTNodeFactory.FileNode('fileNode.js', folderNode, { });
-      astNode = fileNode.children['program'] = new CASTNodeFactory.ASTNode('program', fileNode, {}, null);
-
-      CAST.appendNarrative(narrativesMock);
     }));
 
 
@@ -74,7 +79,7 @@ describe('Module: Narrator', function(){
       expect(narrator.queue.length).toBe( 2 );
     });
 
-    it('should be able to select a narrative for playing', inject(function($state) {
+    it('should be able to select a narrative for playing', inject(function ($state) {
       narrator.selectNarrative(CAST.getNarrative('/folderNode', 0));
       expect($state.state).toBe( 'narrating.viewing.playing' );
     }));
@@ -90,7 +95,7 @@ describe('Module: Narrator', function(){
     }));
 
 
-    it('should be possible to pop an item from the narrative queue', inject(function($state){
+    it('should be possible to pop an item from the narrative queue', inject(function ($state){
       narrator.selectNarrative(CAST.getNarrative('/folderNode', 0));
       narrator.pushNarrative(CAST.getNarrative('/folderNode/fileNode.js', 0));
       narrator.queuePaths.push('somepath');
@@ -114,7 +119,7 @@ describe('Module: Narrator', function(){
       expect(narrator.storyboard[0].items.length).toBe( 1 );
     });
 
-    it('should load a narrative from a narrative link', inject(function($state){
+    it('should load a narrative from a narrative link', inject(function ($state){
       expect($state.params).toBeUndefined();
 
       narrator.loadNarrative({
@@ -125,7 +130,7 @@ describe('Module: Narrator', function(){
       expect($state.params.path).toBe("/folderNode/fileNode.js");
     }));
 
-    it('should perform a code narrative step, where it adds an item from a code narrative to the storyboard', inject(function(interpreterFactory, $state){
+    it('should perform a code narrative step, where it adds an item from a code narrative to the storyboard', inject(function (interpreterFactory, $state){
       expect(narrator.codeNarrativeStep()).toBe( false );
 
       narrator.pushNarrative(CAST.getNarrative('/folderNode/fileNode.js/program', 0));
@@ -154,22 +159,11 @@ describe('Module: Narrator', function(){
   describe('Factory: Writer', function() {
 
     var writer;
-    var CAST;
-    var folderNode;
-    var fileNode;
-    var astNode;
-    var CASTNodeFactory;
     var $state;
 
-    beforeEach(inject(function(_CAST_, _CASTNodeFactory_, _writerFactory_, _$state_){
-      CASTNodeFactory = _CASTNodeFactory_;
+    beforeEach(inject(function (_writerFactory_, _$state_){
       writer = _writerFactory_;
-      CAST = _CAST_;
-      folderNode = CAST.cast.rootnode.children['folderNode'] = new CASTNodeFactory.FolderNode('folderNode', CAST.cast.rootnode, {});
-      fileNode = folderNode.children['fileNode.js'] = new CASTNodeFactory.FileNode('fileNode.js', folderNode, { });
-      astNode = fileNode.children['program'] = new CASTNodeFactory.ASTNode('program', fileNode, {}, null);
       $state = _$state_;
-      CAST.appendNarrative(narrativesMock);
     }));
 
     it('should select a narrative for editing', function() {
@@ -199,6 +193,95 @@ describe('Module: Narrator', function(){
       writer.addNarrative(CAST.getNode('/folderNode/fileNode.js/program'));
       expect(CAST.narratives['/folderNode/fileNode.js/program'].length).toBe( 2 );
     });
+  });
+
+  describe('Controller: Writer', function(){
+    var writerFactory;
+    var $state;
+    var $scope;
+
+    beforeEach(inject(function (_writerFactory_, _$state_, $rootScope, $controller){
+      $state = _$state_;
+      $scope = $rootScope.$new();
+      writerFactory = _writerFactory_;
+      $state.go('narrating.writing.editing');
+      CAST.setSelected('/folderNode');
+      writerFactory.selectNarrative(CAST.getNarrative('/folderNode', 0));
+      $controller('WriterCtrl', {$scope : $scope});
+    }));
+
+    it('should get the correct narrative when state is editing', function (){
+      expect($scope.selectedNarrative).toBe(writerFactory.selectedNarrative);
+      expect($scope.selectedNarrative).toBe(CAST.getNarrative('/folderNode', 0));
+    });
+
+    it('should deselect a narrative and switch state after', inject(function ($rootScope, $controller){
+      expect($state.state).toBe('narrating.writing.editing');
+      $scope.deselectNarrative();
+      expect($state.state).toBe('narrating.writing.selecting');
+      $scope = $rootScope.$new();
+      $controller('NarratorCtrl', {$scope: $scope});
+       $controller('WriterCtrl', {$scope : $scope});
+      expect($scope.selectedNarrative).toBeUndefined();
+    }));
+
+    it('should add an item to the current narrative', inject(function ($controller) {
+      expect($scope.selectedNarrative.items.length).toBe(3);
+      $scope.addItem();
+      expect($scope.selectedNarrative.items.length).toBe(4);
+      
+      $scope.selectNarrative(CAST.getNarrative('/folderNode/fileNode.js/program',0));
+      CAST.selectedPath = '/folderNode/fileNode.js/program/Body';
+      $controller('WriterCtrl', {$scope : $scope});
+      expect($scope.selectedNarrative.narrativeHooks['/Body']).toBeUndefined();
+      $scope.addItem();
+      expect($scope.selectedNarrative.narrativeHooks['/Body']).toBeDefined();
+    }));
+
+    it('should remove an item from the current narrative', function() {
+      expect($scope.selectedNarrative.items.length).toBe(3);
+      $scope.removeItem($scope.selectedNarrative.items[0]);
+      expect($scope.selectedNarrative.items.length).toBe(2);
+    });
+
+    it('should check if the current state is compatible with the current selected node', inject(function ($state, $controller){
+      CAST.selectedPath = '/';
+      expect($state.state).toBe('narrating.writing.editing');
+      $controller('WriterCtrl', {$scope : $scope});
+      expect($state.state).toBe('narrating.writing.selecting');
+    }));
+
+    describe('when selecting', function() {
+      beforeEach(inject(function (_writerFactory_, _$state_, $rootScope, $controller){
+        $state = _$state_;
+        $scope = $rootScope.$new();
+        writerFactory = _writerFactory_;
+        $state.go('narrating.writing.selecting');
+        $controller('NarratorCtrl', {$scope: $scope});
+        $controller('WriterCtrl', {$scope : $scope});
+      }));
+
+      it('should be able to select a node', function (){
+        $scope.selectNarrative(CAST.getNarrative('/folderNode/fileNode.js', 0));
+        expect($scope.selectedNarrative).toBe(CAST.getNarrative('/folderNode/fileNode.js', 0));
+        expect($scope.selectedNarrative).toBe(writerFactory.selectedNarrative);
+        expect($state.state).toBe('narrating.writing.editing');
+      });
+
+      it('should add a narrative and display it in the scope', function(){
+        expect($scope.narratives.length).toBe(1);
+        $scope.addNarrative();
+        expect($scope.narratives.length).toBe(2);
+      });
+
+      it('should remove a narrative from the list and from the scope', function(){
+        expect($scope.narratives.length).toBe(1);
+        $scope.removeNarrative(CAST.getNarrative('/folderNode', 0));
+        expect($scope.narratives.length).toBe(0);
+      });
+
+    });
+
   });
 
 });
