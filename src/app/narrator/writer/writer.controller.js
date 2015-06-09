@@ -22,7 +22,6 @@ angular.module('narrator')
       $scope.selectedNarrative = writerFactory.selectedNarrative;
       if(!$scope.selectedNarrative.hasSubNode(CAST.selectedPath))
         $state.go('narrating.writing.selecting');
-      console.log(CAST.selectedPath.replace($scope.selectedNarrative.CASTPath, ''));
       //$anchorScroll(CAST.selectedPath.replace($scope.selectedNarrative.CASTPath), '');
     } else {
       writerFactory.selectedNarrative = undefined;
