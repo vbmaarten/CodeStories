@@ -40,6 +40,21 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
       newSession: function () {
         VScope = {};
       },
+
+
+
+      /**
+        * @ngdoc method
+        * @name runVCode
+        * @methodOf VCodeInterpreter.factory:vCodeInterpreterFactory
+        * @description
+        * Runs VCode. Status: Unsafe , security risk : medium
+        * Although 'with' statements are very bad practice. this is by far the easiest way. 
+        * The app will run as a static site so users should not be in any real risk as far as we know. 
+        * possible 'better' methods: 
+        * 1) mock all objects from the global scope. But a mallicous user can still access the window through the dom elements or eval wizardry
+        * 2) run the VCode by using the interpreter. This requires a lot of patches to the interpreter to inject the proper methods. We do not have the time. 
+        */
       runVCode: function (VCodeItem, interpreterScope) {
         generateScope(VCodeItem.content, VScope);
         var $this = this;
