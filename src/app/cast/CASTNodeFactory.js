@@ -1,4 +1,7 @@
 'use strict';
+
+
+
 angular.module('cast').factory('CASTNodeFactory', [
   'ItemFactory',
   'notificationsFactory',

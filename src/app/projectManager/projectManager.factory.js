@@ -8,112 +8,99 @@
  * Factory of the projectManager, contains logic for importing and exporting
  * project files. 
  */
-
- angular.module('projectManager').factory('projectManagerFactory', [
-  'CAST', '$http', 'CASTNodeFactory','notificationsFactory',
+angular.module('projectManager').factory('projectManagerFactory', [
+  'CAST',
+  '$http',
+  'CASTNodeFactory',
+  'notificationsFactory',
   function (CAST, $http, CASTNodeFactory, notificationsFactory) {
-    var _incrementCounter = function(counter){
+    var _incrementCounter = function (counter) {
       counter.value = counter.value ? counter.value + 1 : 1;
-    }
-
-    var _decrementCounter = function(counter, proceed){
+    };
+    var _decrementCounter = function (counter, proceed) {
       counter.value -= 1;
-      if(counter.value === 0){
+      if (counter.value === 0) {
         proceed();
       }
-    }
-
+    };
     return {
-
-      gitHubLoadCounter: {value: undefined},
-
-      _githubRateLimitSufficient: function(amount, callback){
-        $http.get('https://api.github.com/rate_limit')
-        .success(function(data, status, headers, config){
-          if(data.rate.remaining >= amount){
+      gitHubLoadCounter: { value: undefined },
+      _githubRateLimitSufficient: function (amount, callback) {
+        $http.get('https://api.github.com/rate_limit').success(function (data, status, headers, config) {
+          if (data.rate.remaining >= amount) {
             callback();
           } else {
-            notificationsFactory.error(new Error("GitHub rate insufficient"));
+            notificationsFactory.error(new Error('GitHub rate insufficient'));
           }
-        })
-      },  
-
-      _processGithubElement: function(element, root, ret, proceed){
+        });
+      },
+      _processGithubElement: function (element, root, ret, proceed) {
         var isDirectory = element.type === 'tree';
         var isJS = false;
         var isCodestoriesFile = false;
-
         var path = element.path.split('/');
-
         var last = path.pop();
-
-        if(!isDirectory){
+        if (!isDirectory) {
           var fileExtension = last.split('.').pop();
           if (fileExtension === 'js') {
             isJS = true;
-          } else if(fileExtension === 'codestories'){
+          } else if (fileExtension === 'codestories') {
             isCodestoriesFile = true;
           }
         }
-
         var newRoot = this._walkTo(root, path);
         var $this = this;
-        
         if (!newRoot.children[last]) {
-          if(isCodestoriesFile){   //Parse the narratives file
+          if (isCodestoriesFile) {
+            //Parse the narratives file
             _incrementCounter($this.gitHubLoadCounter);
-            $http.get(element.url).success(function(data){
-               ret.narratives = JSON.parse(atob(data.content));
-               _decrementCounter($this.gitHubLoadCounter, proceed);
-            })
-          } else if (isDirectory) {  //Create the new directory
+            $http.get(element.url).success(function (data) {
+              ret.narratives = JSON.parse(atob(data.content));
+              _decrementCounter($this.gitHubLoadCounter, proceed);
+            });
+          } else if (isDirectory) {
+            //Create the new directory
             newRoot.children[last] = new CASTNodeFactory.FolderNode(last, newRoot, {});
-          } else {   //Create the new file
+          } else {
+            //Create the new file
             _incrementCounter(this.gitHubLoadCounter);
-            $http.get(element.url, {responseType: 'text'}).success(function(data){
-               newRoot.children[last] = new CASTNodeFactory.FileNode(last, newRoot, {}, atob(data.content));
-               _decrementCounter($this.gitHubLoadCounter, proceed);
-            })              
+            $http.get(element.url, { responseType: 'text' }).success(function (data) {
+              newRoot.children[last] = new CASTNodeFactory.FileNode(last, newRoot, {}, atob(data.content));
+              _decrementCounter($this.gitHubLoadCounter, proceed);
+            });
           }
         }
       },
-
-      _loadGitHub: function(data, ret, proceed){
+      _loadGitHub: function (data, ret, proceed) {
         var root = new CASTNodeFactory.FolderNode('', null, {});
         root.path = '';
-
-        var $this = this; 
+        var $this = this;
         data.tree.forEach(function (element) {
           $this._processGithubElement(element, root, ret, proceed);
         });
         ret.cast = root;
       },
-
-      loadGitHub: function (username, repository, callback){
+      loadGitHub: function (username, repository, callback) {
         var ret = {
-            cast: undefined,
-            narratives: undefined
-          };
-
-        var proceed = function(){
+          cast: undefined,
+          narratives: undefined
+        };
+        var proceed = function () {
           CAST.reset();
           CAST.cast.rootnode = ret.cast;
           CAST.appendNarrative(ret.narratives);
-          CAST.project = "github:"+username + ':' + repository;
+          CAST.project = 'github:' + username + ':' + repository;
           callback();
         };
-
         var $this = this;
-        this._githubRateLimitSufficient(1,function(){
-          $http.get('https://api.github.com/repos/'+username+'/'+repository+'/git/trees/HEAD?recursive=1')
-          .success(function(data, status, headers, config){         
-            $this._githubRateLimitSufficient(data.tree.length, function(){
+        this._githubRateLimitSufficient(1, function () {
+          $http.get('https://api.github.com/repos/' + username + '/' + repository + '/git/trees/HEAD?recursive=1').success(function (data, status, headers, config) {
+            $this._githubRateLimitSufficient(data.tree.length, function () {
               $this._loadGitHub(data, ret, proceed, $this);
-            })
+            });
           });
         });
       },
-
       /**
        * @ngdoc method
        * @name loadZip
@@ -123,15 +110,13 @@
        *
        * @param {String} data Raw data of the zip file
        */
-      loadZip : function (data) {
-        var contents = this.UnpackZip( new JSZip(data) );
-
+      loadZip: function (data) {
+        var contents = this.UnpackZip(new JSZip(data));
         CAST.reset();
         CAST.cast.rootnode = contents.cast;
         CAST.appendNarrative(contents.narratives);
         CAST.project = name;
       },
-
       /**
        * @ngdoc method
        * @name packZip
@@ -140,31 +125,25 @@
        * Generates a zip of the current project state and makes it downloadable in the browser.   
        *
        */
-      packZip: function(){
+      packZip: function () {
         var zip = new JSZip();
-
         var rootNode = CAST.cast.rootnode;
-
         //pack cast
-        this._packCastZip(rootNode,zip);
-
+        this._packCastZip(rootNode, zip);
         //pack narratives
-        var codestories = this._generateCodeStories(CAST.narratives);      
-        zip.file('.codestories', JSON.stringify(codestories,null,'  '));
-
-        saveAs(zip.generate({type: 'blob'}), 'project.zip');
-      },
-
-      saveCodeStories: function(){
         var codestories = this._generateCodeStories(CAST.narratives);
-        saveAs(new Blob([JSON.stringify(codestories, null, '\t')]), ".codestories");
+        zip.file('.codestories', JSON.stringify(codestories, null, '  '));
+        saveAs(zip.generate({ type: 'blob' }), 'project.zip');
       },
-
-      _packCastZip: function(root, zip){
-        if(root.children){
-          for(var _child in root.children){
+      saveCodeStories: function () {
+        var codestories = this._generateCodeStories(CAST.narratives);
+        saveAs(new Blob([JSON.stringify(codestories, null, '\t')]), '.codestories');
+      },
+      _packCastZip: function (root, zip) {
+        if (root.children) {
+          for (var _child in root.children) {
             var child = root.children[_child];
-            if(child.isFolder()){
+            if (child.isFolder()) {
               this._packCastZip(child, zip.folder(child.name));
             } else {
               zip.file(child.name, child.content);
@@ -172,133 +151,92 @@
           }
         }
       },
-
-      _generateCodeStories: function(narratives){
+      _generateCodeStories: function (narratives) {
         var codestories = {};
-
-        for(var path in narratives){
+        for (var path in narratives) {
           codestories[path] = [];
-          
           var $this = this;
-          narratives[path].forEach(function(narrative){
-            if(narrative.isFSNarrative()){ 
+          narratives[path].forEach(function (narrative) {
+            if (narrative.isFSNarrative()) {
               codestories[path].push($this._generateFSNarrative(narrative));
-            } else if (narrative.isCodeNarrative()){
+            } else if (narrative.isCodeNarrative()) {
               codestories[path].push($this._generateCodeNarrative(narrative));
             }
           });
         }
-
         return codestories;
       },
-
-      _generateFSNarrative: function(fsNarrative){
+      _generateFSNarrative: function (fsNarrative) {
         var narrative = {};
-        narrative.name = fsNarrative.name; 
+        narrative.name = fsNarrative.name;
         narrative.type = 'FS';
         narrative.items = [];
-
         var $this = this;
-        fsNarrative.items.forEach(function(fsItem){
+        fsNarrative.items.forEach(function (fsItem) {
           var item = $this._generateItem(fsItem);
           narrative.items.push(item);
-        }); 
-
+        });
         return narrative;
       },
-
-      _generateCodeNarrative: function(codeNarrative){
-          var narrative = {};
-          narrative.name = codeNarrative.name;
-          narrative.type = 'Code';
-          narrative.narrativeHooks = {};
-
-          var $this = this;
-          for(var property in codeNarrative.narrativeHooks){
-            narrative.narrativeHooks[property] = {};
-            narrative.narrativeHooks[property]["path"] = property;
-            narrative.narrativeHooks[property].items = [];
-            codeNarrative.narrativeHooks[property].items.forEach(function(item){
-              narrative.narrativeHooks[property].items.push($this._generateItem(item));
-            });
-          }
-
-          return narrative;
+      _generateCodeNarrative: function (codeNarrative) {
+        var narrative = {};
+        narrative.name = codeNarrative.name;
+        narrative.type = 'Code';
+        narrative.narrativeHooks = {};
+        var $this = this;
+        for (var property in codeNarrative.narrativeHooks) {
+          narrative.narrativeHooks[property] = {};
+          narrative.narrativeHooks[property].path = property;
+          narrative.narrativeHooks[property].items = [];
+          codeNarrative.narrativeHooks[property].items.forEach(function (item) {
+            narrative.narrativeHooks[property].items.push($this._generateItem(item));
+          });
+        }
+        return narrative;
       },
-
-      _generateItem: function(itemObj){
+      _generateItem: function (itemObj) {
         var item = {};
         item.type = itemObj.type;
         item.content = itemObj.content;
         return item;
-      },  
-
-      UnpackZip : function (zip) {
+      },
+      UnpackZip: function (zip) {
         var ret = {
           cast: undefined,
           narratives: undefined
         };
-
         var root = new CASTNodeFactory.FolderNode('', null, {});
         root.path = '';
-
-        var $this = this;
-        //Loop through files that are packed in the zip
-        Object.getOwnPropertyNames(zip.files).forEach(function (element) {
-          var isDirectory = element.slice(-1) === '/';
-          var isJS = false;
-          var isCodestoriesFile = false;
-
-          var path = element.split('/');
-
-
-          if (isDirectory){
-            path.pop();     //avoid empty string at end of path
-          }
-
-          var last = path.pop();
-
-          if(!isDirectory){
-             var fileExtension = last.split('.').pop();
-            if (fileExtension === 'js') {
-              isJS = true;
-            } else if(fileExtension === 'codestories'){
-              isCodestoriesFile = true;
-            }
-          }
-
-          var newRoot = $this._walkTo(root, path);
-          
-          if (!newRoot.children[last]) {
-            if(isCodestoriesFile){   //Parse the narratives file
-              ret.narratives = JSON.parse(zip.file(element).asText());
-            } else if (isDirectory) {  //Create the new directory
-              newRoot.children[last] = new CASTNodeFactory.FolderNode(last, newRoot, {});
-            } else {   //Create the new file
-              newRoot.children[last] = new CASTNodeFactory.FileNode(last, newRoot, {}, zip.file(element).asText());
-            }
-          }
-        });
         ret.cast = root;
-
+        //Loop through files that are packed in the zip
+        var fsPath, fsNode, path, name, isJS, parentFolder,$this = this;;
+        for (fsPath in zip.files) {
+          fsNode = zip.files[fsPath];
+          path = fsPath.split('/');
+          name = path.pop();
+          if (name === 'codestories' || name === '.codestories') {
+            ret.narratives = JSON.parse(fsNode.asText());
+          } else if (!fsNode.dir) {
+            parentFolder = $this._walkTo(root, path);
+            parentFolder.children[name] = new CASTNodeFactory.FileNode(name, parentFolder, {}, fsNode.asText());
+          }
+        }
         return ret;
       },
-
-      _walkTo: function(root, path){
+      _walkTo: function (root, path) {
         var higherRoot = root;
-
         path.forEach(function (element) {
-          if (higherRoot.children[element]) {       //If the folder is already defined, step into it
+          if (higherRoot.children[element]) {
+            //If the folder is already defined, step into it
             higherRoot = higherRoot.children[element];
-          } else {                                  //Otherwise, create the folder node. 
-            higherRoot.children[element] = new CASTNodeFactory.FolderNode(element, higherRoot, {});  
+          } else {
+            //Otherwise, create the folder node. 
+            higherRoot.children[element] = new CASTNodeFactory.FolderNode(element, higherRoot, {});
             higherRoot = higherRoot.children[element];
           }
         });
-
         return higherRoot;
       }
-
     };
   }
 ]);
