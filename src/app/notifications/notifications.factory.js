@@ -1,4 +1,11 @@
 'use strict';
+/**
+ * @ngdoc service
+ * @name notifications.factory:notificationsFactory
+ * @description 
+ *
+ * Factory to track notifications and create new ones.
+ */
 
 angular.module('notifications').factory('notificationsFactory', [
   '$timeout',
@@ -7,6 +14,7 @@ angular.module('notifications').factory('notificationsFactory', [
     var delay = 5000;
     factory.notifications = [];
     factory.callback;
+
     factory.error = function (content) {
       if (content instanceof Error) {
         console.error(content);
@@ -24,6 +32,7 @@ angular.module('notifications').factory('notificationsFactory', [
         });
       }, delay);
     };
+
     factory.success = function (content) {
       factory.notifications.unshift({
         type: 'success',
@@ -37,6 +46,7 @@ angular.module('notifications').factory('notificationsFactory', [
         });
       }, delay);
     };
+
     factory.info = function (content) {
       factory.notifications.unshift({
         type: 'info',
@@ -50,13 +60,16 @@ angular.module('notifications').factory('notificationsFactory', [
         });
       }, delay);
     };
+
     factory.close = function (notification) {
       factory.notifications.splice(factory.notifications.indexOf(notification), 1);
       factory.callback();
     };
+
     factory.registerObserverCallback = function (callback) {
       factory.callback = callback;
     };
+    
     return factory;
   }
 ]);

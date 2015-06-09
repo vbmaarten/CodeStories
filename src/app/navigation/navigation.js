@@ -3,9 +3,8 @@
 
 /**
  * @ngdoc overview
- * @name narrator
+ * @name navigation
  * @description
- * Narrator module. This module contains the narrator functionality i.e.
- * viewing and editing narratives. 
+ * Navigation module. This module contains the navigation for the app as well as saving.
  */
 angular.module('navigation', []);

@@ -1,9 +1,11 @@
 'use strict';
 /**
  * @ngdoc function
- * @name explorer.controller:ExplorerCtrl
+ * @name explorer.controller:CodeCtrl
  * @description
  * @requires cast.factory:CAST 
+ * @requires narrator.factory:writerFactory 
+ * @requires narrator.factory:viewerFactory 
  * 
  * Provides functionality to the CAST Explorer
  */
