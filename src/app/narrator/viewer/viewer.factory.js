@@ -86,7 +86,9 @@
         } else {
           this.interpreterScope = step.scope;
           $state.go('narrating.viewing.playing', {'path': step.node.getPath()});
-
+          if(!step.node){
+            this.popNarrative();
+          }
         }
       },
 
