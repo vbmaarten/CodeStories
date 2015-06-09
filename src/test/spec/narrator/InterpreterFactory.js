@@ -44,14 +44,23 @@ describe('Factory: Interpreter factory', function() {
   });
 
 
-  it("should be possible to step to the next narrative", function(){
+  it("should be possible to step to the next narrative and a debug step should not step off a narrative node", function(){
     var node = astNode.tnode.body[1];
-    var codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/test.js", [{path: "body/1", items: [new ItemFactory.TextItem("textitem")]}]);
+    var codeNarrative = new NarrativeFactory.CodeNarrative("codeNarrative", "/test.js", [{path: "body/1", 
+        items: [
+          new ItemFactory.TextItem("textitem"),
+          new ItemFactory.TextItem("textitem"),
+          new ItemFactory.TextItem("textitem")
+        ]}]);
     interpreterFactory.setupNarratedAST(astNode, codeNarrative);
 
     var step = interpreterFactory.narrativeStep();
-
     expect(step.node).toEqual(node.ASTNode);
+    step = interpreterFactory.narrativeStep();
+    expect(step.node).toEqual(node.ASTNode);
+    step = interpreterFactory.debugStep();
+    expect(step.node).toEqual(node.ASTNode);
+    
   });
 
 
