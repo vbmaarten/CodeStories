@@ -110,7 +110,7 @@ angular.module('narrator').factory('viewerFactory', [
           var CASTNode = CAST.getNode(narrative.CASTPath);
           interpreterFactory.reset();
           interpreterFactory.setupNarratedAST(CASTNode, narrative);
-          vCodeInterpreterFactory.startSession();
+          vCodeInterpreterFactory.newSession();
         }
       },
       /**
