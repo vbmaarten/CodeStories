@@ -15,9 +15,8 @@ angular.module('narrator')
     '$state',
     '$anchorScroll',
     'CAST', 
-    'writerFactory', 
-    'NarrativeFactory',
-    function ($scope, $state, $anchorScroll, CAST, writerFactory,NarrativeFactory) {
+    'writerFactory',
+    function ($scope, $state, $anchorScroll, CAST, writerFactory) {
 
     if($state.is('narrating.writing.editing')){
       $scope.selectedNarrative = writerFactory.selectedNarrative;
@@ -31,13 +30,7 @@ angular.module('narrator')
 
     // Add a narrative
     $scope.addNarrative = function(){
-      var newNarrative;
-      if($scope.activeNode.isASTNode())
-        newNarrative = new NarrativeFactory.CodeNarrative('New Narrative', CAST.selectedPath);
-      else
-        newNarrative = new NarrativeFactory.FSNarrative('New Narrative', CAST.selectedPath);
-      CAST.narratives[CAST.selectedPath] = CAST.narratives[CAST.selectedPath] || [];
-      CAST.narratives[CAST.selectedPath].push(newNarrative);
+      writerFactory.addNarrative($scope.activeNode);
       $scope.narratives = CAST.getSelectedNarratives();
     };
 
@@ -71,11 +64,11 @@ angular.module('narrator')
       if(sel.isCodeNarrative()){
        sel.removeItem(item,subpath);
      } else sel.removeItem(item);
-    }
+    };
 
     $scope.goToItemHook = function (hook) {
       console.log((writerFactory.selectedNarrative.CASTPath + hook))
       $state.go('narrating.writing.editing', {path: (writerFactory.selectedNarrative.CASTPath + hook)});
-    }
+    };
 
 }]);
