@@ -13,7 +13,8 @@ angular.module('codeStoriesApp').controller('HomeScreenCtrl', [
   '$state',
   'projectManagerFactory',
   'CAST',
-  function ($scope, $state, projectManagerFactory, CAST) {
+  'notificationsFactory',
+  function ($scope, $state, projectManagerFactory, CAST, notificationsFactory) {
     $scope.message = 'Upload a .zip file of your project';
     $scope.loader = 'github';
     $scope.githubUser = '';
