@@ -8,52 +8,48 @@
  * The home screen of the app. Starting page and allows for the user to upload a
  * compressed project to narrate using the app.
  */
-angular.module('codeStoriesApp')
-.controller('HomeScreenCtrl', ['$scope', '$state', 'projectManagerFactory', 'CAST', function ($scope, $state, projectManagerFactory, CAST) {
-	
-	$scope.message = "Upload a .zip file of your project";
-  $scope.loader = "github";
-  $scope.githubUser = "";
-  $scope.githubRepo = "";
-  $scope.ziploaded = false;
-  $scope.isLoading = false;
-
-	$scope.loadZip = function(data){
-		$scope.castReady = false;
-		projectManagerFactory.loadZip(data);
-	};
-
-	$scope.goToNarrator = function () {
-    var projectname;
-
-    if($scope.loader == "github"){
-      projectname = "github:"+$scope.githubUser + ':' + $scope.githubRepo;
-      var proceed = function(){$state.go('narrating.viewing.selecting', {'project' : projectname})};
-      projectManagerFactory.loadGitHub($scope.githubUser, $scope.githubRepo, proceed);
-      $scope.isLoading = true;
-
-    } else if($scope.loader == "file"){
+angular.module('codeStoriesApp').controller('HomeScreenCtrl', [
+  '$scope',
+  '$state',
+  'projectManagerFactory',
+  'CAST',
+  function ($scope, $state, projectManagerFactory, CAST) {
+    $scope.message = 'Upload a .zip file of your project';
+    $scope.loader = 'github';
+    $scope.githubUser = '';
+    $scope.githubRepo = '';
+    $scope.ziploaded = false;
+    $scope.isLoading = false;
+    $scope.loadZip = function (data) {
+      $scope.castReady = false;
+      projectManagerFactory.loadZip(data);
+    };
+    $scope.goToNarrator = function () {
+      var projectname;
+      if ($scope.loader == 'github') {
+        projectname = 'github:' + $scope.githubUser + ':' + $scope.githubRepo;
+        var proceed = function () {
+          $state.go('narrating.viewing.selecting', { 'project': projectname });
+        };
+        projectManagerFactory.loadGitHub($scope.githubUser, $scope.githubRepo, proceed);
+        $scope.isLoading = true;
+      } else if ($scope.loader == 'file') {
         projectname = $scope.message;
         CAST.project = projectname;
-        $state.go('narrating.viewing.selecting', {'project' : projectname});
-    }
-
-	};
-
-}])
-.directive("fileread", [function () {
-  return {
-    scope: {
-      fileread: "="
-    },
-    link: function (scope, element, attributes) {
-      element.bind("change", function (changeEvent) {
-        scope.$apply(function () {
-          scope.fileread = changeEvent.target.files[0].name;
-          // or all selected files:
-          // scope.fileread = changeEvent.target.files;
-        });
-      });
-    }
+        $state.go('narrating.viewing.selecting', { 'project': projectname });
+      }
+    };
   }
-}]);
+]).directive('fileread', [function () {
+    return {
+      scope: { fileread: '=' },
+      link: function (scope, element, attributes) {
+        element.bind('change', function (changeEvent) {
+          scope.$apply(function () {
+            scope.fileread = changeEvent.target.files[0].name;  // or all selected files:
+                                                                // scope.fileread = changeEvent.target.files;
+          });
+        });
+      }
+    };
+  }]);

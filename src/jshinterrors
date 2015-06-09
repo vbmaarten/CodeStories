@@ -1,100 +1,50 @@
 [4mRunning "jshint:all" (jshint) task[24m
 
 app/VCode/VObjects.factory.js
-  line 3    col 3   Missing "use strict" statement.
-  line 25   col 37  Strings must use singlequote.
-  line 25   col 46  Strings must use singlequote.
-  line 25   col 29  eval can be harmful.
-  line 30   col 4   Missing semicolon.
-  line 35   col 3   Missing "use strict" statement.
-  line 35   col 42  Missing semicolon.
-  line 47   col 4   Missing semicolon.
-  line 50   col 14  'List' was used before it was defined.
-  line 52   col 3   Missing "use strict" statement.
-  line 53   col 42  Strings must use singlequote.
-  line 58   col 25  Strings must use singlequote.
-  line 58   col 66  Strings must use singlequote.
-  line 63   col 47  Missing semicolon.
-  line 65   col 25  Strings must use singlequote.
-  line 65   col 66  Strings must use singlequote.
-  line 66   col 13  Strings must use singlequote.
-  line 66   col 50  Missing semicolon.
-  line 68   col 26  Missing semicolon.
-  line 69   col 25  Strings must use singlequote.
-  line 70   col 30  Missing semicolon.
-  line 78   col 4   Missing semicolon.
-  line 81   col 16  'VArray' was used before it was defined.
-  line 83   col 3   Missing "use strict" statement.
-  line 84   col 42  Strings must use singlequote.
-  line 89   col 25  Strings must use singlequote.
-  line 89   col 66  Strings must use singlequote.
-  line 94   col 45  Missing semicolon.
-  line 96   col 25  Strings must use singlequote.
-  line 96   col 66  Strings must use singlequote.
-  line 97   col 13  Strings must use singlequote.
-  line 97   col 47  Missing semicolon.
-  line 99   col 26  Missing semicolon.
-  line 100  col 25  Strings must use singlequote.
-  line 101  col 30  Missing semicolon.
-  line 108  col 41  Missing semicolon.
-  line 109  col 4   Missing semicolon.
-  line 111  col 18  'BarChart' was used before it was defined.
-  line 112  col 3   Missing "use strict" statement.
-  line 112  col 44  Missing semicolon.
-  line 113  col 44  Strings must use singlequote.
-  line 114  col 47  Missing semicolon.
-  line 122  col 35  Strings must use singlequote.
-  line 126  col 52  Strings must use singlequote.
-  line 128  col 35  Strings must use singlequote.
-  line 128  col 73  Strings must use singlequote.
-  line 128  col 95  Strings must use singlequote.
-  line 131  col 32  Strings must use singlequote.
-  line 132  col 25  Strings must use singlequote.
-  line 133  col 14  Strings must use singlequote.
-  line 133  col 14  Too many errors. (78% scanned).
+  line 2    col 3   Missing "use strict" statement.
+  line 19   col 29  eval can be harmful.
+  line 26   col 3   Missing "use strict" statement.
+  line 43   col 14  'List' was used before it was defined.
+  line 44   col 3   Missing "use strict" statement.
+  line 65   col 16  'VArray' was used before it was defined.
+  line 66   col 3   Missing "use strict" statement.
+  line 88   col 18  'BarChart' was used before it was defined.
+  line 89   col 3   Missing "use strict" statement.
+  line 28   col 15  'width' is not defined.
+  line 29   col 16  'height' is not defined.
+  line 31   col 18  'width' is not defined.
+  line 32   col 19  'height' is not defined.
+  line 38   col 12  'width' is not defined.
+  line 39   col 12  'height' is not defined.
+  line 45   col 13  'd3' is not defined.
+  line 67   col 13  'd3' is not defined.
+  line 90   col 15  'd3' is not defined.
+  line 93   col 16  'd3' is not defined.
+  line 99   col 5   'd3' is not defined.
+  line 25   col 10  'Canvas' is defined but never used.
+  line 65   col 23  'vertical' is defined but never used.
 
 app/VCode/vcodeinterpreter.factory.js
-  line 24   col 0   Identifier 'interpreter_scope' is not in camel case.
-  line 52   col 0   Identifier 'interpreter_scope' is not in camel case.
-  line 3    col 5   Missing "use strict" statement.
-  line 6    col 94  Missing semicolon.
-  line 11   col 10  Missing semicolon.
-  line 52   col 13  Don't use 'with'.
-  line 53   col 17  Don't use 'with'.
-  line 54   col 21  Don't use 'with'.
-  line 55   col 25  eval can be harmful.
-  line 64   col 6   Missing semicolon.
-  line 4    col 23  'acorn' is not defined.
-  line 8    col 13  'acorn' is not defined.
-  line 44   col 22  'display' is defined but never used.
+  line 20   col 0   Identifier 'interpreter_scope' is not in camel case.
+  line 42   col 0   Identifier 'interpreter_scope' is not in camel case.
+  line 4    col 5   Missing "use strict" statement.
+  line 42   col 9   Don't use 'with'.
+  line 43   col 11  Don't use 'with'.
+  line 44   col 13  Don't use 'with'.
+  line 45   col 15  eval can be harmful.
+  line 5    col 17  'acorn' is not defined.
+  line 9    col 7   'acorn' is not defined.
+  line 35   col 18  'display' is defined but never used.
 
 app/VObjectEditor/VObjectEditor.controller.js
-  line 16   col 29  Strings must use singlequote.
-  line 17   col 26  Strings must use singlequote.
-  line 18   col 20  Strings must use singlequote.
-  line 22   col 44  Strings must use singlequote.
-  line 31   col 43  Missing semicolon.
-  line 32   col 6   Missing semicolon.
-  line 33   col 4   Missing semicolon.
-  line 36   col 28  Strings must use singlequote.
-  line 36   col 15  Expected '===' and instead saw '=='.
-  line 37   col 27  Strings must use singlequote.
-  line 43   col 27  Strings must use singlequote.
-  line 43   col 62  Strings must use singlequote.
-  line 43   col 77  Strings must use singlequote.
-  line 44   col 31  Strings must use singlequote.
-  line 44   col 67  Strings must use singlequote.
-  line 45   col 4   Missing semicolon.
-  line 61   col 4   Missing semicolon.
-  line 65   col 4   Missing semicolon.
-  line 69   col 4   Missing semicolon.
-  line 22   col 15  'd3' is not defined.
-  line 37   col 14  'prompt' is not defined.
-  line 22   col 9   'svg' is defined but never used.
-  line 24   col 21  'newData' is defined but never used.
+  line 37   col 18  Expected '===' and instead saw '=='.
+  line 24   col 17  'd3' is not defined.
+  line 38   col 16  'prompt' is not defined.
+  line 24   col 11  'svg' is defined but never used.
+  line 25   col 23  'newData' is defined but never used.
 
 app/VObjectEditor/VObjectEditor.directive.js
-  line 3    col 5   Missing "use strict" statement.
+  line 2    col 3   Missing "use strict" statement.
 
 app/app.js
   line 61   col 50  Strings must use singlequote.
@@ -106,34 +56,16 @@ app/app.js
   line 32   col 16  'valToString' is defined but never used.
 
 app/cast/CASTNodeFactory.js
-  line 109  col 0   Identifier 't_node_constructor' is not in camel case.
-  line 110  col 0   Identifier 't_node_constructor' is not in camel case.
-  line 156  col 0   Identifier 't_node_constructor' is not in camel case.
-  line 20   col 25  Missing semicolon.
-  line 35   col 36  Expected '===' and instead saw '=='.
-  line 48   col 42  Missing semicolon.
-  line 51   col 40  Missing semicolon.
-  line 54   col 39  Missing semicolon.
-  line 57   col 40  Missing semicolon.
-  line 90   col 47  Strings must use singlequote.
-  line 106  col 2   Missing semicolon.
-  line 112  col 3   Missing semicolon.
-  line 126  col 52  Missing semicolon.
-  line 128  col 2   Missing semicolon.
-  line 133  col 49  Missing semicolon.
-  line 144  col 2   Missing semicolon.
-  line 150  col 22  Missing semicolon.
-  line 157  col 22  'name' is already defined.
-  line 165  col 85  Missing semicolon.
-  line 178  col 17  Duplicate key 'ASTNode'.
-  line 179  col 6   Missing semicolon.
-  line 92   col 31  'acorn' is not defined.
-  line 109  col 26  'acorn' is not defined.
+  line 95   col 0   Identifier 't_node_constructor' is not in camel case.
+  line 96   col 0   Identifier 't_node_constructor' is not in camel case.
+  line 130  col 0   Identifier 't_node_constructor' is not in camel case.
+  line 33   col 36  Expected '===' and instead saw '=='.
+  line 131  col 20  'name' is already defined.
+  line 85   col 25  'acorn' is not defined.
+  line 95   col 30  'acorn' is not defined.
 
 app/cast/cast.factory.js
-  line 91   col 30  Missing semicolon.
-  line 130  col 33  Missing semicolon.
-  line 121  col 37  'node' is defined but never used.
+  line 103  col 39  'node' is defined but never used.
 
 app/explorer/code.controller.js
   line 50   col 9   Expected '{' and instead saw 'node'.
@@ -293,23 +225,19 @@ app/narrator/viewer/viewer.factory.js
   line 178  col 17  'nextItem' is defined but never used.
 
 app/narrator/writer/writer.controller.js
-  line 25   col 9   Expected '{' and instead saw '$state'.
-  line 36   col 9   Expected '{' and instead saw 'newNarrative'.
-  line 38   col 9   Expected '{' and instead saw 'newNarrative'.
-  line 64   col 17  Expected '{' and instead saw 'item'.
-  line 65   col 33  Expected '{' and instead saw 'sel'.
-  line 65   col 87  Strings must use singlequote.
-  line 66   col 12  Expected '{' and instead saw 'sel'.
-  line 73   col 13  Expected '{' and instead saw 'sel'.
-  line 74   col 6   Missing semicolon.
-  line 77   col 69  Missing semicolon.
-  line 79   col 6   Missing semicolon.
+  line 24   col 9   Expected '{' and instead saw '$state'.
+  line 57   col 17  Expected '{' and instead saw 'item'.
+  line 58   col 33  Expected '{' and instead saw 'sel'.
+  line 58   col 87  Strings must use singlequote.
+  line 59   col 12  Expected '{' and instead saw 'sel'.
+  line 66   col 13  Expected '{' and instead saw 'sel'.
+  line 70   col 69  Missing semicolon.
 
 app/narrator/writer/writer.factory.js
   line 46   col 53  Missing semicolon.
-  line 52   col 6   Missing semicolon.
-  line 16   col 35  'CAST' is defined but never used.
-  line 16   col 21  '$stateParams' is defined but never used.
+  line 64   col 11  Expected '{' and instead saw 'newNarrative'.
+  line 66   col 11  Expected '{' and instead saw 'newNarrative'.
+  line 70   col 6   Missing semicolon.
 
 app/navigation/navigation.controller.js
   line 19   col 6   Missing semicolon.
@@ -468,15 +396,15 @@ app/stories/topdownparse/tokens.js
   line 213  col 76  Strings must use singlequote.
   line 217  col 76  Strings must use singlequote.
 
-  ✖  30 errors
-  ⚠  360 warnings
+  ✖  29 errors
+  ⚠  289 warnings
 
 [33mWarning: Task "jshint:all" failed. Use --force to continue.[39m
 
 [31mAborted due to warnings.[39m
 
 
-Execution Time (2015-06-09 11:12:42 UTC)
-jshint:all   938ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 99%
-Total 946ms
+Execution Time (2015-06-09 11:16:09 UTC)
+jshint:all   935ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 99%
+Total 944ms
 

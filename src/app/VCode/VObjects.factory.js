@@ -1,27 +1,6 @@
-angular.module('VCodeInterpreter').factory('VObjectFactory', function () {
-  var VObjects = {};
-  VObjects.VArray = VArray;
-  VObjects.BarChart = BarChart;
-  VObjects.List = List;
-  var height = 150, width = 300;
-  function setSizeInfo(name) {
-    VObjects[name].prototype.width = width;
-    VObjects[name].prototype.height = height;
-  }
-  for (var vobj in VObjects) {
-    setSizeInfo(vobj);
-  }
-  return {
-    DomEl: function () {
-      return document.createElement('div');
-    },
-    setVObject: function (name, func) {
-      this.VObjects[name] = eval('(' + func + ')');
-      setSizeInfo(name);
-    },
-    VObjects: VObjects
-  };
-});
+'use strict';
+
+
 function Canvas() {
   var dom = document.createElement('div');
   var canvas = document.createElement('canvas');
@@ -132,3 +111,28 @@ function BarChart(data) {
     highlight: highlight
   };
 }
+
+angular.module('VCodeInterpreter').factory('VObjectFactory', function () {
+  var VObjects = {};
+  VObjects.VArray = VArray;
+  VObjects.BarChart = BarChart;
+  VObjects.List = List;
+  var height = 150, width = 300;
+  function setSizeInfo(name) {
+    VObjects[name].prototype.width = width;
+    VObjects[name].prototype.height = height;
+  }
+  for (var vobj in VObjects) {
+    setSizeInfo(vobj);
+  }
+  return {
+    DomEl: function () {
+      return document.createElement('div');
+    },
+    setVObject: function (name, func) {
+      this.VObjects[name] = eval('(' + func + ')');
+      setSizeInfo(name);
+    },
+    VObjects: VObjects
+  };
+});

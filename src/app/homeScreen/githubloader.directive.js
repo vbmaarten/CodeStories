@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('codeStoriesApp')
   .directive('githubloader', function () {
     return {

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('codeStoriesApp')
   .directive('fileloader', function(){
   	return {

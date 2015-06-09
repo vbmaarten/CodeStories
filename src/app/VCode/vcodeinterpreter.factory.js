@@ -17,7 +17,7 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
       resetSession: function () {
         VScope = {};
       },
-      runVCode: function (VCodeItem, interpreter_scope) {
+      runVCode: function (VCodeItem, interpreterScope) {
         generateScope(VCodeItem.content, VScope);
         function detachOldDOMel(DOMel) {
           var oldVCodeItem = DOMel.VCodeItem;
@@ -39,7 +39,7 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
           }
           attachDOMel(DOMel, VCodeItem);
         }
-        with (interpreter_scope) {
+        with (interpreterScope) {
           with (VScope) {
             with (VObjectFactory.VObjects) {
               eval(VCodeItem.content);
