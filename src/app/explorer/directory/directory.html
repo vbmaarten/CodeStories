@@ -4,7 +4,7 @@
 		<a ui-sref=".selecting({path: (castUrl + key)})"
 		ng-class="{'folder-reference': value.isFolder(), 'active': contains((castUrl + key))}">{{key}}</a> 
 
-		<a class='js-program-node' ng-if="value.isFile() && value.name.substr(-3) === '.js'" 
+		<a class='js-program-node' ng-if="value.isJSFile()" 
 		ui-sref=".selecting({path: (castUrl + key + '/Program' )})" > P </a>
 
 		<div directory data="value.children" cast-url="castUrl+key+'/'"></div>

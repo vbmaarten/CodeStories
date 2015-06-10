@@ -3,17 +3,7 @@
 	background-color:#FFFFFF;
 	width:100%;
 	position:relative;
-	transition:0.5s linear all;
 }
-
-.item.ng-enter {
-	opacity:0;
-}
-
-.item.ng-enter-active {
-	opacity:1;
-}
-
 .item input {
 	font-size:1em;
 }

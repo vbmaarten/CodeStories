@@ -75,9 +75,12 @@ CodeNarrative
 --------------------------------*/
     // items is an array that contains objects {'path' , 'items'}
     // the goal is to append to the sub node of the AST nodes the proper items under the proper name
-    var CodeNarrative = function (name, CASTPath, narrativeHooks) {
+    var CodeNarrative = function (name, CASTPath, narrativeHooks, dependencies) {
       Narrative.call(this, name, CASTPath);
       this.narrativeHooks = narrativeHooks || {};
+      if(dependencies){
+        this.dependencies = dependencies;
+      }
     };
     CodeNarrative.prototype = Object.create(Narrative.prototype);
     CodeNarrative.prototype.validItem = function (item) {

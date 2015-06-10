@@ -1,10 +1,42 @@
 
+.dependencies{
+	background:yellow;
+}
+
+.dependencies {
+	text-align: center;
+
+}
 
 .narrator {
 	padding:20px;
 	padding-bottom:50px;
 	background-color: #f0f0f0;
-	overflow-y: scroll; 
+	overflow-y: scroll;
+}
+
+.narrator .narrative {
+	-webkit-transition:all .2s ease-in-out;
+	-moz-transition:all .2s ease-in-out;
+	-o-transition:all .2s ease-in-out;
+	transition:all .2s ease-in-out;
+	overflow:hidden;
+}
+
+.narrator .narrative.ng-enter {
+	max-height:0px;
+}
+
+.narrator .narrative.ng-enter-active{
+	max-height:99px;
+}
+
+.narrator .narrative.ng-leave {
+	max-height:99px;
+}
+
+.narrator .narrative.ng-leave-active{
+	max-height:0px;
 }
 
 .narrator input[type="text"] {
@@ -118,6 +150,7 @@
 	border-color: #999;
 	color: #999;
 }
+
 
 .narrative{
 	width:100%;

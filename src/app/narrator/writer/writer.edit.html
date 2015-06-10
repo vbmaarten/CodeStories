@@ -2,6 +2,12 @@
 	<input type="text" ng-model="selectedNarrative.name">
 	<div class="return" ng-click="deselectNarrative()"><</div>
 </h2>
+<div class="dependencies" ng-if='selectedNarrative.isCodeNarrative()'>
+<h4 ng-repeat="dependency in selectedNarrative.dependencies"> {{ dependency.getPath() }} <span ng-click='removeDependency(dependency)'>(-) </span></h4>
+<select  ng-options="file as (file.parent.name +'/'+ file.name) for file in JSFiles" ng-model="dep.toAdd" ng-change='addDependency(file)'>
+	<option value="false">-- Add a dependency --</option>
+</select>
+</div>
 
 <div class="item button-wide add" ng-click="addItem()"></div>
 
