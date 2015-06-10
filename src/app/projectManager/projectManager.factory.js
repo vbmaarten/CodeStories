@@ -218,6 +218,8 @@ angular.module('projectManager').factory('projectManagerFactory', [
         narrative.name = codeNarrative.name;
         narrative.type = 'Code';
         narrative.narrativeHooks = {};
+
+
         var $this = this;
         for (var property in codeNarrative.narrativeHooks) {
           narrative.narrativeHooks[property] = {};
@@ -226,6 +228,13 @@ angular.module('projectManager').factory('projectManagerFactory', [
           codeNarrative.narrativeHooks[property].items.forEach(function (item) {
             narrative.narrativeHooks[property].items.push($this._generateItem(item));
           });
+        }
+
+        if(codeNarrative.dependencies){
+          narrative.dependencies = [];
+        }
+        for(var dep in codeNarrative.dependencies){
+          narrative.dependencies.push(codeNarrative.dependencies[dep].getPath())
         }
         return narrative;
       },

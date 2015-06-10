@@ -80,6 +80,7 @@ angular.module('cast').factory('CAST', [
         this.content = '';
         this.project = '';
         this.narratives = {};
+        this.jsFiles = undefined;
       },
       appendNarrative: function (narratives) {
         var i, newNarrative, name;
@@ -91,7 +92,9 @@ angular.module('cast').factory('CAST', [
             //hack: ASTNodes are only loaded once the filenode.getChild('program') has been called. 
             //  check if the path contains '/program' to determine if its an ast node
             if (castPath.toLowerCase().indexOf('.js/program') > 0) {
-              newNarrative = new NarrativeFactory.CodeNarrative(name, castPath, narrative[i].narrativeHooks);
+              newNarrative = new NarrativeFactory.CodeNarrative(name, castPath, narrative[i].narrativeHooks,narrative[i].dependencies);
+              if(newNarrative.dependencies)
+                newNarrative.dependencies = newNarrative.dependencies.map(this.cast.rootnode.getNode,this.cast.rootnode);
             } else {
               newNarrative = new NarrativeFactory.FSNarrative(name, castPath, narrative[i].items);
             }
@@ -121,6 +124,14 @@ angular.module('cast').factory('CAST', [
         result.super.sort(longestString);
         result.sub.sort(longestString);
         return result;
+      },
+
+      jsFiles : undefined,
+      getJSFiles:function(){
+        if(!this.jsFiles){
+          this.jsFiles = this.cast.rootnode.getJSFiles();
+        }
+        return this.jsFiles;
       },
       /**
        * @ngdoc method

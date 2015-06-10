@@ -37,6 +37,7 @@ var Interpreter = function(code, opt_initFunc) {
   this.ast = acorn.parse(code, {location: true});
   var scope = this.createScope(this.ast, null);
   this.stateStack = [{node: this.ast, scope: scope, thisExpression: scope}];
+  this.globalScope = scope;
 };
 
 /**

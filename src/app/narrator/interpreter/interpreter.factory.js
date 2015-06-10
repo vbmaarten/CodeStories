@@ -65,7 +65,18 @@ angular.module('narrator').factory('interpreterFactory', [
       ASTNode.attachNarrativeHooks(codeNarrative);
       currentNarrative = codeNarrative.name;
       i = 0;
-      interpreter.setAst(ASTNode.tnode);
+      var keepScope = false;
+      if( codeNarrative.dependencies ){
+        var depCode = ''
+        keepScope = true;
+        for(var node in codeNarrative.dependencies){
+          depCode += codeNarrative.dependencies[node].content
+        }
+        interpreter = new Interpreter(depCode);
+        interpreter.run();
+      } 
+      interpreter.setAst(ASTNode.tnode , keepScope);
+      
       vCodeInterpreterFactory.newSession();
     }
     function getCurrentScope() {
