@@ -1,0 +1,10 @@
+<div class="blackout" ng-show="activated"></div>
+<div class="modal" ng-show="activated">
+	<div id="header">
+		<p id="title_text">{{title}}</p>
+	</div>
+
+	<div id="content">
+		<ng-transclude></ng-transclude>
+	</div>
+</div>
