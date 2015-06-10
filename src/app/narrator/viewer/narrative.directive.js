@@ -15,11 +15,14 @@ angular.module('narrator')
       templateUrl:'narrator/viewer/narrative.html',
       link: function (scope, el, attr) {
 
-        console.log(el.parent().parent());
+        var narrator = document.querySelector('.narrator');
 
-        el.parent().parent()[0].addEventListener('resize', function() {
-          console.log('addEventListener - resize');
-        }, true);;
+        narrator.addEventListener('scroll', function(event) {
+          if(el[0].offsetTop+20 < narrator.scrollTop)
+            el.addClass('top');
+          if(el[0].offsetTop+20 >= narrator.scrollTop)
+            el.removeClass('top');
+        });;
 
       }
     }
