@@ -2,11 +2,7 @@
 
 
 
-<div class="narrative" ng-repeat="narrative in storyboard">
-	<h2>{{narrative.name}}</h2>
-	<div ng-repeat="item in narrative.items track by $index">
-		<div item class="item"></div>
-	</div>
+<div narrative class="narrative" ng-repeat="narrative in storyboard">
 </div>
 
 <table class="control-buttons">
