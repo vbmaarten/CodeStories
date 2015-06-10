@@ -22,5 +22,8 @@ angular.module('navigation').controller('navigationCtrl', [
     $scope.openEditor = function(){
       modalFactory.activate("VObjectEditor")
     }
+    $scope.openGuide = function(){
+      modalFactory.activate("guide");
+    }
   }
 ]);

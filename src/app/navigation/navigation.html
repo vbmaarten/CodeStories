@@ -1,13 +1,14 @@
-<VObjectEditor></VObjectEditor>	
-
+<VObjectEditor></VObjectEditor>
+<guide></guide>
 
 <u>
 	<li><a ui-sref="home">Home</a></li>
 	<li><a href="" ng-click="openEditor()">V-Object</a></li>
+	<li><a href="" ng-click="openGuide()">Guide</a></li>
 	<li><a href="" ng-init='showExport = false' ng-click='showExport = !showExport' >Export</a>
 		<ul class="export-choice" ng-if="showExport" ng-mouseleave="showExport=false">
-			<li><a ng-click="saveCodeStories()"> .codestories</a></li>
-			<li><a ng-click="saveZip()"> Zip </a></li>
+			<a ng-click="saveCodeStories()"> .codestories</a>
+			<a ng-click="saveZip()"> Zip </a>
 		</ul>
 
 	</li>
