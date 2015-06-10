@@ -8,7 +8,8 @@
  */
 angular.module('narrator').factory('interpreterFactory', [
   'vCodeInterpreterFactory',
-  function (vCodeInterpreterFactory) {
+  'notificationsFactory',
+  function (vCodeInterpreterFactory,notificationsFactory) {
     var interpreter;
     var currentNarrative;
     var currentnarrativeHooks;
@@ -65,7 +66,18 @@ angular.module('narrator').factory('interpreterFactory', [
       ASTNode.attachNarrativeHooks(codeNarrative);
       currentNarrative = codeNarrative.name;
       i = 0;
-      interpreter.setAst(ASTNode.tnode);
+      var keepScope = false;
+      if( codeNarrative.dependencies ){
+        var depCode = ''
+        keepScope = true;
+        for(var node in codeNarrative.dependencies){
+          depCode += codeNarrative.dependencies[node].content
+        }
+        interpreter = new Interpreter(depCode);
+        interpreter.run();
+      } 
+      interpreter.setAst(ASTNode.tnode , keepScope);
+      
       vCodeInterpreterFactory.newSession();
     }
     function getCurrentScope() {
@@ -112,21 +124,29 @@ angular.module('narrator').factory('interpreterFactory', [
       if (currentStep) {
         return processCodeStep(currentStep);
       }
-      do {
-        if (interpreter.stateStack.length === 0) {
-          return {
-            'node': processedNode.ASTNode,
-            'item': item
-          };
-        }
-        processedNode = interpreter.getCurrentNode();
-        oldStackSize = interpreter.stateStack.length;
-        step = interpreter.step();
-        newStackSize = interpreter.stateStack.length;
-        if (debugStep) {
-          break;
-        }  //stop when the processedNode has a current narrative and the stack size has decreased (node has been poped)
-      } while (oldStackSize < newStackSize || !(processedNode.codeNarrative && processedNode.codeNarrative[currentNarrative]));
+
+      try {
+        do {
+          if (interpreter.stateStack.length === 0) {
+            return {
+              'node': processedNode.ASTNode,
+              'item': item
+            };
+          }
+          processedNode = interpreter.getCurrentNode();
+          oldStackSize = interpreter.stateStack.length;
+         
+          step = interpreter.step();
+        
+          newStackSize = interpreter.stateStack.length;
+          if (debugStep) {
+            break;
+          }  //stop when the processedNode has a current narrative and the stack size has decreased (node has been poped)
+        } while (oldStackSize < newStackSize || !(processedNode.codeNarrative && processedNode.codeNarrative[currentNarrative]));
+
+      } catch(error){
+        notificationsFactory.error(error,processedNode);
+      }
       currentnarrativeHooks = processedNode.codeNarrative ? processedNode.codeNarrative[currentNarrative] : undefined;
       i = 0;
       if (currentnarrativeHooks && currentnarrativeHooks[i]) {

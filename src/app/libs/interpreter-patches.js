@@ -1,6 +1,13 @@
-Interpreter.prototype.setAst = function(ast){
+
+
+Interpreter.prototype.setAst = function(ast,keepScope){
+	var scope;
 	this.ast = ast;
-	var scope = this.createScope(this.ast, null);
+	if(keepScope){
+		scope = this.createScope(this.ast, this.globalScope);
+	} else {
+		scope = this.createScope(this.ast, null);
+	}
 	this.stateStack = [{node: this.ast, scope: scope, thisExpression: scope}];
 };
 

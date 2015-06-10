@@ -56,6 +56,9 @@ angular.module('cast').factory('CASTNodeFactory', [
       isFile: function () {
         return this instanceof FileNode;
       },
+      isJSFile: function(){
+        return this.isFile() && (this.name.substr(-3) === ".js");
+      },
       isASTNode: function () {
         return this instanceof ASTNode;
       },
@@ -69,19 +72,40 @@ angular.module('cast').factory('CASTNodeFactory', [
         return true;
       }
     };
+    
+    var FolderNode = function (name, parent, children) {
+      CASTNode.call(this, name, parent, children);
+    };
+    FolderNode.prototype = Object.create(CASTNode.prototype);
+    FolderNode.prototype.getJSFiles = function(){
+      var result = [], name , node;
+      for(name in this.children){
+        node = this.children[name];
+        if(node.isJSFile()){
+          result.push(node)
+        } else if (node.isFolder()){
+          result = result.concat( node.getJSFiles() );
+        }
+      }
+      return result;
+    }
+
     var RootNode = function (name, children) {
       CASTNode.call(this, name, null, children);
       this.path = '';
     };
     RootNode.prototype = Object.create(CASTNode.prototype);
-    var FolderNode = function (name, parent, children) {
-      CASTNode.call(this, name, parent, children);
-    };
-    FolderNode.prototype = Object.create(CASTNode.prototype);
+    RootNode.prototype.getJSFiles = FolderNode.prototype.getJSFiles;
+
+
     var FileNode = function (name, parent, children, content) {
       CASTNode.call(this, name, parent, children);
       this.content = content;
     };
+
+
+
+
     FileNode.prototype = Object.create(CASTNode.prototype);
     //return filenode child. Generates the parse tree only when requested with the getChild method
     // The only parseAs mode for the moment is the acorn js parser under the name 'Program';

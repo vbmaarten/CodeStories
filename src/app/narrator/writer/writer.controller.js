@@ -22,6 +22,20 @@ angular.module('narrator').controller('WriterCtrl', [
     } else {
       writerFactory.selectedNarrative = undefined;
     }
+
+    $scope.JSFiles = CAST.getJSFiles();
+
+
+
+    $scope.dep = {};
+
+    $scope.addDependency = function(){
+      if($scope.dep.toAdd)
+        writerFactory.addDependency($scope.dep.toAdd);
+    }
+
+    $scope.removeDependency = writerFactory.removeDependency;
+
     // Add a narrative
     $scope.addNarrative = function () {
       writerFactory.addNarrative($scope.activeNode);

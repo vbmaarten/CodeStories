@@ -49,6 +49,21 @@ angular.module('narrator')
         }
       },
 
+      addDependency: function(dep){
+        if(!this.selectedNarrative.dependencies){
+          this.selectedNarrative.dependencies = []
+        }
+        this.removeDependency(dep);
+        this.selectedNarrative.dependencies.push( dep );
+
+      },
+
+      removeDependency:function(dep){
+        var i = this.selectedNarrative.dependencies.indexOf(dep) ;
+        if(i !== -1)
+          this.selectedNarrative.dependencies.splice( i ,1 )
+      },
+
       /**
         * @ngdoc method
         * @name addNarrative
