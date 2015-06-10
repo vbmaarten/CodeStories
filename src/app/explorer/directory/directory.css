@@ -9,11 +9,22 @@
 	width:100%;
 }
 
-.folder-reference {
+.directory-view li a {
+	padding:2px 8px;
+}
+
+.directory-view li .folder-reference {
 	font-weight: bold;
 }
 
-.js-program-node{
+.directory-view li .js-program-node{
+	padding:0;
 	float:right;
 	font-weight:italic;
+}
+
+.directory-view .active {
+	color:white;
+	background-color: #9C27B0;
+	border-radius: 5px;
 }
