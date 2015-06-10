@@ -38,7 +38,7 @@ angular.module('codeStoriesApp').controller('HomeScreenCtrl', [
       } else if ($scope.loader === 'file') {
         projectname = $scope.message;
         CAST.project = projectname;
-        notificationsFactory.success('Zit project loaded!');
+        notificationsFactory.success('Zip project loaded!');
         $state.go('narrating.viewing.selecting', { 'project': projectname });
       }
     };
