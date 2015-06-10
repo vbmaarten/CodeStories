@@ -6,8 +6,14 @@
 
 .directory-view li {
 	margin: 7px 0;
+	width:100%;
 }
 
 .folder-reference {
 	font-weight: bold;
+}
+
+.js-program-node{
+	float:right;
+	font-weight:italic;
 }
