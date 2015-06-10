@@ -1,5 +1,6 @@
-<div class="blackout" ng-show="activated"></div>
+<div class="blackout" ng-show="activated" ng-click="close()"></div>
 <div class="modal" ng-show="activated">
+	<i id="close_button" class="fa fa-times" ng-click="close()"></i>
 	<div id="header">
 		<p id="title_text">{{title}}</p>
 	</div>

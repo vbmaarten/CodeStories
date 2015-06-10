@@ -9,7 +9,8 @@
 angular.module('navigation').controller('navigationCtrl', [
   '$scope',
   'projectManagerFactory',
-  function ($scope, projectManagerFactory) {
+  'modalFactory',
+  function ($scope, projectManagerFactory, modalFactory) {
     $scope.showVObjectEditor = false;
 
   	$scope.saveCodeStories = function(){
@@ -18,5 +19,8 @@ angular.module('navigation').controller('navigationCtrl', [
   	$scope.saveZip = function(){
   		projectManagerFactory.packZip();
   	}
+    $scope.openEditor = function(){
+      modalFactory.activate("VObjectEditor")
+    }
   }
 ]);

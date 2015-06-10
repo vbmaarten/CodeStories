@@ -9,19 +9,21 @@ angular.module('VisualElements').controller('ModalCtrl', ['$scope', 'modalFactor
   function ($scope, modalFactory) {
   	$scope.activated = false;
 
+  	$scope.close = function(){
+  		modalFactory.closeModal();
+  	}
+
   	var accessor = {};
+
   	accessor.activate = function(){
   		$scope.activated = true;
   		$scope.$apply();
-  		$scope.onopen();
-  	}
+  	};
 
-  	accessor.deactivate = function(){
-  		console.log("called");
+  	accessor.deactivate = function() {
   		$scope.activated = false;
   		$scope.$apply();
-  		$scope.onclose();
-  	}
+  	};	
 
   	modalFactory.register($scope.name, accessor);
   }

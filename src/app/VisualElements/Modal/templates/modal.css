@@ -1,5 +1,5 @@
 .blackout {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	background-color: rgba(0,0,0,0.5);
@@ -9,10 +9,10 @@
 }
 
 .modal {
+	position: fixed;
 	background-color: white;
 	width: 70%;
 	height: 70%;
-	position: absolute;
 	left: 15%;
 	top: 15%;
 	z-index: 102;
@@ -45,4 +45,13 @@
 	height: calc(100% - 50px);
 	padding: 20px;
 	overflow: auto;
+}
+
+#close_button{
+	position: absolute;
+	color: white;
+	right: 5px;
+	top: 5px;
+	z-index: 102;
+	cursor: pointer;
 }

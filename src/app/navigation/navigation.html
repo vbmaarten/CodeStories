@@ -1,9 +1,9 @@
-<VObjectEditor ng-show='showVObjectEditor'></VObjectEditor>	
+<VObjectEditor></VObjectEditor>	
 
 
 <u>
 	<li><a ui-sref="home">Home</a></li>
-	<li><a href="" ng-click="showVObjectEditor = true">V-Object</a></li>
+	<li><a href="" ng-click="openEditor()">V-Object</a></li>
 	<li><a href="" ng-init='showExport = false' ng-click='showExport = !showExport' >Export</a>
 		<ul class="export-choice" ng-if="showExport" ng-mouseleave="showExport=false">
 			<li><a ng-click="saveCodeStories()"> .codestories</a></li>

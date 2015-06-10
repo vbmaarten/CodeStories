@@ -1,23 +1,18 @@
-<div class="VObjectEditorWrapper">
-	<div class="content">
-		<div class="header"><h1>V-Object Editor</h1></div>
-		<div class="close"></div>
-		<div class="editor">
-			<div id="leftpane">
-				<div class="controls">
-					<select ng-model="selectedVObject" ng-change="updateVObject()">
-						<option ng-repeat="(name, object) in VObjects">{{name}}</option>
-						<option>New Object</option>
-					</select>
-					<button ng-click="saveObject(); showVObjectEditor = false">Save</button>
-				</div>
-				<div ng-model="VObjectContent" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div>
-			</div>
-			<div id="rightpane">
-				<div id="VisualElement"></div>
-				<div id="VCode"><div ng-model="VCode" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div></div>
-				<button id="execute" ng-click="test()">Test</button>
-			</div>
+<modal name='VObjectEditor' title="VObject Editor">
+	<div id="leftpane">
+		<div class="controls">
+			<select ng-model="selectedVObject" ng-change="updateVObject()">
+				<option ng-repeat="(name, object) in VObjects">{{name}}</option>
+				<option>New Object</option>
+			</select>
+			<button ng-click="saveObject(); showVObjectEditor = false">Save</button>
+		</div>
+		<div ng-model="VObjectContent" ui-ace="{ theme: crimson_editor, mode :'javascript'}">
 		</div>
 	</div>
-</div>
+	<div id="rightpane">
+		<div id="VisualElement"></div>
+		<div id="VCode"><div ng-model="VCode" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div></div>
+		<button id="execute" ng-click="test()">Test</button>
+	</div>
+</modal>

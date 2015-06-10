@@ -20,7 +20,8 @@ angular.module('codeStoriesApp', [
   'VCodeInterpreter',
   'VObjectEditor',
   'notifications',
-  'navigation'
+  'navigation',
+  'VisualElements'
 ]).config([
   '$stateProvider',
   '$urlRouterProvider',
