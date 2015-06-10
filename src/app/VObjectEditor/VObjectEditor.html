@@ -1,6 +1,7 @@
 <modal name='VObjectEditor' title="VObject Editor">
 	<div id="leftpane">
-		<div class="controls">
+		<vobjectlist items="VObjects" onselect="selectVObject(key)" onadd="newVObject(key)" onremove="removeVObject(key)"></vobjectlist>
+		<!--<div class="controls">
 			<select ng-model="selectedVObject" ng-change="updateVObject()">
 				<option ng-repeat="(name, object) in VObjects">{{name}}</option>
 				<option>New Object</option>
@@ -8,11 +9,12 @@
 			<button ng-click="saveObject(); showVObjectEditor = false">Save</button>
 		</div>
 		<div ng-model="VObjectContent" ui-ace="{ theme: crimson_editor, mode :'javascript'}">
-		</div>
+		</div>-->
 	</div>
 	<div id="rightpane">
-		<div id="VisualElement"></div>
+		<!--<div id="VisualElement"></div>
 		<div id="VCode"><div ng-model="VCode" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div></div>
-		<button id="execute" ng-click="test()">Test</button>
+		<button id="execute" ng-click="test()">Test</button>-->
+		<div id="VCode"><div id="VCode" ng-model="selectedVObject.content" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div></div>
 	</div>
 </modal>

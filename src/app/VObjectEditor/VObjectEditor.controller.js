@@ -13,11 +13,12 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
   'VObjectFactory',
   'ItemFactory',
   'vCodeInterpreterFactory',
-  function ($scope, VObjectFactory, ItemFactory, vCodeInterpreterFactory) {
+  'notificationsFactory',
+  function ($scope, VObjectFactory, ItemFactory, vCodeInterpreterFactory, notificationsFactory) {
     $scope.VObjects = VObjectFactory.VObjects;
-    $scope.selectedVObject = undefined;
-    $scope.VObjectContent = '';
-    $scope.VObjectName = '';
+    $scope.selectedVObject = {name: '',
+                              content: '',
+                              object: undefined};
     $scope.VCode = '';
     var emptyVObject = function (data) {
       var domEl = document.createElement('div');
@@ -33,17 +34,29 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
         }
       };
     };
-    $scope.selectVObject = function (name) {
-      if (name === 'New Object') {
-        name = prompt('Name');
-        $scope.VObjects[name] = emptyVObject;
+
+    $scope.newVObject = function(key){
+      if($scope.VObjects[key]){
+        notificationsFactory.error("VObject "+key+" already exists.")
+      } else {
+        $scope.VObjects[key] = emptyVObject;
       }
-      $scope.selectedVObject = name;
-      $scope.VObjectContent = $scope.VObjects[name].toString();
-      $scope.VObjectName = name;
-      $scope.VCode = 'var ' + name.toLowerCase() + 'Object = new ' + name + '([]);\n';
-      $scope.VCode += 'display(' + name.toLowerCase() + 'Object.domEl);';
+    }
+
+    $scope.removeVObject = function(key){
+      delete $scope.VObjects[key];
+    }
+
+    $scope.selectVObject = function (key) {
+      $scope.VObjects[key]
+      $scope.selectedVObject.content = $scope.VObjects[key].toString();
+      $scope.selectedVObject.name = key;
+      $scope.selectedVObject.object = $scope.VObjects[key];
+      $scope.VCode = 'var ' + key.toLowerCase() + 'Object = new ' + key + '([]);\n';
+      $scope.VCode += 'display(' + key.toLowerCase() + 'Object.domEl);';
+
     };
+
     $scope.test = function () {
       $scope.saveObject();
       var VItem = new ItemFactory.VCodeItem($scope.VCode);
@@ -55,12 +68,13 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
       }
       document.getElementById('VisualElement').appendChild(VItem.dom);
     };
-    $scope.updateVObject = function () {
-      $scope.selectVObject($scope.selectedVObject);
-    };
+
     $scope.saveObject = function () {
-      VObjectFactory.setVObject($scope.VObjectName, $scope.VObjectContent);
+      if(selectedVObject.object != undefined){
+        VObjectFactory.setVObject($scope.selectedVObject.object, $scope.selectedVObject.content);
+      }
     };
+
     $scope.selectVObject(Object.keys($scope.VObjects)[0]);
   }
 ]);
