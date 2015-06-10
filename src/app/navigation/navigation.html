@@ -12,10 +12,10 @@
 
 	</li>
 	<li class="mode">
-		<a ui-sref="narrating.writing.selecting($stateParams)" ui-sref-active="active">
+		<a ui-sref="narrating.writing.selecting($stateParams)" ng-class="{active: $state.includes('narrating.writing')}">
 			<i class="fa fa-pencil fa-2"></i>
 		</a>
-		<a ui-sref="narrating.viewing.selecting($stateParams)" ui-sref-active="active">
+		<a ui-sref="narrating.viewing.selecting($stateParams)" ng-class="{active: $state.includes('narrating.viewing')}">
 			<i class="fa fa-eye fa-2"></i>
 		</a>
 	</li>

@@ -60,3 +60,21 @@
 |-|2| code selection | Maarten  |  |
 |-|1| Save codestories | Maarten  |  |
 |-|3| visualization objects editor |  |  |
+
+
+
+###Week 7 
+
+##Work flow enhancements:
+writer mode -> codenarrative -> subnode :  view button step to outer hook instead of sub node
+reload not wroking
+better visual cue for creating new narrative / creating new items 
+allow repositioning of narrativehook by clicking relative path 
+add dependencies for codenarrative 
+
+
+Additional features:
+'fullscreen' popup box for enlarging graphics & vobject editor
+writer mode: quick test run too codeNarrative item
+
+

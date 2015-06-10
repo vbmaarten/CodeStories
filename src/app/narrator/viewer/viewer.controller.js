@@ -9,8 +9,16 @@
  */
 angular.module('narrator').controller('ViewerCtrl', [
   '$scope',
+  '$state',
   'viewerFactory',
-  function ($scope, viewerFactory) {
+  'writerFactory',
+  function ($scope, $state, viewerFactory, writerFactory) {
+    if(writerFactory.selectedNarrative) {
+      var n = writerFactory.selectedNarrative; 
+      writerFactory.selectedNarrative = undefined;
+      $state.go('narrating.viewing.selecting', {path: n.CASTPath});
+    } 
+
     $scope.storyboard = viewerFactory.storyboard;
     $scope.interpreterScope = viewerFactory.interpreterScope;
     $scope.debugStep = function () {

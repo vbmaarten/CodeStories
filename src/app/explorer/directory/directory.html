@@ -1,7 +1,12 @@
 
 <ul>
 	<li ng-repeat="(key, value) in data" ng-if="!value.isASTNode()">
-		<a ui-sref=".selecting({path: (castUrl + key)})" ng-class="value.isFile() ? 'file-reference' :'folder-reference'">{{key}}</a>
+		<a ui-sref=".selecting({path: (castUrl + key)})"
+		ng-class="{'folder-reference': value.isFolder(), 'active': contains((castUrl + key))}">{{key}}</a> 
+
+		<a class='js-program-node' ng-if="value.isFile() && value.name.substr(-3) === '.js'" 
+		ui-sref=".selecting({path: (castUrl + key + '/Program' )})" > P </a>
+
 		<div directory data="value.children" cast-url="castUrl+key+'/'"></div>
 	</li>
 </ul>
