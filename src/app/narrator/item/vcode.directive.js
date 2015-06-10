@@ -13,10 +13,16 @@
 angular.module('narrator')
   .directive('vcodeItem', function () {
     return {
-      link: function(scope,elements,attrs){
+      link: function(scope,el,attrs){
         if(scope.item.dom){
-          elements[0].querySelector('.vcode-visual').appendChild(scope.item.dom);
+          el[0].querySelector('.vcode-visual').appendChild(scope.item.dom);
         }
+        var narrator = document.querySelector('.narrator');
+
+        narrator.addEventListener('scroll', function(event) {
+
+        });
+
       },
       restrict: 'AE',
       templateUrl: function (elem, attr) {
