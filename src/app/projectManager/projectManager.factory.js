@@ -13,7 +13,9 @@ angular.module('projectManager').factory('projectManagerFactory', [
   '$http',
   'CASTNodeFactory',
   'notificationsFactory',
-  function (CAST, $http, CASTNodeFactory, notificationsFactory) {
+  'VObjectFactory',
+
+  function (CAST, $http, CASTNodeFactory, notificationsFactory, VObjectFactory) {
     var _incrementCounter = function (counter) {
       counter.value = counter.value ? counter.value + 1 : 1;
     };
@@ -35,6 +37,12 @@ angular.module('projectManager').factory('projectManagerFactory', [
             notificationsFactory.error('GitHub rate insufficient');
           }
         });
+      },
+
+      _addVObjects(VObjects){
+        for(var key in VObjects){
+          VObjectFactory.setVObject(key, VObjects[key])
+        }
       },
 
       _processGithubElement: function (element, root, ret, proceed) {
@@ -61,7 +69,9 @@ angular.module('projectManager').factory('projectManagerFactory', [
             //Parse the narratives file
             _incrementCounter($this.gitHubLoadCounter);
             $http.get(element.url).success(function (data) {
-              ret.narratives = JSON.parse(atob(data.content));
+              var codestories = JSON.parse(atob(data.content));
+              ret.narratives = codestories.Narratives;
+              $this._addVObjects(codestories.VObjects);
               _decrementCounter($this.gitHubLoadCounter, proceed);
             });
           } else if (isDirectory) {
@@ -188,17 +198,25 @@ angular.module('projectManager').factory('projectManagerFactory', [
 
       _generateCodeStories: function (narratives) {
         var codestories = {};
+        var cd_narratives = {};
+        var VObjects = {};
         for (var path in narratives) {
-          codestories[path] = [];
+          cd_narratives[path] = [];
           var $this = this;
           narratives[path].forEach(function (narrative) {
             if (narrative.isFSNarrative()) {
-              codestories[path].push($this._generateFSNarrative(narrative));
+              cd_narratives[path].push($this._generateFSNarrative(narrative));
             } else if (narrative.isCodeNarrative()) {
-              codestories[path].push($this._generateCodeNarrative(narrative));
+              cd_narratives[path].push($this._generateCodeNarrative(narrative));
             }
           });
         }
+
+        for (var VObject in VObjectFactory.VObjects){
+          VObjects[VObject] = VObjectFactory.VObjects[VObject].toString();
+        }
+        codestories["Narratives"] = cd_narratives;
+        codestories["VObjects"] = VObjects;
         return codestories;
       },
 
@@ -274,7 +292,9 @@ angular.module('projectManager').factory('projectManagerFactory', [
           path = fsPath.split('/');
           name = path.pop();
           if (name === 'codestories' || name === '.codestories') {
-            ret.narratives = JSON.parse(fsNode.asText());
+            var codestories = JSON.parse(sNode.asText());
+            ret.narratives = codestories.Narratives;
+            $this._addVObjects(codestories.VObjects);
           } else if (!fsNode.dir) {
             parentFolder = $this._walkTo(root, path);
             parentFolder.children[name] = new CASTNodeFactory.FileNode(name, parentFolder, {}, fsNode.asText());
