@@ -1,6 +1,6 @@
-<modal name='VObjectEditor' title="VObject Editor">
+<modal name='VObjectEditor' title="VObject Editor" onclose="saveObject()" onselect="saveObject()">
 	<div id="leftpane">
-		<vobjectlist id="vobjectlist" items="VObjects" onselect="selectVObject(key)" onadd="newVObject(key)" onremove="removeVObject(key)"></vobjectlist>
+		<vobjectlist id="vobjectlist" items="VObjects" onselect="saveObject(); selectVObject(key)" onadd="newVObject(key)" onremove="removeVObject(key)"></vobjectlist>
 		<!--<div class="controls">
 			<select ng-model="selectedVObject" ng-change="updateVObject()">
 				<option ng-repeat="(name, object) in VObjects">{{name}}</option>

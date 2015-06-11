@@ -72,7 +72,7 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
       document.getElementById('VisualElement').appendChild(VItem.dom);
     };
 
-    $scope.saveObject = function () {
+    $scope.saveObject = function (){
       if($scope.selectedVObject.object != undefined){
         VObjectFactory.setVObject($scope.selectedVObject.name, $scope.selectedVObject.content);
       }

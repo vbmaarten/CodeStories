@@ -22,6 +22,7 @@ angular.module('VisualElements').controller('ModalCtrl', ['$scope', 'modalFactor
 
   	accessor.deactivate = function() {
   		$scope.activated = false;
+      $scope.onclose();
   		$scope.$apply();
   	};	
 
