@@ -32,7 +32,7 @@ angular.module('projectManager').factory('projectManagerFactory', [
           if (data.rate.remaining >= amount) {
             callback();
           } else {
-            notificationsFactory.error(new Error('GitHub rate insufficient'));
+            notificationsFactory.error('GitHub rate insufficient');
           }
         });
       },
