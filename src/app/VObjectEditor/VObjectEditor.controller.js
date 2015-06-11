@@ -19,7 +19,10 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
     $scope.selectedVObject = {name: '',
                               content: '',
                               object: undefined};
-    $scope.VCode = '';
+    $scope.VCode = {};
+    $scope.VCode.content = '';
+    $scope.testCollapsed = false;
+
     var emptyVObject = function (data) {
       var domEl = document.createElement('div');
       var svg = d3.select(domEl).append('svg');
@@ -52,14 +55,14 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
       $scope.selectedVObject.content = $scope.VObjects[key].toString();
       $scope.selectedVObject.name = key;
       $scope.selectedVObject.object = $scope.VObjects[key];
-      $scope.VCode = 'var ' + key.toLowerCase() + 'Object = new ' + key + '([]);\n';
-      $scope.VCode += 'display(' + key.toLowerCase() + 'Object.domEl);';
+      $scope.VCode.content = 'var ' + key.toLowerCase() + 'Object = new ' + key + '([]);\n';
+      $scope.VCode.content += 'display(' + key.toLowerCase() + 'Object.domEl);';
 
     };
 
     $scope.test = function () {
       $scope.saveObject();
-      var VItem = new ItemFactory.VCodeItem($scope.VCode);
+      var VItem = new ItemFactory.VCodeItem($scope.VCode.content);
       vCodeInterpreterFactory.newSession();
       vCodeInterpreterFactory.runVCode(VItem, {});
       var VElement = document.getElementById('VisualElement');
@@ -70,8 +73,8 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
     };
 
     $scope.saveObject = function () {
-      if(selectedVObject.object != undefined){
-        VObjectFactory.setVObject($scope.selectedVObject.object, $scope.selectedVObject.content);
+      if($scope.selectedVObject.object != undefined){
+        VObjectFactory.setVObject($scope.selectedVObject.name, $scope.selectedVObject.content);
       }
     };
 
