@@ -118,8 +118,10 @@ angular.module('projectManager').factory('projectManagerFactory', [
           $http.get('https://api.github.com/repos/' + username + '/' + repository + '/git/trees/HEAD?recursive=1').success(function (data) {
             $this._githubRateLimitSufficient(data.tree.length, function () {
               $this._loadGitHub(data, ret, proceed, $this);
-            });
-          });
+            })
+          }).error(function(){
+            notificationsFactory.error("GitHub repository not found");
+          });;
         });
       },
 
