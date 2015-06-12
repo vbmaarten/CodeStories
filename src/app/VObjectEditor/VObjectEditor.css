@@ -41,6 +41,7 @@
 	width: 460px;
 	height: 250px;
 	float: left;
+	border: 1px solid black;
 }
 
 #test_code{
