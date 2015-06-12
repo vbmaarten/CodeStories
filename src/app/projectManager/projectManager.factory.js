@@ -292,7 +292,7 @@ angular.module('projectManager').factory('projectManagerFactory', [
           path = fsPath.split('/');
           name = path.pop();
           if (name === 'codestories' || name === '.codestories') {
-            var codestories = JSON.parse(sNode.asText());
+            var codestories = JSON.parse(fsNode.asText());
             ret.narratives = codestories.Narratives;
             $this._addVObjects(codestories.VObjects);
           } else if (!fsNode.dir) {
