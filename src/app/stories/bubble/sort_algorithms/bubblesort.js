@@ -1,4 +1,4 @@
-function sort(values) {
+function bubble_sort(values) {
   var length = values.length - 1;
   do {
     var swapped = false;
@@ -11,6 +11,6 @@ function sort(values) {
       }
     }
   }
-  while(swapped === true)
+  while(swapped == true)
 };
-sort([7, 4, 5, 2, 9, 1]);
+

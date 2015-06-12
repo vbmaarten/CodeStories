@@ -19,6 +19,11 @@
 	position:relative;
 }
 
+.narrative-select-container{
+
+	margin-top:50%;
+}
+
 /*.narrator .narrative {
 	-webkit-transition:all .2s ease-in-out;
 	-moz-transition:all .2s ease-in-out;

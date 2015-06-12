@@ -38,6 +38,7 @@ var Interpreter = function(code, opt_initFunc) {
   var scope = this.createScope(this.ast, null);
   this.stateStack = [{node: this.ast, scope: scope, thisExpression: scope}];
   this.globalScope = scope;
+  this.prevScope = scope;
 };
 
 /**
@@ -50,6 +51,7 @@ Interpreter.prototype.step = function() {
   }
   var state = this.stateStack[0];
   this['step' + state.node.type]();
+  this.prevScope = ( (this.stateStack[0] && this.stateStack[0].scope) ? this.stateStack[0].scope : this.prevScope) ;
   return true;
 };
 

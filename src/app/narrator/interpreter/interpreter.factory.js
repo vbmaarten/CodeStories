@@ -28,6 +28,14 @@ angular.module('narrator').factory('interpreterFactory', [
       } else if (item.isVCodeItem()) {
         item = item.clone();
         vCodeInterpreterFactory.runVCode(item, step.scope);
+      } else if (item.isCodeItem()){
+        var code = item.content;
+        var ast = acorn.parse(code);
+        try {
+        interpreter.setAst(ast,interpreter.prevScope);
+        } catch (error){
+          notificationsFactory.error(error,"running: '" + code + "'");
+        }
       } else if (item.isTextItem()) { // Match text from a text time to be replaced by values of the current state of execution
         item = item.clone();
         var doubleBrakRegex = /\[\[\s?(\w*)\s?\]\]/;
@@ -76,7 +84,7 @@ angular.module('narrator').factory('interpreterFactory', [
         interpreter = new Interpreter(depCode);
         interpreter.run();
       } 
-      interpreter.setAst(ASTNode.tnode , keepScope);
+      interpreter.setAst(ASTNode.tnode , interpreter.globalScope);
       
       vCodeInterpreterFactory.newSession();
     }

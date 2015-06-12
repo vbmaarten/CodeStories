@@ -22,7 +22,7 @@
 	height:350px;
 }
 
-.edit-vcode .ace_editor, .vcode .ace_editor, .vcode .vcode-visual {
+.edit-vcode .ace_editor, .vcode .ace_editor, .vcode .vcode-visual, .code , .edit-code {
 	padding:0;
 	width:460px;
 	height:250px;

@@ -491,6 +491,3 @@ var make_parse = function () {
     return s;
   };
 };
-var source = 'var console = ( console ? function(){} : console );\n var x = 0;\n  while(x < 10 )\n{ if( x % 2 === 0 ) { console.log(x , "even"); } \n else { console.log(x,"odd"); } x += 1; } ';
-var parse = make_parse();
-var tree = parse(source);

@@ -29,6 +29,8 @@ angular.module('narrator').factory('ItemFactory', [function () {
           return new TextItem(item.content);
         case 'link':
           return new LinkItem(item.content);
+        case 'code':
+          return new CodeItem(item.content);
         case 'vcode':
           return new VCodeItem(item.content);
         case 'video':
@@ -50,6 +52,9 @@ angular.module('narrator').factory('ItemFactory', [function () {
       },
       isVCodeItem: function () {
         return this instanceof VCodeItem;
+      },
+      isCodeItem: function () {
+        return this instanceof CodeItem;
       },
       isTextItem: function () {
         return this instanceof TextItem;
@@ -76,6 +81,11 @@ angular.module('narrator').factory('ItemFactory', [function () {
     };
     PictureItem.prototype = Object.create(Item.prototype);
     PictureItem.prototype.type = 'picture';
+    var CodeItem = function (content) {
+      Item.call(this, content);
+    };
+    CodeItem.prototype = Object.create(Item.prototype);
+    CodeItem.prototype.type = 'code';
     var VCodeItem = function (content) {
       Item.call(this, content);
     };
@@ -101,6 +111,7 @@ angular.module('narrator').factory('ItemFactory', [function () {
       VideoItem: VideoItem,
       PictureItem: PictureItem,
       VCodeItem: VCodeItem,
+      CodeItem:CodeItem,
       LinkItem: LinkItem,
       EmptyItem: EmptyItem
     };

@@ -1,5 +1,55 @@
 <modal name='guide' title="The Guide">
 	<h1> Guide </h1>
 
-	Trololololol
+	<h2> Index </h2>
+	<ol> 
+	<li href="#intro"> Introduction</li>
+
+
+	</ol>
+
+
+
+	<h2 id="intro"> Introduction </h2>
+
+	<p> Welcome to Code Stories. 
+	Code Stories allows a developer to guide user through a project and visualize code. 
+
+	We only support a JS interpreter at the moment, but more could be added. </p>
+
+
+
+	<h2> Basic usage </h2>
+
+	<h3> Viewer </h3>
+
+
+
+	<h3> Writer </h3>
+
+	<p>There are two kinds of narratives. Code Narratives and FileSystem Narratives. </p>
+
+	<p>FileSystm narratives can be placed on a file or folder node in a project In this case they are a simple sequence of items that will be displayed. You can also add link items inside a FS Narrative that will push that narrative on the stack. once that narrative is done it will continue where you left off. 
+
+	Code Narratives are a little different. You click in the code view to select an AST Node. This is the scope of the item hooks you can place. Now you can place items at points inside the code you have selected. Every time this sub AST Node is <B>POP'ED</B> from the stack, the item will be displayed to the viewer. There are three ways you can interact with the code when you are writing a code narrative. </p>
+
+	<p>You can insert variables in your text items by using [[ variable_name ]]  . </p>
+	<p>You can execute some code inside the interpreter with the code item. This is most usefull if you want to initialize your function. 
+		Placing a code item on the '/' node will execute after the code has been initiated. </p>
+
+	<p>You can run 'VCode'. VCode has access to all none function variables in the scope. And it holds a persistant scope of its own. ( variables declared in one VCode item can be used in any other VCode item within the same CodeNarrative )</p>
+
+	<h2> Known Issues </h2>
+		VCode is evaled , more info in the source code (VCode/vcodeinterpreter.factory.js)
+
+
+
+
+	<h2> Contributers </h2>
+
+
+	<h2> Used Libraries </h2>
+
+	<h2> Licence </h2>
+	
 </modal>
