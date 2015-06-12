@@ -22,6 +22,7 @@ angular.module('narrator')
         $scope.types= [
           'Text',
           'Visualizations',
+          'Code',
           'Video',
           'Image',
           'Narrative',
@@ -41,6 +42,10 @@ angular.module('narrator')
             case 'Video':
               $scope.item.__proto__ = Object.create(ItemFactory.VideoItem.prototype);
               $scope.item.type = 'video';
+              break;
+             case 'Code':
+              $scope.item.__proto__ = Object.create(ItemFactory.CodeItem.prototype);
+              $scope.item.type = 'code';
               break;
             case 'Image':
               $scope.item.__proto__ = Object.create(ItemFactory.PictureItem.prototype);

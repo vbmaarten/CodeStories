@@ -1,15 +1,16 @@
 
 
-Interpreter.prototype.setAst = function(ast,keepScope){
+Interpreter.prototype.setAst = function(ast,scope){
 	var scope;
 	this.ast = ast;
-	if(keepScope){
-		scope = this.createScope(this.ast, this.globalScope);
+	if(scope){
+		scope = this.createScope(this.ast, scope);
 	} else {
 		scope = this.createScope(this.ast, null);
 	}
 	this.stateStack = [{node: this.ast, scope: scope, thisExpression: scope}];
 };
+
 
 Interpreter.prototype.getCurrentNode = function(){
 	return (this.stateStack && this.stateStack[0]) ? this.stateStack[0].node : undefined;
