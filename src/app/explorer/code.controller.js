@@ -34,7 +34,7 @@ angular.module('explorer').controller('CodeCtrl', [
         node = node.getChild('Program');
       }
       var hasBetterSelection = true;
-      while (!node.containsPosition(pos) && node.isASTNode()) {
+      while (node.isASTNode() && !node.containsPosition(pos)) {
         node = node.parent;
       }
       while (hasBetterSelection) {
@@ -98,7 +98,7 @@ angular.module('explorer').controller('CodeCtrl', [
       }
       var selectNode = function (e, selection) {
         // if statement to handle bug in changeCursor event of ace editor
-        if (!$scope.editorLoaded) {
+        if (!$scope.editorLoaded && ( $scope.selected.isJSFile() || $scope.selected.isASTNode() ) ) {
           var cursor = selection.getCursor();
           var pos = _session.getDocument().positionToIndex(cursor, 0);
           var node = getASTNodeByRange(pos);

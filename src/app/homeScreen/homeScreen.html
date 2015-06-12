@@ -6,12 +6,14 @@
 			<div ng-switch="loader">
 			<githubloader ng-show='loader=="github"'></githubloader>
 			<fileloader ng-show='loader=="file"'></fileloader>
+			<examples  ng-show='loader==="examples"' > </examples>
 			<!--<input type="text" placeholder="Username">-->
 			<!--<input type="password" placeholder="Password">-->
-			<div class="link" ng-hide="isLoading">
-				<a ng-click="loader='file'" ng-show="loader=='github'">Or upload a zip file</a>
-				<a ng-click="loader='github'" ng-show="loader=='file'">Or use github</a>
-			</div>
+			<ul class="link" ng-hide="isLoading">
+				<li ng-show="loader!='file'" ><a ng-click="loader='file'" >Or upload a zip file</a></li>
+				<li ng-show="loader!='github'" ><a ng-click="loader='github'" >Or use github</a></li>
+				<li ng-show="loader!='examples'"><a ng-click="loader='examples'" >Or Checkout our featured examples</a></li>
+			</ul>
 			</div>
 		</form>
 	</div>

@@ -17,13 +17,11 @@ angular.module('VisualElements').controller('ModalCtrl', ['$scope', 'modalFactor
 
   	accessor.activate = function(){
   		$scope.activated = true;
-  		$scope.$apply();
   	};
 
   	accessor.deactivate = function() {
   		$scope.activated = false;
       $scope.onclose();
-  		$scope.$apply();
   	};	
 
   	modalFactory.register($scope.name, accessor);
