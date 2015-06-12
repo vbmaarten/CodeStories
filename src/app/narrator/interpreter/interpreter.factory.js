@@ -27,7 +27,13 @@ angular.module('narrator').factory('interpreterFactory', [
 
       } else if (item.isVCodeItem()) {
         item = item.clone();
-        vCodeInterpreterFactory.runVCode(item, step.scope);
+
+        
+        try {
+          vCodeInterpreterFactory.runVCode(item, step.scope);
+        } catch (error){
+          notificationsFactory.error(error,"running: '" + item.content + "'");
+        }
       } else if (item.isCodeItem()){
         var code = item.content;
         var ast = acorn.parse(code);
