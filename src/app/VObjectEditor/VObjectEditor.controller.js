@@ -23,6 +23,12 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
     $scope.VCode.content = '';
     $scope.testCollapsed = false;
 
+    $scope.saveObject = function (){
+      if($scope.selectedVObject.object != undefined){
+        VObjectFactory.setVObject($scope.selectedVObject.name, $scope.selectedVObject.content);
+      }
+    };
+
     var emptyVObject = function (data) {
       var domEl = document.createElement('div');
       var svg = d3.select(domEl).append('svg');
@@ -70,12 +76,6 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
         VElement.children[0].remove();
       }
       document.getElementById('VisualElement').appendChild(VItem.dom);
-    };
-
-    $scope.saveObject = function (){
-      if($scope.selectedVObject.object != undefined){
-        VObjectFactory.setVObject($scope.selectedVObject.name, $scope.selectedVObject.content);
-      }
     };
 
     $scope.selectVObject(Object.keys($scope.VObjects)[0]);

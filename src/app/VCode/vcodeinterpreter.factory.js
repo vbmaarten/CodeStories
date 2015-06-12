@@ -1,4 +1,4 @@
-
+  
 /**
  * @ngdoc service
  * @name VCodeInterpreter.factory:vCodeInterpreterFactory
@@ -16,7 +16,15 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
       var saveVariable = function (node) {
         scope[node.declarations[0].id.name] = undefined;
       };
-      acorn.walk.simple(ast, { VariableDeclaration: saveVariable });
+
+      //Function neccesarry due to bug in acorn.walk.simple
+      var base = acorn.walk.base; 
+      base.ObjectExpression = function(node, st, c) {
+        for (var i = 0; i < node.properties.length; ++i)
+          c(node.properties[i].key, st);
+      };
+
+      acorn.walk.simple(ast, { VariableDeclaration: saveVariable }, base);
       return scope;
     };
 
