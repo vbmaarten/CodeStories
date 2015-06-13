@@ -57,7 +57,7 @@ Interpreter.prototype.convertScope =  function(interpreter_scope){
 	if(interpreter_scope.parentScope){
 		scope = this.convertScope(interpreter_scope.parentScope);
 	} else{
-		// global js scope. filter out the default variables
+		// global js scope or This scope. filter out the default variables
 		scope = {};
 		for( property in interpreter_scope.properties){
 			if( !this.defaultGlobalScopeVariables[ property ] ){
@@ -74,16 +74,25 @@ Interpreter.prototype.convertScope =  function(interpreter_scope){
 }
 
 Interpreter.prototype.getCurrentScope = function(){
-	var iscope , i = 0; 
+	var iscope , i = 0 , node;
+	var itself;
 	do {
-		if(!this.stateStack[i] ){
-			return {};
+		node = this.stateStack[i]
+		if(!node ){
+			return itself || {};
 		}
-		iscope = this.stateStack[i].scope;
-		i++
-	} while( !iscope)
 
-	return this.convertScope( iscope );
+		
+		if(!itself && node.funcThis_ ){
+			itself = this.convertScope(node.funcThis_)
+		}
+		iscope = node.scope;
+		i++
+
+	} while( !iscope)
+	var result = this.convertScope( iscope );
+	result.this = itself;
+	return result;
 }
 
 Interpreter.prototype.defaultGlobalScopeVariables ={

@@ -138,6 +138,8 @@ angular.module('cast').factory('CASTNodeFactory', [
       var tnode = this.tnode;
       if (tnode instanceof Array) {
         tnode = this.parent.tnode;
+      } else if (tnode.kind === 'init'){
+        return tnode.key.start <= pos && tnode.value.end >= pos;
       }
       return tnode.start <= pos && tnode.end >= pos;
     };
@@ -174,6 +176,8 @@ angular.module('cast').factory('CASTNodeFactory', [
             throw new Error('Wohoooaaah , same cast paths', children[name], child);
           }
           children[name] = child;
+        } else if( astNodeName === 'properties' && subNode.kind === 'init'){
+          children[index] = wrapAcornAsASTNode(subNode,index,newASTNode);
         }
       }
       return newASTNode;

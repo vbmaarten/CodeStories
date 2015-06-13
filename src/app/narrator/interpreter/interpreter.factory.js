@@ -14,49 +14,81 @@ angular.module('narrator').factory('interpreterFactory', [
     var currentNarrative;
     var currentnarrativeHooks;
     var i = 0;
-    /**
-        * @ngdoc method
-        * @name processItem
-        * @methodOf narrator.factory:viewerFactory
-        * @description
-        * Runs VCode items in the VCode interpreter and replaces [[ variable_name ]] with the variable_name.toString from the interpreter scope
-        */
-    function processCodeStep(step) {
-      var item = step.item;
-      if(!item){
 
-      } else if (item.isVCodeItem()) {
-        item = item.clone();
 
-        
+
+
+    function processVCodeItem(step){
+
+         var item = item.clone();
         try {
           vCodeInterpreterFactory.runVCode(item, step.scope);
         } catch (error){
           notificationsFactory.error(error,"running: '" + item.content + "'");
         }
-      } else if (item.isCodeItem()){
-        var code = item.content;
+        step.item = step;
+        return step;
+    }
+
+    function processCodeItem(step){
+        var code = step.item.content;
         var ast = acorn.parse(code);
         try {
-        interpreter.setAst(ast,interpreter.prevScope);
+          interpreter.setAst(ast,interpreter.prevScope);
         } catch (error){
           notificationsFactory.error(error,"running: '" + code + "'");
         }
-      } else if (item.isTextItem()) { // Match text from a text time to be replaced by values of the current state of execution
-        item = item.clone();
-        var doubleBrakRegex = /\[\[\s?(\w*)\s?\]\]/;
-        // regex to match [[ someword ]]
+        return step;
+
+    }
+
+    function processTextItem(step){
+       var item = step.item.clone();
+        var doubleBrakRegex = /\[\[\s?([\w.]*)\s?\]\]/;
+        // regex to match [[ someword.word ]] 
         var matched = doubleBrakRegex.exec(item.content);
         while (matched) {
-          var value = step.scope[matched[1]];
+          var value = getDescendantProp(step.scope , matched[1]) ;
           if(value === undefined){
             value = "undefined";
           }
-          item.content = item.content.split(matched[0]).join(value);
+          item.content = item.content.split(matched[0]).join(JSON.stringify(value));
           matched = doubleBrakRegex.exec(item.content);
         }
-      }
+      
       step.item = item;
+
+      return step;
+
+    }
+
+        function getDescendantProp(obj, desc) {
+      var arr = desc.split(".");
+      while(arr.length && (obj = obj[arr.shift()]));
+        return obj;
+    }
+    /**
+        * @ngdoc method
+        * @name processCodeItems
+        * @methodOf narrator.factory:viewerFactory
+        * @description
+        * Runs VCode items 
+         Code items and Text items
+        */
+    function processItem(step) {
+      var item = step.item;
+      if(!item){
+
+      } else if (item.isVCodeItem()) {
+        step = processVCodeItem(step);
+
+        
+      } else if (item.isCodeItem()){
+        step = processCodeItem(step);
+
+      } else if (item.isTextItem()) { // Match text from a text time to be replaced by values of the current state of execution
+        step = processTextItem(step);
+      }
       return step;
     }
     function resetInterpreter() {
@@ -120,6 +152,8 @@ angular.module('narrator').factory('interpreterFactory', [
       }
       return false;
     }
+
+
     /**
          * @ngdoc method
          * @name narrativeStep
@@ -135,8 +169,15 @@ angular.module('narrator').factory('interpreterFactory', [
       var step = true;
       var item = false;
       var oldStackSize, newStackSize;
+
+      function hasProcessedAHook(){
+        //when the processedNode has a current narrative and the stack size has decreased (node has been poped)
+          return oldStackSize > newStackSize && 
+                  processedNode.codeNarrative && 
+                  processedNode.codeNarrative[currentNarrative] ;
+        }
       if (currentStep) {
-        return processCodeStep(currentStep);
+        return processItem(currentStep);
       }
 
       try {
@@ -153,20 +194,21 @@ angular.module('narrator').factory('interpreterFactory', [
           step = interpreter.step();
         
           newStackSize = interpreter.stateStack.length;
-          if (debugStep) {
+          if (debugStep && processedNode.ASTNode ) {// only break if the processedNode is part of the CAST
             break;
-          }  //stop when the processedNode has a current narrative and the stack size has decreased (node has been poped)
-        } while (oldStackSize < newStackSize || !(processedNode.codeNarrative && processedNode.codeNarrative[currentNarrative]));
+          }  
+        } while ( !hasProcessedAHook() );
 
       } catch(error){
         notificationsFactory.error(error,processedNode);
       }
+
       currentnarrativeHooks = processedNode.codeNarrative ? processedNode.codeNarrative[currentNarrative] : undefined;
       i = 0;
-      if (currentnarrativeHooks && currentnarrativeHooks[i]) {
+      if ( hasProcessedAHook() ) {
         item = currentnarrativeHooks[i];
       }
-      return processCodeStep({
+      return processItem({
         'node': processedNode.ASTNode,
         'item': item,
         'scope': getCurrentScope()

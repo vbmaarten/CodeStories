@@ -99,8 +99,8 @@ CodeNarrative
       var hook = this.narrativeHooks[index];
       var i = hook.items.indexOf(item);
       hook.items.splice(i, 1);
-      if (hook.length === 0) {
-        this.narrativeHooks[index] = undefined;
+      if (hook.items.length === 0) {
+        delete this.narrativeHooks[index];
       }
     };
     CodeNarrative.prototype.addItem = function (subpath, item, index) {
