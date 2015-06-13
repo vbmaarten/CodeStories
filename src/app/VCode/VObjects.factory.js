@@ -7,7 +7,17 @@
  * factory for the Vobjects
  */
 
-function Canvas() {
+function Canvas(centered) {
+"use strict";
+
+  function reposition(p){
+        if(centered){
+            p.x += center.x;
+            p.y += center.y;
+        }
+    return p;
+  }
+
   var dom = document.createElement('div');
   var canvas = document.createElement('canvas');
   dom.width = width;
@@ -15,15 +25,29 @@ function Canvas() {
   dom.appendChild(canvas);
   canvas.width = width;
   canvas.height = height;
-  return {
-    domEl: dom,
-    canvas: canvas,
-    ctx: canvas.getContext('2d'),
-    center: {
+  var center = {
       'x': width / 2,
       'y': height / 2
     }
-  };
+  var ctx = canvas.getContext('2d');
+  var TAU = Math.PI *2;
+  
+  
+  function drawPoint(x,y,r,color){
+      var p  = reposition({x:x,y:y});
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,r || 3, 0,TAU);
+      ctx.fill();
+      ctx.stroke();
+      ctx.closePath();
+      
+  }
+
+  ctx.domEl = dom;
+  ctx.drawPoint = drawPoint;
+  ctx.center = center;
+  
+  return ctx;
 }
 function List(data) {
   var domEl = document.createElement('div');
@@ -123,6 +147,7 @@ angular.module('VCodeInterpreter').factory('VObjectFactory', function () {
   VObjects.VArray = VArray;
   VObjects.BarChart = BarChart;
   VObjects.List = List;
+  VObjects.Canvas = Canvas;
   var height = 150, width = 300;
   function setSizeInfo(name) {
     VObjects[name].prototype.width = width;

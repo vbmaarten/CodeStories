@@ -11,8 +11,9 @@ angular.module('narrator').factory('interpreterFactory', [
   'notificationsFactory',
   function (vCodeInterpreterFactory,notificationsFactory) {
     var interpreter;
-    var currentNarrative;
-    var currentnarrativeHooks;
+    var narrativeName;
+    var hookItems;
+    var rootNode;
     var i = 0;
 
 
@@ -20,13 +21,13 @@ angular.module('narrator').factory('interpreterFactory', [
 
     function processVCodeItem(step){
 
-         var item = item.clone();
+         var item = step.item.clone();
         try {
           vCodeInterpreterFactory.runVCode(item, step.scope);
         } catch (error){
           notificationsFactory.error(error,"running: '" + item.content + "'");
         }
-        step.item = step;
+        step.item = item;
         return step;
     }
 
@@ -93,8 +94,13 @@ angular.module('narrator').factory('interpreterFactory', [
     }
     function resetInterpreter() {
       interpreter = new Interpreter('');
-      currentNarrative = '';
-      currentnarrativeHooks = '';
+      if(rootNode){
+        rootNode.removeNarrativeHooks(narrativeName);
+      }
+      rootNode = undefined;
+      narrativeName = '';
+      hookItems = '';
+
       i = 0;
     }
     resetInterpreter();
@@ -108,9 +114,10 @@ angular.module('narrator').factory('interpreterFactory', [
          * @param {ASTNode} ASTNode the ast node to which the narrative must be loaded
          * @param {CodeNarrative} codeNarrative The code narrative that has to be loaded with the ASTNode
          */
-    function setupNarratedAST(ASTNode, codeNarrative) {
-      ASTNode.attachNarrativeHooks(codeNarrative);
-      currentNarrative = codeNarrative.name;
+    function setupNarratedAST(node, codeNarrative) {
+      node.attachNarrativeHooks(codeNarrative);
+      rootNode = node;
+      narrativeName = codeNarrative.name;
       i = 0;
       var keepScope = false;
       if( codeNarrative.dependencies ){
@@ -122,7 +129,7 @@ angular.module('narrator').factory('interpreterFactory', [
         interpreter = new Interpreter(depCode);
         interpreter.run();
       } 
-      interpreter.setAst(ASTNode.tnode , interpreter.globalScope);
+      interpreter.setAst(node.tnode , interpreter.globalScope);
       
       vCodeInterpreterFactory.newSession();
     }
@@ -142,11 +149,11 @@ angular.module('narrator').factory('interpreterFactory', [
       return narrativeStep(true);
     }
     function checkCurrentHookForItems() {
-      if (currentnarrativeHooks && currentnarrativeHooks[i + 1]) {
+      if (hookItems && hookItems[i + 1]) {
         i++;
         return {
           'node': processedNode.ASTNode,
-          'item': currentnarrativeHooks[i],
+          'item': hookItems[i],
           'scope': getCurrentScope()
         };
       }
@@ -174,7 +181,7 @@ angular.module('narrator').factory('interpreterFactory', [
         //when the processedNode has a current narrative and the stack size has decreased (node has been poped)
           return oldStackSize > newStackSize && 
                   processedNode.codeNarrative && 
-                  processedNode.codeNarrative[currentNarrative] ;
+                  processedNode.codeNarrative[narrativeName] ;
         }
       if (currentStep) {
         return processItem(currentStep);
@@ -203,10 +210,10 @@ angular.module('narrator').factory('interpreterFactory', [
         notificationsFactory.error(error,processedNode);
       }
 
-      currentnarrativeHooks = processedNode.codeNarrative ? processedNode.codeNarrative[currentNarrative] : undefined;
+      hookItems = processedNode.codeNarrative ? processedNode.codeNarrative[narrativeName] : undefined;
       i = 0;
       if ( hasProcessedAHook() ) {
-        item = currentnarrativeHooks[i];
+        item = hookItems[i];
       }
       return processItem({
         'node': processedNode.ASTNode,

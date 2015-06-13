@@ -76,6 +76,7 @@ Interpreter.prototype.convertScope =  function(interpreter_scope){
 Interpreter.prototype.getCurrentScope = function(){
 	var iscope , i = 0 , node;
 	var itself;
+
 	do {
 		node = this.stateStack[i]
 		if(!node ){
@@ -91,6 +92,9 @@ Interpreter.prototype.getCurrentScope = function(){
 
 	} while( !iscope)
 	var result = this.convertScope( iscope );
+	if(!itself && node.thisExpression){
+		itself = this.convertScope( node.thisExpression)
+	}
 	result.this = itself;
 	return result;
 }

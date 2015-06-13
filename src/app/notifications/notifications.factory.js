@@ -44,7 +44,8 @@ angular.module('notifications').factory('notificationsFactory', [
     var error = function (content) {
       if (content instanceof Error) {
         console.error(content);
-        content = content.notification + '\n' + content.fileName;
+
+        content = content.message + '\n' +  content.notification + '\n' + content.fileName;
       }
       notify('error', content);
     };
