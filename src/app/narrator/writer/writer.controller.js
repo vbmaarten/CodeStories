@@ -15,8 +15,18 @@ angular.module('narrator').controller('WriterCtrl', [
   'CAST',
   'writerFactory',
   function ($scope, $state, $anchorScroll, CAST, writerFactory) {
+
+
+     console.log(CAST.selectedPath , writerFactory.movingHook)
+     if(writerFactory.movingHook){
+        var newHookPath = CAST.selectedPath.replace( writerFactory.selectedNarrative.CASTPath , '' ) || "/";
+        writerFactory.moveHook(writerFactory.movingHook.path , newHookPath);
+        writerFactory.movingHook = undefined;
+      }
+
     if ($state.is('narrating.writing.editing')) {
       $scope.selectedNarrative = writerFactory.selectedNarrative;
+      
       if (!$scope.selectedNarrative.hasSubNode(CAST.selectedPath))
         $state.go('narrating.writing.selecting');
     } else {
@@ -24,6 +34,9 @@ angular.module('narrator').controller('WriterCtrl', [
     }
 
     $scope.JSFiles = CAST.getJSFiles();
+
+    
+    
 
 
 
@@ -76,9 +89,14 @@ angular.module('narrator').controller('WriterCtrl', [
         sel.removeItem(item);
       }
     };
-    $scope.goToItemHook = function (hook) {
-      console.log(writerFactory.selectedNarrative.CASTPath + hook);
-      $state.go('narrating.writing.editing', { path: writerFactory.selectedNarrative.CASTPath + hook });
+    $scope.goToItemHook = function (hookPath) {
+      console.log(writerFactory.selectedNarrative.CASTPath + hookPath);
+      $state.go('narrating.writing.editing', { path: writerFactory.selectedNarrative.CASTPath + hookPath });
     };
+    $scope.moveHook = function(hook){
+      writerFactory.movingHook  = hook;
+
+     // $state.go('narrating.writing.editing', { path: writerFactory.selectedNarrative.CASTPath + hook.path})
+    }
   }
 ]);

@@ -18,8 +18,11 @@
 	<div class="item button-wide add" ng-click="addItem(item)"></div>
 </div>
 
-<div ng-repeat="node in selectedNarrative.narrativeHooks track by $index" ng-click="goToItemHook(node.path)" id="{{node.path}}">
-	<p class="muted narrative-hook">{{node.path}}</p>
+<div ng-repeat="node in selectedNarrative.narrativeHooks track by $index" id="{{node.path}}">
+	 <p class="narrative-hook">
+	  <i ng-click='moveHook(node)' class="fa fa-chain-broken">  </i>
+	  <span ng-click="goToItemHook(node.path)">  {{node.path}} </span> 
+	 </p>
 	<div ng-repeat="item in node.items">
 		<div item-edit class="item">
 			<div class="remove" ng-click="removeItem(item,node.path)"></div>

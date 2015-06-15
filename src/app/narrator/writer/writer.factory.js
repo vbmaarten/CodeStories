@@ -18,6 +18,8 @@ angular.module('narrator')
 
       selectedNarrative: undefined,
 
+      movingHook: undefined,
+
       /**
         * @ngdoc method
         * @name selectNarrative
@@ -62,6 +64,22 @@ angular.module('narrator')
         var i = this.selectedNarrative.dependencies.indexOf(dep) ;
         if(i !== -1)
           this.selectedNarrative.dependencies.splice( i ,1 )
+      },
+
+      moveHook:function(toMovePath, targetPath){
+
+
+        var toMove = this.selectedNarrative.getHookIndex(toMovePath);
+        var target = this.selectedNarrative.getHookIndex(targetPath);
+        var hooks = this.selectedNarrative.narrativeHooks;
+        if(target){
+          hooks[target].items =  hooks[target].items.concat(hooks[toMove].items);
+          delete hooks[toMove];
+        }
+        else {
+          hooks[toMove].path = targetPath;
+        }
+        
       },
 
       /**

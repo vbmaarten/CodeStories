@@ -82,6 +82,7 @@ CodeNarrative
         this.dependencies = dependencies;
       }
     };
+
     CodeNarrative.prototype = Object.create(Narrative.prototype);
     CodeNarrative.prototype.validItem = function (item) {
       if (item.isLinkItem()) {
@@ -89,6 +90,15 @@ CodeNarrative
       }
       return item instanceof ItemFactory.Item;
     };
+    CodeNarrative.prototype.getHookIndex = function( path ){
+      var index;
+      for( index in this.narrativeHooks ){
+        if(this.narrativeHooks[index].path === path){
+          return index
+        }
+      }
+      return undefined
+    }
     CodeNarrative.prototype.removeItem = function (item, subpath) {
       var index;
       for (index in this.narrativeHooks) {
