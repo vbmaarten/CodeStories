@@ -198,6 +198,23 @@ angular.module('cast').factory('CAST', [
        */
       getNarratives: function (path) {
         return this.narratives[path];
+      },
+      getFileAndLine:function ( path ){
+        var node = this.cast.rootnode.getNode(path);
+        if(node.isFile() || node.isFolder() ){
+          return node.getPath();
+        }
+        else if (node.isASTNode()) {
+
+          var loc = node.tnode.loc, locStr;
+          if(loc.start.line === loc.end.line){
+            locStr =  ' [' + loc.start.line + ']';
+          }
+          else {
+            locStr = ' [' + loc.start.line + '-' + loc.end.line + ']';
+          }
+          return node.getFile().getPath() + locStr;
+        }
       }
     };
   }
