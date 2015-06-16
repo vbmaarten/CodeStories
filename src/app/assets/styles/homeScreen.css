@@ -10,18 +10,28 @@
 
 
 form .link{
-  margin-top:30px;
+  margin-top:10px;
   list-style:none;
 }
 
-form .link a {
+form .link li {
+  margin-top:10px;
+}
+
+
+form .link a, .featured-container a {
   color:white;
   cursor: pointer;
 }
 
-
-form .link a:hover {
+form .link a:hover, .featured-container a:hover{
   text-decoration: underline;
+}
+
+.featured-container {
+  padding-bottom:30px;
+  margin-bottom:15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .

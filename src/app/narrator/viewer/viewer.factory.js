@@ -48,7 +48,7 @@ angular.module('narrator').factory('viewerFactory', [
       selectNarrative: function (narrative) {
         this.deselectNarrative();
         this.pushNarrative(narrative);
-        $state.go('narrating.viewing.playing');
+        $state.go('narrating.viewing.playing', {path: $stateParams.path});
       },
       /**
        * @ngdoc method
@@ -62,7 +62,7 @@ angular.module('narrator').factory('viewerFactory', [
         this.queue.length = 0;
         this.queueCounter.length = 0;
         this.storyboard.length = 0;
-        $state.go('narrating.viewing.selecting');
+        $state.go('narrating.viewing.selecting', {path: $stateParams.path});
       },
       /**
         * @ngdoc method
