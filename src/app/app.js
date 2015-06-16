@@ -49,13 +49,14 @@ angular.module('codeStoriesApp', [
     }());
     var resolveCASTObj = {
       resolveCAST: [
+        '$rootScope',
         '$state',
         '$stateParams',
         '$http',
         'CAST',
         'projectManagerFactory',
         'notificationsFactory',
-        function ($state, $stateParams, $http, CAST, projectManagerFactory,notificationsFactory) {
+        function ($rootScope, $state, $stateParams, $http, CAST, projectManagerFactory,notificationsFactory) {
           var setPath = function () {
             if (CAST.selectedPath !== $stateParams.path) {
               CAST.setSelected($stateParams.path);
@@ -70,6 +71,7 @@ angular.module('codeStoriesApp', [
               } else {
                 CAST.content = 'This is a folder';
               }
+              $rootScope.$broadcast('castEvent');
             }
           };
           if (CAST.project !== $stateParams.project) {
@@ -89,6 +91,7 @@ angular.module('codeStoriesApp', [
                 CAST.project = $stateParams.project;
                 notificationsFactory.success('Zip project loaded!');
                 setPath();
+                $state.go('narrating.viewing.selecting', { 'project': $stateParams.project }, { reload: true });
               }).error(function () {
                 console.error('project not found');
                 $state.go('home');
@@ -113,20 +116,26 @@ angular.module('codeStoriesApp', [
       url: '/:project',
       abstract: true,
       views: {
-        'app': { templateUrl: 'app.html' },
+        'app': { 
+          templateUrl: 'app.html' 
+        },
         'navigation@narrating': {
           templateUrl: '/navigation/navigation.html',
           controller: 'navigationCtrl'
         },
-        'explorer@narrating': { templateUrl: '/explorer/explorer.html' }
+        'explorer@narrating': { 
+          templateUrl: '/explorer/explorer.html' 
+        }
       }
     }).state('narrating.viewing', {
-      url: '{path:.*}',
-      resolve: resolveCASTObj,
       abstract: true,
       views: {
-        'code': { controller: 'CodeCtrl' },
-        'directories': { controller: 'DirectoriesCtrl' },
+        'code': { 
+          controller: 'CodeCtrl' 
+        },
+        'directories': { 
+          controller: 'DirectoriesCtrl' 
+        },
         'narrator': {
           templateUrl: '/narrator/narrator.html',
           controller: 'NarratorCtrl'
@@ -136,16 +145,31 @@ angular.module('codeStoriesApp', [
           controller: 'ViewerCtrl'
         }
       }
-    }).state('narrating.viewing.playing', { views: { 'viewer': { templateUrl: '/narrator/viewer/viewer.play.html' } } }).state('narrating.viewing.selecting', {
-      url: '',
-      views: { 'viewer': { templateUrl: '/narrator/viewer/viewer.select.html' } }
-    }).state('narrating.writing', {
-      url: '{path:.*}',
+    }).state('narrating.viewing.playing', {
       resolve: resolveCASTObj,
+      url: '{path:.*}',
+      views: { 
+        'viewer': { 
+          templateUrl: '/narrator/viewer/viewer.play.html' 
+        } 
+      } 
+    }).state('narrating.viewing.selecting', {
+      resolve: resolveCASTObj,
+      url: '{path:.*}',
+      views: { 
+        'viewer': { 
+          templateUrl: '/narrator/viewer/viewer.select.html' 
+        } 
+      }
+    }).state('narrating.writing', {
       abstract: true,
       views: {
-        'code': { controller: 'CodeCtrl' },
-        'directories': { controller: 'DirectoriesCtrl' },
+        'code': { 
+          controller: 'CodeCtrl' 
+        },
+        'directories': { 
+          controller: 'DirectoriesCtrl' 
+        },
         'narrator': {
           templateUrl: '/narrator/narrator.html',
           controller: 'NarratorCtrl'
@@ -155,9 +179,22 @@ angular.module('codeStoriesApp', [
           controller: 'WriterCtrl'
         }
       }
-    }).state('narrating.writing.editing', { views: { 'writer': { templateUrl: '/narrator/writer/writer.edit.html' } } }).state('narrating.writing.selecting', {
-      url: '',
-      views: { 'writer': { templateUrl: '/narrator/writer/writer.select.html' } }
+    }).state('narrating.writing.editing', {
+      resolve: resolveCASTObj,
+      url: '{path:.*}',
+      views: { 
+        'writer': { 
+          templateUrl: '/narrator/writer/writer.edit.html' 
+        } 
+      } 
+    }).state('narrating.writing.selecting', {
+      resolve: resolveCASTObj,
+      url: '{path:.*}',
+      views: { 
+        'writer': { 
+          templateUrl: '/narrator/writer/writer.select.html' 
+        } 
+      }
     });
   }
 ]).run([

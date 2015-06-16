@@ -24,6 +24,10 @@
 	padding-left:150px;
 }
 
+.ace_selection {
+	background:none !important;
+}
+
 .higlight-ace{
 	background:'black';
 	color:'black';
