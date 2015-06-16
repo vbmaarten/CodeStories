@@ -1,4 +1,29 @@
 
+.this-narratives{
+	padding-top:1em;
+	padding-bottom:1em;
+	border-top:1px dashed black;
+	border-bottom:1px dashed black;
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+
+.related{
+	text-align: center;
+}
+.related h3{
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#9C27B0;
+	color:white;
+	width:75%;
+	font-weight:lighter;
+}
+
+.super-narratives{
+	
+}
+
 
 .dependencies{
 	background:yellow;
@@ -22,32 +47,9 @@
 
 .narrative-select-container{
 
-	margin-top:50%;
+	margin-top:40%;
 }
 
-/*.narrator .narrative {
-	-webkit-transition:all .2s ease-in-out;
-	-moz-transition:all .2s ease-in-out;
-	-o-transition:all .2s ease-in-out;
-	transition:all .2s ease-in-out;
-	overflow:hidden;
-}
-
-.narrator .narrative.ng-enter {
-	max-height:0px;
-}
-
-.narrator .narrative.ng-enter-active{
-	max-height:99px;
-}
-
-.narrator .narrative.ng-leave {
-	max-height:99px;
-}
-
-.narrator .narrative.ng-leave-active{
-	max-height:0px;
-}*/
 
 .narrative-hook {
 	text-align: center;

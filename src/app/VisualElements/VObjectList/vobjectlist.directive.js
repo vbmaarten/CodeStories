@@ -8,6 +8,11 @@
  * Creates a itemlist
  */
 angular.module('VisualElements').directive('vobjectlist', function () {
+
+  function link(scope, element, attrs){
+    console.log(element);
+  }
+
   return {
     restrict: 'E',
     templateUrl: 'VisualElements/VObjectList/templates/VObjectList.html',
@@ -18,5 +23,6 @@ angular.module('VisualElements').directive('vobjectlist', function () {
         onremove: "&",
         onadd: "&"
     },
+    link: link
   };
-});
+})

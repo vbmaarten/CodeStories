@@ -8,6 +8,18 @@
 	z-index: 101;
 }
 
+.activated{
+	-webkit-transition: height 0.3s;
+	transition: opacity 0.3s;
+	opacity: 1;
+}
+
+.deactivated{
+	-webkit-transition: height 0.3s;
+	transition: opacity 0.3s;
+	opacity: 0;
+}
+
 .modal {
 	position: fixed;
 	background-color: white;

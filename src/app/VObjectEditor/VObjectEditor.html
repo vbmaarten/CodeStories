@@ -23,7 +23,7 @@
 		<div id="collapsebar" ng-click="testCollapsed = testCollapsed ? false : true">
 			<div class="fa-lg fa fa-chevron-left arrow" ng-class="(testCollapsed) ? 'fa  fa-chevron-left' : 'fa fa-chevron-right'"></div>
 		</div>
-		<div id="area" ng-hide="testCollapsed">
+		<div id="area" >
 			<div id="VisualElement"></div>
 			<div id="test_code" ng-model="VCode.content" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div>
 			<button id="test_button" ng-click="test()">Run testcode</button>

@@ -4,6 +4,11 @@ angular.module("VisualElements").controller("VObjectListCtrl", ['$scope',
 		$scope.newVObjectName = "";
 		$scope.adding = false;
 
+		$scope.hideInput = function(){	
+			$scope.adding = false;
+			$scope.newVObjectName = "";
+		}
+
 		$scope.select = function(key){
 			$scope.onselect({'key': key});
 			$scope.selected = key;
@@ -14,9 +19,12 @@ angular.module("VisualElements").controller("VObjectListCtrl", ['$scope',
 		}
 
 		$scope.add = function(key){
-			$scope.adding = false;
-			$scope.newVObjectName = "";
+			$scope.hideInput();
 			$scope.onadd({'key': key});
+		}
+
+		$scope.link = function(scope, element, attrs){
+			console.log(element);
 		}
 	}
 ]);

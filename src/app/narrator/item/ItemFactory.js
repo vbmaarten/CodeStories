@@ -11,9 +11,6 @@ angular.module('narrator').factory('ItemFactory', [function () {
     var Item = function (content, url) {
       this.content = content;
       this.type;
-      this.getTemplateUrl = function () {
-        return baseUrl + this.type;
-      };
     };
     Item.prototype = {
       buildItem: function (item) {

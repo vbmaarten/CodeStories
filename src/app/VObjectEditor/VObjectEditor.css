@@ -13,23 +13,28 @@
 }
 
 .rightpane_full{
+	transition: width 0.3s;
 	width: calc(85% - 20px);
 }
 
-.rightpane_short{	
+.rightpane_short{
+	transition: width 0.3s;
 	width: calc(85% - 480px);
 }
 
 #test_area{
 	float: left;
 	height: 100%;
+	overflow-x: hidden;
 }
 
 .testarea_collapsed{
+	transition: width 0.3s;
 	width: 20px;
 }
 
 .testarea_full{
+	transition: width 0.3s;
 	width: 480px;
 }
 
@@ -49,11 +54,6 @@
 }
 
 #test_button{
-	position: relative;
-	margin-top: 12.5px;
-	left: 80px;
-	height: 25px;
-	width: 300px;
 }
 
 #vobjectlist{
@@ -85,3 +85,24 @@
 	height: 100%;
 	float: left;
 }
+
+#test_button{
+	position: relative;
+	margin-top: 12.5px;
+	left: 80px;
+	height: 25px;
+	width: 300px;
+	background-color: light-gray;
+
+	appearance: none;
+	outline: 0;
+	border: 0;
+	border-radius: 3px;
+	cursor: pointer;
+	-webkit-transition-duration: 0.25s;
+	  transition-duration: 0.25s;
+}
+
+#test_button:hover{
+	background-color: #CCCCCC;
+}	

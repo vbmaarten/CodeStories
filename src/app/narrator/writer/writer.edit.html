@@ -13,7 +13,7 @@
 
 <div ng-repeat="item in selectedNarrative.items track by $index">
 	<div item-edit class="item">
-		<div class="remove" ng-click="removeItem(item)"></div>
+		<i ng-click="removeItem(item)" class="fa fa-times"></i>
 
 	</div>
 	<div class="item button-wide add" ng-click="addItem(item)"></div>
@@ -26,7 +26,7 @@
 	 </p>
 	<div ng-repeat="item in node.items">
 		<div item-edit class="item">
-			<div class="remove" ng-click="removeItem(item,node.path)"></div>
+			<i ng-click="removeItem(item,node.path)"class="fa fa-times"></i>
 			<i ng-click='move(node,item)' class="fa fa-chain-broken">  </i>
 		</div>
 		<div class="item button-wide add" ng-click="addItem(item)"></div>

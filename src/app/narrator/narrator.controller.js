@@ -21,6 +21,11 @@ angular.module('narrator').controller('NarratorCtrl', [
     $scope.$on('castEvent', function (event) {
     	$scope.activeNode = CAST.selected || '/';
     	$scope.narratives = CAST.getSelectedNarratives();
+    	$scope.related = CAST.getRelatedNarratives();
     });
+
+    $scope.readableSubNode = function(path){
+    	return CAST.getFileAndLine(path);
+    }
   }
 ]);
