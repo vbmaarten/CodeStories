@@ -10,6 +10,8 @@
 function Canvas(centered) {
 "use strict";
 
+  var height = this.height, width = this.width;
+  
   function reposition(p){
         if(centered){
             p.x += center.x;

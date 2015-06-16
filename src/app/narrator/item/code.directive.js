@@ -9,7 +9,7 @@
  * executed inside the interpreter scope
  * @param {object} item Item object.
  */
-angular.module('narrator').directive('code', function () {
+angular.module('narrator').directive('codeItem', function () {
   return {
     restrict: 'AE',
     templateUrl: 'narrator/item/code.html'
