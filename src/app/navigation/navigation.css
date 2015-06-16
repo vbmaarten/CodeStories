@@ -40,7 +40,7 @@
 	opacity:.6;
 }
 
-.navigation .mode .active, .navigation a:hover {
+.navigation .mode .active, .navigation .nav-item:hover {
 	opacity:1;
 	border-bottom:3px solid white;
 }
