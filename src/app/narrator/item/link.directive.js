@@ -18,12 +18,12 @@ angular.module('narrator').directive('linkItem', function () {
     controller: [
       '$scope',
       'CAST',
-      function ($scope, CAST) {
+      '$state',
+      function ($scope, CAST,$state) {
         var nodes = CAST.narratives;
         var narratives = {};
-        if ($scope.item.content === 'Empty') {
-          $scope.item.content = {};
-        }
+        $scope.item.content = $scope.item.content || {};
+        
         $scope.link = $scope.item.content.path + ' - ' + $scope.item.content.id;
         for (var i in nodes) {
           for (var j in nodes[i]) {
@@ -37,6 +37,9 @@ angular.module('narrator').directive('linkItem', function () {
           $scope.item.content.id = narToLink.name;
           $scope.item.content.path = narToLink.CASTPath;
         };
+        $scope.gotoEditLink = function(){
+          $state.go('.', { path : $scope.item.content.path });
+        }
       }
     ]
   };

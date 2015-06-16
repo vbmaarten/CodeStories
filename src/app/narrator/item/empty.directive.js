@@ -30,30 +30,25 @@ angular.module('narrator')
 
         $scope.changeToType = function (changeToType) {
 
+          var index = $scope.node.items.indexOf($scope.item)
           switch(changeToType) {
             case 'Text':
-              $scope.item.__proto__ = Object.create(ItemFactory.TextItem.prototype);
-              $scope.item.type = 'text';
+              $scope.node.items[ index ] = new ItemFactory.TextItem();
               break;
             case 'Visualizations':
-              $scope.item.__proto__ = Object.create(ItemFactory.VCodeItem.prototype);
-              $scope.item.type = 'vcode';
+              $scope.node.items[ index ] = new ItemFactory.VCodeItem();
               break;
             case 'Video':
-              $scope.item.__proto__ = Object.create(ItemFactory.VideoItem.prototype);
-              $scope.item.type = 'video';
+               $scope.node.items[ index ] = new ItemFactory.VideoItem();
               break;
              case 'Code':
-              $scope.item.__proto__ = Object.create(ItemFactory.CodeItem.prototype);
-              $scope.item.type = 'code';
+               $scope.node.items[ index ] = new ItemFactory.CodeItem();
               break;
             case 'Image':
-              $scope.item.__proto__ = Object.create(ItemFactory.PictureItem.prototype);
-              $scope.item.type = 'picture';
+               $scope.node.items[ index ] = new ItemFactory.PictureItem();
               break;
             case 'Narrative':
-              $scope.item.__proto__ = Object.create(ItemFactory.LinkItem.prototype);
-              $scope.item.type = 'link';
+               $scope.node.items[ index ] = new ItemFactory.LinkItem();
               break;
           }
         };
