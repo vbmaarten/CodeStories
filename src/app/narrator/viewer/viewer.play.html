@@ -7,13 +7,20 @@
 
 <table class="control-buttons">
 	<tr>
-		<td class="control-button next" tabindex="0" ng-keypress="$event.charCode === 32 && next()" focus ng-click='next()'>
+		<td class="control-button play" tabindex="0"  focus ng-click='auto.playing ? stopAutoPlay() : startAutoPlay()'>
+			<i ng-show='!auto.playing' class="fa fa-play"></i> <i ng-show='auto.playing' class="fa fa-pause"></i> 
+		</td>
+		<td class="control-button next" tabindex="1" ng-keypress="$event.charCode === 32 && next()" focus ng-click='next()'>
 			<i class="fa fa-forward"></i>
 		</td>
 		<td ng-if='activeNode.isASTNode()' class="control-button debugStep" tabindex="0" ng-keypress="$event.charCode === 78 && debugStep()" focus ng-click='debugStep()'>
 			<i class="fa fa-step-forward"></i>
 		</td>
 	</tr>
+	<tr>
+	<td> Play Speed: </td>
+	<td>  <input type="range" name="points" min="250" max="4000" ng-model='auto.speed'></input> </td>
+	<td> {{ auto.speed }}</td>
 </div>
 
 <!-- <table class='interpreterScope' ng-if='activeNode.isASTNode()'> 

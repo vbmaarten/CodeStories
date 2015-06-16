@@ -12,7 +12,8 @@ angular.module('narrator').controller('ViewerCtrl', [
   '$state',
   'viewerFactory',
   'writerFactory',
-  function ($scope, $state, viewerFactory, writerFactory) {
+  '$timeout',
+  function ($scope, $state, viewerFactory, writerFactory,$timeout) {
     if(writerFactory.selectedNarrative) {
       var n = writerFactory.selectedNarrative; 
       writerFactory.selectedNarrative = undefined;
@@ -28,6 +29,36 @@ angular.module('narrator').controller('ViewerCtrl', [
       // Do one step in the narrative
       viewerFactory.step();  // Check if the narrative is still playing after the last step
     };
+
+    
+    $scope.auto = {};
+    $scope.auto.speed = 1000;
+
+    $scope.auto.playing = false;
+    var timer;
+    function autoPlay(){
+      if($state.is('narrating.viewing.selecting')){
+        $scope.auto.playing = false;
+      }
+
+      if($scope.auto.playing ){
+        $scope.next();
+        console.log(parseInt($scope.auto.speed))
+        timer = $timeout(autoPlay , parseInt($scope.auto.speed));
+      }
+    }
+
+    $scope.startAutoPlay = function(){
+
+      $scope.auto.playing = true;
+      autoPlay();
+
+    }
+    $scope.stopAutoPlay = function(){
+        $scope.auto.playing = false;
+        $timeout.cancel(timer);
+
+    }
     // Select a narrative to edit or view
     $scope.selectNarrative = function (narrative) {
       viewerFactory.selectNarrative(narrative);
