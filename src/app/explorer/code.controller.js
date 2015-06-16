@@ -129,7 +129,7 @@ angular.module('explorer').controller('CodeCtrl', [
               mark(narrativeNode.getNode(hookPath), 'selected-item-hook');
             }
           }
-          if ($state.is('narrating.viewing.playing') && viewerFactory.queue[0].isCodeNarrative()) {
+          if ($state.is('narrating.viewing.playing') && viewerFactory.queue[0]  && viewerFactory.queue[0].isCodeNarrative()) {
             narrativeNode = CAST.getNode(viewerFactory.queue[0].CASTPath);
             mark(narrativeNode, 'selected-narrative');
           }
