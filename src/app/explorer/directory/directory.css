@@ -21,12 +21,9 @@
 
 .directory-view li .js-program-node{
 	position: absolute;
-	right: 16px;
+	right: 20px;
 	width: 10px;
-	font-weight: italic;
-}
-
-.folder-arrow{
+	font-style: normal;
 }
 
 .directory-view .active {
