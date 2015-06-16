@@ -143,6 +143,13 @@ angular.module('cast').factory('CASTNodeFactory', [
       }
       return tnode.start <= pos && tnode.end >= pos;
     };
+    ASTNode.prototype.getFile = function(){
+      var x = this.parent;
+      while( !x.isFile() ){
+        x = x.parent;
+      }
+      return x;
+    }
     // Attach items to the interpreter ast nodes, under the attribute .codeNarrative[ narrative name ]
     ASTNode.prototype.attachNarrativeHooks = function (codeNarrative) {
       var hooks = codeNarrative.narrativeHooks;
