@@ -27,7 +27,7 @@ angular.module('narrator').controller('ViewerCtrl', [
     };
     $scope.next = function () {
       // Do one step in the narrative
-      viewerFactory.step();  // Check if the narrative is still playing after the last step
+      return viewerFactory.step();  // Check if the narrative is still playing after the last step
     };
 
     
@@ -37,7 +37,7 @@ angular.module('narrator').controller('ViewerCtrl', [
     $scope.auto.playing = false;
     var timer;
     function autoPlay(){
-      if($state.is('narrating.viewing.selecting')){
+      if(viewerFactory.finished || $state.is('narrating.viewing.selecting')){
         $scope.auto.playing = false;
       }
 
