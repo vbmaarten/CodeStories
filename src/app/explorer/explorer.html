@@ -2,7 +2,7 @@
 	<div class='fa-lg' ng-class="(collapsed) ? 'fa fa-chevron-right' : 'fa  fa-chevron-left'"></div>
 </div>
 
-<div ui-view="directories" class="directory-view" ng-hide="collapsed">
+<div ui-view="directories" class="directory-view">
 	<div  directory data="directory.rootnode.children" cast-url="'/'" level='0'></div>
 </div>
 
