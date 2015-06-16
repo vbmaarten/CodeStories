@@ -16,6 +16,11 @@
 
 .close{
 	float: right;
+	color: gray;
+}
+
+.close:hover{
+	color: black	;
 }
 
 .add {
@@ -23,6 +28,11 @@
 	margin: 0;
 	padding: 0;
 	padding: 5px;
+	color: gray;
+}
+
+.add:hover{
+	color: black;
 }
 
 ng-transclude {

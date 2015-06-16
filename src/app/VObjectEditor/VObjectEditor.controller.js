@@ -45,6 +45,10 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
     };
 
     $scope.newVObject = function(key){
+      if(!key.trim()){
+        return;
+      }
+
       if($scope.VObjects[key]){
         notificationsFactory.error("VObject "+key+" already exists.")
       } else {
