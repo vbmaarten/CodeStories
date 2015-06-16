@@ -117,14 +117,15 @@ CodeNarrative
       if (!subpath) {
         subpath = '/';
       }
-      this.narrativeHooks[subpath] = this.narrativeHooks[subpath] || {
+      this.narrativeHooks[subpath] = this.narrativeHooks[ subpath ] || {
         'path': subpath,
         'items': []
       };
       var hook = this.narrativeHooks[subpath];
       if (!item) {
         item = new ItemFactory.EmptyItem();
-      }
+      } 
+      item = item instanceof ItemFactory.Item ? item : ItemFactory.Item.prototype.buildItem(item);
       if (!this.validItem(item)) {
         throw new TypeError('Trying to add a bad item to narrative', item, this);
       }

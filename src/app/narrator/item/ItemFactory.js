@@ -61,7 +61,8 @@ angular.module('narrator').factory('ItemFactory', [function () {
       },
       isEmptyItem: function () {
         return this instanceof EmptyItem;
-      }
+      },
+      isItem: true
     };
     var TextItem = function (content) {
       Item.call(this, content);

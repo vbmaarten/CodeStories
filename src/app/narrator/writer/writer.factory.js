@@ -18,7 +18,7 @@ angular.module('narrator')
 
       selectedNarrative: undefined,
 
-      movingHook: undefined,
+      stashed: undefined,
 
       /**
         * @ngdoc method
@@ -66,19 +66,27 @@ angular.module('narrator')
           this.selectedNarrative.dependencies.splice( i ,1 )
       },
 
-      moveHook:function(toMovePath, targetPath){
-
-
-        var toMove = this.selectedNarrative.getHookIndex(toMovePath);
+      moveStashed:function(targetPath){
         var target = this.selectedNarrative.getHookIndex(targetPath);
-        var hooks = this.selectedNarrative.narrativeHooks;
-        if(target){
-          hooks[target].items =  hooks[target].items.concat(hooks[toMove].items);
-          delete hooks[toMove];
+        if(this.stashed.type){ //hack , most likly a item
+          this.selectedNarrative.addItem(targetPath,this.stashed);
+
+        } else if ( this.stashed.path && this.stashed.items){
+          //move whole narrativeHook  
+            var hooks = this.selectedNarrative.narrativeHooks;
+            if(target){
+              hooks[target].items =  hooks[target].items.concat(this.stashed.items);
+            }
+            else {
+              hooks[targetPath] = this.stashed;
+              hooks[targetPath].path = targetPath;
+              
+            }
+
         }
-        else {
-          hooks[toMove].path = targetPath;
-        }
+
+
+        this.stashed = undefined;
         
       },
 
