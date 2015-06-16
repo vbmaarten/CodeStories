@@ -1,16 +1,18 @@
 .directory-view ul{
 	list-style: none;
-	padding-left: 10px;
 	margin:0;
+	padding:0;
 }
 
 .directory-view li {
-	margin: 7px 0;
-	width:100%;
+	margin: 0;
 }
-
 .directory-view li a {
-	padding:2px 8px;
+	display: inline-block;
+	padding:5px 8px;
+}
+.directory-view li a.cast-entry {
+	width: 95%;
 }
 
 .directory-view li .folder-reference {
@@ -18,13 +20,16 @@
 }
 
 .directory-view li .js-program-node{
-	padding:0;
-	float:right;
-	font-weight:italic;
+	position: absolute;
+	right: 16px;
+	width: 10px;
+	font-weight: italic;
+}
+
+.folder-arrow{
 }
 
 .directory-view .active {
 	color:white;
-	background-color: #9C27B0;
-	border-radius: 5px;
+	background-color: #c0c0c0;
 }

@@ -3,7 +3,7 @@
 </div>
 
 <div ui-view="directories" class="directory-view" ng-hide="collapsed">
-	<div  directory data="directory.rootnode.children" cast-url="'/'"></div>
+	<div  directory data="directory.rootnode.children" cast-url="'/'" level='0'></div>
 </div>
 
 <div ui-view="code" class='ace-container' ui-ace="{ theme: crimson_editor, onLoad: aceLoaded , mode :(selected.isJSFile() || selected.tnode ? 'javascript' : 'text')}" readonly></div>
