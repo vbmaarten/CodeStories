@@ -21,7 +21,7 @@ angular.module('explorer').directive('directory', [
       templateUrl: '/explorer/directory/directory.html',
       controller:['$scope', 'CAST', function ($scope, CAST){
         $scope.contains = function (path){
-          if(CAST.selectedPath.indexOf('.js') == CAST.selectedPath.length-3)
+          if(CAST.selectedPath.indexOf('.js/') !== -1)
             return (CAST.selectedPath.split('.js')[0] + '.js') == path;
           else 
             return path == CAST.selectedPath;
