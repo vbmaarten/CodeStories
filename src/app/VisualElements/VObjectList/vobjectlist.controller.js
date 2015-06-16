@@ -4,7 +4,7 @@ angular.module("VisualElements").controller("VObjectListCtrl", ['$scope',
 		$scope.newVObjectName = "";
 		$scope.adding = false;
 
-		$scope.hideInput = function(){
+		$scope.hideInput = function(){	
 			$scope.adding = false;
 			$scope.newVObjectName = "";
 		}
@@ -19,7 +19,7 @@ angular.module("VisualElements").controller("VObjectListCtrl", ['$scope',
 		}
 
 		$scope.add = function(key){
-			hideInput();
+			$scope.hideInput();
 			$scope.onadd({'key': key});
 		}
 
