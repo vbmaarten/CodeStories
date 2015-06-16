@@ -42,6 +42,7 @@
 
 .navigation .mode .active, .navigation a:hover {
 	opacity:1;
+	border-bottom:3px solid white;
 }
 
 .navigation a:hover{
