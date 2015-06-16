@@ -29,28 +29,30 @@ angular.module('narrator')
         ];
 
         $scope.changeToType = function (changeToType) {
-
-          var index = $scope.node.items.indexOf($scope.item)
+          var list = $scope.selectedNarrative.items || $scope.node.items;
+          var index = list.indexOf($scope.item);
+          var newItem;
           switch(changeToType) {
             case 'Text':
-              $scope.node.items[ index ] = new ItemFactory.TextItem();
+              newItem = new ItemFactory.TextItem();
               break;
             case 'Visualizations':
-              $scope.node.items[ index ] = new ItemFactory.VCodeItem();
+              newItem = new ItemFactory.VCodeItem();
               break;
             case 'Video':
-               $scope.node.items[ index ] = new ItemFactory.VideoItem();
+               newItem = new ItemFactory.VideoItem();
               break;
              case 'Code':
-               $scope.node.items[ index ] = new ItemFactory.CodeItem();
+               newItem = new ItemFactory.CodeItem();
               break;
             case 'Image':
-               $scope.node.items[ index ] = new ItemFactory.PictureItem();
+               $newItem = new ItemFactory.PictureItem();
               break;
             case 'Narrative':
-               $scope.node.items[ index ] = new ItemFactory.LinkItem();
+               newItem = new ItemFactory.LinkItem();
               break;
           }
+          list[index] = newItem;
         };
       }]
     }
