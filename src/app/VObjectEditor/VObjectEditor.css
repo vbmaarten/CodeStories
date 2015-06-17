@@ -46,11 +46,11 @@
 	width: 460px;
 	height: 250px;
 	float: left;
-	border: 1px solid black;
+	border: 1px dashed #b0b0b0;
 }
 
 #test_code{
-	height: calc(100% - 300px);
+	height: calc(100% - 280px);
 }
 
 #test_button{
@@ -88,21 +88,18 @@
 
 #test_button{
 	position: relative;
-	margin-top: 12.5px;
-	left: 80px;
-	height: 25px;
-	width: 300px;
-	background-color: light-gray;
-
-	appearance: none;
+	height: 30px;
+	width: 100%;
+	background-color: #d0d0d0;
 	outline: 0;
 	border: 0;
-	border-radius: 3px;
 	cursor: pointer;
-	-webkit-transition-duration: 0.25s;
-	  transition-duration: 0.25s;
 }
 
 #test_button:hover{
-	background-color: #CCCCCC;
+	background-color: #c0c0c0;
 }	
+
+#test_button:active{
+	background-color: #d0d0d0;
+}

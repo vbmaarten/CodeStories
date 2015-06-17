@@ -34,7 +34,7 @@
 
 .modal #header {
 	position: relative;
-	background-color: purple;
+	background-color: #9C27B0;
 	margin: 0;
 	padding: 0;
 	height: 50px;
@@ -47,9 +47,9 @@
 	width: 100%;
 	text-align: center;
 	color: white;
-	font-weight: bold;
-	font-size: 30px;
-	padding: 8px;
+	font-weight: 100;
+	font-size: 25px;
+	padding: 12px;
 }
 
 .modal #content{
