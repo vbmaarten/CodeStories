@@ -149,6 +149,10 @@
 	background-color:#bbbbbb;
 }
 
+.stashed{
+	background: green;
+}
+
 .narrator .control-buttons {
 	position: fixed;
 	bottom:20px;	

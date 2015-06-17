@@ -19,15 +19,15 @@
 	<div class="item button-wide add" ng-click="addItem(item)"></div>
 </div>
 
-<div ng-repeat="node in selectedNarrative.narrativeHooks track by $index" id="{{node.path}}">
+<div ng-repeat="node in selectedNarrative.narrativeHooks track by $index" id="{{node.path}}" ng-class="(node==stashed) ? 'stashed' :'' ">
 	 <p class="narrative-hook">
-	  <i ng-click='move(node)' class="fa fa-chain-broken">  </i>
+	  <i ng-click='move(node.path)' class="fa fa-chain-broken">  </i>
 	  <span ng-click="goToItemHook(node.path)">  {{node.path}} </span> 
 	 </p>
-	<div ng-repeat="item in node.items">
-		<div item-edit class="item">
+	<div ng-repeat="item in node.items" ng-class="(node==stashed) ? 'stashed' :'' ">
+		<div item-edit class="item" >
 			<i ng-click="removeItem(item,node.path)"class="fa fa-times"></i>
-			<i ng-click='move(node,item)' class="fa fa-chain-broken">  </i>
+			<i ng-click='move(node.path , item)' class="fa fa-chain-broken">  </i>
 		</div>
 		<div class="item button-wide add" ng-click="addItem(item)"></div>
 	</div>

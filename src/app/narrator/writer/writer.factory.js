@@ -66,29 +66,42 @@ angular.module('narrator')
           this.selectedNarrative.dependencies.splice( i ,1 )
       },
 
-      moveStashed:function(targetPath){
-        var target = this.selectedNarrative.getHookIndex(targetPath);
-        if(this.stashed.type){ //hack , most likly a item
-          this.selectedNarrative.addItem(targetPath,this.stashed);
+      moveStashed:function(destination ){
 
-        } else if ( this.stashed.path && this.stashed.items){
-          //move whole narrativeHook  
-            var hooks = this.selectedNarrative.narrativeHooks;
-            if(target){
-              hooks[target].items =  hooks[target].items.concat(this.stashed.items);
+      if( this.stashed.hook === destination){
+        this.stashed = undefined;
+        return;
+      }
+      var hooks = this.selectedNarrative.narrativeHooks ;
+      var originHook = hooks[this.stashed.hook];
+
+
+        if(this.stashed.item){ // move item 
+
+          this.selectedNarrative.addItem(destination,this.stashed.item);
+
+          originHook.items.splice( originHook.items.indexOf(this.stashed.item) , 1 );
+          if( originHook.items.length === 0){
+            delete hooks[this.stashed.hook];
+          } 
+
+
+        }  else {
+
+            if( hooks[destination] ){
+              hooks[destination].items =  hooks[destination].items.concat( originHook.items);
             }
             else {
-              hooks[targetPath] = this.stashed;
-              hooks[targetPath].path = targetPath;
-              
+              hooks[destination] = originHook ;
+              hooks[destination].path = destination;
+
             }
 
+            delete hooks[this.stashed.hook]
         }
-
-
         this.stashed = undefined;
-        
       },
+     
 
       /**
         * @ngdoc method

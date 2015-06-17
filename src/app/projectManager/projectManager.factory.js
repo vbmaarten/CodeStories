@@ -292,7 +292,15 @@ angular.module('projectManager').factory('projectManagerFactory', [
           path = fsPath.split('/');
           name = path.pop();
           if (name === 'codestories' || name === '.codestories') {
-            var codestories = JSON.parse(fsNode.asText());
+            try{
+              var codestories = JSON.parse(fsNode.asText());
+            } catch(error){
+
+              notificationsFactory.error(error, " Bad Code Stories file");
+
+              root.children['codestories'] = new CASTNodeFactory.FileNode('codestories',root,null,fsNode.asText());
+              return ret;
+            }
             ret.narratives = codestories.Narratives;
             $this._addVObjects(codestories.VObjects);
           } else if (!fsNode.dir) {
