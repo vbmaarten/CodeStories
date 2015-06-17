@@ -180,9 +180,12 @@ angular.module('narrator').factory('viewerFactory', [
           return false;
         }
         var item = codeStep.item;
-        // Push the narrative on the storyboard
-        this.interpreterScope = codeStep.scope;
-        this.storyboard[this.storyboard.length - 1].items.push(item);
+
+          // Push the narrative on the storyboard
+          this.interpreterScope = codeStep.scope;
+        if(!item.isVCodeItem() || item.dom){
+          this.storyboard[this.storyboard.length - 1].items.push(item);
+        }
         // Goes to next node
         if (this.lastCodeNarrativeNode !== codeStep.node.getPath()) {
           this.lastCodeNarrativeNode = codeStep.node.getPath();

@@ -3,7 +3,18 @@
 	background-color:#FFFFFF;
 	width:100%;
 	position:relative;
+	transition: 1s  ease-in-out all;
+	overflow:hidden;
 }
+
+.item.ng-enter {
+	max-height:0;
+}
+
+.item.ng-enter.ng-enter-active {
+	max-height:500px;
+}
+
 .item input {
 	font-size:1em;
 }

@@ -14,6 +14,7 @@ angular.module('narrator').controller('ViewerCtrl', [
   'writerFactory',
   '$timeout',
   function ($scope, $state, viewerFactory, writerFactory,$timeout) {
+    console.log('refresh viewer');
     if(writerFactory.selectedNarrative) {
       var n = writerFactory.selectedNarrative; 
       writerFactory.selectedNarrative = undefined;
