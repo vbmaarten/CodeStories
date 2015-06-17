@@ -11,6 +11,9 @@
 angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
   'VObjectFactory',
   function (VObjectFactory) {
+
+    var theVCodeFactory = this;
+
     var generateScope = function (code, scope) {
       var ast = acorn.parse(code);
       var saveVariable = function (node) {
@@ -28,9 +31,7 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
       return scope;
     };
 
-    var VScope = {};
-    return {
-      detachOldDOMel: function(DOMel) {
+    var detachOldDOMel = function(DOMel) {
         var oldVCodeItem = DOMel.VCodeItem;
         DOMel.VCodeItem = undefined;
         var clone = DOMel.cloneNode(true);
@@ -38,22 +39,20 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
         var parent = DOMel.parentNode;
         DOMel.remove();
         parent.appendChild(clone);
-      },
+      }
 
-      attachDOMel: function(DOMel, VCodeItem) {
+    var  attachDOMel = function(DOMel, VCodeItem) {
         VCodeItem.dom = DOMel;
         DOMel.VCodeItem = VCodeItem;
-      },
+      }
 
-      newSession: function () {
-        VScope = {};
-      },
+    var VScope = {};
 
 
 
-      /**
+/**
         * @ngdoc method
-        * @name runVCode
+        * @name runVCodeWithIScopeThis
         * @methodOf VCodeInterpreter.factory:vCodeInterpreterFactory
         * @description
         * Runs VCode. Status: Unsafe , security risk : medium
@@ -63,23 +62,37 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
         * 1) mock all objects from the global scope. But a mallicous user can still access the window through the dom elements or eval wizardry
         * 2) run the VCode by using the interpreter. This requires a lot of patches to the interpreter to inject the proper methods. We do not have the time. 
         */
+
+       var runVCodeWithIScopeThis = function(interpreterScope,VCodeItem){
+          function display(DOMel) {
+            if (DOMel.parentNode) {
+              //If DOMel is already attached
+              detachOldDOMel(DOMel);
+            }
+            attachDOMel(DOMel, VCodeItem);
+          }
+
+              with (interpreterScope) {
+                with (VScope) {
+                  with (VObjectFactory.VObjects) {
+                    eval(VCodeItem.content);
+                  }
+                }
+              }
+      };
+
+
+    return {
+
+      newSession: function () {
+        VScope = {};
+      },
+
+      
       runVCode: function (VCodeItem, interpreterScope) {
         generateScope(VCodeItem.content, VScope);
-        var $this = this;
-        function display(DOMel) {
-          if (DOMel.parentNode) {
-            //If DOMel is already attached
-            $this.detachOldDOMel(DOMel);
-          }
-          $this.attachDOMel(DOMel, VCodeItem);
-        }
-        with (interpreterScope) {
-          with (VScope) {
-            with (VObjectFactory.VObjects) {
-              eval(VCodeItem.content);
-            }
-          }
-        }
+        runVCodeWithIScopeThis.call(interpreterScope.this || {} , interpreterScope, VCodeItem)
+          
       }
     };
   }
