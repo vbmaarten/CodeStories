@@ -7,49 +7,53 @@
  * factory for the Vobjects
  */
 
-function Canvas(centered) {
+function PointCloud(data) {
 "use strict";
 
+  var domEl = document.createElement('div');
+  var chart = d3.select(domEl).append('svg');
   var height = this.height, width = this.width;
-  
-  function reposition(p){
-        if(centered){
-            p.x += center.x;
-            p.y += center.y;
-        }
-    return p;
+  var yScale = d3.scale.linear().range([
+    height,
+    0
+  ]);
+  yScale.domain([
+    0,
+    d3.max(data)
+  ]);
+  var pointGroup;
+  function update(newData) {
+    pointGroup = chart.selectAll('g').data(newData);
+    var pointGroupEnter = pointGroup.enter().append('g');
+    pointGroupEnter.attr('transform', function (d, i) {
+      return 'translate(' + 1 * i + ',0)';
+    });
+    pointGroupEnter.append('rect').attr('fill', 'green').attr('y', height).attr('height', function (d) {
+      return height - yScale(d);
+    }).attr('width', 1 - 1);
+    pointGroupEnter.append('text');
+    pointGroup.select('rect').transition().attr('height', function (d) {
+      return height - yScale(d);
+    }).attr('y', function (d) {
+      return yScale(d);
+    });
+    pointGroup.select('text').attr('y', function (d) {
+      return yScale(d) + 3;
+    }).attr('dy', '.75em').text(function (d) {
+      return '' + d;
+    });
   }
-
-  var dom = document.createElement('div');
-  var canvas = document.createElement('canvas');
-  dom.width = width;
-  dom.height = height;
-  dom.appendChild(canvas);
-  canvas.width = width;
-  canvas.height = height;
-  var center = {
-      'x': width / 2,
-      'y': height / 2
-    }
-  var ctx = canvas.getContext('2d');
-  var TAU = Math.PI *2;
-  
-  
-  function drawPoint(x,y,r,color){
-      var p  = reposition({x:x,y:y});
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,r || 3, 0,TAU);
-      ctx.fill();
-      ctx.stroke();
-      ctx.closePath();
-      
+  update(data);
+  function highlight(toHighlight, color) {
+    pointGroup.select('rect').attr('fill', function (d, i) {
+      return toHighlight.indexOf(i) > -1 ? color : 'green';
+    });
   }
-
-  ctx.domEl = dom;
-  ctx.drawPoint = drawPoint;
-  ctx.center = center;
-  
-  return ctx;
+  return {
+    domEl: domEl,
+    update: update,
+    highlight: highlight
+  };
 }
 function List(data) {
   var domEl = document.createElement('div');
@@ -149,7 +153,7 @@ angular.module('VCodeInterpreter').factory('VObjectFactory', function () {
   VObjects.VArray = VArray;
   VObjects.BarChart = BarChart;
   VObjects.List = List;
-  VObjects.Canvas = Canvas;
+  VObjects.PointCloud = PointCloud;
   var height = 150, width = 300;
   function setSizeInfo(name) {
     VObjects[name].prototype.width = width;

@@ -23,9 +23,24 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
     $scope.VCode.content = '';
     $scope.testCollapsed = false;
 
+    
+
+    function showError(error){
+      var VElement = document.getElementById('VisualElement');
+      VElement.innerHTML = ''
+      var errorMsg = document.createElement('div');
+        errorMsg.innerHTML = error.message + ' [ ' + error.columnNumber + ' : ' + error.lineNumber + ' ] ';
+        VElement.appendChild(errorMsg)
+    }
+
     $scope.saveObject = function (){
+      try{
       if($scope.selectedVObject.object != undefined){
         VObjectFactory.setVObject($scope.selectedVObject.name, $scope.selectedVObject.content);
+      }
+      } catch (error){
+        showError(error);
+        throw(error);
       }
     };
 
@@ -71,15 +86,18 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
     };
 
     $scope.test = function () {
-      $scope.saveObject();
-      var VItem = new ItemFactory.VCodeItem($scope.VCode.content);
-      vCodeInterpreterFactory.newSession();
-      vCodeInterpreterFactory.runVCode(VItem, {});
       var VElement = document.getElementById('VisualElement');
-      if (VElement.children.length > 0) {
-        VElement.children[0].remove();
+      try{ 
+        $scope.saveObject();
+        var VItem = new ItemFactory.VCodeItem($scope.VCode.content);
+        vCodeInterpreterFactory.newSession();
+        VElement.innerHTML = ''
+        
+        vCodeInterpreterFactory.runVCode(VItem, {});
+        VElement.appendChild(VItem.dom);
+      } catch (error){
+        showError(error);
       }
-      document.getElementById('VisualElement').appendChild(VItem.dom);
     };
 
     $scope.selectVObject(Object.keys($scope.VObjects)[0]);
