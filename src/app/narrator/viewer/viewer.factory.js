@@ -62,7 +62,9 @@ angular.module('narrator').factory('viewerFactory', [
         this.queue.length = 0;
         this.queueCounter.length = 0;
         this.storyboard.length = 0;
-        $state.go('narrating.viewing.selecting', {path: $stateParams.path});
+        var tmp = this.finished;
+        this.finished = false;
+        $state.go('narrating.viewing.selecting', {path: tmp || $stateParams.path});
       },
       /**
         * @ngdoc method
@@ -94,14 +96,20 @@ angular.module('narrator').factory('viewerFactory', [
         * Pops a narrative from the queue. When there are still narratives on the queue
         * play the next narrative. If the queue is empty then stop playing.
         */
+      finished : false,
+
       popNarrative: function () {
         // Remove the first item from the queue
+        var lastNarrative = this.queue[0].CASTPath;
+
         this.queue.shift();
         this.queueCounter.shift();
+
         // If there are no more items left in the queue stop playing
         if (this.queue.length === 0) {
-          this.deselectNarrative();
-        }  // Else continue with the queued up narrative
+          this.storyboard[this.storyboard.length - 1].items.push({type:'text',content:'The End...'});
+          this.finished = lastNarrative
+        }  
         else {
           this.storyboard.push({
             'name': this.queue[0].name,
@@ -119,6 +127,10 @@ angular.module('narrator').factory('viewerFactory', [
         * playing. Pops a narrative when the next step is the last of the narrative.
         */
       step: function () {
+        if(this.finished){
+          this.deselectNarrative();
+          return;
+        }
         var result;
         if (this.queue[0].isCodeNarrative()) {
           result = this.codeNarrativeStep();

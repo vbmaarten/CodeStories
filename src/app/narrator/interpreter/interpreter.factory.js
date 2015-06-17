@@ -13,7 +13,7 @@ angular.module('narrator').factory('interpreterFactory', [
     var interpreter;
     var narrativeName;
     var hookItems;
-    var rootNode;
+    var activeTnodes;
     var i = 0;
 
 
@@ -94,10 +94,12 @@ angular.module('narrator').factory('interpreterFactory', [
     }
     function resetInterpreter() {
       interpreter = new Interpreter('');
-      if(rootNode){
-        rootNode.removeNarrativeHooks(narrativeName);
+      if(activeTnodes){
+        for( var node in activeTnodes){
+          delete activeTnodes[node].codeNarrative
+        }
       }
-      rootNode = undefined;
+      activeTnodes = undefined;
       narrativeName = '';
       hookItems = '';
 
@@ -115,8 +117,7 @@ angular.module('narrator').factory('interpreterFactory', [
          * @param {CodeNarrative} codeNarrative The code narrative that has to be loaded with the ASTNode
          */
     function setupNarratedAST(node, codeNarrative) {
-      node.attachNarrativeHooks(codeNarrative);
-      rootNode = node;
+      activeTnodes = node.attachNarrativeHooks(codeNarrative);
       narrativeName = codeNarrative.name;
       i = 0;
       var keepScope = false;

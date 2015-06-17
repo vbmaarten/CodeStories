@@ -21,6 +21,12 @@
 	<td> Play Speed: </td>
 	<td>  <input type="range" name="points" min="250" max="4000" ng-model='auto.speed'></input> </td>
 	<td> {{ auto.speed }}</td>
+	<tr>
+	<td></td><td ng-init='showScope = false' ng-click='showScope = !showScope' > /\ </td> <td></td>
+	</tr>
+	<tr ng-show='showScope' >  
+		<td> {{ interpreterScope }} <td> 
+	</tr>
 </div>
 
 <!-- <table class='interpreterScope' ng-if='activeNode.isASTNode()'> 

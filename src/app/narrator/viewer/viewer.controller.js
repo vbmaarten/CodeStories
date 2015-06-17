@@ -37,7 +37,7 @@ angular.module('narrator').controller('ViewerCtrl', [
     $scope.auto.playing = false;
     var timer;
     function autoPlay(){
-      if($state.is('narrating.viewing.selecting')){
+      if(viewerFactory.finished || $state.is('narrating.viewing.selecting')){
         $scope.auto.playing = false;
       }
 

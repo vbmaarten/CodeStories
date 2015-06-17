@@ -12,12 +12,8 @@
 angular.module('narrator').directive('codeItem', function () {
   return {
     restrict: 'AE',
-    templateUrl: 'narrator/item/code.html'
+	templateUrl: function (elem, attr) {
+        return 'narrator/item/' + attr.type + '.html';
+      },
   };
-}).directive('codeEdit', function () {
-  return {
-    transclude: true,
-    restrict: 'AE',
-    templateUrl: 'narrator/item/code.edit.html'
-  };
-});
+})

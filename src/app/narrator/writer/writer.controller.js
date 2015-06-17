@@ -16,11 +16,13 @@ angular.module('narrator').controller('WriterCtrl', [
   'writerFactory',
   function ($scope, $state, $anchorScroll, CAST, writerFactory) {
 
-     if(writerFactory.stashed){
 
-        var newHookPath = CAST.selectedPath.replace( writerFactory.selectedNarrative.CASTPath , '' ) || "/";
-        writerFactory.moveStashed( newHookPath );
+   $scope.$on('castEvent', function (event) {
+      if(writerFactory.stashed){
+        writerFactory.moveStashed( CAST.selectedPath.replace( writerFactory.selectedNarrative.CASTPath , '' ) || "/"  );
       }
+    });
+     
 
     if ($state.is('narrating.writing.editing')) {
       $scope.selectedNarrative = writerFactory.selectedNarrative;
@@ -33,8 +35,7 @@ angular.module('narrator').controller('WriterCtrl', [
 
     $scope.JSFiles = CAST.getJSFiles();
 
-    
-    
+
 
 
 
@@ -89,21 +90,20 @@ angular.module('narrator').controller('WriterCtrl', [
     };
     $scope.goToItemHook = function (hookPath) {
       console.log(writerFactory.selectedNarrative.CASTPath + hookPath);
+      if(writerFactory.stashed){
+        writerFactory.moveStashed(hookPath);
+      }
+
       $state.go('narrating.writing.editing', { path: writerFactory.selectedNarrative.CASTPath + hookPath });
     };
     $scope.move = function(hook,item){
-      var index = writerFactory.selectedNarrative.getHookIndex(hook.path);
-      var hooks =  writerFactory.selectedNarrative.narrativeHooks ; 
-      if(item){
-        writerFactory.stashed  = hook.items.splice( hook.items.indexOf(item) , 1)[0] ;
-        if(hook.items.length === 0){
-          delete hooks[index];
-        }
-      } else {
-        writerFactory.stashed  =  hooks[index];
-        delete hooks[index];
-      }
+      writerFactory.stashed = {};
+      writerFactory.stashed.hook = hook;
+      writerFactory.stashed.item = item;
+
+
     }
+
 
   }
 ]);
