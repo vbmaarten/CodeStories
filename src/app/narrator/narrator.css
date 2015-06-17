@@ -2,8 +2,8 @@
 .this-narratives{
 	padding-top:1em;
 	padding-bottom:1em;
-	border-top:1px dashed black;
-	border-bottom:1px dashed black;
+	border-top:1px solid #D0D0D0;
+	border-bottom:1px solid #D0D0D0;
 	margin-bottom: 1em;
 	margin-top: 1em;
 }
@@ -46,8 +46,7 @@
 }
 
 .narrative-select-container{
-
-	margin-top:40%;
+	margin-top:50%;
 }
 
 
@@ -197,6 +196,7 @@
 	width:100%;
 	position:relative;
 	margin-bottom:30px;
+	border-radius:2px;
 }
 
 .narrative > * {
