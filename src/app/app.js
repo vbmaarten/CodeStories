@@ -71,7 +71,6 @@ angular.module('codeStoriesApp', [
               } else {
                 CAST.content = 'This is a folder';
               }
-              $rootScope.$broadcast('castEvent');
             }
           };
           if (CAST.project !== $stateParams.project) {
@@ -100,6 +99,7 @@ angular.module('codeStoriesApp', [
           } else {
             setPath();
           }
+          $rootScope.$broadcast('castEvent');
         }
       ]
     };

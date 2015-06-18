@@ -19,6 +19,10 @@ angular.module('explorer').controller('CodeCtrl', [
   function ($scope, $state, $timeout, CAST, writerFactory, viewerFactory) {
     $scope.selected = CAST.selected;
     $scope.content = CAST.content;
+    // bug in ace editor, giving multiple events.
+    $timeout(function () {
+      $scope.editorLoaded = true;
+    }, 100);
 
     $scope.$on('castEvent', function (event){
       $scope.editorLoaded = false;
