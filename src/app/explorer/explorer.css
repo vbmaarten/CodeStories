@@ -50,7 +50,7 @@
 }
 
 .selected-item-hook {
-	background-color:#3C27B0;
+	background-color:#3C2700;
   position: absolute;
   opacity:.2;
   z-index:6;
