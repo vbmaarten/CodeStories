@@ -16,10 +16,13 @@ angular.module('narrator').controller('WriterCtrl', [
   'writerFactory',
   function ($scope, $state, $anchorScroll, CAST, writerFactory) {
 
+    
+
 
    $scope.$on('castEvent', function (event) {
       if(writerFactory.stashed){
         writerFactory.moveStashed( CAST.selectedPath.replace( writerFactory.selectedNarrative.CASTPath , '' ) || "/"  );
+        $scope.stash = undefined;
       }
     });
      
@@ -92,14 +95,16 @@ angular.module('narrator').controller('WriterCtrl', [
       console.log(writerFactory.selectedNarrative.CASTPath + hookPath);
       if(writerFactory.stashed){
         writerFactory.moveStashed(hookPath);
+         $scope.stash = undefined;
       }
 
       $state.go('narrating.writing.editing', { path: writerFactory.selectedNarrative.CASTPath + hookPath });
     };
-    $scope.move = function(hook,item){
+    $scope.stash = function(hook,item){
       writerFactory.stashed = {};
       writerFactory.stashed.hook = hook;
       writerFactory.stashed.item = item;
+     $scope.stashed = item || hook;
 
 
     }
