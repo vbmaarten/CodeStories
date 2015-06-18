@@ -110,7 +110,7 @@ angular.module('cast').factory('CAST', [
         };
         var path = this.selected.getPath();
         for (var n in this.narratives) {
-          if (path !== n) {
+          if (path !== n && this.narratives[n].length > 0) {
             if (path.contains(n)) {
               result.super.push(n);
             } else if (n.contains(path)) {
