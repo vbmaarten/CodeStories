@@ -24,6 +24,8 @@ angular.module('narrator')
             el.removeClass('top');
         });;
 
+        Waves.attach('narrative');
+
       }
     }
   });

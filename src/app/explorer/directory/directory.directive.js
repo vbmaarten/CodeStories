@@ -26,6 +26,9 @@ angular.module('explorer').directive('directory', [
           else 
             return path == CAST.selectedPath;
         }
+        $scope.narrative = function (path){
+          return CAST.getNarratives(path).length > 0;
+        }
       }],
       //Used to call directives recursively
       compile: function (element) {

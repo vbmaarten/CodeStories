@@ -3,31 +3,37 @@
 	<div class="return" ng-click="deselectNarrative()"><</div>
 </h2>
 <div class="dependencies" ng-if='selectedNarrative.isCodeNarrative()'>
-<h4 ng-repeat="dependency in selectedNarrative.dependencies"> {{ dependency.getPath() }} <span ng-click='removeDependency(dependency)'>(-) </span></h4>
-<select  ng-options="file as (file.parent.name +'/'+ file.name) for file in JSFiles" ng-model="dep.toAdd" ng-change='addDependency(file)'>
-	<option value="false">-- Add a dependency --</option>
-</select>
+	<p class="muted" ng-hide="selectedNarrative.dependencies.length > 0">
+		Optional: Select files to load as dependencies.
+	</p>
+	<p ng-repeat="dependency in selectedNarrative.dependencies"> 
+		{{ dependency.getPath() }}
+		<i ng-click='removeDependency(dependency)' class="fa fa-times cursor-pointer"></i>
+	</p>
+	<select  ng-options="file as (file.parent.name +'/'+ file.name) for file in JSFiles" ng-model="dep.toAdd" ng-change='addDependency(file)'>
+		<option value="false">-- Add a dependency --</option>
+	</select>
 </div>
 
 <div class="item button-wide add" ng-click="addItem()"></div>
 
 <div ng-repeat="item in selectedNarrative.items track by $index">
 	<div item-edit class="item">
-		<i ng-click="removeItem(item)" class="fa fa-times"></i>
+		<i ng-click="removeItem(item)" class="fa fa-times remove-item"></i>
 
 	</div>
 	<div class="item button-wide add" ng-click="addItem(item)"></div>
 </div>
 
-<div ng-repeat="node in selectedNarrative.narrativeHooks track by $index" id="{{node.path}}" ng-class="(node==stashed) ? 'stashed' :'' ">
-	 <p class="narrative-hook">
+<div ng-repeat="node in selectedNarrative.narrativeHooks track by $index" id="{{node.path}}" class="narrative-hook" ng-class="{'stashed': (node==stashed) }">
+	<p class="narrative-hook-name">
 	  <i ng-click='move(node.path)' class="fa fa-chain-broken">  </i>
 	  <span ng-click="goToItemHook(node.path)">  {{node.path}} </span> 
-	 </p>
+	</p>
 	<div ng-repeat="item in node.items" ng-class="(node==stashed) ? 'stashed' :'' ">
 		<div item-edit class="item" >
-			<i ng-click="removeItem(item,node.path)"class="fa fa-times"></i>
-			<i ng-click='move(node.path , item)' class="fa fa-chain-broken">  </i>
+			<i ng-click="removeItem(item,node.path)"class="fa fa-times remove-item"></i>
+			<i ng-click='move(node.path , item)' class="fa fa-chain-broken move-item">  </i>
 		</div>
 		<div class="item button-wide add" ng-click="addItem(item)"></div>
 	</div>

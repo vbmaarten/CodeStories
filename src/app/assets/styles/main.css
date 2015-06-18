@@ -36,3 +36,11 @@ button {
   background-color: #b0a727;
   position: absolute;
 }
+
+.right {
+  float: right;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

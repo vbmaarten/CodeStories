@@ -1,7 +1,7 @@
 .directory-view ul{
 	list-style: none;
 	margin:0;
-	padding:0;
+	padding:0 8px;
 }
 
 .directory-view li {
@@ -9,10 +9,8 @@
 }
 .directory-view li a {
 	display: inline-block;
-	padding:5px 8px;
-}
-.directory-view li a.cast-entry {
-	width: 95%;
+	padding:5px 0px;
+	max-width:120px;
 }
 
 .directory-view li .folder-reference {
@@ -21,11 +19,28 @@
 
 .directory-view li .js-program-node{
 	position: absolute;
-	right: 20px;
+	right: 30px;
 	width: 10px;
 	font-style: normal;
 }
 
-.directory-view .active {
-	background-color: #d0d0d0;
+.directory-view .active::after {
+	background-color: #000;
+	opacity:.1;
+	left:0;
+	position:absolute;
+	width:200px;
+	height:26px;
+	margin-top:-21px;
+	display:block;
+	content:"";
+}
+
+.directory-view .hasNarrative::before {
+	display:list-item;
+	list-style:disc;
+	position:absolute;
+	content:"";
+	margin-top:5px;
+	right:0;
 }

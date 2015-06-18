@@ -17,13 +17,10 @@
 		<div class="button-wide add" ng-click="addNarrative()"></div>	
 	</div>
 
-		<div class="sub-narratives related" ng-repeat="sub in related.sub  track by $index">
+	<div class="sub-narratives related" ng-repeat="sub in related.sub  track by $index">
 		<h3 ui-sref="narrating.writing.selecting({ path: sub })">
 			{{ readableSubNode(sub) }}
 		</h3>
 	</div>
-
-
-
 
 </div>
