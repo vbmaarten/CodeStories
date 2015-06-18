@@ -54,13 +54,15 @@ angular.module('narrator').controller('WriterCtrl', [
     // Add a narrative
     $scope.addNarrative = function () {
       writerFactory.addNarrative($scope.activeNode);
-      //$scope.narratives = CAST.getSelectedNarratives();
+
     };
     // Remove a narrative
-    $scope.removeNarrative = function (narrative) {
+    $scope.removeNarrative = function (narrative,event) {
       var i = $scope.narratives.indexOf(narrative);
       $scope.narratives.splice(i, 1);
       $scope.deselectNarrative();
+      event.stopPropagation();
+      event.preventDefault();
     };
     // Select a narrative to edit or view
     $scope.selectNarrative = function (narrative) {
