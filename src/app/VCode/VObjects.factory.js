@@ -154,10 +154,15 @@ angular.module('VCodeInterpreter').factory('VObjectFactory', function () {
   VObjects.BarChart = BarChart;
   VObjects.List = List;
   VObjects.PointCloud = PointCloud;
-  var height = 150, width = 300;
+  var height = 186, width = 354;
+  var center = {
+    x: width/2,
+    y: height/2
+  }
   function setSizeInfo(name) {
     VObjects[name].prototype.width = width;
     VObjects[name].prototype.height = height;
+    VObjects[name].prototype.center = center;
   }
   for (var vobj in VObjects) {
     setSizeInfo(vobj);
