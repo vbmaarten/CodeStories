@@ -10,7 +10,7 @@
 		<div class="narrative" ng-repeat="narrative in narratives  track by $index">
 			<h2 ng-click="selectNarrative(narrative)">
 				{{narrative.name}}
-				<div class="remove" ng-click="removeNarrative(narrative)"></div>
+				<div class="remove" ng-click="removeNarrative(narrative,$event)"></div>
 			</h2>
 		</div>
 

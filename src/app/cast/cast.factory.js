@@ -172,7 +172,8 @@ angular.module('cast').factory('CAST', [
        * @returns {array} Array of narratives.
        */
       getSelectedNarratives: function () {
-        return this.narratives[this.selectedPath] || [];
+       this.narratives[this.selectedPath] = this.narratives[this.selectedPath] || [];
+        return this.narratives[this.selectedPath];
       },
       /**
        * @ngdoc method
