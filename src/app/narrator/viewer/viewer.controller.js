@@ -29,6 +29,7 @@ angular.module('narrator').controller('ViewerCtrl', [
     $scope.next = function () {
       // Do one step in the narrative
       viewerFactory.step();  // Check if the narrative is still playing after the last step
+      $scope.$emit('storyboardEvent');
     };
 
     

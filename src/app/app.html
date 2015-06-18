@@ -10,7 +10,8 @@
 
 	<main class="explorer" ui-view="explorer" ng-class="{collapsed:collapsed}"></main>
 
-	<div class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></div>
+	<!-- <div class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></div> -->
+	<div class="narrator" ui-view="narrator" dynamic-scroll></div>
 
 </div>	
 
