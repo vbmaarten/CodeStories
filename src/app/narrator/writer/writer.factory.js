@@ -115,10 +115,25 @@ angular.module('narrator')
       addNarrative : function (node) {
         var newNarrative;
         if(node.isASTNode()){
-          newNarrative = new NarrativeFactory.CodeNarrative('New Narrative', CAST.selectedPath);
+          var name, nameNode = node;
+          var tnode ;
+          do {
+            tnode = nameNode.tnode;
+            name = tnode.name || 
+                ( (tnode.key) ? tnode.key.name : undefined ) ||
+                ( tnode.id ? tnode.id.name : undefined );
+            nameNode = nameNode.parent 
+          }while( !name && nameNode.tnode );
+          if( nameNode.isJSFile() ){
+            name = nameNode.name + ' program'
+          }
+
+
+          newNarrative = new NarrativeFactory.CodeNarrative('A ' + name + ' story', CAST.selectedPath);
         }
         else{
-          newNarrative = new NarrativeFactory.FSNarrative('New Narrative', CAST.selectedPath);
+
+          newNarrative = new NarrativeFactory.FSNarrative('A ' + node.name + ' story', CAST.selectedPath);
         }
         CAST.narratives[node.getPath()] = CAST.narratives[node.getPath()] || [];
         CAST.narratives[node.getPath()].push(newNarrative);
