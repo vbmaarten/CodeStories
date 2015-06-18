@@ -54,7 +54,7 @@ angular.module('narrator').controller('WriterCtrl', [
     // Add a narrative
     $scope.addNarrative = function () {
       writerFactory.addNarrative($scope.activeNode);
-      $scope.narratives = CAST.getSelectedNarratives();
+      //$scope.narratives = CAST.getSelectedNarratives();
     };
     // Remove a narrative
     $scope.removeNarrative = function (narrative) {

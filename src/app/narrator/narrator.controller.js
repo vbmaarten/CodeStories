@@ -19,6 +19,7 @@ angular.module('narrator').controller('NarratorCtrl', [
     $scope.narratives = CAST.getSelectedNarratives();
     
     $scope.$on('castEvent', function (event) {
+      console.log('narrator castevent');
     	$scope.activeNode = CAST.selected || '/';
     	$scope.narratives = CAST.getSelectedNarratives();
     	$scope.related = CAST.getRelatedNarratives();
