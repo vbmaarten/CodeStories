@@ -32,7 +32,7 @@ angular.module('narrator').factory('ItemFactory', [function () {
         case 'vcode':
           return new VCodeItem(item.content);
         case 'audio':
-          return new TextItem(item.content);
+          return new AudioItem(item.content);
         case 'video':
           return new VideoItem(item.content);
         case 'picture':

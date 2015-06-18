@@ -77,7 +77,22 @@ CodeNarrative
     // the goal is to append to the sub node of the AST nodes the proper items under the proper name
     var CodeNarrative = function (name, CASTPath, narrativeHooks, dependencies) {
       Narrative.call(this, name, CASTPath);
-      this.narrativeHooks = narrativeHooks || {};
+      this.narrativeHooks = {};
+      if(narrativeHooks){
+        for(var i in narrativeHooks){
+          var plainObj = narrativeHooks[i];
+          var subpath = plainObj.path
+          this.narrativeHooks[subpath] = {};
+          this.narrativeHooks[subpath].path = subpath
+          this.narrativeHooks[subpath].items = [];
+          var items = this.narrativeHooks[subpath].items;
+          for( var j in plainObj.items){
+            items.push( ItemFactory.Item.prototype.buildItem( plainObj.items[j] ) )
+          }
+        }
+
+
+      } 
       if(dependencies){
         this.dependencies = dependencies;
       }
