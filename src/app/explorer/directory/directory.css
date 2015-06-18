@@ -20,8 +20,14 @@
 .directory-view li .js-program-node{
 	position: absolute;
 	right: 30px;
-	width: 10px;
 	font-style: normal;
+	padding:3px;
+	margin-top:2px;
+}
+
+.directory-view li .js-program-node:hover {
+	border-radius: 9px;
+	background-color:#aaa;
 }
 
 .directory-view .active::after {
