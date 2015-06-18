@@ -21,6 +21,7 @@ angular.module('narrator')
         $scope.type = 'Select an item';
         $scope.types= [
           'Text',
+          'Audio',
           'Visualizations',
           'Code',
           'Video',
@@ -33,6 +34,9 @@ angular.module('narrator')
           var index = list.indexOf($scope.item);
           var newItem;
           switch(changeToType) {
+            case 'Audio':
+              newItem = new ItemFactory.AudioItem();
+              break;
             case 'Text':
               newItem = new ItemFactory.TextItem();
               break;

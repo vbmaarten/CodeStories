@@ -1,0 +1,9 @@
+<div class='audio-item' >
+	<input type="text" ng-model="item.content.src"> <br>
+	<input ng-model='item.content.wait' type='checkbox'> Wait on Auto Play?</input>
+	 <audio controls>
+		  <source ng-src='{{item.content.src}}'>
+		Your browser does not support the audio element.
+		</audio> 
+
+</div>

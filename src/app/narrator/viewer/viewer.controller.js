@@ -34,7 +34,7 @@ angular.module('narrator').controller('ViewerCtrl', [
     
     $scope.auto = {};
     $scope.auto.speed = 1000;
-
+    $scope.auto.playingItem = false;
     $scope.auto.playing = false;
     var timer;
     function autoPlay(){
@@ -42,8 +42,13 @@ angular.module('narrator').controller('ViewerCtrl', [
         $scope.auto.playing = false;
       }
 
+
+
       if($scope.auto.playing ){
-        $scope.next();
+        if( !$scope.auto.playingItem ){
+          $scope.next();
+        }
+        
         console.log(parseInt($scope.auto.speed))
         timer = $timeout(autoPlay , parseInt($scope.auto.speed));
       }

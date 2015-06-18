@@ -22,6 +22,7 @@ angular.module('narrator').factory('ItemFactory', [function () {
         }
         var type = item.type;
         switch (type) {
+
         case 'text':
           return new TextItem(item.content);
         case 'link':
@@ -30,6 +31,8 @@ angular.module('narrator').factory('ItemFactory', [function () {
           return new CodeItem(item.content);
         case 'vcode':
           return new VCodeItem(item.content);
+        case 'audio':
+          return new AudioItem(item.content);
         case 'video':
           return new VideoItem(item.content);
         case 'picture':
@@ -49,6 +52,9 @@ angular.module('narrator').factory('ItemFactory', [function () {
       },
       isVCodeItem: function () {
         return this instanceof VCodeItem;
+      },
+      isAudioItem: function(){
+        return this instanceof AudioItem;
       },
       isCodeItem: function () {
         return this instanceof CodeItem;
@@ -74,6 +80,14 @@ angular.module('narrator').factory('ItemFactory', [function () {
     };
     VideoItem.prototype = Object.create(Item.prototype);
     VideoItem.prototype.type = 'video';
+
+    var AudioItem = function (content) {
+      Item.call(this, content);
+      this.content = this.content || {src:'./test.mp3',wait:true};
+    };
+    AudioItem.prototype = Object.create(Item.prototype);
+    AudioItem.prototype.type = 'audio';
+
     var PictureItem = function (content) {
       Item.call(this, content);
     };
@@ -111,6 +125,7 @@ angular.module('narrator').factory('ItemFactory', [function () {
       VCodeItem: VCodeItem,
       CodeItem:CodeItem,
       LinkItem: LinkItem,
-      EmptyItem: EmptyItem
+      EmptyItem: EmptyItem,
+      AudioItem: AudioItem
     };
   }]);
