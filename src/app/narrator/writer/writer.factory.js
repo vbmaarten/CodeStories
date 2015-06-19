@@ -32,7 +32,7 @@ angular.module('narrator')
         */     
       selectNarrative: function(narrative){
         this.selectedNarrative = narrative;
-        $state.go('narrating.writing.editing', {path : $stateParams.path});
+        $state.go('narrating.writing.editing.url', {path : $stateParams.path});
       },
 
       /**
@@ -47,7 +47,7 @@ angular.module('narrator')
         if(this.selectedNarrative) {
           var path = this.selectedNarrative.CASTPath;
           this.selectedNarrative = undefined;
-          $state.go('narrating.writing.selecting', {path: path});
+          $state.go('narrating.writing.selecting.url', {path: path});
         }
       },
 

@@ -31,7 +31,7 @@ angular.module('narrator').controller('WriterCtrl', [
       $scope.selectedNarrative = writerFactory.selectedNarrative;
       
       if (!$scope.selectedNarrative.hasSubNode(CAST.selectedPath))
-        $state.go('narrating.writing.selecting');
+        $state.go('narrating.writing.selecting.url');
     } else {
       writerFactory.selectedNarrative = undefined;
     }
@@ -100,7 +100,7 @@ angular.module('narrator').controller('WriterCtrl', [
          $scope.stash = undefined;
       }
 
-      $state.go('narrating.writing.editing', { path: writerFactory.selectedNarrative.CASTPath + hookPath });
+      $state.go('narrating.writing.editing.url', { path: writerFactory.selectedNarrative.CASTPath + hookPath });
     };
     $scope.stash = function(hook,item){
       writerFactory.stashed = {};

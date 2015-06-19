@@ -18,7 +18,7 @@ angular.module('narrator').controller('ViewerCtrl', [
     if(writerFactory.selectedNarrative) {
       var n = writerFactory.selectedNarrative; 
       writerFactory.selectedNarrative = undefined;
-      $state.go('narrating.viewing.selecting', {path: n.CASTPath});
+      $state.go('narrating.viewing.selecting.url', {path: n.CASTPath});
     } 
 
     $scope.storyboard = viewerFactory.storyboard;
@@ -39,7 +39,7 @@ angular.module('narrator').controller('ViewerCtrl', [
     $scope.auto.playing = false;
     var timer;
     function autoPlay(){
-      if(viewerFactory.finished || $state.is('narrating.viewing.selecting')){
+      if(viewerFactory.finished || $state.is('narrating.viewing.selecting.url')){
         $scope.auto.playing = false;
       }
 

@@ -1,7 +1,7 @@
 
 <ul>
 	<li ng-repeat="(key, value) in data" ng-if="!value.isASTNode()" ng-class="{'hasNarrative' : narrative((castUrl + key))}">
-		<a class='cast-entry' ui-sref=".selecting({path: (castUrl + key)})"
+		<a class='cast-entry' ui-sref=".selecting.url({path: (castUrl + key)})"
 		ng-class="{
 			'folder-reference': value.isFolder(),
 			'active': contains((castUrl + key)),
@@ -9,7 +9,7 @@
 			{{key}}
 		</a> 
 		<a class='js-program-node' ng-if="value.isJSFile()" 
-		ui-sref=".selecting({path: (castUrl + key + '/Program' )})" ><i class="fa fa-code"></i></a>
+		ui-sref=".selecting.url({path: (castUrl + key + '/Program' )})" ><i class="fa fa-code"></i></a>
 
 		<div directory data="value.children" level="level+1" cast-url="castUrl+key+'/'"></div>		
 	</li>

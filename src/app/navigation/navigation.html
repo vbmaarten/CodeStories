@@ -13,10 +13,10 @@
 	<li><a href="" ng-click="openGuide()" class="nav-item"><i class="fa fa-book"></i> Guide</a></li>
 	
 	<li class="mode">
-		<a ui-sref="narrating.writing.selecting($stateParams)" ng-class="{active: $state.includes('narrating.writing')}">
+		<a ui-sref="narrating.writing.selecting.url($stateParams)" ng-class="{active: $state.includes('narrating.writing')}">
 			<i class="fa fa-pencil fa-2"></i>
 		</a>
-		<a ui-sref="narrating.viewing.selecting($stateParams)" ng-class="{active: $state.includes('narrating.viewing')}">
+		<a ui-sref="narrating.viewing.selecting.url($stateParams)" ng-class="{active: $state.includes('narrating.viewing')}">
 			<i class="fa fa-eye fa-2"></i>
 		</a>
 	</li>

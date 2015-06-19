@@ -78,7 +78,7 @@ angular.module('codeStoriesApp', [
               var params = $stateParams.project.split(':');
               projectManagerFactory.loadGitHub(params[1], params[2], function () {
                 notificationsFactory.success('Git project loaded!');
-                $state.go('narrating.viewing.selecting', { 'project': $stateParams.project }, { reload: true });
+                $state.go('narrating.viewing.selecting.url', { 'project': $stateParams.project }, { reload: true });
               });
             } else if ($stateParams.project.endsWith('.zip')) {
               return $http({
@@ -90,7 +90,7 @@ angular.module('codeStoriesApp', [
                 CAST.project = $stateParams.project;
                 notificationsFactory.success('Zip project loaded!');
                 setPath();
-                $state.go('narrating.viewing.selecting', { 'project': $stateParams.project }, { reload: true });
+                $state.go('narrating.viewing.selecting.url', { 'project': $stateParams.project }, { reload: true });
               }).error(function () {
                 console.error('project not found');
                 $state.go('home');
@@ -146,16 +146,14 @@ angular.module('codeStoriesApp', [
         }
       }
     }).state('narrating.viewing.playing', {
-      resolve: resolveCASTObj,
-      url: '{path:.*}',
+      abstract: true,
       views: { 
         'viewer': { 
           templateUrl: '/narrator/viewer/viewer.play.html' 
         } 
-      } 
+      }
     }).state('narrating.viewing.selecting', {
-      resolve: resolveCASTObj,
-      url: '{path:.*}',
+      abstract: true,
       views: { 
         'viewer': { 
           templateUrl: '/narrator/viewer/viewer.select.html' 
@@ -180,21 +178,31 @@ angular.module('codeStoriesApp', [
         }
       }
     }).state('narrating.writing.editing', {
-      resolve: resolveCASTObj,
-      url: '{path:.*}',
+      abstract: true,
       views: { 
         'writer': { 
           templateUrl: '/narrator/writer/writer.edit.html' 
         } 
       } 
     }).state('narrating.writing.selecting', {
-      resolve: resolveCASTObj,
-      url: '{path:.*}',
+      abstract: true,
       views: { 
         'writer': { 
           templateUrl: '/narrator/writer/writer.select.html' 
         } 
       }
+    }).state('narrating.viewing.playing.url', {
+      resolve: resolveCASTObj,
+      url: '{path:.*}',
+    }).state('narrating.viewing.selecting.url', {
+      resolve: resolveCASTObj,
+      url: '{path:.*}',
+    }).state('narrating.writing.editing.url', {
+      resolve: resolveCASTObj,
+      url: '{path:.*}',
+    }).state('narrating.writing.selecting.url', {
+      resolve: resolveCASTObj,
+      url: '{path:.*}',
     });
   }
 ]).run([

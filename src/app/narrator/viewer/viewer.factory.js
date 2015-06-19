@@ -48,7 +48,7 @@ angular.module('narrator').factory('viewerFactory', [
       selectNarrative: function (narrative) {
         this.deselectNarrative();
         this.pushNarrative(narrative);
-        $state.go('narrating.viewing.playing', {path: $stateParams.path});
+        $state.go('narrating.viewing.playing.url', {path: $stateParams.path});
       },
       /**
        * @ngdoc method
@@ -64,7 +64,7 @@ angular.module('narrator').factory('viewerFactory', [
         this.storyboard.length = 0;
         var tmp = this.finished;
         this.finished = false;
-        $state.go('narrating.viewing.selecting', {path: tmp || $stateParams.path});
+        $state.go('narrating.viewing.selecting.url', {path: tmp || $stateParams.path});
       },
       /**
         * @ngdoc method
@@ -115,7 +115,7 @@ angular.module('narrator').factory('viewerFactory', [
             'name': this.queue[0].name,
             'items': []
           });
-          $state.go('narrating.viewing.playing', { 'path': this.queuePaths.shift() });
+          $state.go('narrating.viewing.playing.url', { 'path': this.queuePaths.shift() });
         }
       },
       /**
@@ -189,7 +189,7 @@ angular.module('narrator').factory('viewerFactory', [
         // Goes to next node
         if (this.lastCodeNarrativeNode !== codeStep.node.getPath()) {
           this.lastCodeNarrativeNode = codeStep.node.getPath();
-          $state.go('narrating.viewing.playing', { 'path': codeStep.node.getPath() });
+          $state.go('narrating.viewing.playing.url', { 'path': codeStep.node.getPath() });
         }
         this.lastCodeNarrativeNode = codeStep.node.getPath();
         return true;
@@ -214,7 +214,7 @@ angular.module('narrator').factory('viewerFactory', [
         this.queuePaths.unshift($stateParams.path);
         // Push the narrative on the stack and navigate to the node
         this.pushNarrative(linked);
-        $state.go('narrating.viewing.playing', { 'path': linkItem.content.path });
+        $state.go('narrating.viewing.playing.url', { 'path': linkItem.content.path });
       },
       /**
         * @ngdoc method
@@ -233,7 +233,7 @@ angular.module('narrator').factory('viewerFactory', [
           if (!step.node) {
             this.popNarrative();
           }
-          $state.go('narrating.viewing.playing', { 'path': step.node.getPath() });
+          $state.go('narrating.viewing.playing.url', { 'path': step.node.getPath() });
         }
       }
     };

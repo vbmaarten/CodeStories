@@ -14,6 +14,8 @@ angular.module('narrator')
   .directive('vcodeItem', function () {
     return {
       link: function(scope,el,attrs){
+                console.log('load vcode item');
+
         if(scope.item.dom){
           el[0].querySelector('.vcode-visual').appendChild(scope.item.dom);
         }
@@ -36,6 +38,8 @@ angular.module('narrator')
       },
       restrict: 'AE',
       templateUrl: function (elem, attr) {
+                console.log('load vcode item template');
+
         return 'narrator/item/' + attr.type + '.html';
       },
     }

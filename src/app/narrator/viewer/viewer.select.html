@@ -2,7 +2,7 @@
 
 
 	<div class="super-narratives related" ng-repeat="super in related.super  track by $index">
-		<h3 ui-sref="narrating.viewing.selecting({ path: super })">
+		<h3 ui-sref="narrating.viewing.selecting.url({ path: super })">
 			{{super}}
 		</h3>
 	</div>
@@ -21,7 +21,7 @@
 	</div>
 
 		<div class="sub-narratives related" ng-repeat="sub in related.sub  track by $index">
-		<h3 ui-sref="narrating.viewing.selecting({ path: sub })">
+		<h3 ui-sref="narrating.viewing.selecting.url({ path: sub })">
 			{{ readableSubNode(sub) }}
 		</h3>
 	</div>
