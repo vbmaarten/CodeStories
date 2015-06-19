@@ -1,4 +1,4 @@
-<modal name='VObjectEditor' title="VObject Editor" onclose="saveObject()">
+<modal name='VObjectEditor' title="VObject Editor" onclose="saveObject()" onopen="onopen()">
 	<div id="leftpane">
 		<vobjectlist id="vobjectlist" items="VObjects" onselect="saveObject(); selectVObject(key)" onadd="newVObject(key)" onremove="removeVObject(key)"></vobjectlist>
 		<!--<div class="controls">

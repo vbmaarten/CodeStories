@@ -75,14 +75,13 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
       delete $scope.VObjects[key];
     }
 
-    $scope.selectVObject = function (key) {
+    $scope.selectVObject = function (key) {2
       $scope.VObjects[key]
       $scope.selectedVObject.content = $scope.VObjects[key].toString();
       $scope.selectedVObject.name = key;
       $scope.selectedVObject.object = $scope.VObjects[key];
       $scope.VCode.content = 'var ' + key.toLowerCase() + 'Object = new ' + key + '([]);\n';
       $scope.VCode.content += 'display(' + key.toLowerCase() + 'Object.domEl);';
-
     };
 
     $scope.test = function () {
