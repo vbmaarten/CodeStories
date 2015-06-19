@@ -40,23 +40,36 @@ function PointCloud(data) {
     });*/
   }
   update(data);
-  function highlight(toHighlight, color) {
-    pointGroup.select('circle').attr('fill', function (d, i) {
-      return toHighlight.indexOf(i) > -1 ? color : 'red';
+  
+  function hasPoint(list,p){
+      for(var i in list){
+          if(list[i].x == p.x && list[i].y == p.y)
+            return true
+      }
+      return false;
+  }
+  
+  function highlight(list, color) {
+      color = color || 'red';
+     list = list.length ? list : [list]
+      
+    pointGroup.selectAll('circle').attr('fill', function (d, i) {
+      return hasPoint(list,d) ? color : 'green';
     });
   }
   
-  function showConnection(a,b){
-     chart.selectAll('line').remove();
-     chart.data([[a,b]]).append('line').attr('x1',function(d){
-        return getX( d[0] );
+  function showConnection(){
+     var list = arguments[0].length ? arguments[0] : [].slice.call(arguments);
+
+     chart.selectAll('line').data(list).enter().append('line').attr('x1',function(d){
+        return getX( d );
     }).attr('y1',function(d){
-       return  getY( d[0] );
+       return  getY( d );
     })
-    .attr('x2', function(d){
-        return getX( d[1]);
-    }).attr('y2',function(d){
-        return getY( d[1])
+    .attr('x2', function(d,i){
+        return getX( list[(i+1)%list.length]);
+    }).attr('y2',function(d,i){
+        return getY( list[(i+1)%list.length])
     }).style('stroke-width','2px')
     .style('stroke','black')
       
@@ -70,6 +83,7 @@ function PointCloud(data) {
     highlight: highlight
   };
 }
+
 function List(data) {
   var domEl = document.createElement('div');
   var svg = d3.select(domEl).append('svg');
