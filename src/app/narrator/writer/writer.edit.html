@@ -30,6 +30,7 @@
 	  <i ng-click='stash(node.path)' class="fa fa-chain-broken unhook">  </i>
 	  <span ng-click="goToItemHook(node.path)">  {{node.path}} </span> 
 	</p>
+	<div class="item button-wide add" ng-click="addItem(item,0)"></div>
 	<div ng-repeat="item in node.items" ng-class="{'stashed' : (stashed==item) }">
 		<div item-edit class="item" >
 			<i ng-click="removeItem(item,node.path)"class="fa fa-times remove-item"></i>
