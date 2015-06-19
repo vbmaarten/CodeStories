@@ -47,15 +47,21 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
     var emptyVObject = function (data) {
       var domEl = document.createElement('div');
       var svg = d3.select(domEl).append('svg');
+      var height = this.height, width = this.width, center = this.center, data;
+
       function update(newData) {
+        data = newData;
+        var group = svg.selectAll('g').data(newData);
+        var groupEnter = svg.enter().append('g');
+        groupEnter.attr('transform', function (d, i) {
+          return 'translate(' + 1 * i + ',0)';
+        });
+        group.exit().remove();
       }
       update(data);
       return {
-        domEl: domEl,
-        //Mandatory element
-        update: function (data) {
-          update(data);
-        }
+        domEl: domEl, 
+        update: update
       };
     };
 

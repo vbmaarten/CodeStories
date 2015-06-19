@@ -22,6 +22,7 @@ angular.module('narrator').factory('interpreterFactory', [
     function processVCodeItem(step){
 
          var item = step.item.clone();
+         item.usedVariables = step.item.usedVariables;
         try {
           vCodeInterpreterFactory.runVCode(item, step.scope);
         } catch (error){
