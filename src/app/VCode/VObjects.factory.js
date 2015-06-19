@@ -9,49 +9,64 @@
 
 function PointCloud(data) {
 "use strict";
-
+   var c =  this.center;
   var domEl = document.createElement('div');
   var chart = d3.select(domEl).append('svg');
   var height = this.height, width = this.width;
-  var yScale = d3.scale.linear().range([
-    height,
-    0
-  ]);
-  yScale.domain([
-    0,
-    d3.max(data)
-  ]);
+    var connections = [] , points;
+
+  function getY(d,i){
+      return c.y+d.y
+  }
+  function getX(d,i){
+      return c.x+d.x;
+  }
   var pointGroup;
   function update(newData) {
+      points = newData;
     pointGroup = chart.selectAll('g').data(newData);
     var pointGroupEnter = pointGroup.enter().append('g');
     pointGroupEnter.attr('transform', function (d, i) {
-      return 'translate(' + 1 * i + ',0)';
-    });
-    pointGroupEnter.append('rect').attr('fill', 'green').attr('y', height).attr('height', function (d) {
-      return height - yScale(d);
-    }).attr('width', 1 - 1);
+        console.log(d);
+      return 'translate(' +  getX(d) + ','+ getY(d) +')';
+    })
+    pointGroupEnter.append('circle').attr('fill', 'green')
+    .attr('r', 4)
     pointGroupEnter.append('text');
-    pointGroup.select('rect').transition().attr('height', function (d) {
-      return height - yScale(d);
-    }).attr('y', function (d) {
-      return yScale(d);
-    });
-    pointGroup.select('text').attr('y', function (d) {
-      return yScale(d) + 3;
-    }).attr('dy', '.75em').text(function (d) {
-      return '' + d;
-    });
+    
+    pointGroup.select('text')
+    /*.attr('dy', '.75em').text(function (d) {
+      return '' + d.x + ':'+d.y;
+    });*/
   }
   update(data);
   function highlight(toHighlight, color) {
-    pointGroup.select('rect').attr('fill', function (d, i) {
-      return toHighlight.indexOf(i) > -1 ? color : 'green';
+    pointGroup.select('circle').attr('fill', function (d, i) {
+      return toHighlight.indexOf(i) > -1 ? color : 'red';
     });
   }
+  
+  function showConnection(a,b){
+     chart.selectAll('line').remove();
+     chart.data([[a,b]]).append('line').attr('x1',function(d){
+        return getX( d[0] );
+    }).attr('y1',function(d){
+       return  getY( d[0] );
+    })
+    .attr('x2', function(d){
+        return getX( d[1]);
+    }).attr('y2',function(d){
+        return getY( d[1])
+    }).style('stroke-width','2px')
+    .style('stroke','black')
+      
+  
+  }
+  
   return {
     domEl: domEl,
     update: update,
+    showConnection:showConnection,
     highlight: highlight
   };
 }

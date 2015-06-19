@@ -16,9 +16,6 @@ angular.module('narrator')
       restrict: 'AE',
       templateUrl: function (elem, attr) {
         return 'narrator/item/' + attr.type + '.html';
-      },
-      controller : ['$scope', function($scope){
-        
-      }]
+      }
     }
   });
