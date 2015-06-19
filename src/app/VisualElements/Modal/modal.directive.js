@@ -16,6 +16,7 @@ angular.module('VisualElements').directive('modal', function () {
     	name: "@",
     	title: "@",
         onclose: "&",
+        onopen: "&"
     },
     transclude: true
   };

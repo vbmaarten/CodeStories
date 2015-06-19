@@ -213,6 +213,6 @@ angular.module('codeStoriesApp', [
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     $rootScope.editorLoaded = false;
-    Waves.init();
+    
   }
 ]);

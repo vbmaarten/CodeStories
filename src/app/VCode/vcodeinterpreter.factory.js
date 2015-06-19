@@ -14,21 +14,29 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
 
     var theVCodeFactory = this;
 
-    var generateScope = function (code, scope) {
-      var ast = acorn.parse(code);
-      var saveVariable = function (node) {
-        scope[node.declarations[0].id.name] = undefined;
-      };
+    var generateScope = function (item) {
+      var code = item.content;
+     
+      if(!item.usedVariables){
+        item.usedVariables = {};
+        var ast = acorn.parse(code);
+        var saveVariable = function (node) {
+          item.usedVariables[node.declarations[0].id.name] = undefined;
+        };
 
-      //Function neccesarry due to bug in acorn.walk.simple
-      var base = acorn.walk.base; 
-      base.ObjectExpression = function(node, st, c) {
-        for (var i = 0; i < node.properties.length; ++i)
-          c(node.properties[i].key, st);
-      };
+        //Function neccesarry due to bug in acorn.walk.simple
+        var base = acorn.walk.base; 
+        base.ObjectExpression = function(node, st, c) {
+          for (var i = 0; i < node.properties.length; ++i)
+            c(node.properties[i].key, st);
+        };
 
-      acorn.walk.simple(ast, { VariableDeclaration: saveVariable }, base);
-      return scope;
+        acorn.walk.simple(ast, { VariableDeclaration: saveVariable }, base);
+      }
+      for(var i in item.usedVariables){
+        VScope[i] = undefined;
+      }
+      
     };
 
     var detachOldDOMel = function(DOMel) {
@@ -90,7 +98,8 @@ angular.module('VCodeInterpreter').factory('vCodeInterpreterFactory', [
 
       
       runVCode: function (VCodeItem, interpreterScope) {
-        generateScope(VCodeItem.content, VScope);
+
+        generateScope(VCodeItem, VScope);
         runVCodeWithIScopeThis.call(interpreterScope.this || {} , interpreterScope, VCodeItem)
           
       }
