@@ -26,9 +26,9 @@
 </div>
 
 <div ng-repeat="node in selectedNarrative.narrativeHooks track by $index" id="{{node.path}}" class="narrative-hook" ng-class="{'stashed': (node==stashed) }">
-	<p class="narrative-hook-name">
+	<p ng-click="goToItemHook(node.path)" class="narrative-hook-name">
 	  <i ng-click='stash(node.path)' class="fa fa-chain-broken unhook">  </i>
-	  <span ng-click="goToItemHook(node.path)">  {{node.path}} </span> 
+	  <span >  {{node.path}} </span> 
 	</p>
 	<div class="item button-wide add" ng-click="addItem(item,0)"></div>
 	<div ng-repeat="item in node.items" ng-class="{'stashed' : (stashed==item) }">
