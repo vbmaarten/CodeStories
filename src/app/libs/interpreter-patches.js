@@ -95,7 +95,11 @@ Interpreter.prototype.getCurrentScope = function(){
 	if(!itself && node.thisExpression){
 		itself = this.convertScope( node.thisExpression)
 	}
+
 	result.this = itself;
+	if(this.stateStack[0].done && this.stateStack[0].value){
+		result.$result = _convertProperty(this.stateStack[0].value)
+	}
 	return result;
 }
 
