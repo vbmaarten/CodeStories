@@ -50,7 +50,7 @@ angular.module('narrator')
                newItem = new ItemFactory.CodeItem();
               break;
             case 'Image':
-               $newItem = new ItemFactory.PictureItem();
+               newItem = new ItemFactory.PictureItem();
               break;
             case 'Narrative':
                newItem = new ItemFactory.LinkItem();
