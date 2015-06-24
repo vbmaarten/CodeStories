@@ -21,12 +21,12 @@
 	overflow-y:scroll;
 }
 
-.ace_editor { 
+.explorer .ace_editor { 
 	height: 100%; 
 	padding-left:150px;
 }
 
-.ace_selection {
+.explorer .ace_selection {
 	background:none !important;
 }
 
