@@ -1,4 +1,4 @@
-<modal name='VObjectEditor' title="VObject Editor" onclose="saveObject()" onopen="onopen()">
+<modal name='VObjectEditor' title="VObject Editor" onclose="saveObject()" onopen="onopen()" class="VObjectEditor">
 	<div id="leftpane">
 		<vobjectlist id="vobjectlist" items="VObjects" onselect="saveObject(); selectVObject(key)" onadd="newVObject(key)" onremove="removeVObject(key)"></vobjectlist>
 		<!--<div class="controls">
@@ -25,7 +25,7 @@
 		</div>
 		<div id="area" >
 			<div id="VisualElement"></div>
-			<div id="test_code" ng-model="VCode.content" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div>
+			<div id="test_code"><div ng-model="VCode.content" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div></div>
 			<button id="test_button" ng-click="test()">Run testcode</button>
 		</div>
 	</div>

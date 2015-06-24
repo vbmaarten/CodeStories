@@ -5,4 +5,4 @@
  * @description
  * VObjectEditor module.
  */
-angular.module('VObjectEditor', []);
+angular.module('VObjectEditor', ['ui.ace']);

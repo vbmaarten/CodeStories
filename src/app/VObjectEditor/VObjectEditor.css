@@ -1,3 +1,7 @@
+.VObjectEditor .ace_editor{
+	height:100%;
+}
+
 #leftpane{	
 	width: 15%;
 	height: 100%;
@@ -50,6 +54,8 @@
 }
 
 #test_code{
+	margin-top:250px;
+	position:relative;
 	height: calc(100% - 280px);
 }
 

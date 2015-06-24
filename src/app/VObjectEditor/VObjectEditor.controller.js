@@ -86,6 +86,7 @@ angular.module('VObjectEditor').controller('VObjectEditorCtrl', [
       $scope.selectedVObject.object = $scope.VObjects[key];
       $scope.VCode.content = 'var ' + key.toLowerCase() + 'Object = new ' + key + '([]);\n';
       $scope.VCode.content += 'display(' + key.toLowerCase() + 'Object.domEl);';
+      console.log($scope.selectedVObject);
     };
 
     $scope.test = function () {
