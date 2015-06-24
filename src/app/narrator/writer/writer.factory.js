@@ -137,6 +137,7 @@ angular.module('narrator')
         }
         CAST.narratives[node.getPath()] = CAST.narratives[node.getPath()] || [];
         CAST.narratives[node.getPath()].push(newNarrative);
+        return newNarrative;
       }
     }
   }]);

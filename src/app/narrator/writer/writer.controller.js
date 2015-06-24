@@ -53,8 +53,7 @@ angular.module('narrator').controller('WriterCtrl', [
 
     // Add a narrative
     $scope.addNarrative = function () {
-      writerFactory.addNarrative($scope.activeNode);
-
+      $scope.selectNarrative(writerFactory.addNarrative($scope.activeNode));
     };
     // Remove a narrative
     $scope.removeNarrative = function (narrative,event) {
@@ -73,13 +72,14 @@ angular.module('narrator').controller('WriterCtrl', [
     $scope.deselectNarrative = function () {
       writerFactory.deselectNarrative();
     };
-    $scope.addItem = function (item) {
+    $scope.addItem = function (item, subpath) {
       var sel = $scope.selectedNarrative;
       if (!item){
         item = 0;
       }
       if (sel.isCodeNarrative()){
-        sel.addItem(CAST.selectedPath.replace(sel.CASTPath, ''), null, item);
+        var path = subpath || CAST.selectedPath.replace(sel.CASTPath, '');
+        sel.addItem(path, null, item);
       }
       else{
         sel.addItem(null, item);
