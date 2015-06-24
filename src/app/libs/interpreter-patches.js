@@ -85,7 +85,7 @@ Interpreter.prototype.getCurrentScope = function(){
 
 		
 		if(!itself && node.funcThis_ ){
-			itself = this.convertScope(node.funcThis_)
+			itself = _convertObject(node.funcThis_)
 		}
 		iscope = node.scope;
 		i++
