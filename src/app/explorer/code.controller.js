@@ -124,7 +124,10 @@ angular.module('explorer').controller('CodeCtrl', [
         var narrativeNode
         if ($scope.selected.isASTNode()) {
           mark($scope.selected, 'selected-node');
-          _editor.scrollToRow($scope.selected.tnode.loc.start.line - 1);
+
+          //_editor.centerSelection()
+
+          _editor.scrollToRow($scope.selected.tnode.loc.start.line - 1,true,true);
           if (writerFactory.selectedNarrative && $state.is('narrating.writing.editing')) {
             narrativeNode = CAST.getNode(writerFactory.selectedNarrative.CASTPath);
             mark(narrativeNode, 'selected-narrative');

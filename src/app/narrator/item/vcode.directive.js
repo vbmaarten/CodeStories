@@ -17,7 +17,10 @@ angular.module('narrator')
                 console.log('load vcode item');
 
         if(scope.item.dom){
-          el[0].querySelector('.vcode-visual').appendChild(scope.item.dom);
+          var vis = el[0].querySelector('.vcode-visual');
+          vis.style.height = '250px';
+          vis.appendChild(scope.item.dom);
+
         }
         var narrator = document.querySelector('.narrator');
         var item = el.parent().parent().parent()
