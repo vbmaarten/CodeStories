@@ -125,8 +125,8 @@ angular.module('narrator').factory('interpreterFactory', [
       if( codeNarrative.dependencies ){
         var depCode = ''
         keepScope = true;
-        for(var node in codeNarrative.dependencies){
-          depCode += codeNarrative.dependencies[node].content
+        for(var dep in codeNarrative.dependencies){
+          depCode += codeNarrative.dependencies[dep].content
         }
         interpreter = new Interpreter(depCode);
         interpreter.run();
