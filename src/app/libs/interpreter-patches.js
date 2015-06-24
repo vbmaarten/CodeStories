@@ -97,7 +97,7 @@ Interpreter.prototype.getCurrentScope = function(){
 	}
 
 	result.this = itself;
-	if(this.stateStack[0].done && this.stateStack[0].value){
+	if(this.stateStack[0].value){
 		result.$result = _convertProperty(this.stateStack[0].value)
 	}
 	return result;

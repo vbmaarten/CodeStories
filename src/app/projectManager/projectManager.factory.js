@@ -210,6 +210,9 @@ angular.module('projectManager').factory('projectManagerFactory', [
               cd_narratives[path].push($this._generateCodeNarrative(narrative));
             }
           });
+          if(cd_narratives[path].length === 0){
+            delete cd_narratives[path];
+          }
         }
 
         for (var VObject in VObjectFactory.VObjects){
