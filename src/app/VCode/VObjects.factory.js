@@ -130,34 +130,40 @@ function VArray(data, vertical) {
   };
 }
 function BarChart(data) {
+"use strict";
+
   var domEl = document.createElement('div');
   var chart = d3.select(domEl).append('svg');
   var height = this.height, width = this.width;
-  var barWidth = width / data.length;
-  var yScale = d3.scale.linear().range([
-    height,
-    0
-  ]);
-  yScale.domain([
-    0,
-    d3.max(data)
-  ]);
+  
   var barGroup;
   function update(newData) {
-    barGroup = chart.selectAll('g').data(newData);
-    var barGroupEnter = barGroup.enter().append('g');
-    barGroupEnter.attr('transform', function (d, i) {
+    var barWidth = width / newData.length;
+    var yScale = d3.scale.linear().range([
+        height,
+        0
+      ]);
+      yScale.domain([
+        0,
+        d3.max(newData)
+      ]);
+      
+        barGroup = chart.selectAll('g').data(newData);
+    barGroup.exit().remove();
+    var barGroupEnter = barGroup.enter().append('g'); 
+    barGroupEnter.append('rect').attr('width', barWidth - 1);
+    barGroupEnter.append('text');
+    
+    barGroup.attr('transform', function (d, i) {
       return 'translate(' + barWidth * i + ',0)';
     });
-    barGroupEnter.append('rect').attr('fill', 'green').attr('y', height).attr('height', function (d) {
-      return height - yScale(d);
-    }).attr('width', barWidth - 1);
-    barGroupEnter.append('text');
+    
     barGroup.select('rect').transition().attr('height', function (d) {
       return height - yScale(d);
     }).attr('y', function (d) {
       return yScale(d);
-    });
+    }).attr('fill', 'green')
+    
     barGroup.select('text').attr('y', function (d) {
       return yScale(d) + 3;
     }).attr('dy', '.75em').text(function (d) {

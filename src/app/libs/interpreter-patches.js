@@ -93,7 +93,7 @@ Interpreter.prototype.getCurrentScope = function(){
 	} while( !iscope)
 	var result = this.convertScope( iscope );
 	if(!itself && node.thisExpression){
-		itself = this.convertScope( node.thisExpression)
+		itself = _convertObject( node.thisExpression)
 	}
 
 	result.this = itself;
