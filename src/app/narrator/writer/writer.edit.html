@@ -28,11 +28,12 @@
 	<div class="button-wide add" ng-click="addItem(item)"></div>
 </div>
 
-<div ng-repeat="node in selectedNarrative.narrativeHooks track by $index" id="{{node.path}}" class="narrative-hook" ng-class="{'stashed': (node==stashed) }">
-	<p ng-click="goToItemHook(node.path)" class="narrative-hook-name">
-	  <i ng-click='stash(node.path)' class="fa fa-chain-broken unhook">  </i>
-	  <span >  {{node.path}} </span> 
+<div ng-repeat="node in selectedNarrative.narrativeHooks track by $index" ng-init='castNode = CAST.getNode(selectedNarrative.CASTPath + node.path)' id="{{node.path}}" class="narrative-hook" ng-class="{'stashed': (stashed==node) }">
+	<p  class="narrative-hook-name">
+	 
+	  <span ng-click="goToItemHook(node.path)"> {{ friendlyName(node.path) }}  </span style='width:90%'> <i ng-click='stash(node.path)' class="fa fa-chain-broken unhook">  </i>
 	</p>
+	<div ng-if='isSelected(node.path);'>
 	<div class="button-wide add" ng-click="addItem(item, node.path)"></div>
 	<div ng-repeat="item in node.items" ng-class="{'stashed' : (stashed==item) }">
 		<div item-edit class="item" >
@@ -40,5 +41,6 @@
 			<i ng-click='stash(node.path , item)' class="fa fa-chain-broken move-item">  </i>
 		</div>
 		<div class="button-wide add" ng-click="addItem(item, node.path)"></div>
+	</div>
 	</div>
 </div>

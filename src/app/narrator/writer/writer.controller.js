@@ -107,8 +107,17 @@ angular.module('narrator').controller('WriterCtrl', [
       writerFactory.stashed.hook = hook;
       writerFactory.stashed.item = item;
      $scope.stashed = item || hook;
+    }
 
+    $scope.friendlyName = function(hookPath){
+      var node = CAST.getNode(writerFactory.selectedNarrative.CASTPath + hookPath)
+      return node.locationString() + ' ' + node.getBodyName();
+    }
 
+    $scope.isSelected = function(path){
+      if(path === '/')
+        path = '';
+      return (writerFactory.selectedNarrative.CASTPath + path === $scope.activeNode.path);
     }
 
 
