@@ -1,3 +1,16 @@
+
+
+.narrator {
+	padding:20px;
+	padding-bottom:50px;
+	background-color: #f0f0f0;
+	overflow-y: scroll;
+}
+
+.narrator .narratives {
+	position:relative;
+}
+
 .this-narratives{
 	padding-top:1em;
 	padding-bottom:1em;
@@ -17,18 +30,6 @@
 	color:white;
 	width:75%;
 	font-weight:lighter;
-}
-
-
-.narrator {
-	padding:20px;
-	padding-bottom:50px;
-	background-color: #f0f0f0;
-	overflow-y: scroll;
-}
-
-.narrator .narratives {
-	position:relative;
 }
 
 .narrative-hook {
@@ -245,21 +246,6 @@
 .narrator .button-wide.add:hover {
 	border-color: #999;
 	color: #999;
-}
-
-
-
-.this-narratives{
-	padding-top:1em;
-	padding-bottom:1em;
-	border-top:1px solid #D0D0D0;
-	border-bottom:1px solid #D0D0D0;
-	margin-bottom: 1em;
-	margin-top: 1em;
-}
-
-.related{
-	text-align: center;
 }
 
 .dependencies{
