@@ -206,15 +206,8 @@ angular.module('cast').factory('CAST', [
           return node.getPath();
         }
         else if (node.isASTNode()) {
-
-          var loc = node.tnode.loc, locStr;
-          if(loc.start.line === loc.end.line){
-            locStr =  ' [' + loc.start.line + ']';
-          }
-          else {
-            locStr = ' [' + loc.start.line + '-' + loc.end.line + ']';
-          }
-          return node.getFile().getPath() + locStr;
+          
+          return node.getFile().getPath() + node.locationString();
         }
       }
     };

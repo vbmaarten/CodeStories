@@ -115,18 +115,7 @@ angular.module('narrator')
       addNarrative : function (node) {
         var newNarrative;
         if(node.isASTNode()){
-          var name, nameNode = node;
-          var tnode ;
-          do {
-            tnode = nameNode.tnode;
-            name = tnode.name || 
-                ( (tnode.key) ? tnode.key.name : undefined ) ||
-                ( tnode.id ? tnode.id.name : undefined );
-            nameNode = nameNode.parent 
-          }while( !name && nameNode.tnode );
-          if( nameNode.isJSFile() ){
-            name = nameNode.name + ' program'
-          }
+          var name = node.getBodyName();
 
 
           newNarrative = new NarrativeFactory.CodeNarrative('A ' + name + ' story', CAST.selectedPath);

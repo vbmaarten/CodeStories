@@ -133,7 +133,34 @@ angular.module('cast').factory('CASTNodeFactory', [
       CASTNode.call(this, name, parent, children);
       this.tnode = tnode;
     };
+
     ASTNode.prototype = Object.create(CASTNode.prototype);
+
+    ASTNode.prototype.getBodyName = function(){
+      var name, nameNode = this;
+          var tnode ;
+          do {
+            tnode = nameNode.tnode;
+            name = tnode.name || 
+                ( (tnode.key) ? tnode.key.name : undefined ) ||
+                ( tnode.id ? tnode.id.name : undefined );
+            nameNode = nameNode.parent 
+          }while( !name && nameNode.tnode );
+          if( nameNode.isJSFile() ){
+            name = nameNode.name + ' program'
+          }
+          return name;
+    }
+    ASTNode.prototype.locationString = function(){
+      var loc = this.tnode.loc, locStr;
+          if(loc.start.line === loc.end.line){
+            locStr =  ' [' + loc.start.line + ']';
+          }
+          else {
+            locStr = ' [' + loc.start.line + '-' + loc.end.line + ']';
+          }
+          return locStr;
+    }
     ASTNode.prototype.containsPosition = function (pos) {
       var tnode = this.tnode;
       if (tnode instanceof Array) {
