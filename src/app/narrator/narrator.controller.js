@@ -17,15 +17,18 @@ angular.module('narrator').controller('NarratorCtrl', [
     // Get the current active node in the CAST and its narratives
     $scope.activeNode = CAST.selected || '/';
     $scope.narratives = CAST.getSelectedNarratives();
-    
+    $scope.related = CAST.getRelatedNarratives();
+
     $scope.$on('castEvent', function (event) {
       console.log('narrator castevent');
+      $scope.related = CAST.getRelatedNarratives();
     	$scope.activeNode = CAST.selected || '/';
     	$scope.narratives = CAST.getSelectedNarratives();
-    	$scope.related = CAST.getRelatedNarratives();
+    	
     });
 
     $scope.readableSubNode = function(path){
+      
     	return CAST.getFileAndLine(path);
     }
   }
