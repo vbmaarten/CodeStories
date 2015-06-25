@@ -1,0 +1,12 @@
+<div class="logo"><i class="fa fa-github fa-5x"></i></div>
+
+<div ng-show="!isLoading">
+<input type="text" ng-model="githubUser" placeholder="username"></input>
+<input type="text" ng-model="githubRepo" placeholder="repository"></input>
+<button ng-click="goToNarrator()" ng-disabled="githubUser=='' || githubRepo==''">Narrate</button>
+</div>
+
+<svg ng-if="isLoading" class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+   <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+</svg>
+

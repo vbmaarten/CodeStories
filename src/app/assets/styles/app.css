@@ -1,0 +1,40 @@
+.main-container {
+  width:100%;
+  height: 100%;
+  padding-top:50px;
+  position: relative;
+  overflow-y: hiddens;
+}
+
+.navigation {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  top:0;
+  left:0;
+  background-color: #9C27B0;
+}
+
+.wrapper {
+  height: 100%;
+  position: relative;
+  padding-right:500px;
+}
+
+body{
+}
+
+.explorer {
+  height: 100%;
+  width: 100%;
+}
+
+.narrator {
+  position:absolute;
+  top:0;
+  right:0;
+  height: 100%;
+  width:500px;
+  background-color: #EFEFEF;
+}
+

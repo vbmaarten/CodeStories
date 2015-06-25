@@ -1,0 +1,105 @@
+<modal name='guide' title="The Guide">
+	<div id="guide">
+	<h1> Guide </h1>
+
+	<h2> Index </h2>
+	<ol class='normal-list'> 
+	<li>  Introduction</a></li>
+	<li>  Viewer</li>
+	<li> Writer</li>
+	<li> Known </li>
+	<li> Contact</li>
+	<li> Contributers</li>
+	<li> Libraries</li>
+	<li> Licence</li>
+
+
+	</ol>
+
+
+	If you are to lazy to read the entire Guide. Here are some basics must knows:
+
+	<ol>
+
+	<li>Narratives are executed when a node is popped.</li>
+	<li>Array.prototype.sort compare functions can't be narrated by default. Overwrite this function if you want to hook inside compare functions</li>
+	<li>To initialize an object and call some methods of it, you can add a code item to the <i class="fa fa-code"></i> of a code narrative. (This will be executed when </li>
+	the interpreter has processed the object decleration)</li>
+
+	</ol>
+
+	<h2 id="g-intro"> Introduction </h2>
+
+	<p> Welcome to Code Stories. 
+	Code Stories was written as a Bachelors project at the TU Delft. 
+	Code Stories allows a developer to guide users through a project and visualize code. 
+	We only support a JS interpreter at the moment.</p>
+
+
+
+	<h2 > Basic usage </h2>
+
+
+
+	<h3 id='g-viewer'> Viewer </h3>
+
+	To view a narrative select 'viewer mode' ( the eye at the top right) and then select a narrative. You can auto play it with the play button. The button <i class="fa fa-forward"></i> allows you to step to the next item and the <i class="fa fa-step-forward"></i> will allow you to do a single step when viewing a code narrative
+
+
+
+	<h3 id='g-writer'> Writer </h3>
+
+	<p>There are two kinds of narratives. Code Narratives and FileSystem Narratives. </p>
+
+	<p>FileSystem narratives can be placed on a file or folder node in a project In this case they are a simple sequence of items that will be displayed. You can also add link items inside a FS Narrative that will push that narrative on the stack. once that narrative is done it will continue where you left off. 
+
+	Code Narratives are a little different. You click in the code view to select an AST Node. This is the scope of the item hooks you can place. Now you can place items at points inside the code you have selected. Every time this sub AST Node is popped from the stack, the item will be displayed to the viewer. There are three ways you can interact with the code when you are writing a code narrative. </p>
+
+	<p>You can insert variables in your text items by using [[ variable_name ]]  . </p>
+	<p>You can execute some code inside the interpreter with the code item. This is most usefull if you want to initialize your function. 
+		Placing a code item on the '/' node will execute after the code has been initiated. </p>
+
+	<p>You can run 'VCode' (Visualization items) . VCode has access to the variables in the scope. And it holds a persistant scope of its own. ( variables declared in one VCode item can be used in any other VCode item within the same CodeNarrative )</p>
+
+	<h4>
+	As a writter you can create visualization objects to be called from your narrative. These are wrappers to keep down the size and complexity of your story items. You can edit and them in the Visualization tab. 
+	</h4>
+
+	<h2 id='g-issues'> Known Issues </h2>
+	<p>
+		VCode is evaled , more info in the source code ('VCode/vcodeinterpreter.factory.js')
+		The narrator is fixed width and VCode items are not dynamic in size. 
+	</p>
+
+
+	<h2 id='g-contact'> Contact </h2>
+	<p>
+		If you need to contact us through <a href="https://github.com/Code-Stories">https://github.com/Code-Stories</a>
+	</p>
+		<h2 id='g-contributers'> Contributers </h2>
+
+	<ul style="list-style:none; padding-left:10px;">
+		<li>Maarten van Beek</li>
+		<li>Salim Salmi</li>
+		<li>Roelof Sol</li>
+	</ul>
+
+
+	<h2 id='g-libraries'> Used Libraries </h2>
+	<ul style="list-style:none; padding-left:10px">
+		<li>Angular</li>
+		<li>Angular-UI</li>
+		<li>JS-Interpreter </li>
+		<li>D3</li>
+		<li>GitHub API</li>
+		<li>JS-Zip</li>
+		<li>FileSaver</li>
+		<li>Font-Awsome</li>
+	</ul>
+
+
+	<h2 id='g-licence'> Licence </h2>
+	GNU General Public License
+
+	</div>
+</modal>

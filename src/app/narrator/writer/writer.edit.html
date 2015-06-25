@@ -1,0 +1,46 @@
+<h2>
+	<input type="text" ng-model="selectedNarrative.name">
+	<div class="return" ng-click="deselectNarrative()"><</div>
+</h2>
+<div class="dependencies" ng-if='selectedNarrative.isCodeNarrative()'>
+	<p class="muted" ng-hide="selectedNarrative.dependencies.length > 0">
+		Optional: Select files to load as dependencies.
+	</p>
+	<p ng-repeat="dependency in selectedNarrative.dependencies"> 
+		{{ dependency.getPath() }}
+		<i ng-click='removeDependency(dependency)' class="fa fa-times cursor-pointer"></i>
+	</p>
+	<select  ng-options="file as (file.parent.name +'/'+ file.name) for file in JSFiles" ng-model="dep.toAdd" ng-change='addDependency(file)'>
+		<option value="false">-- Add a dependency --</option>
+	</select>
+</div>
+
+<div ng-class="{
+	'button-wide add': selectedNarrative.isFSNarrative(),
+	'add-fixed': selectedNarrative.isCodeNarrative()
+}"ng-click="addItem()"></div>
+
+<div ng-repeat="item in selectedNarrative.items track by $index">
+	<div item-edit class="item">
+		<i ng-click="removeItem(item)" class="fa fa-times remove-item"></i>
+
+	</div>
+	<div class="button-wide add" ng-click="addItem(item)"></div>
+</div>
+
+<div ng-repeat="node in selectedNarrative.narrativeHooks track by $index" ng-init='castNode = CAST.getNode(selectedNarrative.CASTPath + node.path)' id="{{node.path}}" class="narrative-hook" ng-class="{'stashed': (stashed==node) }">
+	<p  class="narrative-hook-name">
+	 
+	  <span ng-click="goToItemHook(node.path)"> {{ friendlyName(node.path) }}  </span style='float:left;width:90%'> <i ng-click='stash(node.path)' class="fa fa-chain-broken unhook">  </i>
+	</p>
+	<div ng-if='isSelected(node.path);'>
+		<div class="button-wide add" ng-click="addItem(item, node.path)"></div>
+		<div ng-repeat="item in node.items" ng-class="{'stashed' : (stashed==item) }">
+			<div item-edit class="item" >
+				<i ng-click="removeItem(item,node.path)"class="fa fa-times remove-item"></i>
+				<i ng-click='stash(node.path , item)' class="fa fa-chain-broken move-item">  </i>
+			</div>
+			<div class="button-wide add" ng-click="addItem(item, node.path)"></div>
+		</div>
+	</div>
+</div>

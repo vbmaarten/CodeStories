@@ -1,0 +1,130 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Code Stories</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/waves/dist/waves.min.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    
+    <link rel="stylesheet" href="VObjectEditor/VObjectEditor.css">
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="explorer/explorer.css">
+    <link rel="stylesheet" href="explorer/directory/directory.css">
+    <link rel="stylesheet" href="narrator/narrator.css">
+    <link rel="stylesheet" href="narrator/item/items.css">
+    <link rel="stylesheet" href="navigation/navigation.css">
+    <link rel="stylesheet" href="notifications/notifications.css">
+    <link rel="stylesheet" href="VisualElements/Modal/templates/modal.css">
+    <link rel="stylesheet" href="Guide/Guide.css">
+    <link rel="stylesheet" href="VisualElements/VObjectList/templates/VObjectList.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="codeStoriesApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="main-container" ui-view="app"></div>
+<notifications></notifications>
+
+
+
+
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <script src="bower_components/ace-builds/src-min-noconflict/ace.js"></script>
+    <script src="libs/FileSaver.min.js"></script>
+    <script src="libs/acorn.js"></script>
+    <script src="libs/walk.js"></script>
+    <script src="libs/jszip.js"></script>
+    <script src="libs/interpreter.js"></script>
+    <script src="libs/interpreter-patches.js"></script>
+
+
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/angular-scroll-glue/src/scrollglue.js"></script>
+    <script src="bower_components/waves/dist/waves.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
+        <script src="app.js"></script>    
+        <script src="homeScreen/fileupload.directive.js"></script>
+        <script src="homeScreen/githubloader.directive.js"></script>
+        <script src="homeScreen/examples.directive.js"></script>
+        <script src="homeScreen/homeScreen.controller.js"></script>    
+        
+        <script src="cast/cast.js"></script>
+        <script src="cast/cast.factory.js"></script>
+        <script src="explorer/explorer.js"></script>
+        <script src="explorer/code.controller.js"></script>
+        <script src="explorer/directory/directories.controller.js"></script>
+        <script src="explorer/directory/directory.directive.js"></script>
+        <script src="explorer/directory/recursionHelper.js"></script>
+        <script src="narrator/narrator.js"></script>
+        <script src="narrator/narrator.controller.js"></script>
+        <script src="narrator/dynamic-scroll.directive.js"></script>
+        <script src="narrator/viewer/viewer.factory.js"></script>
+        <script src="narrator/writer/writer.factory.js"></script>
+        <script src="narrator/writer/writer.controller.js"></script>
+        <script src="narrator/viewer/viewer.controller.js"></script>  
+        <script src="narrator/viewer/narrative.directive.js"></script>  
+        <script src="narrator/item/item.directive.js"></script>
+        <script src="narrator/item/audio.directive.js"></script>
+        <script src="narrator/item/text.directive.js"></script>
+        <script src="narrator/item/empty.directive.js"></script>
+        <script src="narrator/item/link.directive.js"></script>
+        <script src="narrator/item/video.directive.js"></script>
+        <script src="narrator/item/picture.directive.js"></script>
+        <script src="narrator/item/vcode.directive.js"></script>
+        <script src="narrator/item/code.directive.js"></script>
+        <script src="narrator/interpreter/interpreter.factory.js"></script>
+        <script src="projectManager/projectManager.js"></script>
+        <script src="projectManager/projectManager.controller.js"></script>
+        <script src="projectManager/projectManager.factory.js"></script>
+        <script src="projectManager/fileReader/onReadFile.directive.js"></script>
+        <script src="VCode/vcodeinterpreter.js"></script>
+        <script src="VCode/vcodeinterpreter.factory.js"></script>
+        <script src="VCode/VObjects.factory.js"></script>
+        <script src="VObjectEditor/VObjectEditor.js"></script>
+        <script src="VObjectEditor/VObjectEditor.controller.js"></script>
+        <script src="VObjectEditor/VObjectEditor.directive.js"></script>
+        <script src="notifications/notifications.js"></script>
+        <script src="notifications/notifications.directive.js"></script>
+        <script src="notifications/notification/notification.directive.js"></script>
+        <script src="notifications/notifications.factory.js"></script>
+        <script src="notifications/notifications.controller.js"></script>
+        <script src="VisualElements/visualelements.js"></script>        
+        <script src="VisualElements/Modal/modal.factory.js"></script>
+        <script src="VisualElements/Modal/modal.controller.js"></script>
+        <script src="VisualElements/Modal/modal.directive.js"></script>
+        <script src="VisualElements/VObjectList/vobjectlist.controller.js"></script>
+        <script src="VisualElements/VObjectList/vobjectlist.directive.js"></script>
+        <script src="narrator/item/ItemFactory.js"></script>
+        <script src="narrator/NarrativeFactory.js"></script>
+        <script src="cast/CASTNodeFactory.js"></script>
+        <script src="navigation/navigation.js"></script>
+        <script src="navigation/navigation.controller.js"></script>
+        <script src="Guide/Guide.controller.js"></script>
+        <script src="Guide/Guide.directive.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

@@ -1,0 +1,22 @@
+<u>
+	<li class="home-button"><a ui-sref="home" class="nav-item">CodeStories</a></li>
+	<li><a href="" ng-init='showExport = false' ng-click='showExport = !showExport' class="nav-item"><i class="fa fa-floppy-o"></i> Export</a>
+		<ul class="export-choice" ng-class="{'export-visible':showExport, 'export-invisible':!showExport}" ng-show="showExport" ng-mouseleave="showExport=false">
+			<a ng-click="saveCodeStories()"> .codestories</a>
+			<a ng-click="saveZip()"> Zip </a>
+		</ul>
+
+	</li>
+	<li><a href="" ng-click="openEditor()" class="nav-item"><i class="fa fa-pencil-square"></i> Visualizations</a></li>
+
+	<li><a href="" ng-click="openGuide()" class="nav-item"><i class="fa fa-book"></i> Guide</a></li>
+	
+	<li class="mode">
+		<a ui-sref="narrating.writing.selecting.url($stateParams)" ng-class="{active: $state.includes('narrating.writing')}">
+			<i class="fa fa-pencil fa-2"></i>
+		</a>
+		<a ui-sref="narrating.viewing.selecting.url($stateParams)" ng-class="{active: $state.includes('narrating.viewing')}">
+			<i class="fa fa-eye fa-2"></i>
+		</a>
+	</li>
+</u>

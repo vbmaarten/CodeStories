@@ -1,0 +1,277 @@
+
+
+.narrator {
+	padding:20px;
+	padding-bottom:50px;
+	background-color: #f0f0f0;
+	overflow-y: scroll;
+}
+
+.narrator .narratives {
+	position:relative;
+}
+
+.this-narratives{
+	padding-top:1em;
+	padding-bottom:1em;
+	border-top:1px solid #D0D0D0;
+	border-bottom:1px solid #D0D0D0;
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+
+.related{
+	text-align: center;
+}
+.related h3{
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#9C27B0;
+	color:white;
+	width:75%;
+	font-weight:lighter;
+}
+
+.narrative-hook {
+	margin-bottom:40px;
+	background-color:#F5f5f5;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	padding-bottom:20px;
+	transition: 1s  ease-in-out all;
+}
+
+.narrative-hook-name {
+	margin-top:0;
+	color:white;
+	padding:5px;
+	width:460px;
+	overflow-x:scroll;
+	background-color:#9C27B0;
+	position:relative;
+}
+
+.narrative-hook-name:active{
+	background-color:purple;
+}
+
+.narrative-hook-name .unhook {
+	background-color:#000000;
+	opacity:.2;
+	position: absolute;
+	top:0;
+	right:0;
+	cursor:pointer;
+	z-index:2;
+	padding:5px;
+	height:100%;
+}
+
+.narrative-hook-name .unhook:hover {
+	opacity:.8;
+}
+
+.narrator input[type="text"] {
+	background-color: transparent;
+	outline: none;
+	border: none;
+	padding:0;
+	width:100%;
+}
+
+
+.narrator .remove {
+	width:1.4em;
+	height: 1.4em;
+	background-color:#000000;
+	opacity:.2;
+	position: absolute;
+	top:0;
+	right:0;
+	color:#ffffff;
+	cursor:pointer;
+	z-index:2;
+}
+
+.narrator .remove:before {
+	content:'x';
+}
+
+.narrator .remove-item {
+	position: absolute;
+	top:2px;
+	right:2px;
+	cursor:pointer;
+	z-index:2;
+}
+
+.narrator .move-item {
+	position:absolute;
+	top:2px;
+	right: 17px;
+	cursor:pointer;
+	z-index:2;
+}
+
+
+.narrator h2 {
+	width:100%;
+	margin:0;
+	padding:10px 20px;
+	background-color:#9C27B0;
+	color:white;
+	font-weight:300;
+	position:relative;
+	z-index:21;
+}
+
+.narrator h2 input[type="text"] {
+	color:white;
+	font-size:1em;
+	font-weight: 300;
+}
+
+.narrator h2 .return, .narrator h2 .remove {
+	height: 100%;
+	width:50px;
+	position:absolute;
+	right:0;
+	top:0;
+	background-color: #000000;
+	opacity:.2;
+	padding:.1em 0;
+	font-size:1.3em;
+	font-weight:500;
+	text-align: center;
+}
+
+.narrator .narrative.top {
+	padding-top:45px;
+}
+
+.narrator .narrative.top h2 {
+	position: fixed;
+	top:50px;
+	width:460px;
+	z-index:20;
+}
+
+.narrator .narrative.top .vcode.top-vcode {
+	z-index:20;
+	position:fixed;
+	width:460px;
+	top:95px;
+	box-shadow: 0 3px 3px -3px #EFEFEF, 0 3px 2px -2px #E0E0E0;
+}
+
+.narrator .button-wide {
+	background-color:#cccccc;
+	padding:5px;
+	width: 100%;
+	text-align: center;
+	margin-bottom:15px;
+	cursor:pointer;
+}
+
+.narrator .button-wide:active {
+	background-color:#bbbbbb;
+}
+
+.stashed{
+	padding-left: 10px;
+	padding-right: 10px;
+	border-left: 3px solid black;
+	border-right: 3px solid black;
+}
+
+.narrator .control-buttons {
+	position: fixed;
+	bottom:0px;	
+	width:460px;
+	z-index:100;
+	padding-bottom:20px;
+	background-color: rgba(239,239,239,.9);
+}
+
+.narrator .control-buttons .control-button {
+	background-color: #9C27B0;
+	color: #FFFFFF;
+	text-align: center;
+	padding: 5px;
+}
+
+.narrator .control-buttons .control-button:focus {
+	outline:none;
+}
+
+.narrator .control-buttons .control-button.next {
+}
+
+.narrator .control-buttons .control-button.debugStep {
+	width:100px;
+}
+
+.narrator .add-fixed {
+	width:52px;
+	height: 52px;
+	border-radius:26px;
+	background-color: #9C27B0;
+	color:white;
+	position:fixed;
+	bottom:20px;
+	right:20px;
+	text-align: center;
+	font-size:30px;
+	padding-top:5px;
+	z-index:29;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.narrator .add-fixed:before {
+	content:'+';
+}
+
+
+.narrator .button-wide.add {
+	width:420px;
+	margin:20px;
+	background-color:transparent;
+	border:2px dashed #ccc;
+	border-radius: 5px;
+	color:#ccc;
+}
+
+.narrator .button-wide.add:before {
+	content:'+';
+}
+
+.narrator .button-wide.add:hover {
+	border-color: #999;
+	color: #999;
+}
+
+.dependencies{
+	background:white;
+	padding:15px;
+	margin-bottom:50px;
+}
+
+
+.narrative{
+	width:100%;
+	position:relative;
+	margin-bottom:30px;
+	border-radius:2px;
+}
+
+.narrative > * {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.narrative > * {
+	border-bottom: 1px solid #DDD;
+}
+
+.narrative > *:first-child, .narrative > *:last-child {
+	border:none;
+}
+

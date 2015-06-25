@@ -1,0 +1,32 @@
+<modal name='VObjectEditor' title="Visualizations" onclose="saveObject()" onopen="onopen()" class="VObjectEditor">
+	<div id="leftpane">
+		<vobjectlist id="vobjectlist" items="VObjects" onselect="saveObject(); selectVObject(key)" onadd="newVObject(key)" onremove="removeVObject(key)"></vobjectlist>
+		<!--<div class="controls">
+			<select ng-model="selectedVObject" ng-change="updateVObject()">
+				<option ng-repeat="(name, object) in VObjects">{{name}}</option>
+				<option>New Object</option>
+			</select>
+			<button ng-click="saveObject(); showVObjectEditor = false">Save</button>
+		</div>
+		<div ng-model="VObjectContent" ui-ace="{ theme: crimson_editor, mode :'javascript'}">
+		</div>-->
+	</div>
+
+	<div id="rightpane" ng-class="testCollapsed ? 'rightpane_full' : 'rightpane_short'">
+		<!--<div id="VisualElement"></div>
+		<div id="VCode"><div ng-model="VCode" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div></div>
+		<button id="execute" ng-click="test()">Test</button>-->
+		<div id="VCode"><div ng-model="selectedVObject.content" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div></div>
+	</div>
+
+	<div id="test_area" ng-class="testCollapsed ? 'testarea_collapsed' : 'testarea_full'">
+		<div id="collapsebar" ng-click="testCollapsed = testCollapsed ? false : true">
+			<div class="fa-lg fa fa-chevron-left arrow" ng-class="(testCollapsed) ? 'fa  fa-chevron-left' : 'fa fa-chevron-right'"></div>
+		</div>
+		<div id="area" >
+			<div id="VisualElement"></div>
+			<div id="test_code"><div ng-model="VCode.content" ui-ace="{ theme: crimson_editor, mode :'javascript'}"></div></div>
+			<button id="test_button" ng-click="test()">Run testcode</button>
+		</div>
+	</div>
+</modal>

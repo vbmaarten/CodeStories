@@ -1,0 +1,33 @@
+<div class='narrative-select-container'>
+
+
+	<div class="super-narratives related" ng-repeat="super in related.super  track by $index">
+		<h3 ui-sref="narrating.viewing.selecting.url({ path: super })">
+			{{super}}
+		</h3>
+	</div>
+
+	<div class='this-narratives' >
+		
+		<div class="narrative" ng-repeat="narrative in narratives">
+			<h2  ng-click="selectNarrative(narrative)">{{narrative.name}}</h2>
+		</div>
+
+		<h3 class="muted center-text" ng-show="narratives.length === 0">No narratives available.</h3>
+		<p class="muted center-text" ng-show="narratives.length === 0">
+			Click <i class="fa fa-pencil"></i> to start creating a new narrative.
+		</p>
+		</div>
+	</div>
+
+		<div class="sub-narratives related" ng-repeat="sub in related.sub  track by $index">
+		<h3 ui-sref="narrating.viewing.selecting.url({ path: sub })">
+			{{ readableSubNode(sub) }}
+		</h3>
+	</div>
+
+
+</div>
+
+
+

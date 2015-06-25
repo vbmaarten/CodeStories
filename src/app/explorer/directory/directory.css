@@ -1,0 +1,52 @@
+.directory-view ul{
+	list-style: none;
+	margin:0;
+	padding:0 8px;
+}
+
+.directory-view li {
+	margin: 0;
+}
+.directory-view li a {
+	display: inline-block;
+	padding:5px 0px;
+	max-width:120px;
+}
+
+.directory-view li .folder-reference {
+	font-weight: bold;
+}
+
+.directory-view li .js-program-node{
+	position: absolute;
+	right: 30px;
+	font-style: normal;
+	padding:3px;
+	margin-top:2px;
+}
+
+.directory-view li .js-program-node:hover {
+	border-radius: 9px;
+	background-color:#aaa;
+}
+
+.directory-view .active::after {
+	background-color: #000;
+	opacity:.1;
+	left:0;
+	position:absolute;
+	width:200px;
+	height:26px;
+	margin-top:-21px;
+	display:block;
+	content:"";
+}
+
+.directory-view .hasNarrative::before {
+	display:list-item;
+	list-style:disc;
+	position:absolute;
+	content:"";
+	margin-top:5px;
+	right:0;
+}

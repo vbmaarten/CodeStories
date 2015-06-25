@@ -1,0 +1,9 @@
+<div ng-click='collapsed = !collapsed' class="show-files-btn">
+	<div class='fa-lg' ng-class="(collapsed) ? 'fa fa-chevron-right' : 'fa  fa-chevron-left'"></div>
+</div>
+
+<div ui-view="directories" class="directory-view">
+	<div  directory data="directory.rootnode.children" cast-url="'/'" level='0'></div>
+</div>
+
+<div ui-view="code" class='ace-container' ui-ace="{ theme: crimson_editor, onLoad: aceLoaded , mode :(selected.isJSFile() || selected.tnode ? 'javascript' : 'text')}" readonly></div>

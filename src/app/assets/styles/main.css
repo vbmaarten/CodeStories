@@ -1,0 +1,46 @@
+html, body {
+  margin:0;
+  padding:0;
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  color:#333;
+}
+
+a{
+  color:#333;
+  text-decoration: none;
+}
+
+button {
+  outline: none;
+}
+
+.muted {
+  opacity:.5;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.selected {
+  background-color: #b0a727;
+  position: absolute;
+}
+
+.right {
+  float: right;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

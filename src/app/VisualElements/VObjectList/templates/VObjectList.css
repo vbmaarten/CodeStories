@@ -1,0 +1,50 @@
+.vobjectitem.select {
+	background-color: #c0c0c0;
+}
+
+.vobjectitem {
+	cursor: pointer;
+	padding: 5px;
+}
+
+#vobjectlist{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.close{
+	float: right;
+	color: gray;
+}
+
+.close:hover{
+	color: black	;
+}
+
+.add {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	padding: 5px;
+	color: gray;
+}
+
+.add:hover{
+	color: black;
+}
+
+ng-transclude {
+	width: 100%;
+	height: 100%;
+}
+
+#addInput {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	padding: 5px;
+	outline:none;
+	border:none;
+}

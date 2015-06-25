@@ -1,0 +1,235 @@
+[4mRunning "jshint:all" (jshint) task[24m
+
+app/VCode/VObjects.factory.js
+  line 133  col 29   eval can be harmful.
+  line 7    col 15   'width' is not defined.
+  line 8    col 16   'height' is not defined.
+  line 10   col 18   'width' is not defined.
+  line 11   col 19   'height' is not defined.
+  line 17   col 12   'width' is not defined.
+  line 18   col 12   'height' is not defined.
+  line 24   col 13   'd3' is not defined.
+  line 46   col 13   'd3' is not defined.
+  line 69   col 15   'd3' is not defined.
+  line 72   col 16   'd3' is not defined.
+  line 78   col 5    'd3' is not defined.
+  line 4    col 10   'Canvas' is defined but never used.
+  line 44   col 23   'vertical' is defined but never used.
+
+app/VCode/vcodeinterpreter.factory.js
+  line 4    col 5    Missing "use strict" statement.
+  line 42   col 9    Don't use 'with'.
+  line 43   col 11   Don't use 'with'.
+  line 44   col 13   Don't use 'with'.
+  line 45   col 15   eval can be harmful.
+  line 5    col 17   'acorn' is not defined.
+  line 9    col 7    'acorn' is not defined.
+  line 35   col 18   'display' is defined but never used.
+
+app/VObjectEditor/VObjectEditor.controller.js
+  line 24   col 17   'd3' is not defined.
+  line 38   col 16   'prompt' is not defined.
+  line 24   col 11   'svg' is defined but never used.
+  line 25   col 23   'newData' is defined but never used.
+
+app/VObjectEditor/VObjectEditor.directive.js
+  line 2    col 3    Missing "use strict" statement.
+
+app/app.js
+  line 30   col 16   'valToString' is defined but never used.
+
+app/cast/CASTNodeFactory.js
+  line 95   col 0    Identifier 't_node_constructor' is not in camel case.
+  line 96   col 0    Identifier 't_node_constructor' is not in camel case.
+  line 130  col 0    Identifier 't_node_constructor' is not in camel case.
+  line 131  col 20   'name' is already defined.
+  line 85   col 25   'acorn' is not defined.
+  line 95   col 30   'acorn' is not defined.
+
+app/cast/cast.factory.js
+  line 103  col 39   'node' is defined but never used.
+
+app/explorer/code.controller.js
+  line 49   col 9    Expected '{' and instead saw 'node'.
+  line 90   col 29   'narrativeNode' is already defined.
+  line 67   col 19   'ace' is not defined.
+  line 65   col 11   '_renderer' is defined but never used.
+
+app/homeScreen/githubloader.directive.js
+  line 8    col 6    Missing semicolon.
+
+app/homeScreen/homeScreen.controller.js
+  line 46   col 39   'attributes' is defined but never used.
+
+app/narrator/interpreter/interpreter.factory.js
+  line 77   col 34   Missing semicolon.
+  line 100  col 7    Expected '{' and instead saw 'item'.
+  line 15   col 23   'Interpreter' is not defined.
+
+app/narrator/item/ItemFactory.js
+  line 6    col 12   Expected an assignment or function call and instead saw an expression.
+  line 4    col 35   'url' is defined but never used.
+
+app/narrator/item/empty.directive.js
+  line 34   col 36   The '__proto__' property is deprecated.
+  line 38   col 36   The '__proto__' property is deprecated.
+  line 42   col 36   The '__proto__' property is deprecated.
+  line 46   col 36   The '__proto__' property is deprecated.
+  line 50   col 36   The '__proto__' property is deprecated.
+  line 56   col 6    Missing semicolon.
+
+app/narrator/item/picture.directive.js
+  line 23   col 6    Missing semicolon.
+  line 20   col 40   '$scope' is defined but never used.
+
+app/narrator/item/text.directive.js
+  line 23   col 6    Missing semicolon.
+  line 20   col 40   '$scope' is defined but never used.
+
+app/narrator/item/vcode.directive.js
+  line 28   col 6    Missing semicolon.
+  line 16   col 37   'attrs' is defined but never used.
+  line 25   col 40   '$scope' is defined but never used.
+
+app/narrator/item/video.directive.js
+  line 23   col 6    Missing semicolon.
+  line 20   col 40   '$scope' is defined but never used.
+
+app/narrator/viewer/viewer.controller.js
+  line 20   col 5    Missing semicolon.
+  line 28   col 5    Missing semicolon.
+  line 38   col 4    Missing semicolon.
+
+app/narrator/viewer/viewer.factory.js
+  line 177  col 13   'nextItem' used out of scope.
+  line 178  col 30   'nextItem' used out of scope.
+  line 180  col 66   'nextItem' used out of scope.
+  line 194  col 11   Expected '{' and instead saw 'return'.
+  line 226  col 43   'CodeNarrative' is not defined.
+  line 226  col 113  'FSNarrative' is not defined.
+  line 172  col 15   'nextItem' is defined but never used.
+
+app/narrator/writer/writer.controller.js
+  line 20   col 9    Expected '{' and instead saw '$state'.
+  line 48   col 9    Expected '{' and instead saw 'item'.
+  line 50   col 9    Expected '{' and instead saw 'sel'.
+  line 52   col 9    Expected '{' and instead saw 'sel'.
+  line 59   col 9    Expected '{' and instead saw 'sel'.
+
+app/narrator/writer/writer.factory.js
+  line 46   col 53   Missing semicolon.
+  line 64   col 11   Expected '{' and instead saw 'newNarrative'.
+  line 66   col 11   Expected '{' and instead saw 'newNarrative'.
+  line 70   col 6    Missing semicolon.
+
+app/navigation/navigation.controller.js
+  line 19   col 6    Missing semicolon.
+  line 22   col 6    Missing semicolon.
+
+app/notifications/notification/notification.directive.js
+  line 3    col 31   Strings must use singlequote.
+  line 3    col 57   Strings must use singlequote.
+  line 7    col 4    Missing semicolon.
+
+app/notifications/notifications.factory.js
+  line 9    col 13   Expected an assignment or function call and instead saw an expression.
+
+app/projectManager/projectManager.controller.js
+  line 39   col 6    Missing semicolon.
+  line 37   col 31   'data' is defined but never used.
+
+app/projectManager/projectManager.factory.js
+  line 17   col 6    Missing semicolon.
+  line 24   col 6    Missing semicolon.
+  line 36   col 76   Strings must use singlequote.
+  line 38   col 11   Missing semicolon.
+  line 68   col 15   Missing semicolon.
+  line 76   col 15   Missing semicolon.
+  line 102  col 35   Strings must use singlequote.
+  line 112  col 15   Missing semicolon.
+  line 160  col 83   Strings must use singlequote.
+  line 189  col 12   Don't make functions within a loop.
+  line 219  col 54   Strings must use singlequote.
+  line 219  col 47   ['path'] is better written in dot notation.
+  line 223  col 14   Don't make functions within a loop.
+  line 127  col 44   'JSZip' is not defined.
+  line 144  col 23   'JSZip' is not defined.
+  line 155  col 9    'saveAs' is not defined.
+  line 160  col 9    'saveAs' is not defined.
+  line 32   col 50   'config' is defined but never used.
+  line 32   col 41   'headers' is defined but never used.
+  line 32   col 33   'status' is defined but never used.
+  line 109  col 52   'config' is defined but never used.
+  line 109  col 43   'headers' is defined but never used.
+  line 109  col 35   'status' is defined but never used.
+
+app/stories/bubble/fibonacci.js
+  line 3    col 3    Missing "use strict" statement.
+
+app/stories/bubble/graham_scan.js
+  line 8    col 3    Missing "use strict" statement.
+  line 15   col 5    Missing "use strict" statement.
+  line 19   col 5    Missing "use strict" statement.
+  line 39   col 5    Missing "use strict" statement.
+  line 51   col 5    Missing "use strict" statement.
+  line 65   col 5    Missing "use strict" statement.
+  line 70   col 14   Confusing use of '!'.
+  line 78   col 5    Missing "use strict" statement.
+  line 115  col 5    Missing "use strict" statement.
+  line 113  col 37   'define' is not defined.
+  line 114  col 3    'define' is not defined.
+
+app/stories/bubble/sort_algorithms/bubblesort.js
+  line 2    col 3    Missing "use strict" statement.
+  line 14   col 9    'swapped' used out of scope.
+  line 14   col 26   Missing semicolon.
+  line 15   col 2    Unnecessary semicolon.
+
+app/stories/topdownparse/parse.js
+  line 20   col 5    Missing "use strict" statement.
+  line 27   col 3    Missing "use strict" statement.
+  line 27   col 14   'source' is already defined.
+  line 234  col 0    Identifier 'make_parse' is not in camel case.
+  line 235  col 3    Missing "use strict" statement.
+  line 236  col 0    Identifier 'symbol_table' is not in camel case.
+  line 239  col 0    Identifier 'token_nr' is not in camel case.
+  line 243  col 0    Identifier 'original_scope' is not in camel case.
+  line 267  col 0    Identifier 'symbol_table' is not in camel case.
+  line 268  col 0    Identifier 'symbol_table' is not in camel case.
+  line 292  col 0    Identifier 'new_scope' is not in camel case.
+  line 294  col 0    Identifier 'original_scope' is not in camel case.
+  line 304  col 0    Identifier 'token_nr' is not in camel case.
+  line 305  col 0    Identifier 'symbol_table' is not in camel case.
+  line 308  col 0    Identifier 'token_nr' is not in camel case.
+  line 309  col 0    Identifier 'token_nr' is not in camel case.
+  line 315  col 0    Identifier 'symbol_table' is not in camel case.
+  line 320  col 0    Identifier 'symbol_table' is not in camel case.
+  line 376  col 0    Identifier 'original_symbol' is not in camel case.
+  line 385  col 0    Identifier 'symbol_table' is not in camel case.
+  line 392  col 0    Identifier 'original_symbol' is not in camel case.
+  line 395  col 0    Identifier 'symbol_table' is not in camel case.
+  line 403  col 0    Identifier 'symbol_table' is not in camel case.
+  line 557  col 0    Identifier 'new_scope' is not in camel case.
+  line 628  col 0    Identifier 'new_scope' is not in camel case.
+  line 703  col 0    Identifier 'token_nr' is not in camel case.
+  line 704  col 0    Identifier 'new_scope' is not in camel case.
+  line 713  col 0    Identifier 'make_parse' is not in camel case.
+  line 714  col 5    'tree' is defined but never used.
+  line 380  col 20   'left' is defined but never used.
+
+app/stories/topdownparse/tokens.js
+  line 19   col 3    Missing "use strict" statement.
+
+  ✖  16 errors
+  ⚠  142 warnings
+
+[33mWarning: Task "jshint:all" failed. Use --force to continue.[39m
+
+[31mAborted due to warnings.[39m
+
+
+Execution Time (2015-06-09 11:31:42 UTC)
+loading tasks   12ms  ▇ 1%
+jshint:all     990ms  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 99%
+Total 1s
+

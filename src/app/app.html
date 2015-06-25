@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="assets/styles/app.css">
+
+
+<nav class="navigation" ui-view="navigation">
+	
+
+</nav>
+
+<div class="wrapper">
+
+	<main class="explorer" ui-view="explorer" ng-class="{collapsed:collapsed}"></main>
+
+	<!-- <div class="narrator" ui-view="narrator" scroll-glue="'narrating.viewing.playing' | isState"></div> -->
+	<div class="narrator" ui-view="narrator" dynamic-scroll></div>
+
+</div>	
+
+<VObjectEditor></VObjectEditor> 
+<guide></guide>

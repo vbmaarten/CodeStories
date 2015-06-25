@@ -1,0 +1,71 @@
+/* make keyframes that tell the start state and the end state of our object */
+
+@keyframes fadeIn { 
+	0% {
+	  opacity:0;
+	}
+	20% {
+		opacity:1;
+	}
+	80% {
+		opacity:1;
+	}
+	100% {
+		opacity:0;
+	}
+}
+
+.fade-in {
+ 	opacity:0;  /* make things invisible upon start */
+	animation-name: fadeIn;
+	animation-timing-function: ease-in-out;
+	animation-duration: 5s;
+}
+
+
+.notification{
+	position: relative;
+	width: 300px;
+	margin: 20px;
+	padding: 4px;
+
+	border-radius: 6px; 
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px; 
+	border: 0px solid #800000;
+
+	-webkit-box-shadow: 0 25px 10px -15px rgba(0,0,0,0.05);
+	-moz-box-shadow:    0 25px 10px -15px rgba(0,0,0,0.05);
+	box-shadow:         0 25px 10px -15px rgba(0,0,0,0.05);	
+	color:white;
+}
+
+.notification #content{
+	padding:15px;
+}
+
+.notification #close{
+	position: absolute;
+	right: 10px;
+	top: 5px;
+	cursor: pointer;
+}
+
+.error {
+	background-color: rgba(183,28,28,.8);
+}
+
+.success {
+	background-color: rgba(0,200,83,.8);
+}
+
+.info {
+	background-color: rgba(171,71,188,.8);
+}
+
+#notifications {
+	z-index:200;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}

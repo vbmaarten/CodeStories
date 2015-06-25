@@ -1,0 +1,87 @@
+
+.navigation ul{
+	float:left;
+	list-style: none;
+}
+
+.navigation u {
+	text-decoration: none;
+}
+
+.navigation li {
+	display: inline-block;
+	height:100%;
+	position:relative;
+}
+
+
+.navigation a {
+	text-decoration: none;
+	color:white;
+	display:block;
+	float:left;
+	height: 100%;
+	text-align: center;
+	font-size:1.3em;
+	font-weight:200;
+	padding-top: .8em;
+	padding-left:25px;
+	padding-right:25px;
+}
+
+.navigation .mode {
+	float:right;
+	width:200px;
+	margin-right:150px;
+}
+
+.navigation .mode a {
+	width:50%;
+	opacity:.6;
+}
+
+.navigation .mode .active, .navigation .nav-item:hover {
+	opacity:1;
+	border-bottom:3px solid white;
+}
+
+.navigation a:hover{
+	background-color: rgba(255,255,255,.1);
+}
+
+.export-choice{
+	top: 35px;
+	position:absolute;
+	z-index:10;
+	background:#9C27B0;
+	padding-left:0px;
+	display:table;
+	text-align:center;
+
+}
+.export-choice a{
+	width:100%;
+	display:table-cell;
+	vertical-align: middle;
+	height:100%;
+	padding:10px;
+	cursor: pointer;
+}
+
+
+.export-visible {
+	-webkit-transition: height 0.3s;
+	transition: opacity 0.3s;
+	opacity: 1;
+}
+
+.export-invisible {
+	-webkit-transition: height 0.3s;
+	transition: opacity 0.3s;
+	opacity: 0;
+}
+
+.home-button a{
+	font-weight: bold;
+	width: 200px;
+}

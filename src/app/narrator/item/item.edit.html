@@ -1,0 +1,12 @@
+<div ng-switch="item.type">
+	<div text-item ng-switch-when="text" type="text.edit" class="edit"></div>
+	<div vcode-item ng-switch-when="vcode" type="vcode.edit" class="edit-vcode"></div>
+	<div code-item ng-switch-when="code" type="code.edit" class="edit-code"></div>
+	<div video-item ng-switch-when="video" type="video.edit" class="edit"></div>
+	<div picture-item ng-switch-when="picture" type="picture.edit" class="edit"></div>
+	<div link-item ng-switch-when="link" type="link.edit" class="edit"></div>
+	<div audio-item ng-switch-when="audio" type="audio.edit" class="edit-audio"></div>
+	<div empty-item ng-switch-when="empty" type="empty.edit" class="edit"></div>
+</div>
+
+<div ng-transclude></div>

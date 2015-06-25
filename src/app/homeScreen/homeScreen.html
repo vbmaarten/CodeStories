@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="assets/styles/homeScreen.css">
+<div class="wrapper">
+	<div class="container">
+		
+		<form class="form">
+			<div ng-switch="loader">
+			<githubloader ng-show='loader=="github"'></githubloader>
+			<fileloader ng-show='loader=="file"'></fileloader>
+			<examples  ng-show='loader==="examples"' > </examples>
+			<!--<input type="text" placeholder="Username">-->
+			<!--<input type="password" placeholder="Password">-->
+			<ul class="link" ng-hide="isLoading">
+				<li ng-show="loader!='file'" ><a ng-click="loader='file'" >Upload a zip file</a></li>
+				<li ng-show="loader!='github'" ><a ng-click="loader='github'" >Use github</a></li>
+				<li ng-show="loader!='examples'"><a ng-click="loader='examples'" >Checkout our featured examples</a></li>
+			</ul>
+			</div>
+		</form>
+	</div>
+	
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>

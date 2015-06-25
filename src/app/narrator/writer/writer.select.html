@@ -1,0 +1,26 @@
+<div class='narrative-select-container'>
+
+	<div class="super-narratives related" ng-repeat="super in related.super  track by $index">
+		<h3 ui-sref="narrating.writing.selecting.url({ path: super })">
+			{{super}}
+		</h3>
+	</div>
+
+	<div class='this-narratives' >
+		<div class="narrative" ng-repeat="narrative in narratives  track by $index">
+			<h2 ng-click="selectNarrative(narrative)">
+				{{narrative.name}}
+				<div class="remove" ng-click="removeNarrative(narrative,$event)"></div>
+			</h2>
+		</div>
+
+		<div class="add button-wide" ng-click="addNarrative()"></div>	
+	</div>
+
+	<div class="sub-narratives related" ng-repeat="sub in related.sub  track by $index">
+		<h3 ui-sref="narrating.writing.selecting.url({ path: sub })">
+			{{ readableSubNode(sub) }}
+		</h3>
+	</div>
+
+</div>

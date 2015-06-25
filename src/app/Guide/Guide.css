@@ -1,0 +1,16 @@
+#guide {
+	padding: 10px 30px 30px 30px;
+}
+
+.normal-list li{
+	display:list-item;
+
+}
+
+.normal-list a{
+	color: blue;
+	font-size:1em;
+	padding-top:1px;
+	float:none;
+	text-align: left;
+}

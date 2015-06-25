@@ -1,0 +1,8 @@
+<div class="logo"><i class="fa fa-file-archive-o fa-5x"></i></div>
+
+<div class="fileUpload">
+<span style="margin: auto" class='upload-message'>{{message}}</span>
+ <input type="file" class="upload" on-read-file="loadZip($fileContent); ziploaded=true;" fileread="message"></input> 
+</div>
+
+<button ng-click="goToNarrator()" ng-disabled="!ziploaded">Narrate</button>

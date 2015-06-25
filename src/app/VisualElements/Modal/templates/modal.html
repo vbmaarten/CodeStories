@@ -1,0 +1,11 @@
+<div class="blackout" ng-class="{'activated': activated, 'deactivated': !activated}" ng-show="activated" ng-click="close()"></div>
+<div class="modal" 	ng-show="activated">
+	<i id="close_button" class="fa fa-times" ng-click="close()"></i>
+	<div id="header">
+		<p id="title_text">{{title}}</p>
+	</div>
+
+	<div id="content">
+		<ng-transclude></ng-transclude>
+	</div>
+</div>

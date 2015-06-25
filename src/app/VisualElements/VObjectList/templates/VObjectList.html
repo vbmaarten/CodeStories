@@ -1,0 +1,5 @@
+<ul id="vobjectlist">
+	<li class="vobjectitem" ng-repeat="(key, value) in items" ng-click="select(key)" ng-class="(selected==key) ? 'select':''">{{key}} <i class="fa fa-times close" ng-click="remove(key)"></i></li>
+	<li><form ng-show="adding" ng-submit="add(newVObjectName)"><input id="addInput" show-focus="adding" type="text" ng-model="newVObjectName" ng-blur="hideInput()"></input></form></li>
+	<li><p class="add" ng-hide="adding" ng-click="adding = true"><i class="fa fa-plus"></i></p></li>	
+</ul>
